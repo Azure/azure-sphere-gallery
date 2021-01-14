@@ -2,11 +2,10 @@
 
 This repository contains a collection of inspirational, unmaintained [Azure Sphere](https://www.microsoft.com/azure-sphere/) software samples and hardware designs ready to be reused.
 
-Please also see the official Azure Sphere Sample and Azure Sphere Hardware Designs for maintained examples.
+Please also see the official Azure Sphere Sample and Azure Sphere Hardware Designs for maintained examples:
 
-https://github.com/Azure/azure-sphere-samples
-
-https://github.com/Azure/azure-sphere-hardware-designs
+- https://github.com/Azure/azure-sphere-samples
+- https://github.com/Azure/azure-sphere-hardware-designs
 
 ## Using the samples and designs
 
