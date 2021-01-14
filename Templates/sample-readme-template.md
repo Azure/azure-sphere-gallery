@@ -3,7 +3,7 @@ Include the metadata if you want your sample to be discoverable by the Microsoft
 
 # Sample: Name of content
 
-<!---Start with a short description of what the sample/design does--no more than two paragraphs
+<!---Start with a short description of what the sample does--no more than two paragraphs
 --->
 
 
@@ -63,13 +63,11 @@ Describe the state of the code. For example:
 
 ### Expected support for the code
 
+<!---If you will reply to issues, please suggest how users should report problems or reach out. Github issues is preferable.--->
+
 How often will you check and reply to issues or maintain and update the code? For example:
 * Will reply to issues once per quarter, once a year, etc.
 * No support whatsoever, code is as is
-
-### How to report an issue
-
-<!---In general, if your sample is in the Azure Sphere Gallery repo, GitHub issues is preferable. Otherwise, please suggest how users should report problems.--->
 
 ## Telemetry collection
 
