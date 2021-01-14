@@ -9,14 +9,12 @@ Include the metadata if you want your sample to be discoverable by the Microsoft
 
 ## Contents
 
-<!---List file  contents of the sample, in table.--->
+<!---List file contents of the sample, in table.--->
 
 | File/folder | Description |
 |-------------|-------------|
 | `src`       | Sample source code. |
-| `.gitignore` | Define what to ignore at commit time. |
 | `CHANGELOG.md` | List of changes to the sample. |
-| `CONTRIBUTING.md` | Guidelines for contributing to the sample. |
 | `README.md` | This README file. |
 | `LICENSE`   | The license for the sample. |
 
