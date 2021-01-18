@@ -14,7 +14,7 @@ products:
 - azure
 - azure-sphere
 name:
-- name for sample; default is the text of the first H1 line below
+- name for sample (unmaintained); default is the text of the first H1 line below plus "(unmaintained)"
 urlFragment: HelloWorld
 extendedZipContent:
 - path: <location in repo>
