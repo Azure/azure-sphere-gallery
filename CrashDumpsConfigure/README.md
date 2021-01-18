@@ -77,7 +77,7 @@ python crashdumps_configure.py --get --tenantid xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxx
 python crashdumps_configure.py --get --tenantid xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx --devicegroupid  yyyyyyyy-yyyy-yyyy-yyyy-yyyyyyyyyyyy
 ```
 
-### Get for multiple device groups in a tenant
+#### Get for multiple device groups in a tenant
 
 ```
 python crashdumps_configure.py --get --tenantid xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx --devicegroupid  yyyyyyyy-yyyy-yyyy-yyyy-yyyyyyyyyyyy zzzzzzzz-zzzz-zzzz-zzzz-zzzzzzzzzzzz
@@ -103,7 +103,7 @@ python crashdumps_configure.py --set on --tenantid xxxxxxxx-xxxx-xxxx-xxxx-xxxxx
 python crashdumps_configure.py --set on --tenantid xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx --devicegroupid  yyyyyyyy-yyyy-yyyy-yyyy-yyyyyyyyyyyy
 ```
 
-### Enable for multiple device groups in a tenant
+#### Enable for multiple device groups in a tenant
 
 ```
 python crashdumps_configure.py --set on --tenantid xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx --devicegroupid  yyyyyyyy-yyyy-yyyy-yyyy-yyyyyyyyyyyy zzzzzzzz-zzzz-zzzz-zzzz-zzzzzzzzzzzz
@@ -129,7 +129,7 @@ python crashdumps_configure.py --set off --tenantid xxxxxxxx-xxxx-xxxx-xxxx-xxxx
 python crashdumps_configure.py --set off --tenantid xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx --devicegroupid  yyyyyyyy-yyyy-yyyy-yyyy-yyyyyyyyyyyy
 ```
 
-### Disable for multiple device groups in a tenant
+#### Disable for multiple device groups in a tenant
 
 ```
 python crashdumps_configure.py --set off --tenantid xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx --devicegroupid  yyyyyyyy-yyyy-yyyy-yyyy-yyyyyyyyyyyy zzzzzzzz-zzzz-zzzz-zzzz-zzzzzzzzzzzz
