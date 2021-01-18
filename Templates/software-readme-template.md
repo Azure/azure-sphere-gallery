@@ -1,26 +1,26 @@
 <!--- Optional Metadata goes here
-Include the metadata if you want your sample to be discoverable by the Microsoft samples browser. See samples-metadata-guide.md for details. --->
+Include the metadata if you want your project to be discoverable by the Microsoft samples browser. See samples-metadata-guide.md for details. --->
 
-# Sample: Name of content
+# Name of software project
 
-<!---Start with a short description of what the sample does--no more than two paragraphs
+<!---Start with a short description of what the project does--no more than two paragraphs
 --->
 
 
 ## Contents
 
-<!---List file contents of the sample, in table.--->
+<!---List file contents of the project, in table.--->
 
 | File/folder | Description |
 |-------------|-------------|
-| `src`       | Sample source code. |
-| `CHANGELOG.md` | List of changes to the sample. |
+| `src`       | source code. |
+| `CHANGELOG.md` | List of changes to the project. |
 | `README.md` | This README file. |
-| `LICENSE`   | The license for the sample. |
+| `LICENSE`   | The license for the project. |
 
 ## Prerequisites
 
-<!---List the components and tools required to build and run the sample. Include OS platform, any tools, minimum Azure Sphere OS/SDK versions, etc. Include links to required items wherever possible. If lists are long, suggest separating hardware from software.
+<!---List the components and tools required to build and run the project. Include OS platform, any tools, minimum Azure Sphere OS/SDK versions, etc. Include links to required items wherever possible. If lists are long, suggest separating hardware from software.
 --->
 
   - Windows/Linux version
@@ -33,15 +33,15 @@ Include the metadata if you want your sample to be discoverable by the Microsoft
 
 ## Setup
 
-<!--- Explain how to prepare the sample after it's been downloaded: how to install any dependencies and configure any settings? e.g. setup of an Azure IoT Hub would go here. --->
+<!--- Explain how to prepare the project after it's been downloaded: how to install any dependencies and configure any settings? e.g. setup of an Azure IoT Hub would go here. --->
 
-## Running the sample
+## Running the code
 
-<Stepwise instructions for building and running the sample.>
+<Stepwise instructions for building and running the software.>
 
 ## Key concepts
 
-Discuss the aspects of the sample that might be particularly useful to someone looking at it:
+Discuss the aspects of the project that might be particularly useful to someone looking at it:
 
 - Significant design decisions
 - Gotchas and tricky bits
@@ -49,9 +49,9 @@ Discuss the aspects of the sample that might be particularly useful to someone l
 
 ## Next steps
 
-<!---Next steps for users to learn more about the technology, how to revise the sample to do other interesting things, etc. Don't reiterate the online documentation here; link to it if necessary. --->
+<!---Next steps for users to learn more about the technology, how to revise the project to do other interesting things, etc. Don't reiterate the online documentation here; link to it if necessary. --->
 
-## Sample expectations
+## Project expectations
 
 Describe the state of the code. For example:
 
