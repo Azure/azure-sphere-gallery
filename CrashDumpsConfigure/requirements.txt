@@ -1,0 +1,4 @@
+keyring
+cryptography
+msal >= 1.7.0
+requests
