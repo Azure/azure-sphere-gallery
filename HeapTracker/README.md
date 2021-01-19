@@ -16,9 +16,8 @@ The library accomplishes this by overriding the following native C memory functi
 | app_manifest.json | The sample App's manifest file. |
 | CMakeLists.txt | Contains the project information and produces the build, along with the memory-specific wrapping directives. |
 | CMakeSettings.json| Configures CMake with the correct command-line options. |
-|launch.vs.json | Tells Visual Studio how to deploy and debug the application.|
 | README.md | This readme file. |
-|.vscode | Contains settings.json that configures Visual Studio Code to use CMake with the correct options, and tells it how to deploy and debug the application. |
+|.vscode | Contains launch.json and settings.json that configures Visual Studio Code to use CMake with the correct options, and tells it how to deploy and debug the application. |
 
 The sample uses the following Azure Sphere libraries.
 
