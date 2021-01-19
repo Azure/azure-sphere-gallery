@@ -1,8 +1,6 @@
 # Heap Tracker library
 
-This library implements a custom heap tracking mechanism to provide the App a global `heap_allocated` variable that can be used to prevent OOM conditions.
-
-The library accomplishes this by overriding the following native C memory functions, though the standard GNU C Library wrapping mechanism:
+HeapTracker is a thin-layer library that implements a custom heap tracking mechanism which provides a global `heap_allocated` variable that can be used in a High-Level App to prevent OOM conditions. The library accomplishes this by overriding the following native C memory allocation functions, though the standard GNU C Library wrapping mechanism:
 - `malloc()`, `realloc()`, `calloc()`, `alloc_aligned()` and `free()`
 
 
@@ -11,8 +9,8 @@ The library accomplishes this by overriding the following native C memory functi
 | File/folder | Description |
 |-------------|-------------|
 |   main.c    | The sample App's source file. |
-|   heap_tracker_lib.h    | Header source file for the heap custom memory management library. |
-|   heap_tracker_lib.c    | Implementation source file for the heap custom memory management library. |
+|   heap_tracker_lib.h    | Header source file for the heap tracking library. |
+|   heap_tracker_lib.c    | Implementation source file for the heap tracking library. |
 | app_manifest.json | The sample App's manifest file. |
 | CMakeLists.txt | Contains the project information and produces the build, along with the memory-specific wrapping directives. |
 | CMakeSettings.json| Configures CMake with the correct command-line options. |
@@ -27,10 +25,10 @@ The sample uses the following Azure Sphere libraries.
 
 ## Prerequisites & Setup
 
-- Any Azure Sphere-based device with development features.
-- A development environment for Azure Sphere
+- An Azure Sphere-based device with development features (see [Get started with Azure Sphere](https://azure.microsoft.com/en-us/services/azure-sphere/get-started/) for more information).
+- Setup a development environment for Azure Sphere (see [Quickstarts to set up your Azure Sphere device](https://docs.microsoft.com/en-us/azure-sphere/install/overview) for more information).
 
-See [Get started with Azure Sphere](https://azure.microsoft.com/en-us/services/azure-sphere/get-started/) for more information.
+
 
 ## How to use
 
@@ -47,7 +45,7 @@ See [Get started with Azure Sphere](https://azure.microsoft.com/en-us/services/a
     ...
     ```
 
-2. In the library's header `heap_tracker_lib.h`, define wither verbose logs are enabled or not by setting `DEBUG_LOGS_ON` accordingly:
+2. In the library's header file `heap_tracker_lib.h`, define wither verbose logs are enabled or not by setting `DEBUG_LOGS_ON` accordingly:
 
     ```c
     //////////////////////////////////////////////////////////////////////////////////
@@ -58,9 +56,9 @@ See [Get started with Azure Sphere](https://azure.microsoft.com/en-us/services/a
     extern volatile ssize_t	heap_allocated;	// Currently allocated heap (in bytes). Note: this is NOT thread safe!
     ```
 
-3. In the library's code `heap_tracker_lib.c`, define an initial value for the `heap_limit` constant. Please refer to [Memory available on Azure Sphere](https://docs.microsoft.com/en-us/azure-sphere/app-development/mt3620-memory-available) for more information on memory availability for High-level applications.
+3. In the library's implementation file `heap_tracker_lib.c`, define an initial value for the `heap_limit` constant. Please refer to [Memory available on Azure Sphere](https://docs.microsoft.com/en-us/azure-sphere/app-development/mt3620-memory-available) for more information on memory availability for High-level applications.
 
-4. Use malloc() as usual in your App, BUT use the *_free()* and *_realloc()* helpers, in order to keep track of the available heap. If the native *free()* and *realloc()* functions will be used in the App, then the internal heap counter will become invalid, and the `heap_allocated` counter will become unreliable.
+4. Use malloc() as usual in your App, **BUT use the `_free()` and `_realloc()` helpers**, in order to keep track of the available heap. If the native `free()` and `realloc()` functions were to be used in the App, the `heap_allocated` variable cannot be considered reliable anymore.
 
     **NOTE**: the library does not *intentionally* alter the behaviors of the native functions, in order to not disrupt the functionality on other system libraries that use them. **Altering the implementations is *not* recommended as it could result in unpredicted App behavior**.
 
@@ -108,9 +106,11 @@ The sample code in `main.c` will cyclicly grow in heap memory allocation by call
     ```
 
 ## Key concepts
-The goal in using the Heap Tracker library, is to best-estimate the *actual* memory available to your application, in a more precise manner. This because the Linux OS (upon which the Azure sphere OS is based) manages memory with an [optimistic memory allocation strategy](https://man7.org/linux/man-pages/man3/malloc.3.html), by means of which the OS almost never returns a `null` pointer upon memory allocation requests that would i.e. absolutely go beyond the device's availability. This is not an "overlooked" behavior in the Os, but for the OS to actually cope with the 100s/1000s of allocation requests, it'll "speculate" that statistically not all memory requests will actually be committed.
+The goal in using the Heap Tracker library, is to best-estimate the *actual* memory available to your application, in a more precise manner. This because the Linux OS (upon which the Azure Sphere OS is based) manages memory with a so called "[optimistic memory allocation strategy](https://man7.org/linux/man-pages/man3/malloc.3.html)", by means of which the OS almost never returns a `null` pointer upon memory allocation requests that would i.e. absolutely go beyond the device's availability.
 
-Things though get tricky when dealing with memory on constrained devices, as often the App *must* be aware of its heap availability, in order to implement correlated strategies & behaviors. An Azure Sphere HL-Core Apps run in the OS's user space, therefore the developer must rely on his best estimation upon the memory consumption that his App will have. This is the problem that this library is aiming at supporting to solve.
+This is not an "overlooked" behavior in the OS, but rather a key feature for the OS to actually cope with the 100s/1000s of memory allocation requests that would never be satisfiable if immediately committed; this is achieved by accepting all requests and de facto "speculating" that statistically not all memory allocation requests will actually be committed immediately, if not committed at all.
+
+Things get though tricky when dealing with memory-constrained devices, as often in these cases the App *must* be aware of its heap availability, in order to properly implement its logic. An Azure Sphere HL-Core App runs in the OS's user space, therefore the developer must rely on his best estimation upon the heap amount that his App will use. This is the problem that this library is aiming at supporting to solve with the best possible memory usage approximation.
 
 ## Next steps
 
