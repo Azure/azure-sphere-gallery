@@ -114,10 +114,14 @@ Things get though tricky when dealing with memory-constrained devices, as often 
 
 ## Next steps
 
-- For more information and recommendations on Azure Sphere memory usage and debugging, see [Memory use in high-level applications](https://docs.microsoft.com/en-us/azure-sphere/app-development/application-memory-usage).
+### Project expectations
+
+This library should be use during *development only*, for optimizing the memory usage in a High-level application.
+
+For more information and recommendations on Azure Sphere memory usage and debugging, see [Memory use in high-level applications](https://docs.microsoft.com/en-us/azure-sphere/app-development/application-memory-usage).
 
 
-## Expected support for the code
+### Expected support for the code
 There is no official support guarantee for this code, but we will make a best effort to respond to/address any issues you encounter.
 
 ## How to report an issue
