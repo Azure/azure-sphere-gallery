@@ -15,6 +15,12 @@ Each sample/hardware design will include instructions in the readme for any syst
 
 Each folder within this repository contains a README.md file that describes the samples or hardware designs therein. Follow the instructions in each individual readme.
 
+## List of projects
+
+| Folder name | Description |
+| ----------- | ----------- |
+| [CrashDumpsConfigure](CrashDumpsConfigure) | Script that can be used to get or set crash dump policy for the Azure Sphere Security Service |
+
 ## Contributing
 
 This project contains a collection of Microsoft employee demos, hacks, hardware designs, and proof of concepts. This project welcomes contributions and suggestions. Most contributions require you to agree to a Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us the rights to use your contribution. For details, visit https://cla.microsoft.com.
@@ -28,3 +34,4 @@ contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additio
 ## Licenses
 
 For information about the licenses that apply to a particular sample or hardware design, see the License and README.md files in each subdirectory.
+ 
