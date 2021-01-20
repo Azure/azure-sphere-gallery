@@ -110,7 +110,7 @@ In order cope with the 100s/1000s of memory allocation requests (i.e. that event
 
 Things get tricky when dealing with memory-constrained devices, as often in these cases the App *must* be aware of its heap availability, in order to properly implement its logic.
 
-The goal in using the Heap Tracker library, is to precisely track the memory requests being done by the High-level application, and providing the developer a precise measure to best estimate the overall heap amount that his App will need.
+The goal in using the Heap Tracker library, is to precisely track the memory requests being done by the High-level application, and providing developers a precise measure to best estimate the overall heap amount that their App will need.
 
 ## Next steps
 
