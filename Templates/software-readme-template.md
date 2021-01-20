@@ -16,7 +16,7 @@ Include the metadata if you want your project to be discoverable by the Microsof
 | `src`       | source code. |
 | `CHANGELOG.md` | List of changes to the project. |
 | `README.md` | This README file. |
-| `LICENSE`   | The license for the project. |
+| `LICENSE.txt`   | The license for the project. |
 
 ## Prerequisites
 
