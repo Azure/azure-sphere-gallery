@@ -106,11 +106,11 @@ The sample code in `main.c` will cyclicly grow in heap memory allocation by call
     ```
 
 ## Key concepts
-The goal in using the Heap Tracker library, is to best-estimate the *actual* memory available to your application, in a more precise manner. This because the Linux OS (upon which the Azure Sphere OS is based) manages memory with a so called "[optimistic memory allocation strategy](https://man7.org/linux/man-pages/man3/malloc.3.html)", by means of which the OS almost never returns a `null` pointer upon memory allocation requests that would i.e. absolutely go beyond the device's availability.
+In order cope with the 100s/1000s of memory allocation requests (i.e. that eventually could never be satisfiable if immediately committed), the Linux OS currently manages memory with "[optimistic memory allocation strategy](https://man7.org/linux/man-pages/man3/malloc.3.html)", by means of which the OS almost never returns a `null` pointer upon memory allocation requests.
 
-This is not an "overlooked" behavior in the OS, but rather a key feature for the OS to actually cope with the 100s/1000s of memory allocation requests that would never be satisfiable if immediately committed; this is achieved by accepting all requests and de facto "speculating" that statistically not all memory allocation requests will actually be committed immediately, if not committed at all.
+Things get tricky when dealing with memory-constrained devices, as often in these cases the App *must* be aware of its heap availability, in order to properly implement its logic.
 
-Things get though tricky when dealing with memory-constrained devices, as often in these cases the App *must* be aware of its heap availability, in order to properly implement its logic. An Azure Sphere HL-Core App runs in the OS's user space, therefore the developer must rely on his best estimation upon the heap amount that his App will use. This is the problem that this library is aiming at supporting to solve with the best possible memory usage approximation.
+The goal in using the Heap Tracker library, is to precisely track the memory requests being done by the High-level application, and providing the developer a precise measure to best estimate the overall heap amount that his App will need.
 
 ## Next steps
 
