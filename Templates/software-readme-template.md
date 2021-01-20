@@ -92,6 +92,6 @@ or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any addi
 
 ## License
 
-<!---Make sure you've added the [MIT license](https://docs.opensource.microsoft.com/content/releasing/license.html) to the repository.--->
+<!---Make sure you've added the [MIT license](https://docs.opensource.microsoft.com/content/releasing/license.html) to the project folder.--->
 
 For details on license, see LICENSE.txt in this directory.
