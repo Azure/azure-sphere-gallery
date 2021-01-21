@@ -18,10 +18,10 @@
 // GLOBAL VARIABLES
 //////////////////////////////////////////////////////////////////////////////////
 
-// Sets the maximum allowed heap that can be allocated (in bytes) (set this variable based on practical tests on the App's memory usage).
-const size_t heap_limit = 250 * 1024;
+// Sets a reference allocation threshold (in bytes) after which the library will log warnings.
+const size_t heap_threshold = 250 * 1024;
 
-// Heap allocated amount (in bytes). This is signed so the user can debug de-allocation issues.
+// Heap allocated amount (in bytes). This is signed so the user can debug allocation issues.
 volatile ssize_t heap_allocated = 0;
 
 
@@ -37,15 +37,15 @@ void log_heap_status(void)
 {
 	if (heap_allocated < 0)
 	{
-		Log_Debug("WARNING: current allocated memory (%zd) is NEGATIVE --> 'heap_allocated' will not be reliable from now on!\n", heap_allocated);
+		Log_Debug("WARNING: heap_allocated (%zd) is NEGATIVE --> 'heap_allocated' will not be reliable from now on!\n", heap_allocated);
 	}
-	else if (heap_allocated > heap_limit)
+	else if (heap_allocated > heap_threshold)
 	{
-		Log_Debug("WARNING: allocated heap (%zd bytes) is above available heap_limit (%zu bytes)\n", heap_allocated, heap_limit);
+		Log_Debug("WARNING: heap_allocated (%zd bytes) is above heap_threshold (%zu bytes)\n", heap_allocated, heap_threshold);
 	}
 	else
 	{
-		Log_Debug("SUCCESS: available heap (%zd bytes)\n", (ssize_t)heap_limit - heap_allocated);
+		Log_Debug("SUCCESS: heap_allocated (%zd bytes) - delta with heap_threshold(%zd bytes)\n", heap_allocated, (ssize_t)heap_threshold - heap_allocated);
 	}
 }
 
@@ -75,7 +75,6 @@ void *__wrap_malloc(size_t size)
 	if (NULL != ptr)
 	{
 		heap_allocated += (ssize_t)size;
-		//memset(ptr, 0, size); // Commit by accessing the pointer (because of Linux's optimistic memory allocation)
 	}
 	
 	LogHeapStatus();
@@ -92,7 +91,6 @@ void *__wrap_calloc(size_t num, size_t size)
 	if (ptr)
 	{
 		heap_allocated += (ssize_t)(num * size);
-		LogHeapStatus();
 	}
 	
 	LogHeapStatus();
@@ -132,7 +130,7 @@ void __wrap_free(void *ptr)
 
 
 //////////////////////////////////////////////////////////////////////////////////
-// HELPERS
+// MUST-USE HELPERS
 //////////////////////////////////////////////////////////////////////////////////
 
 // Custom heap-tracking free() helper

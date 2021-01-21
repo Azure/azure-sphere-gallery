@@ -1,6 +1,6 @@
 # Heap Tracker library
 
-HeapTracker is a thin-layer library that implements a custom heap tracking mechanism which provides a global `heap_allocated` variable that can be used in a High-Level App to prevent OOM conditions. The library accomplishes this by overriding the following native C memory allocation functions, though the standard GNU C Library wrapping mechanism:
+HeapTracker is a thin-layer library that implements a custom heap tracking mechanism which provides a global `heap_allocated` variable that can be used track the memory requests being done by the High-level application. The library accomplishes this by overriding the following native C memory allocation functions, though the standard GNU C Library wrapping mechanism:
 - `malloc()`, `realloc()`, `calloc()`, `alloc_aligned()` and `free()`
 
 
@@ -8,14 +8,14 @@ HeapTracker is a thin-layer library that implements a custom heap tracking mecha
 
 | File/folder | Description |
 |-------------|-------------|
-|   main.c    | The sample App's source file. |
-|   heap_tracker_lib.h    | Header source file for the heap tracking library. |
-|   heap_tracker_lib.c    | Implementation source file for the heap tracking library. |
+| main.c    | The sample App's source file. |
+| heap_tracker_lib.h    | Header source file for the heap tracking library. |
+| heap_tracker_lib.c    | Implementation source file for the heap tracking library. |
 | app_manifest.json | The sample App's manifest file. |
 | CMakeLists.txt | Contains the project information and produces the build, along with the memory-specific wrapping directives. |
 | CMakeSettings.json| Configures CMake with the correct command-line options. |
 | README.md | This readme file. |
-|.vscode | Contains launch.json and settings.json that configures Visual Studio Code to use CMake with the correct options, and tells it how to deploy and debug the application. |
+| .vscode | Contains launch.json and settings.json that configures Visual Studio Code to use CMake with the correct options, and tells it how to deploy and debug the application. |
 
 The sample uses the following Azure Sphere libraries.
 
@@ -27,8 +27,6 @@ The sample uses the following Azure Sphere libraries.
 
 - An Azure Sphere-based device with development features (see [Get started with Azure Sphere](https://azure.microsoft.com/en-us/services/azure-sphere/get-started/) for more information).
 - Setup a development environment for Azure Sphere (see [Quickstarts to set up your Azure Sphere device](https://docs.microsoft.com/en-us/azure-sphere/install/overview) for more information).
-
-
 
 ## How to use
 
@@ -52,74 +50,66 @@ The sample uses the following Azure Sphere libraries.
     // GLOBAL VARIABLES
     //////////////////////////////////////////////////////////////////////////////////
     #define DEBUG_LOGS_ON	1				// Enables(1)/Disables(0) verbose loggging
-    extern const size_t		heap_limit;		// Sets the maximum allowed heap that can be allocated (in bytes).
+    extern const size_t		heap_threshold;	// Sets a reference allocation threshold (in bytes) after which the library will log warnings.
     extern volatile ssize_t	heap_allocated;	// Currently allocated heap (in bytes). Note: this is NOT thread safe!
     ```
 
-3. In the library's implementation file `heap_tracker_lib.c`, define an initial value for the `heap_limit` constant. Please refer to [Memory available on Azure Sphere](https://docs.microsoft.com/en-us/azure-sphere/app-development/mt3620-memory-available) for more information on memory availability for High-level applications.
+3. In the library's implementation file `heap_tracker_lib.c`, define an initial value for the `heap_threshold` constant. Please refer to [Memory available on Azure Sphere](https://docs.microsoft.com/en-us/azure-sphere/app-development/mt3620-memory-available) for more information on memory availability for High-level applications.
 
-4. Use malloc() as usual in your App, **BUT use the `_free()` and `_realloc()` helpers**, in order to keep track of the available heap. If the native `free()` and `realloc()` functions were to be used in the App, the `heap_allocated` variable cannot be considered reliable anymore.
+4. Use the `malloc()`, `calloc()` and `alloc_aligned()` functions as usual in your App, **with the exception of `free()` and `realloc()`**, instead of which the `_free()` and `_realloc()` helpers **must** be used, in order to keep correct tracking within the `heap_allocated` variable. If the native `free()` and `realloc()` functions were to be used in the App, the `heap_allocated` variable cannot be considered reliable anymore.
 
-    **NOTE**: the library does not *intentionally* alter the behaviors of the native functions, in order to not disrupt the functionality on other system libraries that use them. **Altering the implementations is *not* recommended as it could result in unpredicted App behavior**.
-
-5. Determine, by trial & error, what is the maximum heap usage for your App, and set the `heap_limit` constant accordingly.
+5. Track and monitor the `heap_allocated` value to have the expected changes throughout the application execution time (i.e. a constant raise in value my indicate a memory leak).
 
 ## Example
 
-The sample code in `main.c` will cyclicly grow in heap memory allocation by calling *getFreeHeapMemory_malloc* or *getFreeHeapMemory_realloc* (depending on what's uncommented in the `main()` preprocessor block), and fetch the remaining free heap memory up to the limit that has been set in the `heap_limit` variable:
+The sample code in `main.c` will cyclicly grow in heap memory allocation by calling *consumeHeap_malloc* or *consumeHeap_realloc* (depending on what's uncommented in the `main()` preprocessor block), and fetch the remaining free heap memory up to the limit that has been set in the `heap_threshold` variable:
 
-- On success, *getFreeHeapMemory_malloc* or *getFreeHeapMemory_realloc* return the amount of memory (in bytes) successfully allocated by the incremental malloc()/realloc() attempts. If `DEBUG_LOGS_ON` is set to `1` (in `heap_tracker_lib.h`), the following output will be generated:
+- On success, *getFreeHeapMemory_malloc* or *consumeHeap_realloc* return the amount of memory (in bytes) successfully allocated by the incremental malloc()/realloc() attempts, up to the given `heap_threshold`. If `DEBUG_LOGS_ON` is set to `1` (in `heap_tracker_lib.h`), the following output will be generated:
 
     ```c
-    Remote debugging from host 192.168.35.1, port 63571
-    Starting Heap Library test application...
-    getFreeHeapMemory_malloc --> Heap status: max available(143360 bytes), allocated (0 bytes)
-    Heap Tracker lib: malloc(1024)... INFO: available heap (142336 bytes)
-    Heap Tracker lib: _free(0xbeeebb40, 1024)... INFO: available heap (143360 bytes)
-    Heap Tracker lib: malloc(2048)... INFO: available heap (141312 bytes)
-    Heap Tracker lib: _free(0xbee84640, 2048)... INFO: available heap (143360 bytes)
+    Remote debugging from host 192.168.35.1, port 60851
+    Starting Heap Tracker test application...
+    consumeHeap_malloc --> Heap status: max available(256000 bytes), allocated (0 bytes)
+    Heap-Tracker lib: malloc(1024)=0xbeee9010... SUCCESS: heap_allocated (1024 bytes) - delta with heap_threshold(254976 bytes)
+    Heap-Tracker lib: _free(0xbeee9010,1024)... SUCCESS: heap_allocated (0 bytes) - delta with heap_threshold(256000 bytes)
+    Heap-Tracker lib: malloc(2048)=0xbee7b3e0... SUCCESS: heap_allocated (2048 bytes) - delta with heap_threshold(253952 bytes)
     ...
     ...
-    Heap Tracker lib: malloc(143360)... INFO: available heap (0 bytes)
-    Heap Tracker lib: _free(0xbedf5010, 143360)... INFO: available heap (143360 bytes)
-    Heap Tracker lib: malloc(144384)... WARNING: allocated heap (144384l bytes) is above available heap_limit (143360 bytes)
-    Heap Tracker lib: _free(0xbedf5010, 144384)... INFO: available heap (143360 bytes)
-    getFreeHeapMemory_malloc --> Currently free heap: 141Kb (144384 bytes)
+    Heap-Tracker lib: _free(0xbedcf010,256000)... SUCCESS: heap_allocated (0 bytes) - delta with heap_threshold(256000 bytes)
+    Heap-Tracker lib: malloc(257024)=0xbedcf010... WARNING: heap_allocated (257024 bytes) is above heap_threshold (256000 bytes)
+    Heap-Tracker lib: _free(0xbedcf010,257024)... SUCCESS: heap_allocated (0 bytes) - delta with heap_threshold(256000 bytes)
+    consumeHeap_malloc --> Currently available heap up to given heap_threshold: 251Kb (257024 bytes)
     ```
 
-- On failure, the OS's OOM Killer will SIGKILL the App's process. This will be the indicator that the global variable `heap_limit` in `heap_tracker_lib.c` should be lowered to a value below to the last successful allocation:
+- On failure, the OS's OOM Killer will SIGKILL the App's process. This will be the indicator that the global variable `heap_threshold` in `heap_tracker_lib.c` should be lowered to a value below to the last successful allocation:
 
     ```c
-    Remote debugging from host 192.168.35.1, port 61736
+    Remote debugging from host 192.168.35.1, port 60827
     Starting Heap Tracker test application...
-    getFreeHeapMemory_realloc --> Heap status: max available(256000 bytes), allocated (0 bytes)
-    Heap-Tracker lib: _realloc(0,0,1024)=0xbee7b010... SUCCESS: available heap (254975 bytes)
-    Heap-Tracker lib: _realloc(0xbee7b010,1024,2048)=0xbee7b010... SUCCESS: available heap (253950 bytes)
-    Heap-Tracker lib: _realloc(0xbee7b010,2048,3072)=0xbeee9010... SUCCESS: available heap (252925 bytes)
+    consumeHeap_realloc --> Heap status: max available(256000 bytes), allocated (0 bytes)
+    Heap-Tracker lib: _realloc(0,0,1024)=0xbeee9010... SUCCESS: heap_allocated (1025 bytes) - delta with heap_threshold(254975 bytes)
+    Heap-Tracker lib: _realloc(0xbeee9010,1024,2048)=0xbeee9010... SUCCESS: heap_allocated (2050 bytes) - delta with heap_threshold(253950 bytes)
+    Heap-Tracker lib: _realloc(0xbeee9010,2048,3072)=0xbeee9010... SUCCESS: heap_allocated (3075 bytes) - delta with heap_threshold(252925 bytes)
     ...
-    Heap-Tracker lib: _realloc(0xbeeff010,188416,189440)=0xbeeff010... SUCCESS: available heap (66375 bytes)
-    Heap-Tracker lib: _realloc(0xbeeff010,189440,190464)=0xbeeff010... SUCCESS: available heap (65350 bytes)
-    Heap-Tracker lib: _realloc(0xbeeff010,190464,191488)=0xbeeff010... SUCCESS: available heap (64325 bytes)
+    ...
+    Heap-Tracker lib: _realloc(0xbeeff010,189440,190464)=0xbeeff010... SUCCESS: heap_allocated (190650 bytes) - delta with heap_threshold(65350 bytes)
+    Heap-Tracker lib: _realloc(0xbeeff010,190464,191488)=0xbeeff010... SUCCESS: heap_allocated (191675 bytes) - delta with heap_threshold(64325 bytes)
 
     Child terminated with signal = 0x9 (SIGKILL)
-
     ```
 
 ## Key concepts
-In order cope with the 100s/1000s of memory allocation requests (i.e. that eventually could never be satisfiable if immediately committed), the Linux OS currently manages memory with "[optimistic memory allocation strategy](https://man7.org/linux/man-pages/man3/malloc.3.html)", by means of which the OS almost never returns a `null` pointer upon memory allocation requests.
+The goal of the Heap Tracker library, is to support developers track their High-level application's memory requests, for discovering potential leaks.
 
-Things get tricky when dealing with memory-constrained devices, as often in these cases the App *must* be aware of its heap availability, in order to properly implement its logic.
+In order to get the actual memory availability, the Azure Sphere OS exposes explicit APIs, that return the actual system memory availability taking into account the more articulated memory usages and variances operated by the underlying OS's system resources (networking, general i/o, etc.).
 
-The goal in using the Heap Tracker library, is to precisely track the memory requests being done by the High-level application, and providing developers a reliable measure to best estimate the overall heap amount that their App will need.
+For more information and recommendations on Azure Sphere memory usage and debugging, refer to [Memory use in high-level applications](https://docs.microsoft.com/en-us/azure-sphere/app-development/application-memory-usage).
 
 ## Next steps
 
 ### Project expectations
 
-This library should be use during *development only*, for optimizing the memory usage in a High-level application.
-
-For more information and recommendations on Azure Sphere memory usage and debugging, see [Memory use in high-level applications](https://docs.microsoft.com/en-us/azure-sphere/app-development/application-memory-usage).
-
+This library should be use during *development only*, for optimizing the memory usage in a High-level application. it is not recommended to be deployed in release versions of Apps deployed into production.
 
 ### Expected support for the code
 There is no official support guarantee for this code, but we will make a best effort to respond to/address any issues you encounter.
