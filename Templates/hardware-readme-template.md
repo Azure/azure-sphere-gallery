@@ -1,4 +1,4 @@
-<!--- This template should be used if the project contains hardware designs. If the project contains both hardware and software designs, please also refer to the software template and incorporate relevant sections. -->
+<!--- This template should be used if the project contains hardware designs. If the project contains both hardware and software designs, please also refer to software-readme-template.md and incorporate relevant sections. -->
 
 <!--- Optional Metadata goes here
 Include the metadata if you want your project to be discoverable by the Microsoft samples browser. See samples-metadata-guide.md for details. --->
