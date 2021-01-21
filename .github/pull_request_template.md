@@ -12,7 +12,7 @@ Please delete options that are not relevant.
 
 # Checklist:
 
-- [ ] My content uses the appropriate readme [template](https://github.com/Azure/azure-sphere-gallery/tree/main/Templates)
+- [ ] My content has a file named README.md, which is based on the appropriate readme [template](https://github.com/Azure/azure-sphere-gallery/tree/main/Templates)
 - [ ] I have performed a self-review of my own contribution
 - [ ] I have provided comments where appropriate
 - [ ] I have updated the repository's [README.md](https://github.com/Azure/azure-sphere-gallery/blob/main/README.md) to index this project
