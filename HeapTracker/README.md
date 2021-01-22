@@ -58,7 +58,7 @@ The sample uses the following Azure Sphere libraries.
 
 4. Use the `malloc()`, `calloc()` and `alloc_aligned()` functions as usual in your App, **with the exception of `free()` and `realloc()`**, instead of which the `_free()` and `_realloc()` helpers **must** be used, in order to keep correct tracking within the `heap_allocated` variable. If the native `free()` and `realloc()` functions were to be used in the App, the `heap_allocated` variable cannot be considered reliable anymore.
 
-5. Track and monitor the `heap_allocated` value to have the expected changes throughout the application execution time (i.e. a constant raise in value may indicate a memory leak).
+5. Track and monitor the `heap_allocated` value.
 
 ## Example
 
@@ -99,9 +99,7 @@ The sample code in `main.c` will cyclicly grow in heap memory allocation by call
     ```
 
 ## Key concepts
-The goal of the Heap Tracker library, is to support developers track their High-level application's memory requests, for discovering potential leaks.
-
-In order to get the actual memory availability, the Azure Sphere OS exposes explicit APIs, that return the actual system memory availability taking into account the more articulated memory usages and variances operated by the underlying OS's system resources (networking, general i/o, etc.).
+The goal of the Heap Tracker library, is to support developers track their High-level application's memory requests to match the expected behavior throughout the application execution time (i.e. a constant raise in value of `heap_allocated` may indicate a potential memory leak).
 
 For more information and recommendations on Azure Sphere memory usage and debugging, refer to [Memory use in high-level applications](https://docs.microsoft.com/en-us/azure-sphere/app-development/application-memory-usage).
 
