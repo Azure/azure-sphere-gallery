@@ -58,7 +58,7 @@ The sample uses the following Azure Sphere libraries.
 
 4. Use the `malloc()`, `calloc()` and `alloc_aligned()` functions as usual in your App, **with the exception of `free()` and `realloc()`**, instead of which the `_free()` and `_realloc()` helpers **must** be used, in order to keep correct tracking within the `heap_allocated` variable. If the native `free()` and `realloc()` functions were to be used in the App, the `heap_allocated` variable cannot be considered reliable anymore.
 
-5. Track and monitor the `heap_allocated` value to have the expected changes throughout the application execution time (i.e. a constant raise in value my indicate a memory leak).
+5. Track and monitor the `heap_allocated` value to have the expected changes throughout the application execution time (i.e. a constant raise in value may indicate a memory leak).
 
 ## Example
 
@@ -109,7 +109,7 @@ For more information and recommendations on Azure Sphere memory usage and debugg
 
 ### Project expectations
 
-This library should be use during *development only*, for optimizing the memory usage in a High-level application. it is not recommended to be deployed in release versions of Apps deployed into production.
+This library should be use during *development only*, for optimizing the memory usage in a High-level application. It is not recommended to be used productions versions of Apps.
 
 ### Expected support for the code
 There is no official support guarantee for this code, but we will make a best effort to respond to/address any issues you encounter.
