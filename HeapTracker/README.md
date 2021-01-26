@@ -16,7 +16,7 @@ HeapTracker is a thin-layer library that implements a custom heap tracking mecha
 | README.md | This readme file. |
 | .vscode | Contains launch.json and settings.json that configures Visual Studio Code to use CMake with the correct options, and tells it how to deploy and debug the application. |
 
-The sample uses the following Azure Sphere libraries.
+The library uses the following Azure Sphere libraries.
 
 | Library | Purpose |
 |---------|---------|
