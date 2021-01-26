@@ -20,6 +20,7 @@ Each folder within this repository contains a README.md file that describes the 
 | Folder name | Description |
 | ----------- | ----------- |
 | [CrashDumpsConfigure](CrashDumpsConfigure) | Script that can be used to get or set crash dump policy for your device groups in the Azure Sphere Security Service |
+| [HeapTracker](HeapTracker) | A memory allocation tracking library that can help diagnose memory leaks. |
 
 ## Contributing
 
