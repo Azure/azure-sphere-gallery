@@ -2,7 +2,7 @@
 
 This repository contains a collection of inspirational, unmaintained [Azure Sphere](https://www.microsoft.com/azure-sphere/) software samples and hardware designs ready to be reused.
 
-Please also see the official Azure Sphere Sample and Azure Sphere Hardware Designs for maintained examples:
+For maintained samples and designs, see the official Azure Sphere Samples and Azure Sphere Hardware Designs repos:
 
 - https://github.com/Azure/azure-sphere-samples
 - https://github.com/Azure/azure-sphere-hardware-designs
@@ -21,6 +21,7 @@ Each folder within this repository contains a README.md file that describes the 
 | ----------- | ----------- |
 | [CrashDumpsConfigure](CrashDumpsConfigure) | Script that can be used to get or set crash dump policy for your device groups in the Azure Sphere Security Service |
 | [HeapTracker](HeapTracker) | A memory allocation tracking library that can help diagnose memory leaks. |
+=======
 
 ## Contributing
 
