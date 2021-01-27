@@ -1,6 +1,3 @@
-<!--- Optional Metadata goes here
-Include the metadata if you want your project to be discoverable by the Microsoft samples browser. See samples-metadata-guide.md for details. --->
-
 # Name of software project
 
 <!---Start with a short description of what the project does--no more than two paragraphs
