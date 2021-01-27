@@ -1,4 +1,5 @@
-﻿// This minimal Azure Sphere app repeatedly retrieves the available heap memory. 
+// This minimal Azure Sphere app repeatedly allocates & frees heap memory, 
+// While displaying the tracked heap amount in the global heap_allocated variable. 
 //
 // It uses the API for the following Azure Sphere application libraries:
 // - log (messages shown in Visual Studio's Device Output window during debugging)

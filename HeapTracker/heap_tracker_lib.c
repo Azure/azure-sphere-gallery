@@ -2,8 +2,6 @@
 * Copyright (c) Microsoft Corporation.
 * Licensed under the MIT License.
 */
-
-#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
@@ -53,12 +51,12 @@ void log_heap_status(void)
 // NATIVE malloc/free WRAPPERS
 //////////////////////////////////////////////////////////////////////////////////
 /*
-*	NOTE: the library does not *intentionally *alter the behaviors of the native functions,
+*	NOTE: the library does not intentionally alter the behaviors of the native functions,
 *	in order to not disrupt the functionality on other system libraries that use them.
 *	Altering the implementations is NOT reccomended as it could result in unpredicted App behavior!
 */
 
-// Native malloc/free stubs, which will be inter-positioned by the wrappers at link-time
+// C-Library malloc/free stubs, which will be inter-positioned by the wrappers at link-time
 void *__real_malloc(size_t size);
 void *__real_realloc(void *ptr, size_t new_size);
 void *__real_calloc(size_t num, size_t size);
@@ -66,7 +64,7 @@ void *__real_aligned_alloc(size_t alignment, size_t size);
 void __real_free(void *ptr);
 
 
-// Heap-tracking malloc() wrapper (tracks heap increse-only)
+// Heap-tracking malloc() wrapper
 void *__wrap_malloc(size_t size)
 {	
 	void *ptr = __real_malloc(size);
@@ -82,7 +80,7 @@ void *__wrap_malloc(size_t size)
 	return ptr;
 }
 
-// Custom heap-tracking calloc() wrapper (tracks heap increse-only)
+// Custom heap-tracking calloc() wrapper
 void *__wrap_calloc(size_t num, size_t size)
 {
 	void *ptr = __real_calloc(num, size);
@@ -98,7 +96,7 @@ void *__wrap_calloc(size_t num, size_t size)
 	return ptr;
 }
 
-// Custom heap-tracking aligned_alloc() wrapper (tracks heap increse-only)
+// Custom heap-tracking aligned_alloc() wrapper
 void *__wrap_aligned_alloc(size_t alignment, size_t size)
 {
 	void *ptr = __real_aligned_alloc(alignment, size);
@@ -114,7 +112,8 @@ void *__wrap_aligned_alloc(size_t alignment, size_t size)
 	return ptr;
 }
 
-// Custom heap-tracking realloc() wrapper (does NOT track heap as it is unaware of the previous memory block size!)
+// Custom heap-tracking realloc() wrapper
+// NOTE: does NOT track heap as it is unaware of the previous memory block size!
 void *__wrap_realloc(void *ptr, size_t new_size)
 {
 	HeapTracker_Log("WARNING! Native realloc(%p,%zu) was called instead of _realloc() helper: 'heap_allocated' will not be reliable from now on!\n", ptr, new_size);

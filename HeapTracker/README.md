@@ -1,13 +1,13 @@
 # Heap Tracker library
 
-HeapTracker is a thin-layer library that implements a custom heap tracking mechanism which provides a global `heap_allocated` variable that can be used track the memory requests being done by the High-level application. The library accomplishes this by overriding the following native C memory allocation functions, though the standard GNU C Library wrapping mechanism:
+HeapTracker is a thin-layer library that implements a custom heap tracking mechanism which provides a global `heap_allocated` variable that can be used to track memory requests being done by High-level applications. The library accomplishes this by overriding the following native C memory allocation functions, though the standard GNU C Library wrapping mechanism:
 - `malloc()`, `realloc()`, `calloc()`, `alloc_aligned()` and `free()`
 
 ## Contents
 
 | File/folder | Description |
 |-------------|-------------|
-| main.c    | The sample App's source file. |
+| main.c    | The library's sample App source file. |
 | heap_tracker_lib.h    | Header source file for the heap tracking library. |
 | heap_tracker_lib.c    | Implementation source file for the heap tracking library. |
 | app_manifest.json | The sample App's manifest file. |
