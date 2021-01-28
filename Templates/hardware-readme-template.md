@@ -1,7 +1,9 @@
+<!--- This template should be used if the project contains hardware designs. If the project contains both hardware and software designs, please also refer to software-readme-template.md and incorporate relevant sections. -->
+
 <!--- Optional Metadata goes here
 Include the metadata if you want your project to be discoverable by the Microsoft samples browser. See samples-metadata-guide.md for details. --->
 
-# Name of software project
+# Name of hardware design
 
 <!---Start with a short description of what the project does--no more than two paragraphs
 --->
@@ -13,31 +15,17 @@ Include the metadata if you want your project to be discoverable by the Microsof
 
 | File/folder | Description |
 |-------------|-------------|
-| `src`       | source code. |
+| `Schematic.pdf`       | Schematic |
+| `BOM.xlsx`       | Bill of materials |
+| `PCB.pdf`        | Report on PCB stack-up |
+| `Altium`         | Altium Designer schematics, PCB layout, and supporting project files 
 | `CHANGELOG.md` | List of changes to the project. |
 | `README.md` | This README file. |
-| `LICENSE.txt`   | The license for the project. |
+| `LICENSE`   | The license for the project. |
 
-## Prerequisites
+## Tools
 
-<!---List the components and tools required to build and run the project. Include OS platform, any tools, minimum Azure Sphere OS/SDK versions, etc. Include links to required items wherever possible. If lists are long, suggest separating hardware from software.
---->
-
-  - Windows/Linux version
-  - Visual Studio/VSCode version
-  - Azure Sphere OS and/or SDK version xxx
-  - Any specific Azure Sphere hardware?
-  - Other hardware?
-  - Azure subscription, Azure IoT setup, etc.?
-
-
-## Setup
-
-<!--- Explain how to prepare the project after it's been downloaded: how to install any dependencies and configure any settings? e.g. setup of an Azure IoT Hub would go here. --->
-
-## Running the code
-
-<Stepwise instructions for building and running the software.>
+<!--- Describe the tool versions used to create this hardware design --->
 
 ## Key concepts
 
@@ -53,25 +41,18 @@ Discuss the aspects of the project that might be particularly useful to someone 
 
 ## Project expectations
 
-Describe the state of the code. For example:
+Describe the state of the design. For example:
 
-* The code is not secure (for example, connection strings are included in the code).
-* The code is grossly inefficient (for example, loops that run unnecessarily because it uses the wrong breakout points).
-* The code does not run (for example, there are build errors).
-* The code may cause a problem if used in a production scenario.
-* The code has not been run through a complete security analysis (for example, there are static analysis failures).
+* The design has been manufactured and tested / not been manufactured
+* Certifications or standards that the design has been tested for / not been tested for (if relevant)
 
-### Expected support for the code
+### Expected support for the project
 
 <!---If you will reply to issues, please suggest how users should report problems or reach out. Github issues is preferable.--->
 
 How often will you check and reply to issues or maintain and update the code? For example:
 * Will reply to issues once per quarter, once a year, etc.
 * No support whatsoever, code is as is
-
-## Telemetry collection
-
-<!---If your sample has source code that enables Microsoft to collect telemetry, please include a [Telemetry Data Collection notice](https://docs.opensource.microsoft.com/content/releasing/telemetry.html).--->
 
 ## Contributing
 
@@ -92,6 +73,7 @@ or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any addi
 
 ## License
 
-<!---Make sure you've added the [MIT license](https://docs.opensource.microsoft.com/content/releasing/license.html) to the project folder.--->
+<!---Make sure you've added the [Creative Commons Attribution 4.0 International Public License](https://github.com/Azure/azure-sphere-hardware-designs/blob/master/LICENSE) to the folder.--->
+<!---If you have software as well as hardware in this folder, then also add [MIT license](https://docs.opensource.microsoft.com/content/releasing/license.html) to this folder as LICENSE-CODE and change the below statement to "Code in this folder is licensed under the MIT license (see LICENSE-CODE).  Any other content is licensed under the Creative Commons Attribution 4.0 International Public License (see LICENSE) -->
 
-For details on license, see LICENSE.txt in this directory.
+For details on license, see LICENSE in this directory.
