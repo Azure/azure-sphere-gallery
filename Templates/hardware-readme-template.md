@@ -1,13 +1,8 @@
 <!--- This template should be used if the project contains hardware designs. If the project contains both hardware and software designs, please also refer to software-readme-template.md and incorporate relevant sections. -->
 
-<!--- Optional Metadata goes here
-Include the metadata if you want your project to be discoverable by the Microsoft samples browser. See samples-metadata-guide.md for details. --->
-
 # Name of hardware design
 
-<!---Start with a short description of what the project does--no more than two paragraphs
---->
-
+<!---Start with a short description of what the project does--no more than two paragraphs--->
 
 ## Contents
 
@@ -18,7 +13,7 @@ Include the metadata if you want your project to be discoverable by the Microsof
 | `Schematic.pdf`       | Schematic |
 | `BOM.xlsx`       | Bill of materials |
 | `PCB.pdf`        | Report on PCB stack-up |
-| `Altium`         | Altium Designer schematics, PCB layout, and supporting project files 
+| `Altium`         | Altium Designer schematics, PCB layout, and supporting project files
 | `CHANGELOG.md` | List of changes to the project. |
 | `README.md` | This README file. |
 | `LICENSE`   | The license for the project. |
