@@ -1,11 +1,8 @@
 <!--- This template should be used if the project contains hardware designs. If the project contains both hardware and software designs, please also refer to software-readme-template.md and incorporate relevant sections. -->
 
-
 # Name of hardware design
 
-<!---Start with a short description of what the project does--no more than two paragraphs
---->
-
+<!---Start with a short description of what the project does--no more than two paragraphs--->
 
 ## Contents
 
