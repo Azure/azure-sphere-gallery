@@ -24,7 +24,7 @@ static int 	sock=-1;
 static struct sockaddr_in broadcast_addr;
 static socklen_t addr_len;
 static int ret;
-static char sock_buffer[2048];
+static char sock_buffer[500];
 
 static bool slogInit = false;
 
@@ -38,7 +38,7 @@ int Log_Debug(const char *fmt, ...)
 		initSlog();
 	}
 
-	memset(sock_buffer, 0x00, 2048);
+	memset(sock_buffer, 0x00, sizeof(sock_buffer));
 	va_list args;
 	va_start(args, fmt);
 
@@ -48,11 +48,16 @@ int Log_Debug(const char *fmt, ...)
 	sock_buffer[1] = 0xff;
 	sock_buffer[0] = 0xff;
 
-	vsnprintf(sock_buffer+4, 2048, fmt, args);
+	int vsRet=vsnprintf(sock_buffer+4, sizeof(sock_buffer) - 4, fmt, args);
 	va_end(args);
 
-	perror(sock_buffer+4);		// print to stderr so VS/Code can display the message if conneted.
-	ret = sendto(sock, sock_buffer, strlen(sock_buffer+4)+4, 0, (struct sockaddr*) &broadcast_addr, addr_len);
+	if (vsRet < 0)	// encoding error
+	{
+		perror("Log_Debug - Cannot compose message\n");
+		return -1;
+	}
+
+	ret = sendto(sock, sock_buffer, strnlen(sock_buffer + 4, sizeof(sock_buffer) - 4)+4, 0, (struct sockaddr*) &broadcast_addr, addr_len);
 	return ret;
 }
 #endif

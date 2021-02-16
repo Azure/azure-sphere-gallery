@@ -2,7 +2,7 @@
 
 The goal of the socket UdpDebugLog library is to provide a mechanism to view debug data from a device that's not connected to Visual Studio/Visual Studio Code, but is connected to the network.
 
-Note that the socket Log_Debug library uses a UDP socket to send the Log_Debug information, the implementation could be easily modified to send the Log_Debug data to a UART or other interface.
+Note that the socket Log_Debug library uses a UDP socket to send the Log_Debug information, the implementation could be easily modified to send the Log_Debug data to a UART or other interface. Since the library is broadcasting to the local subnet the PC that's running the Log Message viewer application needs to be on the same network.
 
 For more information on Log_Debug usage, see [Log_Debug function](https://docs.microsoft.com/en-us/azure-sphere/reference/applibs-reference/applibs-log/function-log-debug)
 
