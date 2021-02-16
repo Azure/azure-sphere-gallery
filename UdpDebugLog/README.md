@@ -12,7 +12,7 @@ For more information on Log_Debug usage, see [Log_Debug function](https://docs.m
 |-------------|-------------|
 | `src\SphereUdpLogSender`       | Azure Sphere Sample App source code |
 | `src\PcUdpLogReceiver`       | .NET Core 3.1 application for viewing Socket Log messages |
-| `Assets`       | Images used in README.txt |
+| `Assets`       | Images used in README.md |
 | `README.md` | This README file. |
 | `LICENSE.txt`   | The license for the project. |
 
