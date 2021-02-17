@@ -87,7 +87,7 @@ The functions only deal with strings, you can easily wrap other variable types b
 
 ## Project expectations
 
-* MutableStorageKVP has been written to make it easy to read/write/query key/value pairs in a High-Level application, this is useful to store device state between device reboots or application updates.
+* This is a set of helper functions for developers; it is not official, maintained, or production-ready code.
 
 ### Expected support for the code
 
