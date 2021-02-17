@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SetDgIoTCProps", "SetDgIoTCProps\SetDgIoTCProps.csproj", "{FCA491DB-96F5-4FDD-AE7A-BC52D6D41F28}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SetIoTCentralPropsForDeviceGroup", "SetIoTCentralPropsForDeviceGroup\SetIoTCentralPropsForDeviceGroup.csproj", "{FCA491DB-96F5-4FDD-AE7A-BC52D6D41F28}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,12 +1,12 @@
-# SetDgIoTCProps
+# SetIoTCentralPropsForDeviceGroup
 
-SetDgIoTCProps is a utility that makes it easy to set an Azure IoT Central Device Twin property for all devices in an Azure Sphere Device Group.
+SetIoTCentralPropsForDeviceGroup is a utility that makes it easy to set an Azure IoT Central Device Twin property for all devices in an Azure Sphere Device Group.
 
 ## Contents
 
 | File/folder | Description |
 |-------------|-------------|
-| `src\SetDgIoTCProps`       | SetDgIoTCProps utility |
+| `src\SetIoTCentralPropsForDeviceGroup`       | SetIoTCentralPropsForDeviceGroup utility |
 | `README.md` | This README file. |
 | `LICENSE.txt`   | The license for the project. |
 
@@ -20,7 +20,7 @@ Follow the instructions to [setup an Azure IoT Central application](https://gith
 
 ## How to use
 
-SetDgIoTCProps is a console application, the application takes four command line arguments: 
+SetIoTCentralPropsForDeviceGroup is a console application, the application takes four command line arguments: 
 
 | Command | Description |
 |-------------|-------------|
@@ -50,11 +50,11 @@ Make sure you have the four required command line arguments:
 * Azure Sphere Device Group Guid
 * JSON Setting to apply
 
-You can now run the SetDgIoTCProps utility:
+You can now run the SetIoTCentralPropsForDeviceGroup utility:
 
 A sample command line could look like this:
 
-`SetDgIoTCProps https://myapp.azureiotcentral.com "IoT Central Access Token" 168A1115-568D-4717-A445-CFC4BB1BB8C7 {\"StatusLED\":true}` 
+`SetIoTCentralPropsForDeviceGroup https://myapp.azureiotcentral.com "IoT Central Access Token" 168A1115-568D-4717-A445-CFC4BB1BB8C7 {\"StatusLED\":true}` 
 
 ## Project expectations
 
