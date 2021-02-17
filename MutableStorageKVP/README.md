@@ -88,6 +88,7 @@ The functions only deal with strings, you can easily wrap other variable types b
 ## Project expectations
 
 * This is a set of helper functions for developers; it is not official, maintained, or production-ready code.
+* This sample has not been written to consider flash wear issues.
 
 ### Expected support for the code
 
