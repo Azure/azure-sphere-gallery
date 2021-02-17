@@ -1,0 +1,12 @@
+{
+  "SchemaVersion": 1,
+  "Name": "SphereUdpLogSender",
+  "ComponentId": "bd259ecf-1744-4c33-a463-4ba5eee160ad",
+  "EntryPoint": "/bin/app",
+  "CmdArgs": [],
+  "Capabilities": {
+    "AllowedUdpServerPorts": [ 1824 ],
+    "AllowedConnections": [ "255.255.255.255" ]
+  },
+  "ApplicationType": "Default"
+}
