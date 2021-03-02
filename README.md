@@ -24,7 +24,7 @@ Each folder within this repository contains a README.md file that describes the 
 | [HeapTracker](HeapTracker) | A memory allocation tracking library that can help diagnose memory leaks. |
 | [MutableStorageKVP](MutableStorageKVP) | Provides a set of functions that expose Key/Value pair functions (write, read, delete) over Azure Sphere Mutable Storage. |
 | [SetIoTCentralPropsForDeviceGroup](SetIoTCentralPropsForDeviceGroup) | Utility that makes it easy to set an Azure IoT Central Device Twin property for all devices in an Azure Sphere Device Group. |
-| [UdpDebugLog](UdpDebugLog) | Code that demonstrates how to override Log_Debug to broadcast on a UDP Socket, includes a Desktop Viewer application. |
+| [SetTimeFromLocation](SetTimeFromLocation) | Project that shows how to use Reverse IP lookup to get location information, then obtain time for location, and set device time. |
 
 ## Contributing
 This project contains a collection of Microsoft employee demos, hacks, hardware designs, and proof of concepts.  Microsoft authors of new contributions should fork the repo and create a pull request using a new folder, using the appropriate README template for [software](Templates/software-readme-template.md) or [hardware](Templates/hardware-readme-template.md) contributions, and following the checklist in the [pull request template](.github/pull_request_template.md).
