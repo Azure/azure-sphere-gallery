@@ -1,0 +1,12 @@
+{
+  "SchemaVersion": 1,
+  "Name": "SetTimeFromLocation_HighLevelApp",
+  "ComponentId": "6105E5DA-30C9-49ED-B5A1-2D55B61EE78B",
+  "EntryPoint": "/bin/app",
+  "CmdArgs": [],
+  "Capabilities": {
+    "AllowedConnections": [ "api.timezonedb.com", "get.geojs.io" ],
+    "SystemTime": true
+  },
+  "ApplicationType": "Default"
+}
