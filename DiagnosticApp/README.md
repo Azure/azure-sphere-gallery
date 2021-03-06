@@ -1,21 +1,13 @@
-# Sample: Diagnostic Application
+# Networking Diagnostic Application
 
 **Note:** In Progress. Currently supporting DNS Resolver and Custom NTP Test.
 
 This application performs two device (MT3620) networking diagnostic tests. The first one tests the DNS resolver functionality against known prod end-points; the second one tries time-syncing with dedicated NTP servers around the world. After running both ones, the app generate a summary report to the device console, which contains diagnostic information about whether each test failed or succeeded.
 
-The sample uses the following Azure Sphere libraries.
-
-| Library | Purpose |
-|---------|---------|
-| [Networking](https://docs.microsoft.com/azure-sphere/reference/applibs-reference/applibs-networking/networking-overview) | Manages network connectivity |
-| [log](https://docs.microsoft.com/azure-sphere/reference/applibs-reference/applibs-log/log-overview) | Displays messages in the Device Output window during debugging |
-| [EventLoop](https://docs.microsoft.com/azure-sphere/reference/applibs-reference/applibs-eventloop/eventloop-overview) | Invoke handlers for timer events |
-
 ## Contents
 | File/folder | Description |
 |-------------|-------------|
-| `src`       | Sample application |
+| `src`       | application source code |
 | `README.md` | This README file. |
 | `LICENSE.txt`   | The license for the project. |
 
@@ -23,8 +15,9 @@ The sample uses the following Azure Sphere libraries.
 
 1. Internet connection through Wi-Fi or Ethernet.
 
-## Prepare the sample
+## Setup
 
+### Prepare the app
 1. Even if you've performed this set up previously, ensure that you have Azure Sphere SDK version 20.10 or above. At the command prompt, run **azsphere show-version** to check. Install [the Azure Sphere SDK](https://docs.microsoft.com/azure-sphere/install/install-sdk) as needed.
 1. Connect your Azure Sphere device to your computer by USB.
 1. Connect your Azure Sphere device to the same local network as the DNS service.
@@ -34,7 +27,7 @@ The sample uses the following Azure Sphere libraries.
 
 ### Network configuration
 
-By default, this sample runs over a Wi-Fi connection to the internet. To use Ethernet instead, make the following changes:
+By default, this app runs over a Wi-Fi connection to the internet. To use Ethernet instead, make the following changes:
 
 1. Configure Azure Sphere as described in [Connect Azure Sphere to Ethernet](https://docs.microsoft.com/azure-sphere/network/connect-ethernet).
 1. Add the following line to the Capabilities section of the app_manifest.json file:
@@ -57,13 +50,13 @@ By default, this sample runs over a Wi-Fi connection to the internet. To use Eth
     }
    ```
 
-## Build and run the sample
+## Running the code
 
-To build and run this sample, follow the instructions in [Build a high-level application](https://docs.microsoft.com/en-us/azure-sphere/install/qs-blink-application?tabs=windows%2Ccliv2beta&pivots=vs-code).
+### Build and run the app
+To build and run this app, follow the instructions in [Build a high-level application](https://docs.microsoft.com/en-us/azure-sphere/install/qs-blink-application?tabs=windows%2Ccliv2beta&pivots=vs-code).
 
 
-## Testing the sample
-
+### Testing the app
 When you run the application, towards the very end, it should displays a summary section in this format:
 
         Index:  0
@@ -78,8 +71,28 @@ When you run the application, towards the very end, it should displays a summary
 
       ......
 
-## Expected support for the code
-The app is an ongoing project. More features will added in the future, and will try to reply to issues once per quarter.
+## Next steps
+
+### Project expectations
+This app is an ongoing project. More features will added in the future. 
+
+### Expected support for the code
+The author will try to reply to issues in future versions.
+
+## Contributing
+
+This project welcomes contributions and suggestions. Most contributions require you to
+agree to a Contributor License Agreement (CLA) declaring that you have the right to,
+and actually do, grant us the rights to use your contribution. For details, visit
+https://cla.microsoft.com.
+
+When you submit a pull request, a CLA-bot will automatically determine whether you need
+to provide a CLA and decorate the PR appropriately (e.g., label, comment). Simply follow the
+instructions provided by the bot. You will only need to do this once across all repositories using our CLA.
+
+This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
+For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/)
+or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
 
 ## License
 
