@@ -1,6 +1,6 @@
-# Networking Diagnostic Application
+# OSNetworkRequirementChecker-HLApp
 
-**Note:** In Progress. Currently supporting DNS Resolver and Custom NTP Test.
+This diagnostic app enables you to test some aspects of the [Azure Sphere OS Networking Requirements](https://docs.microsoft.com/azure-sphere/network/ports-protocols-domains) using an Azure Sphere high-level application. This makes it easier to determine if a given network environment does not meet Azure Sphere OS's networking requirements, which can cause issues such as lack of time synchronization, inability to receive OS or Application updates, and lack of short-lived device certificate which means that an application's Azure IoT connections may not work properly. Currently, this application tests two specific aspects of OS networking requirements: that DNS resolution works for required endpoints, and that NTP time resolution succeeds for the standard NTP endpoints used by the OS.
 
 This application performs two device (MT3620) networking diagnostic tests. The first one tests the DNS resolver functionality against known prod end-points; the second one tries time-syncing with dedicated NTP servers around the world. After running both ones, the app generate a summary report to the device console, which contains diagnostic information about whether each test failed or succeeded.
 
@@ -53,7 +53,7 @@ By default, this app runs over a Wi-Fi connection to the internet. To use Ethern
 ## Running the code
 
 ### Build and run the app
-To build and run this app, follow the instructions in [Build a high-level application](https://docs.microsoft.com/en-us/azure-sphere/install/qs-blink-application?tabs=windows%2Ccliv2beta&pivots=vs-code).
+To build and run this app, follow the instructions in [Build a high-level application](https://docs.microsoft.com/azure-sphere/install/qs-blink-application).
 
 
 ### Testing the app
@@ -74,7 +74,7 @@ When you run the application, towards the very end, it should displays a summary
 ## Next steps
 
 ### Project expectations
-This app is an ongoing project. More features will added in the future. 
+This code is not official, maintained, or production-ready code. For maintained guidance on the Azure Sphere OS networking requirements please refer to the [doc page](https://docs.microsoft.com/azure-sphere/network/ports-protocols-domains).
 
 ### Expected support for the code
 The author will try to reply to issues in future versions.
