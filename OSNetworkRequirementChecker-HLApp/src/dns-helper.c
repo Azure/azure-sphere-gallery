@@ -39,8 +39,8 @@ const char *ServerList[] = {"eastus-prod-azuresphere.azure-devices.net",
                             "prodptimg-secondary.blob.core.windows.net",
                             "sphere.sb.dl.delivery.mp.microsoft.com",
                             "www.msftconnecttest.com"};
-const unsigned int ServerListLen = 17;
-ServiceInstanceDetails *InstanceList[17];
+const unsigned int ServerListLen = 14;
+ServiceInstanceDetails *InstanceList[14];
 int instanceIndex = 0;
 int queryRetryCounter = 0;
 int NCSIRetryCounter = 0;
@@ -113,6 +113,7 @@ int ProcessMessageBySection(char *buf, ssize_t len, ns_msg msg, ns_sect section,
         (*instanceDetails)->name = NULL;
         (*instanceDetails)->host = NULL;
         (*instanceDetails)->ipv4Address.s_addr = INADDR_NONE;
+        (*instanceDetails)->port = 0;
         (*instanceDetails)->txtData = NULL;
         (*instanceDetails)->txtDataLength = 0;
         (*instanceDetails)->alias = NULL;
@@ -149,7 +150,10 @@ int ProcessMessageBySection(char *buf, ssize_t len, ns_msg msg, ns_sect section,
             int compressedTargetDomainNameLength = dn_expand(
                 buf, buf + len, data + sizeof(uint16_t) + sizeof(uint16_t) + sizeof(uint16_t),
                 displayBuf, sizeof(displayBuf));
-            if (compressedTargetDomainNameLength > 0 && !(*instanceDetails)->host) {
+            if ((*instanceDetails)->port == 0 && compressedTargetDomainNameLength > 0 &&
+                !(*instanceDetails)->host) {
+                (*instanceDetails)->port =
+                    (uint16_t)ns_get16(data + sizeof(uint16_t) + sizeof(uint16_t));
                 (*instanceDetails)->host = strdup(displayBuf);
                 if (!(*instanceDetails)->host) {
                     Log_Debug("ERROR: strdup: %s (%d)\n", strerror(errno), errno);
