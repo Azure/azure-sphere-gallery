@@ -25,10 +25,13 @@ const char* const ntpServers[] =
 	"time.windows.com",
 	"time.sphere.azure.net",
 	"prod.time.sphere.azure.net",
+
 	"13.86.101.172",  "20.43.94.199",   "20.189.79.72",
 	"40.81.94.65",    "40.81.188.85",   "40.119.6.228",
 	"51.105.208.173", "51.137.137.111", "51.145.123.29",
 	"52.148.114.188", "52.231.114.183",
+
+	// Termination element
 	""
 };
 
@@ -36,36 +39,35 @@ typedef struct
 {
 	const char *hostname;
 	int port;
-} t_endpoints;
-const t_endpoints endpoints[] =
+} t_endpoint;
+const t_endpoint endpoints[] =
 {
-	// Device provisioning and communication with IoT Hub
-	{ "Device provisioning and communication with IoT Hub:", -1},
-	{ "global.azure-devices-provisioning.net", 8883},
-	{ "global.azure-devices-provisioning.net", 443}, // websocket
+	{ "Device provisioning and communication with IoT Hub:", -1 }, // Group description
+	{ "global.azure-devices-provisioning.net", 8883 },
+	{ "global.azure-devices-provisioning.net", 443 },
 
-	// Internet connection checks, certificate file downloads, and similar tasks
-	{ "Internet connection checks, certificate file downloads, and similar tasks:", -1},
-	{ "www.msftconnecttest.com", 80},
-	{ "prod.update.sphere.azure.net", 80},
+	{ "Internet connection checks, certificate file downloads, and similar tasks:", -1 }, // Group description
+	{ "www.msftconnecttest.com", 80 },
+	{ "prod.update.sphere.azure.net", 80 },
 
-	// Communication with web services and Azure Sphere Security service
-	{ "Communication with web services and Azure Sphere Security service:", -1},
-	{ "anse.azurewatson.microsoft.com", 443},
-	{ "eastus-prod-azuresphere.azure-devices.net", 443},
-	{ "prod.core.sphere.azure.net", 443},
-	{ "prod.device.core.sphere.azure.net", 443},
-	{ "prod.deviceauth.sphere.azure.net", 443},
-	{ "prod.dinsights.core.sphere.azure.net", 443},
-	{ "prod.releases.sphere.azure.net", 443},
-	{ "prodmsimg.blob.core.windows.net", 443},
-	{ "prodmsimg-secondary.blob.core.windows.net", 443},
-	{ "prodptimg.blob.core.windows.net", 443},
-	{ "prodptimg-secondary.blob.core.windows.net", 443},
-	{ "sphereblobeus.azurewatson.microsoft.com", 443},
-	{ "sphereblobweus.azurewatson.microsoft.com", 443},
-	{ "sphere.sb.dl.delivery.mp.microsoft.com", 443},
-	{ "", 0}
+	{ "Communication with web services and Azure Sphere Security service:", -1 }, // Group description
+	{ "anse.azurewatson.microsoft.com", 443 },
+	{ "eastus-prod-azuresphere.azure-devices.net", 443 },
+	{ "prod.core.sphere.azure.net", 443 },
+	{ "prod.device.core.sphere.azure.net", 443 },
+	{ "prod.deviceauth.sphere.azure.net", 443 },
+	{ "prod.dinsights.core.sphere.azure.net", 443 },
+	{ "prod.releases.sphere.azure.net", 443 },
+	{ "prodmsimg.blob.core.windows.net", 443 },
+	{ "prodmsimg-secondary.blob.core.windows.net", 443 },
+	{ "prodptimg.blob.core.windows.net", 443 },
+	{ "prodptimg-secondary.blob.core.windows.net", 443 },
+	{ "sphereblobeus.azurewatson.microsoft.com", 443 },
+	{ "sphereblobweus.azurewatson.microsoft.com", 443 },
+	{ "sphere.sb.dl.delivery.mp.microsoft.com", 443 },
+
+	// Termination element
+	{ "", 0} 
 };
 
 
@@ -87,9 +89,9 @@ typedef struct
 		uint8_t li_vn_mode;		// 8 bits. li, vn, and mode.							 
 	};
 
-	uint8_t stratum;         // 8 bits. Stratum level of the local clock.
-	uint8_t poll;            // 8 bits. Maximum interval between successive messages.
-	uint8_t precision;       // 8 bits. Precision of the local clock.
+	uint8_t stratum;         //  8 bits. Stratum level of the local clock.
+	uint8_t poll;            //  8 bits. Maximum interval between successive messages.
+	uint8_t precision;       //  8 bits. Precision of the local clock.
 
 	uint32_t rootDelay;      // 32 bits. Total round trip delay time.
 	uint32_t rootDispersion; // 32 bits. Max error aloud from primary clock source.
@@ -104,7 +106,7 @@ typedef struct
 	uint32_t rxTm_s;         // 32 bits. Received time-stamp seconds.
 	uint32_t rxTm_f;         // 32 bits. Received time-stamp fraction of a second.
 
-	uint32_t txTm_s;         // 32 bits. Transmit time-stamp seconds (the essential field that the client will use).
+	uint32_t txTm_s;         // 32 bits. Transmit time-stamp seconds.
 	uint32_t txTm_f;         // 32 bits. Transmit time-stamp fraction of a second.
 
 } ntp_packet;				 // Total: 384 bits or 48 bytes.
@@ -258,7 +260,7 @@ int resolve_hostname(const char *hostname, int port)
 #endif
 
 	// Does the host exist?
-	std::cout << "Resolving " << hostname << "... ";
+	std::cout << "- Resolving " << hostname << "... ";
 	struct hostent *server = gethostbyname(hostname);
 	if (server == NULL)
 	{
@@ -296,7 +298,7 @@ int resolve_hostname(const char *hostname, int port)
 #else
 				close(sock_fd);
 #endif
-				std::cout << " success!" << std::endl;
+				std::cout << "success!" << std::endl;
 			}
 		}
 	}
@@ -310,7 +312,8 @@ int resolve_hostname(const char *hostname, int port)
 
 int main(int argc, char **argv)
 {
-	std::cout << "Azure Sphere network-checkup utility." << std::endl << std::endl;	
+	std::cout << "Azure Sphere network-checkup utility." << std::endl;	
+	std::cout << "Please see https://docs.microsoft.com/en-us/azure-sphere/network/ports-protocols-domains for further details." << std::endl << std::endl;
 	try
 	{
 		std::cout << "Querying required NTP servers..." << std::endl;
@@ -324,7 +327,7 @@ int main(int argc, char **argv)
 		{
 			if (-1 == endpoints[i].port)
 			{
-				// This entry is just a description
+				// This entry is a group description
 				std::cout << std::endl << endpoints[i].hostname << std::endl;
 			}
 			else
@@ -338,8 +341,6 @@ int main(int argc, char **argv)
 	{
 		std::cout << std::endl << "Unexpected exception executing checks!" << std::endl;
 	}
-
-	std::cout << "Please see https://docs.microsoft.com/en-us/azure-sphere/network/ports-protocols-domains for further details." << std::endl << std::endl;
 
 	return 0;
 }

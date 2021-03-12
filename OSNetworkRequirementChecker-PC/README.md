@@ -59,50 +59,49 @@ When you run the application, it'll display the checks being executed and their 
 A successful output will look the following (errors will be displayed inline in case they occur):
 ```     
         Azure Sphere network-checkup utility.
+        Please see https://docs.microsoft.com/en-us/azure-sphere/network/ports-protocols-domains for further details.
 
         Querying required NTP servers...
-        - time from time.windows.com<51.105.208.173> --> Fri Mar 12 12:17:35 2021
-        - time from time.sphere.azure.net<51.105.208.173> --> Fri Mar 12 12:17:36 2021
-        - time from prod.time.sphere.azure.net<51.105.208.173> --> Fri Mar 12 12:17:36 2021
-        - time from 13.86.101.172<13.86.101.172> --> Fri Mar 12 12:17:36 2021
-        - time from 20.43.94.199<20.43.94.199> --> Fri Mar 12 12:17:36 2021
-        - time from 20.189.79.72<20.189.79.72> --> Fri Mar 12 12:17:36 2021
-        - time from 40.81.94.65<40.81.94.65> --> Fri Mar 12 12:17:36 2021
-        - time from 40.81.188.85<40.81.188.85> --> Fri Mar 12 12:17:37 2021
-        - time from 40.119.6.228<40.119.6.228> --> Fri Mar 12 12:17:37 2021
-        - time from 51.105.208.173<51.105.208.173> --> Fri Mar 12 12:17:37 2021
-        - time from 51.137.137.111<51.137.137.111> --> Fri Mar 12 12:17:37 2021
-        - time from 51.145.123.29<51.145.123.29> --> Fri Mar 12 12:17:37 2021
-        - time from 52.148.114.188<52.148.114.188> --> Fri Mar 12 12:17:37 2021
-        - time from 52.231.114.183<52.231.114.183> --> Fri Mar 12 12:17:37 2021
+        - time from time.windows.com<51.105.208.173> --> Fri Mar 12 23:16:08 2021
+        - time from time.sphere.azure.net<51.105.208.173> --> Fri Mar 12 23:16:08 2021
+        - time from prod.time.sphere.azure.net<51.105.208.173> --> Fri Mar 12 23:16:08 2021
+        - time from 13.86.101.172<13.86.101.172> --> Fri Mar 12 23:16:08 2021
+        - time from 20.43.94.199<20.43.94.199> --> Fri Mar 12 23:16:08 2021
+        - time from 20.189.79.72<20.189.79.72> --> Fri Mar 12 23:16:09 2021
+        - time from 40.81.94.65<40.81.94.65> --> Fri Mar 12 23:16:09 2021
+        - time from 40.81.188.85<40.81.188.85> --> Fri Mar 12 23:16:09 2021
+        - time from 40.119.6.228<40.119.6.228> --> Fri Mar 12 23:16:09 2021
+        - time from 51.105.208.173<51.105.208.173> --> Fri Mar 12 23:16:09 2021
+        - time from 51.137.137.111<51.137.137.111> --> Fri Mar 12 23:16:09 2021
+        - time from 51.145.123.29<51.145.123.29> --> Fri Mar 12 23:16:10 2021
+        - time from 52.148.114.188<52.148.114.188> --> Fri Mar 12 23:16:10 2021
+        - time from 52.231.114.183<52.231.114.183> --> Fri Mar 12 23:16:10 2021
 
         Querying required hostnames...
 
         Device provisioning and communication with IoT Hub:
-        Resolving global.azure-devices-provisioning.net... success --> connecting to 40.79.180.98:8883...  success!
-        Resolving global.azure-devices-provisioning.net... success --> connecting to 40.79.180.98:443...  success!
+        - Resolving global.azure-devices-provisioning.net... success --> connecting to 40.79.180.98:8883... success!
+        - Resolving global.azure-devices-provisioning.net... success --> connecting to 40.79.180.98:443... success!
 
         Internet connection checks, certificate file downloads, and similar tasks:
-        Resolving www.msftconnecttest.com... success --> connecting to 13.107.4.52:80...  success!
-        Resolving prod.update.sphere.azure.net... success --> connecting to 152.199.19.161:80...  success!
+        - Resolving www.msftconnecttest.com... success --> connecting to 13.107.4.52:80... success!
+        - Resolving prod.update.sphere.azure.net... success --> connecting to 152.199.19.161:80... success!
 
         Communication with web services and Azure Sphere Security service:
-        Resolving anse.azurewatson.microsoft.com... success --> connecting to 52.165.226.185:443...  success!
-        Resolving eastus-prod-azuresphere.azure-devices.net... success --> connecting to 137.117.83.38:443...  success!
-        Resolving prod.core.sphere.azure.net... success --> connecting to 13.83.64.76:443...  success!
-        Resolving prod.device.core.sphere.azure.net... success --> connecting to 13.87.216.151:443...  success!
-        Resolving prod.deviceauth.sphere.azure.net... success --> connecting to 52.146.68.47:443...  success!
-        Resolving prod.dinsights.core.sphere.azure.net... success --> connecting to 52.188.78.215:443...  success!
-        Resolving prod.releases.sphere.azure.net... success --> connecting to 13.107.246.19:443...  success!
-        Resolving prodmsimg.blob.core.windows.net... success --> connecting to 52.239.154.132:443...  success!
-        Resolving prodmsimg-secondary.blob.core.windows.net... success --> connecting to 52.239.162.36:443...  success!
-        Resolving prodptimg.blob.core.windows.net... success --> connecting to 52.240.48.36:443...  success!
-        Resolving prodptimg-secondary.blob.core.windows.net... success --> connecting to 52.239.104.36:443...  success!
-        Resolving sphereblobeus.azurewatson.microsoft.com... success --> connecting to 13.107.246.19:443...  success!
-        Resolving sphereblobweus.azurewatson.microsoft.com... success --> connecting to 13.107.246.19:443...  success!
-        Resolving sphere.sb.dl.delivery.mp.microsoft.com... success --> connecting to 152.199.21.175:443...  success!
-
-        Please see https://docs.microsoft.com/en-us/azure-sphere/network/ports-protocols-domains for further details.
+        - Resolving anse.azurewatson.microsoft.com... success --> connecting to 138.91.195.232:443... success!
+        - Resolving eastus-prod-azuresphere.azure-devices.net... success --> connecting to 137.117.83.38:443... success!
+        - Resolving prod.core.sphere.azure.net... success --> connecting to 52.142.28.244:443... success!
+        - Resolving prod.device.core.sphere.azure.net... success --> connecting to 52.188.78.215:443... success!
+        - Resolving prod.deviceauth.sphere.azure.net... success --> connecting to 52.146.68.47:443... success!
+        - Resolving prod.dinsights.core.sphere.azure.net... success --> connecting to 52.188.78.215:443... success!
+        - Resolving prod.releases.sphere.azure.net... success --> connecting to 13.107.246.19:443... success!
+        - Resolving prodmsimg.blob.core.windows.net... success --> connecting to 52.239.154.132:443... success!
+        - Resolving prodmsimg-secondary.blob.core.windows.net... success --> connecting to 52.239.162.36:443... success!
+        - Resolving prodptimg.blob.core.windows.net... success --> connecting to 52.240.48.36:443... success!
+        - Resolving prodptimg-secondary.blob.core.windows.net... success --> connecting to 52.239.104.36:443... success!
+        - Resolving sphereblobeus.azurewatson.microsoft.com... success --> connecting to 13.107.246.19:443... success!
+        - Resolving sphereblobweus.azurewatson.microsoft.com... success --> connecting to 13.107.246.19:443... success!
+        - Resolving sphere.sb.dl.delivery.mp.microsoft.com... success --> connecting to 152.199.21.175:443... success!
 ```
 
 ## Next steps
