@@ -1,8 +1,8 @@
 #if defined(_WIN32) || defined(__WIN32__) || defined(_MSC_VER)
 #	define _WINSOCK_DEPRECATED_NO_WARNINGS
 #	ifndef _CRT_SECURE_NO_WARNINGS
-#	define _CRT_SECURE_NO_WARNINGS
-#	endif /* _CRT_SECURE_NO_WARNINGS */
+#		define _CRT_SECURE_NO_WARNINGS
+#	endif
 #	pragma comment(lib, "Ws2_32.lib")
 #	include <WS2tcpip.h>
 #	include <winsock2.h>
@@ -104,7 +104,7 @@ typedef struct
 	uint32_t rxTm_s;         // 32 bits. Received time-stamp seconds.
 	uint32_t rxTm_f;         // 32 bits. Received time-stamp fraction of a second.
 
-	uint32_t txTm_s;         // 32 bits. Transmit time-stamp seconds (the essential field that the client wll use).
+	uint32_t txTm_s;         // 32 bits. Transmit time-stamp seconds (the essential field that the client will use).
 	uint32_t txTm_f;         // 32 bits. Transmit time-stamp fraction of a second.
 
 } ntp_packet;				 // Total: 384 bits or 48 bytes.
@@ -202,7 +202,7 @@ int query_ntp_server(const char *hostname, int ntp_port, int src_port)
 				}
 				else
 				{
-					// Get the time data back
+					// Receive the NTP data back
 					socklen_t client_addr_len = sizeof(client_addr);
 					int recv_bytes = recvfrom(sock_fd, (char *)&packet, sizeof(packet), 0, (struct sockaddr *)&client_addr, &client_addr_len);
 					if (recv_bytes < 0)
@@ -211,17 +211,16 @@ int query_ntp_server(const char *hostname, int ntp_port, int src_port)
 						std::cerr << "recvfrom() failed with error " << iRes << std::endl;
 					}
 					else
-					{
-						// txTm_s + txTm_f contain the time-stamp in seconds passed since Jan 1st 1900, as the packet left the NTP server.
-						// Firstly, they need to be converted from the network's to the local host's "endianness".
+					{						
+						// Firstly, the "endianness" of txTm_s needs to be converted from the network's big-endian to the local host's one.
+						// txTm_s contains the number of seconds passed since 00:00:00 UTC Jan 1st 1900, as of when the packet left the NTP server.
 						packet.txTm_s = ntohl(packet.txTm_s);
-						packet.txTm_f = ntohl(packet.txTm_f);
-
-						// Compute the time-stamp in seconds since NTP epoch (catching both txTm_s + txTm_f in 64-bit integer), 
-						// by subtracting 70 years worth of seconds, which results in the seconds since 00:00:00 UTC on 1 January 1970 (UNIX epoch).
+												
+						// The Unix epoch is the number of seconds since 00:00:00 UTC Jan 1st 1970,
+						// therefore we subtract 70 years worth of seconds from the time returned by the NTP server.
 						time_t txTm = (time_t)((uint64_t)packet.txTm_s - NTP_TIMESTAMP_DELTA);
 
-						// Print the time we got from the server, accounting for local timezone and conversion from UTC time.
+						// Print the time we got from the NTP server, accounting the local timezone and conversion from UTC time.
 						std::cout << "- time from " << hostname << "<" << server_ip_addr << "> --> " << ctime((const time_t *)&txTm);
 					}
 				}
