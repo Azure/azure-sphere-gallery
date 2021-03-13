@@ -312,8 +312,7 @@ int resolve_hostname(const char *hostname, int port)
 
 int main(int argc, char **argv)
 {
-	std::cout << "Azure Sphere network-checkup utility." << std::endl;	
-	std::cout << "Please see https://docs.microsoft.com/en-us/azure-sphere/network/ports-protocols-domains for further details." << std::endl << std::endl;
+	std::cout << "Azure Sphere network-checkup utility." << std::endl << std::endl;
 	try
 	{
 		std::cout << "Querying required NTP servers..." << std::endl;
@@ -322,7 +321,7 @@ int main(int argc, char **argv)
 			query_ntp_server(ntpServers[i], NTP_PORT, NTP_PORT_OUT);
 		}
 
-		std::cout << std::endl << "Querying required hostnames..." << std::endl;
+		std::cout << std::endl << "Querying required endpoints..." << std::endl;
 		for (int i = 0; *endpoints[i].hostname; i++)
 		{
 			if (-1 == endpoints[i].port)

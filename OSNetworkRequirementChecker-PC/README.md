@@ -19,12 +19,11 @@ During execution, the utility displays whether each check fails or succeeds.
 
 ## Prerequisites
 
-1. Internet connection through Wi-Fi or Ethernet.
-2. A PC connected to the same network, to run the utility on.
+A PC running Windows or Linux to run the utility on, which must be connected to the same network on which the Azure Sphere devices are (or will be) connected.
 
 ## Setup
 
-Copy the all the project files in a working directory of your choice, from now on referred as `<WRKDIR>`.
+Copy the all the project files in a working directory of your choice, from now on referred as `<WORKDIR>`.
 
 ## Running the code
 
@@ -32,34 +31,34 @@ Copy the all the project files in a working directory of your choice, from now o
 The command line utility has a single source file which supports compiling on Windows (i.e. Visual Studio or Visual Studio Code) and Linux (i.e. Visual Studio Code or g++):
 
 #### On Windows (Visual Studio)
-Open the `OSNetworkRequirementChecker-PC.sln` and build it. The executable should be generated in the following directory:
+Open the `OSNetworkRequirementChecker-PC.sln` from Visual Studio and build it. The executable should be generated in the following directory:
 ```
-<WRKDIR>\x64\Debug\OSNetworkRequirementChecker-PC.exe
+<WORKDIR>\x64\Debug\OSNetworkRequirementChecker-PC.exe
 ```
 
 #### On Linux (g++)
-Open a terminal window and navigate to your `<WRKDIR>`, and run the following command
+Open a terminal window, navigate to your `<WORKDIR>` and run the following command:
 
 ```
-~/<WRKDIR> $ g++ -o OSNetworkRequirementChecker-PC main.cpp
+~/<WORKDIR> $ g++ -o OSNetworkRequirementChecker-PC main.cpp
 ```
-Once compiled, the only required executable `OSNetworkRequirementChecker-PC` will be located in the same directory where the command was launched.
+Once compiled, the only required executable `OSNetworkRequirementChecker-PC` will be located in the same `<WORKDIR>` directory.
 
 ### Testing the app
-To run the application, you just need the single executable file produced from the previous steps:
+To run the application, just the single executable file produced from the previous steps is required:
+
 #### On Windows
 ```
-.\<WRKDIR>\x64\Debug>OSNetworkRequirementChecker-PC.exe
+.\<WORKDIR>\x64\Debug>OSNetworkRequirementChecker-PC.exe
 ```
 #### On Linux
 ```
 sudo ./OSNetworkRequirementChecker-PC
 ```
-When you run the application, it'll display the checks being executed and their related results as they are performed.
+When running the application, it'll display the checks being executed and their related results, as they are performed.
 A successful output will look the following (errors will be displayed inline in case they occur):
 ```     
         Azure Sphere network-checkup utility.
-        Please see https://docs.microsoft.com/en-us/azure-sphere/network/ports-protocols-domains for further details.
 
         Querying required NTP servers...
         - time from time.windows.com<51.105.208.173> --> Fri Mar 12 23:16:08 2021
@@ -77,7 +76,7 @@ A successful output will look the following (errors will be displayed inline in 
         - time from 52.148.114.188<52.148.114.188> --> Fri Mar 12 23:16:10 2021
         - time from 52.231.114.183<52.231.114.183> --> Fri Mar 12 23:16:10 2021
 
-        Querying required hostnames...
+        Querying required endpoints...
 
         Device provisioning and communication with IoT Hub:
         - Resolving global.azure-devices-provisioning.net... success --> connecting to 40.79.180.98:8883... success!
@@ -112,7 +111,7 @@ For the latest information regarding the network connectivity requirements for A
 
 ### Expected support for the code
 
-There is no official support guarantee for this code, but we will make a best effort to respond to/address any issues you encounter.
+There is no official support guarantee for this code, but we will make a best effort to respond and address any issues you may encounter.
 
 ### How to report an issue
 
