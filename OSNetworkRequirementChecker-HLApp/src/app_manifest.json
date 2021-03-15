@@ -6,7 +6,9 @@
   "CmdArgs": [],
   "Capabilities": {
     "AllowedConnections": [ 
+      "anse.azurewatson.microsoft.com",
       "eastus-prod-azuresphere.azure-devices.net",
+      "global.azure-devices-provisioning.net",
       "prod.core.sphere.azure.net",
       "prod.device.core.sphere.azure.net", 
       "prod.deviceauth.sphere.azure.net", 
@@ -18,6 +20,8 @@
       "prodmsimg-secondary.blob.core.windows.net",
       "prodptimg.blob.core.windows.net",
       "prodptimg-secondary.blob.core.windows.net",
+      "sphereblobeus.azurewatson.microsoft.com",
+      "sphereblobweus.azurewatson.microsoft.com",
       "sphere.sb.dl.delivery.mp.microsoft.com", 
       "time.sphere.azure.net", 
       "www.msftconnecttest.com"

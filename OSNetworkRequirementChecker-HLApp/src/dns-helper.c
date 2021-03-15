@@ -28,7 +28,6 @@ const char *NetworkInterface = "wlan0";
 const char *ServerList[] = {"anse.azurewatson.microsoft.com",
                             "eastus-prod-azuresphere.azure-devices.net",
                             "global.azure-devices-provisioning.net",
-                            "global.azure-devices-provisioning.net",
                             "prod.core.sphere.azure.net",
                             "prod.device.core.sphere.azure.net",
                             "prod.deviceauth.sphere.azure.net",
@@ -44,8 +43,8 @@ const char *ServerList[] = {"anse.azurewatson.microsoft.com",
                             "sphereblobweus.azurewatson.microsoft.com",
                             "sphere.sb.dl.delivery.mp.microsoft.com",
                             "www.msftconnecttest.com"};
-const unsigned int ServerListLen = 19;
-ServiceInstanceDetails *InstanceList[19];
+const unsigned int ServerListLen = 18;
+ServiceInstanceDetails *InstanceList[18];
 int instanceIndex = 0;
 int queryRetryCounter = 0;
 int NCSIRetryCounter = 0;
