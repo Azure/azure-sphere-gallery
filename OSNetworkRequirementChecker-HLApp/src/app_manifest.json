@@ -1,6 +1,6 @@
 {
   "SchemaVersion": 1,
-  "Name": "DiagnosticApp",
+  "Name": "OSNetworkRequirementChecker-HLApp",
   "ComponentId": "8128f290-f4b1-4986-945c-1868d38e33a5",
   "EntryPoint": "/bin/app",
   "CmdArgs": [],

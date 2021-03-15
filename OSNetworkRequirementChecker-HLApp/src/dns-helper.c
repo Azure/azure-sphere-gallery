@@ -25,7 +25,10 @@ const Networking_InterfaceConnectionStatus RequiredNetworkStatus =
 const char *NetworkInterface = "wlan0";
 
 // List of hostname to be tested
-const char *ServerList[] = {"eastus-prod-azuresphere.azure-devices.net",
+const char *ServerList[] = {"anse.azurewatson.microsoft.com",
+                            "eastus-prod-azuresphere.azure-devices.net",
+                            "global.azure-devices-provisioning.net",
+                            "global.azure-devices-provisioning.net",
                             "prod.core.sphere.azure.net",
                             "prod.device.core.sphere.azure.net",
                             "prod.deviceauth.sphere.azure.net",
@@ -37,10 +40,12 @@ const char *ServerList[] = {"eastus-prod-azuresphere.azure-devices.net",
                             "prodmsimg-secondary.blob.core.windows.net",
                             "prodptimg.blob.core.windows.net",
                             "prodptimg-secondary.blob.core.windows.net",
+                            "sphereblobeus.azurewatson.microsoft.com",
+                            "sphereblobweus.azurewatson.microsoft.com",
                             "sphere.sb.dl.delivery.mp.microsoft.com",
                             "www.msftconnecttest.com"};
-const unsigned int ServerListLen = 14;
-ServiceInstanceDetails *InstanceList[14];
+const unsigned int ServerListLen = 19;
+ServiceInstanceDetails *InstanceList[19];
 int instanceIndex = 0;
 int queryRetryCounter = 0;
 int NCSIRetryCounter = 0;
@@ -145,8 +150,6 @@ int ProcessMessageBySection(char *buf, ssize_t len, ns_msg msg, ns_sect section,
             // SRV record format: Priority|  Weight |   Port  |     Target
             //                   (2 Bytes)|(2 Bytes)|(2 Bytes)|(Remaining Bytes)
             const char *data = ns_rr_rdata(rr);
-            (*instanceDetails)->port =
-                (uint16_t)ns_get16(data + sizeof(uint16_t) + sizeof(uint16_t));
             int compressedTargetDomainNameLength = dn_expand(
                 buf, buf + len, data + sizeof(uint16_t) + sizeof(uint16_t) + sizeof(uint16_t),
                 displayBuf, sizeof(displayBuf));
