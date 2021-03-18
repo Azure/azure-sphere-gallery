@@ -1,3 +1,7 @@
 [submodule "src/cJSON"]
 	path = MutableStorageKVP/src/cJSON
 	url = https://github.com/DaveGamble/cJSON
+
+[submodule "LittleFs_RemoteDisk/src/HighLevelApp/littlefs"]
+	path = LittleFs_RemoteDisk/src/HighLevelApp/littlefs
+	url = https://github.com/littlefs-project/littlefs.git
