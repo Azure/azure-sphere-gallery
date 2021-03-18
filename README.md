@@ -23,6 +23,7 @@ Each folder within this repository contains a README.md file that describes the 
 | [DeviceTenantFinder](DeviceTenantFinder) | Utility that makes it easy to find the Azure Sphere tenant name/Id within your tenants for a given Device Id |
 | [OSNetworkRequirementChecker-HLApp](OSNetworkRequirementChecker-HLApp) | A sample app that performs DNS resolver and custom NTP test for diagnosing networking connectivity problems. |
 | [HeapTracker](HeapTracker) | A memory allocation tracking library that can help diagnose memory leaks. |
+| [LittleFs](Littlefs) | A project that shows how to add [Littlefs](https://github.com/littlefs-project/littlefs) to an Azure Sphere project, uses Curl to talk to virtual storage |
 | [MutableStorageKVP](MutableStorageKVP) | Provides a set of functions that expose Key/Value pair functions (write, read, delete) over Azure Sphere Mutable Storage. |
 | [OSNetworkRequirementChecker-PC](OSNetworkRequirementChecker-PC) | A PC command line utility for diagnosing networking connectivity issues. |
 | [SetIoTCentralPropsForDeviceGroup](SetIoTCentralPropsForDeviceGroup) | Utility that makes it easy to set an Azure IoT Central Device Twin property for all devices in an Azure Sphere Device Group. |
