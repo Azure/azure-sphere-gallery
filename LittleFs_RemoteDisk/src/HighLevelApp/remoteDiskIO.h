@@ -2,6 +2,7 @@
    Licensed under the MIT License. */
 
 #pragma once
-#include <stdint.h>
 
+#include <stdint.h>
+uint8_t* readBlockData(uint32_t offset, uint32_t size);
 int writeBlockData(uint8_t* sectorData, uint32_t size, uint32_t offset);

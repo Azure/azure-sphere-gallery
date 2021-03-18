@@ -1,6 +1,6 @@
 # Littlefs project
 
-The goal of this project is to show how to add file system support to an Azure Sphere project, in this case using the Littlefs file system and 'virtual storage', the sample project can be extended to talk to physical hardware.
+The goal of this project is to show how to add file system support to an Azure Sphere project, in this case using the Littlefs file system and 'remote storage', the sample project can be extended to talk to physical hardware.
 
 Here's a link to the [Littlefs project on Github](https://github.com/littlefs-project/littlefs).
 
@@ -9,7 +9,7 @@ Here's a link to the [Littlefs project on Github](https://github.com/littlefs-pr
 | File/folder | Description |
 |-------------|-------------|
 | `src\HighLevelApp`       | Azure Sphere Sample App source code |
-| `src\PyDiskHost`       | Python app that hosts a 4MB Virtual Disk |
+| `src\PyDiskHost`       | Python app that hosts a 4MB Remote Disk |
 | `README.md` | This README file. |
 | `LICENSE.txt`   | The license for the project. |
 
@@ -24,7 +24,7 @@ Note that the Azure Sphere High Level application is configured for the 21.01 SD
 
 Supporting Littlefs requires that you setup the storage layout (page, sector, block, and total size), and then support four functions, these are **read, write (called program in the Littlefs implementation), erase, and sync**
 
-**Python Virtual Storage app** 
+**Python Remote Storage app** 
 The project contains a Python Flask application (PyDiskHost.py) that supports 4MB storage (matching the defined storage layout of the high-level Azure Sphere application) - The Python application supports HTTP Get (read), and HTTP Post (Write) functions - the 4MB storage is supported by an in-memory bytearray (but could be easily modified to use a file on disk). The Python app is configured to use port 5000.
 
 Start the Python application before running the Azure Sphere application.
@@ -43,7 +43,7 @@ The high level application sets up the storage size (lines 24-27)
 
 The storage size information and pointers to read, program, erase, and sync are used to initialize Littlefs (lines 40-53) in main.c.
 
-The Azure Sphere high level application uses Curl to make HTTP Get/Post calls to read/write to Python virtual storage.
+The Azure Sphere high level application uses Curl to make HTTP Get/Post calls to read/write to Python remote storage.
 
 You will need to modify the high level application app_manifest.json to provide the IP address of the PC running the Python application - modify **AllowedConnections** to include the PC host IP address, an example is below.
 
@@ -96,7 +96,7 @@ With Curl memory tracking enabled you will see several memory tracking Log_Debug
 
 ## Project expectations
 
-* The code has been developed to support developers wanting to integrate a File System into their Azure Sphere project.
+* The code has been developed to support developers wanting to integrate a File System into their Azure Sphere project -  It is not official, maintained, or production-ready code.
 
 ### Expected support for the code
 

@@ -18,7 +18,7 @@ def memoryCRC():
 
 app = Flask(__name__)
 
-print("Littlefs disk host")
+print("Python disk host")
 
 # create empty 'disk'
 # could easily modify this to read from a file

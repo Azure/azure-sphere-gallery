@@ -11,8 +11,7 @@ azsphere_configure_api(TARGET_API_SET "8")
 add_executable(${PROJECT_NAME} 
 	main.c 
 	curlFunctions.c
-	httpGet.c
-	httpPost.c
+	remoteDiskIO.c
 	littlefs/lfs.c 
 	littlefs/lfs_util.c)
 

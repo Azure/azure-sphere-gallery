@@ -11,8 +11,7 @@
 #include <applibs/networking.h>
 #include <signal.h>
 
-#include "httpGet.h"
-#include "httpPost.h"
+#include "remoteDiskIO.h"
 
 #include "littlefs/lfs.h"
 #include "littlefs/lfs_util.h"
