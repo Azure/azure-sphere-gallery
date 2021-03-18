@@ -1,4 +1,4 @@
-# Littlefs project
+# Littlefs Remote Disk project
 
 The goal of this project is to show how to add file system support to an Azure Sphere project, in this case using the Littlefs file system and 'remote storage', the sample project can be extended to talk to physical hardware.
 
