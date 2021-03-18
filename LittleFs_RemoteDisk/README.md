@@ -96,7 +96,7 @@ With Curl memory tracking enabled you will see several memory tracking Log_Debug
 
 ## Project expectations
 
-* The code has been developed to support developers wanting to integrate a File System into their Azure Sphere project -  It is not official, maintained, or production-ready code.
+* The code has been developed to show how to integrate a File System into an Azure Sphere project -  It is not official, maintained, or production-ready code.
 
 ### Expected support for the code
 
