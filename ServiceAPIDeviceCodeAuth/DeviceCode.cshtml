@@ -1,0 +1,142 @@
+﻿@page
+@model SphereOBOTest.Pages.DeviceCodeModel
+@{
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Azure Sphere Token using Device Code</title>
+    <meta charset="utf-8" />
+    <style type="text/css">
+        body {
+            font-family: Tahoma;
+            padding: 3em;
+        }
+    </style>
+</head>
+<body>
+    <p>
+        A minimal sample app using OAuth 2.0 Device Code to obtain
+        an access token from Azure Active Directory and make an API request.
+    </p>
+    <p>
+        <a href="#" onclick="login(); return false;">Log in</a> |
+        <a href="#" onclick="logout(); return false;">Log out</a>
+    </p>
+    <p>
+        <span id="devicecodetxt"></span>
+    </p>
+    <p>
+        <span id="username" style="font-weight:bold">Not signed in.</span>
+    </p>
+    <mark>Sphere API response</mark>
+    <pre id="apiresponse" style="width:80%"></pre>
+    <script type="text/javascript">
+        const getLoginCode = async () => {
+            const options = {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            };
+            try {
+                const response = await fetch(`/DeviceCode?handler=DeviceLogin`, options);
+                if (response.status == 200) {
+                    const json = JSON.parse(await response.text());
+                    return json;
+                }
+
+            } catch (err) {
+                console.log('Error calling api', err);
+            }
+        }
+
+        const getAuthToken = async (code) => {
+            const options = {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            };
+            try {
+                const response = await fetch(`/DeviceCode?handler=token&code=` + code, options)
+                if (response.status == 200) {
+                    const json = JSON.parse(await response.text());
+                    return json;
+                }
+            } catch (err) {
+                console.log('Error calling api', err);
+            }
+        }
+
+        const login = async () => {
+            const left = (screen.width / 2) - (600 / 2);
+            const top = (screen.height / 2) - (800 / 2);
+            const childWindow = window.open(loginCode.verification_uri, "LoginWindow", "directories=no,titlebar=no,toolbar=no,location=no,status=no,menubar=no,toolbar=no,scrollbars=yes,width=600,height=800,top=" + top + ",left=" + left);
+
+            const getToken = async () => {
+                const tokenData = await getAuthToken(loginCode.device_code);
+                if (tokenData) {
+                    if (!tokenData.error) {
+                        childWindow.close();
+                        clearInterval(poll);
+                        getLoggedinUser(tokenData.access_token);
+                        getTenants(tokenData.access_token);
+                    }
+                    else if (tokenData.error.indexOf("authorization_pending") < 0) {
+                        clearInterval(poll);
+                    }
+                }
+            };
+            const poll = setInterval(getToken, parseInt(loginCode.interval) * 1000);
+
+            const childwindowtimer = setInterval(async () => {
+                if (childWindow.closed) {
+                    await getToken();
+                    clearInterval(poll);
+                    clearInterval(childwindowtimer);
+                }
+            }, 500);
+        }
+
+        const logout = () => location.href = "https://login.microsoftonline.com/common/oauth2/v2.0/logout"
+
+        const getLoggedinUser = (access_token) => {
+            const base64Url = access_token.split('.')[1];
+            const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+            const jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
+                return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+            }).join(''));
+            const user = JSON.parse(jsonPayload);
+            document.getElementById('username').textContent = `Welcome ${user.name} !!!`;
+        }
+
+        const getTenants = async (access_token) => {  
+            document.getElementById('apiresponse').textContent = 'Calling API...';
+            const options = {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    "Authorization": "Bearer " + access_token
+                }
+            };
+            try {
+                const response = await fetch(`https://prod.core.sphere.azure.net/v2/tenants`, options);
+                const json = await response.json();
+                document.getElementById('apiresponse').textContent = JSON.stringify(json, null, '  ');
+            } catch (err) {
+                console.log('Error calling api', err);
+                document.getElementById('apiresponse').textContent = 'ERROR';
+            }
+        }
+
+        let loginCode = null;
+
+        window.onload = async () => {
+            loginCode = await getLoginCode();
+            document.getElementById('devicecodetxt').textContent = `Login with code ${loginCode.user_code}`;
+        }
+    </script>
+</body>
+</html>
