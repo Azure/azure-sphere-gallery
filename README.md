@@ -24,6 +24,7 @@ Each folder within this repository contains a README.md file that describes the 
 | [OSNetworkRequirementChecker-HLApp](OSNetworkRequirementChecker-HLApp) | A sample app that performs DNS resolver and custom NTP test for diagnosing networking connectivity problems. |
 | [HeapTracker](HeapTracker) | A memory allocation tracking library that can help diagnose memory leaks. |
 | [LittleFs_RemoteDisk](LittleFs_RemoteDisk) | A project that shows how to add [Littlefs](https://github.com/littlefs-project/littlefs) to an Azure Sphere project, uses Curl to talk to remote storage |
+| [MultiDeviceProvisioning](MultiDeviceProvisioning) | Shows how multiple Azure Sphere devices can be provisioned automatically and simultaneously from a single PC. |
 | [MutableStorageKVP](MutableStorageKVP) | Provides a set of functions that expose Key/Value pair functions (write, read, delete) over Azure Sphere Mutable Storage. |
 | [OSNetworkRequirementChecker-PC](OSNetworkRequirementChecker-PC) | A PC command line utility for diagnosing networking connectivity issues. |
 | [ServiceAPIDeviceCodeAuth](ServiceAPIDeviceCodeAuth) | Code snippet to access public rest api using device code flow from a web app. |
