@@ -24,6 +24,8 @@ The Documentation folder provides instructions on how to assemble and then use a
 - [Robot software environment setup](Documentation\Balancing_Robot_Software_Setup_Guide.pdf)
 - [Robot demo guide](Documentation\Balancing_Robot_Demo_Guide.pdf)
 
+For more information on the balancing robot project take a look at this [blog post](https://techcommunity.microsoft.com/t5/internet-of-things/building-a-balancing-robot-with-azure-sphere/ba-p/2244444).
+
 ## Project expectations
 
 The project is a proof of concept. It is not official, maintained, or production-ready code.
