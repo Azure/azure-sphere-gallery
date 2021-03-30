@@ -2,7 +2,6 @@
 
 This project contains the hardware, enclosure, and software files needed to build an Azure Sphere and Azure RTOS self-balancing, real-time robot proof-of-concept demo.
 
-For more information about the purpose of this demo, please see the [blog post](https://techcommunity.microsoft.com/t5/internet-of-things/building-a-balancing-robot-with-azure-sphere/ba-p/2244444).
 ## Contents
 
 | Folder | Description |
