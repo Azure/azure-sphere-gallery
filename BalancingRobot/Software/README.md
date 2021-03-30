@@ -16,13 +16,11 @@ The balancing robot uses the high level core for internet communications and def
 
 The Robot project has two Azure Sphere CMake based applications, one for the high level core, and one that's deployed to one of the real time cores.
 
-The projects are configured to build for tools revision 21.01, and Target API set 8.
-
 For this code to actually work, you will need to build out the robot electronics and enclosure as per the other subdirectories.  
 
 However, you can build and run this software out using any Azure Sphere development board.  If you do this, it will communicate with IoT Central showing default/zero data for most telemetry.
 
-Setup instructions for the demo environment are in the [Documentation/Balancing_Robot_Software_Setup_Guide.docx](../Documentation/Balancing_Robot_Software_Setup_Guide.docx)
+Setup instructions for the demo environment are in the [Documentation/Balancing_Robot_Software_Setup_Guide.pdf](../Documentation/Balancing_Robot_Software_Setup_Guide.pdf)
 
 ## High level application
 
@@ -38,4 +36,4 @@ The [real time application README](./RTOS/README.md) provides more information.
 
 ## Running the code
 
-Instructions for running the project can be found in the [Documentation/Balancing_Robot_Demo_Guide.docx](../Documentation/Balancing_Robot_Demo_Guide.docx)
+Instructions for running the project can be found in the [Documentation/Balancing_Robot_Demo_Guide.pdf](../Documentation/Balancing_Robot_Demo_Guide.pdf)

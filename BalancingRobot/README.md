@@ -2,10 +2,7 @@
 
 This project contains the hardware, enclosure, and software files needed to build an Azure Sphere and Azure RTOS self-balancing, real-time robot proof-of-concept demo.
 
-For more information about the purpose of this demo, please see the blog post:
-
-***TODO: PUT LINKS TO BLOG HERE***
-
+For more information about the purpose of this demo, please see the [blog post](https://techcommunity.microsoft.com/t5/internet-of-things/building-a-balancing-robot-with-azure-sphere/ba-p/2244444).
 ## Contents
 
 | Folder | Description |
@@ -23,8 +20,6 @@ The Documentation folder provides instructions on how to assemble and then use a
 - [Robot assembly](Documentation\Balancing_Robot_Assembly_Instructions.pdf)
 - [Robot software environment setup](Documentation\Balancing_Robot_Software_Setup_Guide.pdf)
 - [Robot demo guide](Documentation\Balancing_Robot_Demo_Guide.pdf)
-
-For more information on the balancing robot project take a look at this [blog post](https://techcommunity.microsoft.com/t5/internet-of-things/building-a-balancing-robot-with-azure-sphere/ba-p/2244444).
 
 ## Project expectations
 

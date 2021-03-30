@@ -1,6 +1,6 @@
 # High Level App
 
-The high level app runs on the MT3620 A7 core - the application sends telemetry to an Azure IoT Central application, read the [Azure_Sphere_Robot_Software_Setup_Guide](../../Documentation/Azure_Sphere_Robot_Software_Setup_Guide.docx) which details how to:
+The high level app runs on the MT3620 A7 core - the application sends telemetry to an Azure IoT Central application, read the [Azure_Sphere_Robot_Software_Setup_Guide](../../Documentation/Azure_Sphere_Robot_Software_Setup_Guide.pdf) which details how to:
 
 * Setup an Azure IoT Central application (including Device Template, Telemetry, and Device Settings)
 * Create and configure an Azure Sphere tenant
