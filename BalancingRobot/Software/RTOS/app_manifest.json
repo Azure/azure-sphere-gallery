@@ -1,0 +1,16 @@
+{
+  "SchemaVersion": 1,
+  "Name": "BalancingRobot_RealTime",
+  "ComponentId": "8bad3ffb-ba15-4b81-9acb-0cc5bf5cfa2d",
+  "EntryPoint": "/bin/app",
+  "CmdArgs": [],
+  "Capabilities": {
+    "Pwm": [ "PWM-CONTROLLER-1" ],
+    "I2cMaster": [ "ISU0", "ISU1" ],
+    "Gpio": [ 0, 1, 2, 12, 13, 16 ],
+    "Uart": [ "ISU3" ],
+    "AllowedApplicationConnections": [ "885bc367-b159-44a5-91fa-3feb53a82317" ]
+  },
+  "ApplicationType": "RealTimeCapable"
+}
+

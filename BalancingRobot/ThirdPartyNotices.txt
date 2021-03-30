@@ -1,0 +1,30 @@
+THIRD-PARTY SOFTWARE NOTICES AND INFORMATION
+Do Not Translate or Localize
+
+The High Level Application uses the following third party software:
+
+1. parson - https://github.com/kgabis/parson 
+
+License - https://github.com/kgabis/parson/blob/master/LICENSE
+
+2. CJSON - https://github.com/DaveGamble/cJSON
+
+License - https://github.com/DaveGamble/cJSON/blob/master/LICENSE
+
+The Real-Time Application uses the following third party software:
+
+1. Azure RTOS - https://github.com/azure-rtos
+
+License - https://github.com/azure-rtos/threadx/blob/master/LICENSE.txt
+
+2. VL53L1X - https://github.com/pololu/vl53l1x-arduino
+
+License - https://github.com/pololu/vl53l1x-arduino/blob/master/LICENSE.txt
+
+3. PID Controller - https://github.com/br3ttb/Arduino-PID-Library/ 
+
+License - https://github.com/br3ttb/Arduino-PID-Library/blob/master/README.txt
+
+4. MediaTek MT3620 M4 Driver & Real-Time Application Sample Code - https://github.com/MediaTek-Labs/mt3620_m4_software
+
+License - https://github.com/MediaTek-Labs/mt3620_m4_software/blob/master/LICENSE 

@@ -1,0 +1,98 @@
+{
+  "@id": "urn:RealTimeRobot:RealTimeRobot_6hz:4",
+  "@type": "CapabilityModel",
+  "contents": [],
+  "displayName": {
+    "en": "RealTimeRobot"
+  },
+  "implements": [
+    {
+      "@id": "urn:RealTimeRobot:RealTimeRobot_6hz:_tdlblklh:1",
+      "@type": "InterfaceInstance",
+      "displayName": {
+        "en": "Interface"
+      },
+      "name": "RealTimeRobot_3o1",
+      "schema": {
+        "@id": "urn:RealTimeRobot:RealTimeRobot_3o1:3",
+        "@type": "Interface",
+        "contents": [
+          {
+            "@id": "urn:RealTimeRobot:RealTimeRobot_3o1:BatteryLevel:1",
+            "@type": "Telemetry",
+            "displayName": {
+              "en": "Battery Level"
+            },
+            "name": "BatteryLevel",
+            "schema": "integer"
+          },
+          {
+            "@id": "urn:RealTimeRobot:RealTimeRobot_3o1:Heading:1",
+            "@type": "Telemetry",
+            "displayName": {
+              "en": "Heading (Degrees)"
+            },
+            "name": "Heading",
+            "schema": "integer",
+            "displayUnit": {
+              "en": "Degrees"
+            }
+          },
+          {
+            "@id": "urn:RealTimeRobot:RealTimeRobot_3o1:ObstaclesAvoided:1",
+            "@type": "Telemetry",
+            "displayName": {
+              "en": "Obstacles Avoided"
+            },
+            "name": "ObstaclesAvoided",
+            "schema": "integer"
+          },
+          {
+            "@id": "urn:RealTimeRobot:RealTimeRobot_3o1:HeadingControl:1",
+            "@type": "Property",
+            "displayName": {
+              "en": "Heading Control"
+            },
+            "name": "HeadingControl",
+            "schema": "boolean",
+            "writable": true
+          },
+          {
+            "@id": "urn:RealTimeRobot:RealTimeRobot_3o1:DesiredHeading:1",
+            "@type": "Property",
+            "displayName": {
+              "en": "Desired Heading"
+            },
+            "name": "DesiredHeading",
+            "schema": "integer",
+            "writable": true
+          },
+          {
+            "@id": "urn:RealTimeRobot:RealTimeRobot_3o1:HeadingCompass:2",
+            "@type": "Telemetry",
+            "displayName": {
+              "en": "Heading (Compass)"
+            },
+            "name": "HeadingCompass",
+            "schema": "string"
+          },
+          {
+            "@id": "urn:RealTimeRobot:RealTimeRobot_3o1:CurrentApp:3",
+            "@type": "Telemetry",
+            "displayName": {
+              "en": "Current App"
+            },
+            "name": "CurrentApp",
+            "schema": "string"
+          }
+        ],
+        "displayName": {
+          "en": "Interface"
+        }
+      }
+    }
+  ],
+  "@context": [
+    "http://azureiot.com/v1/contexts/IoTModel.json"
+  ]
+}
