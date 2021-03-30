@@ -5,3 +5,9 @@
 [submodule "LittleFs_RemoteDisk/src/HighLevelApp/littlefs"]
 	path = LittleFs_RemoteDisk/src/HighLevelApp/littlefs
 	url = https://github.com/littlefs-project/littlefs.git
+[submodule "BalancingRobot/Software/RTOS/threadx"]
+	path = BalancingRobot/Software/RTOS/threadx
+	url = https://github.com/azure-rtos/threadx.git
+[submodule "BalancingRobot/Software/RTOS/mt3620_m4_software"]
+	path = BalancingRobot/Software/RTOS/mt3620_m4_software
+	url = https://github.com/MediaTek-Labs/mt3620_m4_software.git

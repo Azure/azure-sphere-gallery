@@ -1,0 +1,39 @@
+{
+  "SchemaVersion": 1,
+  "Name": "BalancingRobot_HighLevel",
+  "ComponentId": "885bc367-b159-44a5-91fa-3feb53a82317",
+  "EntryPoint": "/bin/app",
+  "CmdArgs": [ "your idscope", "AppA" ],
+  "Capabilities": {
+    "Gpio": [
+      9
+    ],
+    "I2cMaster": [
+      "ISU2"
+    ],
+    "Adc": [
+      "ADC-CONTROLLER-0"
+    ],
+    "AllowedConnections": [
+      "255.255.255.255",
+      "global.azure-devices-provisioning.net"
+    ],
+    "AllowedApplicationConnections": [
+      "8bad3ffb-ba15-4b81-9acb-0cc5bf5cfa2d"
+    ],
+    "SystemTime": true,
+    "SystemEventNotifications": true,
+    "SoftwareUpdateDeferral": true,
+    "AllowedUdpServerPorts": [
+      1825
+    ],
+    "MutableStorage": {
+      "SizeKB": 32
+    },
+    "PowerControls": [
+      "ForceReboot"
+    ],
+    "DeviceAuthentication": "00000000-0000-0000-0000-000000000000"
+  },
+  "ApplicationType": "Default"
+}
