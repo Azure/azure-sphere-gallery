@@ -1,0 +1,14 @@
+{
+  "SchemaVersion": 1,
+  "Name": "WifiConfigurationViaUart_HighLevelApp",
+  "ComponentId": "917A9E73-D259-4136-8A5E-3C8480E08C86",
+  "EntryPoint": "/bin/app",
+  "CmdArgs": [],
+  "Capabilities": {
+    "Uart": [ "$MT3620_ISU0_UART" ],
+    "AllowedConnections": [],
+    "WifiConfig": true,
+    "PowerControls": [ "ForceReboot" ]
+  },
+  "ApplicationType": "Default"
+}
