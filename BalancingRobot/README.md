@@ -18,9 +18,9 @@ For more information about the purpose of this demo, please see the [blog post](
 To build out the robot, please refer to the README files in the [Electronics](Electronics), [Enclosure](Enclosure) and [Software](Software) directories. 
 
 The Documentation folder provides instructions on how to assemble and then use a built robot
-- [Robot assembly](Documentation\Balancing_Robot_Assembly_Instructions.pdf)
-- [Robot software environment setup](Documentation\Balancing_Robot_Software_Setup_Guide.pdf)
-- [Robot demo guide](Documentation\Balancing_Robot_Demo_Guide.pdf)
+- [Robot assembly](Documentation/Balancing_Robot_Assembly_Instructions.pdf)
+- [Robot software environment setup](Documentation/Balancing_Robot_Software_Setup_Guide.pdf)
+- [Robot demo guide](Documentation/Balancing_Robot_Demo_Guide.pdf)
 
 ## Project expectations
 
