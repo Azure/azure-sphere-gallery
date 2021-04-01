@@ -1,0 +1,9 @@
+THIRD-PARTY SOFTWARE NOTICES AND INFORMATION
+Do Not Translate or Localize
+
+The application uses the following third party software:
+
+parson - https://github.com/kgabis/parson 
+
+License - https://github.com/kgabis/parson/blob/master/LICENSE
+
