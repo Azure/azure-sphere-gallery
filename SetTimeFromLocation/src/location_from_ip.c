@@ -42,6 +42,9 @@ struct location_info* GetLocationData(void)
 		locationInfo.lat = lat;
 		locationInfo.lng = lng;
 
+		// Free the memory allocated by the call to json_parse_string()
+		json_value_free(rootProperties);
+		
 		// need to free data since this was allocated in the getHttpData function.
 		free(data);
 		return &locationInfo;
