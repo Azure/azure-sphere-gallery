@@ -56,6 +56,18 @@ A sample command line could look like this:
 
 `SetIoTCentralPropsForDeviceGroup https://myapp.azureiotcentral.com "IoT Central Access Token" 168A1115-568D-4717-A445-CFC4BB1BB8C7 {\"StatusLED\":true}` 
 
+## Potential issues
+
+While working with the community we've documented a couple of potential issues that users may encounter using this sample 
+
+### Issue encountered: Application incorrectly parses JSON argument
+
+You may see this issue if you use the Windows PowerShell application to run the sample.  Try running the sample using the Windows Command Prompt "cmd" application.
+
+### Issue encountered: The sample runs without errors, however the twin property is not updated in the IoTCentral application
+
+Make sure that your device twin properties are defined as an "Interface" in your IoTCentral application.  You can add the standard "Azure Sphere Device Template" to see a working example.
+
 ## Project expectations
 
 * This is a utility for developers; it is not official, maintained, or production-ready code.
