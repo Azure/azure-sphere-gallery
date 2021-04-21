@@ -60,10 +60,13 @@ A sample command line could look like this:
 
 While working with the community we've documented a couple of potential issues that users may encounter using this sample 
 
-* Issue encountered: Application incorrectly parses JSON argument
-  * Solution: You may see this issue if you use the Windows PowerShell application to run the sample.  Try running the sample using the Windows Command Prompt "cmd" application
-*  Issue encountered: The sample runs without errors, however the twin property is not updated in the IoTCentral application
-  *  Solution:  Make sure that your device twin properties are defined as an "Interface."  You can add the standard "Azure Sphere Device Template" to see a working example.
+### Issue encountered: Application incorrectly parses JSON argument
+
+You may see this issue if you use the Windows PowerShell application to run the sample.  Try running the sample using the Windows Command Prompt "cmd" application.
+
+### Issue encountered: The sample runs without errors, however the twin property is not updated in the IoTCentral application
+
+Make sure that your device twin properties are defined as an "Interface" in your IoTCentral application.  You can add the standard "Azure Sphere Device Template" to see a working example.
 
 ## Project expectations
 
