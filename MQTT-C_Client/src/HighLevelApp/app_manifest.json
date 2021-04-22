@@ -1,0 +1,13 @@
+{
+  "SchemaVersion": 1,
+  "Name": "MQTT_HighLevelApp",
+  "ComponentId": "B4D8582B-1BAD-4605-B4C9-B7106305EC9D",
+  "EntryPoint": "/bin/app",
+  "CmdArgs": [],
+  "Capabilities": {
+    "AllowedConnections": [
+      "test.mosquitto.org"
+    ]
+  },
+  "ApplicationType": "Default"
+}
