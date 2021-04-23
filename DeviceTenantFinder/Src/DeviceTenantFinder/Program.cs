@@ -85,7 +85,7 @@ namespace DeviceTenantFinder
                 Devices devices = JsonConvert.DeserializeObject<Devices>(result);
                 foreach (Item item in devices.Items)
                 {
-                    if (item.DeviceId == args[0])
+                    if (item.DeviceId.ToLower() == args[0].ToLower())
                     {
                         deviceFound = true;
                         tenantId = tenant.Id;
