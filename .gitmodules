@@ -11,3 +11,9 @@
 [submodule "BalancingRobot/Software/RTOS/mt3620_m4_software"]
 	path = BalancingRobot/Software/RTOS/mt3620_m4_software
 	url = https://github.com/MediaTek-Labs/mt3620_m4_software.git
+[submodule "MQTT-C_Client/src/HighLevelApp/MQTT-C"]
+	path = MQTT-C_Client/src/HighLevelApp/MQTT-C
+	url = https://github.com/LiamBindle/MQTT-C.git
+[submodule "MQTT-C_Client/src/HighLevelApp/AzureSphereDevX"]
+	path = MQTT-C_Client/src/HighLevelApp/AzureSphereDevX
+	url = https://github.com/microsoft/Azure-Sphere-DevX.git
