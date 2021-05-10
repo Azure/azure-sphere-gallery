@@ -120,7 +120,7 @@ namespace DevicePropertiesWebHook
                 authCompleted = true;
                 return result;
             }
-            // TODO: handle or throw all these exceptions
+
             catch (MsalServiceException ex)
             {
                 // Kind of errors you could have (in ex.Message)
