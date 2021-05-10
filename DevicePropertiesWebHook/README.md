@@ -1,6 +1,8 @@
-ic# Littlefs project
+# DevicePropertiesWebHook project
 
-The goal of this project is to show how to update device twin properties for a device connected to Azure IoT Hub, examples might be the Product, Device Group, and OS Feed type.
+The goal of this project is to show how to update device twin properties for a device connected to Azure IoT Hub to reflect Azure Sphere Security Service (AS3) data about that device, such as its Product, Device Group, and OS Feed type.
+
+The project also shows how to transmit device lifecycle events from the Azure Sphere device to Azure IoT, such as when the app is restarted or when the app receives notification that the device software is up-to-date.
 
 ## Contents
 
