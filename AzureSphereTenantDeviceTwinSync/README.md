@@ -1,4 +1,4 @@
-# DevicePropertiesWebHook project
+# AzureSphereTenantDeviceTwinSync project
 
 The goal of this project is to show how to update device twin properties for a device connected to Azure IoT Hub to reflect Azure Sphere Security Service (AS3) data about that device, such as its Product, Device Group, and OS Feed type.
 
@@ -52,7 +52,7 @@ Add the three secrets to Key Vault.
 
 ### Build and Deploy the ASP.NET Core REST API project.
 
-Open the [REST_API project](./REST_API/DevicePropertiesWebHook.sln), open **Utils.cs** and paste your Key Vault URI into the empty string called **KeyVaultUrl**.
+Open the [REST_API project](./REST_API/AzureSphereTenantDeviceTwinSync.sln), open **Utils.cs** and paste your Key Vault URI into the empty string called **KeyVaultUrl**.
 
 This is the only change you need to make to the REST_API project.
 
