@@ -16,8 +16,8 @@ The project also shows how to transmit device lifecycle events from the Azure Sp
 
 ## Prerequisites & Setup
 
-- An Azure Sphere-based device with development features (see [Get started with Azure Sphere](https://azure.microsoft.com/en-us/services/azure-sphere/get-started/) for more information).
-- Setup a development environment for Azure Sphere (see [Quickstarts to set up your Azure Sphere device](https://docs.microsoft.com/en-us/azure-sphere/install/overview) for more information).
+- An Azure Sphere-based device with development features (see [Get started with Azure Sphere](https://azure.microsoft.com/services/azure-sphere/get-started/) for more information).
+- Setup a development environment for Azure Sphere (see [Quickstarts to set up your Azure Sphere device](https://docs.microsoft.com/azure-sphere/install/overview) for more information).
 
 
 ## How to use
@@ -75,7 +75,7 @@ Note that you need to authorize the REST API project to have access to your key 
 **Authorize your REST API service with Key Vault**
 When your REST API service is built and deployed to your Azure Portal Resource Group a 'Service Principal' is created, this can be used to authorize access to your key vault. 
 
-Follow [this guide](https://docs.microsoft.com/en-us/azure/key-vault/general/assign-access-policy-portal) for granting permissions to your secrets, note that the REST API service should be granted list and read permissions. The name of your Principal is going to be the name of your REST API service in the Azure Portal.
+Follow [this guide](https://docs.microsoft.com/azure/key-vault/general/assign-access-policy-portal) for granting permissions to your secrets, note that the REST API service should be granted list and read permissions. The name of your Principal is going to be the name of your REST API service in the Azure Portal.
 
 **Ensure that the REST API Service is configured for **Always on** (a restart will lose the authentication data)
 
@@ -103,7 +103,7 @@ https://yourAPIServiceURL/webhook
 
 Note that the APIKey is only needed to kick off the authentication process, and isn't needed for the WebHook post API.
 
-Use this [Internet of Things show](https://channel9.msdn.com/Shows/Internet-of-Things-Show/IoT-Devices-and-Event-Grid?term=event%20grid&lang-en=true) on MSDN Channel 9 as a guide for setting up IoT Hub/Event Grid with message forwarding and filtering to a WebHook (in the video the WebHook is an Azure Logic App you will point the Event Grid WebHook URL to the REST API).
+Use this [Internet of Things show](https://channel9.msdn.com/Shows/Internet-of-Things-Show/IoT-Devices-and-Event-Grid) on MSDN Channel 9 as a guide for setting up IoT Hub/Event Grid with message forwarding and filtering to a WebHook (in the video the WebHook is an Azure Logic App you will point the Event Grid WebHook URL to the REST API).
 
 Note that Event Grid supports five Event Types (Device Created, Device Deleted, Device Connected, Device Disconnected, and Device Telemetry) - You will only need the Device Telemetry event type.
 
@@ -183,7 +183,7 @@ The updated code should look like this:
 The AzureIoT sample should now be ready to run on your development board.
 
 ### Expected outcome from running the Device Simulator or Updated Azure IoT sample
-The device simulator and modified Azure IoT sample send 'NoUpdateAvailable' and 'AppRestart' telemetry messages to your Azure IoT Hub, these messages are then sent to your REST API service which uses the authenticated user to call [Azure Sphere Public APIs](https://docs.microsoft.com/en-us/rest/api/azure-sphere/) to obtain information about the device that's sending the telemetry - this information includes:
+The device simulator and modified Azure IoT sample send 'NoUpdateAvailable' and 'AppRestart' telemetry messages to your Azure IoT Hub, these messages are then sent to your REST API service which uses the authenticated user to call [Azure Sphere Public APIs](https://docs.microsoft.com/rest/api/azure-sphere/) to obtain information about the device that's sending the telemetry - this information includes:
 - Device OS version
 - Device Product
 - Device Group (including whether the Device Group is Retail Eval)
