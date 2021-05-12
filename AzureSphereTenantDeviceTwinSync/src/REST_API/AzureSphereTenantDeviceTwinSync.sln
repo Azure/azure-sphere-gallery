@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31205.134
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzureSphereTenantDeviceTwinSync", "AzureSphereTenantDeviceTwinSync\AzureSphereTenantDeviceTwinSync.csproj", "{DF0981FC-821D-45C7-8C7D-2BFD574C3476}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DF0981FC-821D-45C7-8C7D-2BFD574C3476}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF0981FC-821D-45C7-8C7D-2BFD574C3476}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF0981FC-821D-45C7-8C7D-2BFD574C3476}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF0981FC-821D-45C7-8C7D-2BFD574C3476}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1BF3EF24-4198-4BAA-838F-5BDF9958E3C4}
+	EndGlobalSection
+EndGlobal
