@@ -40,9 +40,24 @@ namespace DevicePropertiesWebHook
 
         public static string GetAS3Data(string EndpointUrl, string token)
         {
-            var client = new RestClient(AzureSphereApiUri);
-            var request = new RestRequest($"/v2/{EndpointUrl}", Method.GET);
-            request.AddParameter("Authorization", string.Format("Bearer " + token), ParameterType.HttpHeader);
+            var request = (RestRequest)null;
+            var client = (RestClient)null;
+
+            // calling an Azure Sphere API
+            if (!string.IsNullOrEmpty(token))
+            {
+                client = new RestClient(AzureSphereApiUri);
+                request = new RestRequest($"/v2/{EndpointUrl}", Method.GET);
+                request.AddParameter("Authorization", string.Format("Bearer " + token), ParameterType.HttpHeader);
+            }
+            else
+            {
+                Uri hostUri = new Uri(EndpointUrl);
+                string hostName = hostUri.Host;
+                string relativePath = hostUri.PathAndQuery;
+                client = new RestClient("https://" + hostName);
+                request = new RestRequest(relativePath, Method.GET);
+            }
             var response = client.Execute(request);
 
             if (response.IsSuccessful)
