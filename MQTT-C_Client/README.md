@@ -19,15 +19,40 @@ The goal of this project is to show how to add MQTT support to an Azure Sphere p
 - Install Python 3 from [Python.org](www.python.org).
 - Install the ```paho-mqtt``` library using ```pip3 install -r requirements.txt```.
 
-Note that the Azure Sphere high-level application is configured for the 21.01 SDK release.
 
-## How to use
+## How the sample works
 
-Download the Mosquitto Certificate Authority certificate [mosquitto.org.crt (PEM format)](https://test.mosquitto.org/) and save in the HighLevelApp/Certs folder.
+This sample is made up of two applications, an Azure Sphere MQTT Client application and a Python MQTT host application. The sample uses the public **mosquitto.org** MQTT broker.
+
+1. On startup, the Azure Sphere MQTT-C client connects to the mosquitto.org MQTT broker and subscribes to MQTT messages on topic **azuresphere/sample/device**. Then every second, the app publishes a message on topic **azuresphere/sample/host**.
+2. The Python host application connects to the public mosquitto.org MQTT broker and subscribes to messages on topic **azuresphere/sample/host**. When a message published by the Azure Sphere mqtt client arrives on the **azuresphere/sample/host** topic the Python app rotates the message left by one character and publishes the updated message on topic **azuresphere/sample/device**.
+3. The Azure Sphere MQTT client subscribed to messages on topic **azuresphere/sample/device**, it receives the updated message published by the Python app. The Azure Sphere then publishes the updated message back on to topic **azuresphere/sample/host**.
+4. And the cycle repeats every one second. From the Azure Sphere debug output window, you can view the echoed message received from the Python app being shifted left one character at a time.
+
+
+## Mosquitto Certificates
+
+This MQTT sample is going to connect to the [mosquitto.org](https://mosquitto.org) public test MQTT broker. For the Azure Sphere MQTT and Python host MQTT apps to securely connect to the mosquitto.org broker you need to download and copy the ```mosquitto.org``` CA certificate and generated client certificates into the Azure Sphere application **MQTT-C_Client\src\HighLevelApp\Certs** folder.
+
+When you have completed the certificate step you should have **three** certificate files in the **MQTT-C_Client\src\HighLevelApp\Certs** folder. 
+
+They will be named:
+
+1. mosquitto.org.crt
+2. client.key
+3. client.crt
+
+### Install openssl
+
+For Linux users, you may need to install **openssl** if it is not installed by default. You can install openssl using your Linux distribution's package manager. For example, on Ubuntu ```sudo apt-get install openssl```.
+
+For Windows users either download ```openssl``` from [openssl.org](https://wiki.openssl.org/index.php/Binaries), or use [WSL](https://docs.microsoft.com/en-us/windows/wsl/install-win10) (Windows Subsystem for Linux). Depending on the WSL Linux distribution you installed you may need to install **openssl**. You can install openssl using your Linux distribution's package manager. For example, on Ubuntu ```sudo apt-get install openssl```.
+
+### Download the Mosquitto Certificate Authority certificate
+
+Download the Mosquitto Certificate Authority certificate [mosquitto.org.crt (PEM format)](https://test.mosquitto.org/) and save it in the MQTT-C_Client\src\HighLevelApp\Certs folder.
 
 ### Generate the client certificates with openssl
-
-For Linux users, openssl is included. For Windows users either download ```openssl``` from [openssl.org](https://wiki.openssl.org/index.php/Binaries), or use [WSL](https://docs.microsoft.com/en-us/windows/wsl/install-win10) (Windows Subsystem for Linux).
 
 1. Generate a Certificate Signing Request (CSR) using the openssl utility. Generate a private key:
 
@@ -42,6 +67,8 @@ For Linux users, openssl is included. For Windows users either download ```opens
     ```
 
 3. Open the client.csr with your favorite text editor and copy and paste the CSR into the [Generate a TLS client certificate form](https://test.mosquitto.org/ssl/). After you submit the form, the certificate will be generated for you to download. The certificates are valid for 90 days.
+
+4. Save the ```client.key``` and the downloaded ```client.crt``` into the MQTT-C_Client\src\HighLevelApp\Certs folder
 
 ### Python MQTT Host app
 
