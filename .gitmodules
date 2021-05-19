@@ -15,3 +15,6 @@
 	path = MQTT-C_Client/src/HighLevelApp/MQTT-C
 	url = https://github.com/LiamBindle/MQTT-C.git
 
+[submodule "MQTT-C_Client/src/HighLevelApp/AzureSphereDevX"]
+	path = MQTT-C_Client/src/HighLevelApp/AzureSphereDevX
+	url = https://github.com/gloveboxes/AzureSphereDevX.git

@@ -44,8 +44,8 @@ uint8_t sendbuf[SEND_BUFFER_SIZE];
 uint8_t recvbuf[RECEIVE_BUFFER_SIZE];
 
 // When .period is {0,0} then the timer is a oneshot timer
-DX_TIMER mqtt_reconnect_timer = { .period = {0, 0}, .name = "mqtt_reconnect_timer", .handler = mqtt_reconnect_handler };
-DX_TIMER mqtt_ping_timer = { .period = {30, 0}, .name = "mqtt_ping_timer", .handler = mqtt_ping_handler };
+DX_TIMER_BINDING mqtt_reconnect_timer = { .period = {0, 0}, .name = "mqtt_reconnect_timer", .handler = mqtt_reconnect_handler };
+DX_TIMER_BINDING mqtt_ping_timer = { .period = {30, 0}, .name = "mqtt_ping_timer", .handler = mqtt_ping_handler };
 
 bool is_mqtt_connected(void) {
 	return mqtt_connected;
