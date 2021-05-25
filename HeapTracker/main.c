@@ -29,11 +29,11 @@ size_t consumeHeap_malloc(void)
         ptr = malloc(allocated);
         if (heap_allocated > heap_threshold)
         {
-            _free(ptr, allocated);
+            free(ptr);
             break;
         }
 
-        _free(ptr, allocated);
+        free(ptr);
     }
 
     Log_Debug("consumeHeap_malloc --> Currently available heap up to given heap_threshold: %zuKb (%zu bytes)\n", allocated / block_sz, allocated);

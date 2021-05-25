@@ -3,6 +3,7 @@
 * Licensed under the MIT License.
 */
 #include <stdlib.h>
+#include <stdint.h>
 #include <string.h>
 #include <stdbool.h>
 
@@ -27,6 +28,7 @@ volatile ssize_t heap_allocated = 0;
 // LOGGING
 //////////////////////////////////////////////////////////////////////////////////
 
+#define HEAP_MAX_ALIGNMENT_ON_SPHERE	8
 #define HEAP_TRACKER_LIB_LOG_PREFIX		"Heap-Tracker lib: "
 #define HeapTracker_Log(...)			if (DEBUG_LOGS_ON) Log_Debug(HEAP_TRACKER_LIB_LOG_PREFIX __VA_ARGS__)
 #define LogHeapStatus()					if (DEBUG_LOGS_ON) log_heap_status()
@@ -67,17 +69,43 @@ void __real_free(void *ptr);
 // Heap-tracking malloc() wrapper
 void *__wrap_malloc(size_t size)
 {	
-	void *ptr = __real_malloc(size);
-
-	HeapTracker_Log("malloc(%zu)=%p... ", size, ptr);
-	if (NULL != ptr)
-	{
-		heap_allocated += (ssize_t)size;
+	size_t actual_size = size + HEAP_MAX_ALIGNMENT_ON_SPHERE;
+	if (actual_size <= HEAP_MAX_ALIGNMENT_ON_SPHERE) {
+		return NULL;
 	}
-	
+
+	void* ptr = __real_malloc(actual_size);
+	if (ptr == NULL) {
+		return NULL;
+	}
+
+	HeapTracker_Log("malloc(%zu)=%p... ", actual_size, ptr);
+
+	heap_allocated += actual_size;
+	*(size_t *)ptr = size;
+
 	LogHeapStatus();
 
-	return ptr;
+	return ptr + HEAP_MAX_ALIGNMENT_ON_SPHERE;
+}
+
+void __wrap_free(void* ptr)
+{
+	if (ptr == NULL) {
+		return;
+	}
+
+	void *actual_buffer_pos = ptr - HEAP_MAX_ALIGNMENT_ON_SPHERE;
+
+	size_t actual_size = *(size_t *)actual_buffer_pos + HEAP_MAX_ALIGNMENT_ON_SPHERE;
+
+	HeapTracker_Log("free(%p,%zu)... ", actual_buffer_pos, actual_size);
+
+	__real_free(actual_buffer_pos);
+
+	heap_allocated -= (ssize_t)actual_size;
+
+	LogHeapStatus();
 }
 
 // Custom heap-tracking calloc() wrapper
@@ -120,31 +148,23 @@ void *__wrap_realloc(void *ptr, size_t new_size)
 	return __real_realloc(ptr, new_size);
 }
 
-// Native free() wrapper (does NOT track heap!)
-void __wrap_free(void *ptr)
-{
-	HeapTracker_Log("WARNING! Native free(%p) was called instead of _free() helper: 'heap_allocated' will not be reliable from now on!\n", ptr);
-	__real_free(ptr);
-}
-
-
 //////////////////////////////////////////////////////////////////////////////////
 // MUST-USE HELPERS
 //////////////////////////////////////////////////////////////////////////////////
 
 // Custom heap-tracking free() helper
-void _free(void *ptr, size_t size)
-{
-	HeapTracker_Log("_free(%p,%zu)... ", ptr, size);
-
-	__real_free(ptr);
-	if (ptr)
-	{
-		heap_allocated -= (ssize_t)size;
-	}
-
-	LogHeapStatus();
-}
+//void _free(void *ptr, size_t size)
+//{
+//	HeapTracker_Log("_free(%p,%zu)... ", ptr, size);
+//
+//	__real_free(ptr);
+//	if (ptr)
+//	{
+//		heap_allocated -= (ssize_t)size;
+//	}
+//
+//	LogHeapStatus();
+//}
 
 // Custom heap-tracking realloc() helper
 void *_realloc(void *ptr, size_t old_size, size_t new_size)
