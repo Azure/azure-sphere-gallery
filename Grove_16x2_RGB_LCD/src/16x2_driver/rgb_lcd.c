@@ -50,14 +50,14 @@ static void textCommand(uint8_t cmd)
     WriteI2CData(LCD_ADDRESS, data, 2);
 }
 
-int InitRGBLCD(int ISU)
+int RGBLCD_Init(int ISU)
 {
     _i2cFd = I2CMaster_Open(ISU);
     if (_i2cFd > -1)
     {
         I2CMaster_SetBusSpeed(_i2cFd, I2C_BUS_SPEED_FAST);
         I2CMaster_SetTimeout(_i2cFd, 100);
-        CheckI2CDevices(2, _i2cFd);
+        ListI2CDevices(_i2cFd);
     }
     else
     {
@@ -69,7 +69,7 @@ int InitRGBLCD(int ISU)
 }
 
 
-void SetRGBLCDColor(uint8_t r, uint8_t g, uint8_t b)
+void RGBLCD_SetColor(uint8_t r, uint8_t g, uint8_t b)
 {
     write_byte_data(RGB_ADDRESS, 0, 0);
     write_byte_data(RGB_ADDRESS, 1, 0);
@@ -79,7 +79,7 @@ void SetRGBLCDColor(uint8_t r, uint8_t g, uint8_t b)
     write_byte_data(RGB_ADDRESS, 2, b);
 }
 
-void SetRGBLCDText(char* data)
+void RGBLCD_SetText(char* data)
 {
     textCommand(0x01);
     delay(50);
