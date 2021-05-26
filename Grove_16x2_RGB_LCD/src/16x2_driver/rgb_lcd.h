@@ -6,10 +6,6 @@
 #include <inttypes.h>
 #include <stdbool.h>
 
-// Device I2C Addresses
-#define LCD_ADDRESS     0x3e
-#define RGB_ADDRESS     0x62
-
-bool InitRGBLCD(int ISU);
+int InitRGBLCD(int ISU);
 void SetRGBLCDColor(uint8_t r, uint8_t g, uint8_t b);
 void SetRGBLCDText(char* data);

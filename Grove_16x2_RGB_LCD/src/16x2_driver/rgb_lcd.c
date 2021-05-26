@@ -13,6 +13,10 @@
 #include <applibs/log.h>
 #include "../utils.h"
 
+// Device I2C Addresses
+#define LCD_ADDRESS     0x3e
+#define RGB_ADDRESS     0x62
+
 static int _i2cFd = -1;
 
 static void textCommand(uint8_t cmd);
@@ -46,7 +50,7 @@ static void textCommand(uint8_t cmd)
     WriteI2CData(LCD_ADDRESS, data, 2);
 }
 
-bool InitRGBLCD(int ISU)
+int InitRGBLCD(int ISU)
 {
     _i2cFd = I2CMaster_Open(ISU);
     if (_i2cFd > -1)
@@ -58,10 +62,10 @@ bool InitRGBLCD(int ISU)
     else
     {
         Log_Debug("Failed to open I2C ISU\n");
-        return false;
+        return -1;
     }
 
-    return true;
+    return 0;
 }
 
 

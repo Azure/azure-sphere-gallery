@@ -25,7 +25,7 @@ void delayMicroseconds(int us)
 	nanosleep(&ts, NULL);
 }
 
-void CheckI2CDevices(int isuNum, int isuFd)
+void ListI2CDevices(int isuFd)
 {
 	uint8_t data = 0x00;	// I2C OLED Display 'turn off'
 	I2C_DeviceAddress _devAddr = 0x00;
@@ -33,7 +33,6 @@ void CheckI2CDevices(int isuNum, int isuFd)
 	bool deviceFound = false;
 
 	Log_Debug("-----------------------------------------\n");
-	Log_Debug("Enumerating ISU%d\n", isuNum);
 
 	for (unsigned int x = 0; x <= 0x7f; x++)
 	{
@@ -50,7 +49,7 @@ void CheckI2CDevices(int isuNum, int isuFd)
 
 	if (!deviceFound)
 	{
-		Log_Debug("Didn't find any I2C devices on ISU%d\n", isuNum);
+		Log_Debug("Didn't find any I2C devices\n");
 	}
 
 	Log_Debug("\n");

@@ -9,5 +9,5 @@
 
 void delay(int ms);
 void delayMicroseconds(int us);
-void CheckI2CDevices(int isuNum, int isuFd);
+void ListI2CDevices(int isuFd);
 

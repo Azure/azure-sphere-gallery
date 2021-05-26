@@ -1,6 +1,6 @@
 {
   "SchemaVersion": 1,
-  "Name": "16x2RGB_HighLevelApp",
+  "Name": "Grove16x2RGBLCD_HighLevelApp",
   "ComponentId": "19EA1777-9D5B-41E3-882F-85304059E90D",
   "EntryPoint": "/bin/app",
   "CmdArgs": [],

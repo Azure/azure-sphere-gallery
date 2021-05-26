@@ -16,7 +16,7 @@
 
 int main(void)
 {
-    if (InitRGBLCD(MT3620_RDB_HEADER4_ISU2_I2C))
+    if (InitRGBLCD(MT3620_RDB_HEADER4_ISU2_I2C) == 0)
     {
         SetRGBLCDText("Hello world\nSecond line!");
         SetRGBLCDColor(0, 128, 64);
