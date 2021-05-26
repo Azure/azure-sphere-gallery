@@ -25,11 +25,11 @@ The 'display driver' for the Grove 16x2 RGB LCD display is based on the [Python 
 The display driver exposes three functions, usage is demonstrated below:
 
 ```cpp
- InitRGBLCD(MT3620_RDB_HEADER4_ISU2_I2C);    // returns false on failure
- SetRGBLCDColor(0, 255, 0);  // Set background Color Green
- SetRGBLCDText("Hello world\nSecond line!"); // two lines using '\n'
+ RGBLCD_Init(MT3620_RDB_HEADER4_ISU2_I2C);    // returns false on failure
+ RGBLCD_SetColor(0, 255, 0);  // Set background Color Green
+ RGBLCD_SetText("Hello world\nSecond line!"); // two lines using '\n'
 ```
-Note that the Grove 16x2 RGB LCD display is a 5v device, you will need to use a [Level Converter](https://learn.sparkfun.com/tutorials/bi-directional-logic-level-converter-hookup-guide/all) to drive the display at 5v rather than 3.3v.
+Note that the Grove 16x2 RGB LCD display is a 5V device, you will need to use a [Level Converter](https://learn.sparkfun.com/tutorials/bi-directional-logic-level-converter-hookup-guide/all) to drive the display at 5V rather than 3.3V.
 
 ## Project expectations
 
