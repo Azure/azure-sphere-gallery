@@ -22,9 +22,9 @@ int main(void)
         RGBLCD_SetColor(0, 128, 64);
 
         delay(2000);
-        for (int x = 0; x < 255; x++)
+        for (uint8_t x = 0; x < 255; x++)
         {
-            RGBLCD_SetColor(x, 255 - x, 0);
+            RGBLCD_SetColor(x, (uint8_t)(255 - x), 0);
             delay(100);
         }
 
