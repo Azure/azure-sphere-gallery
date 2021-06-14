@@ -1,72 +1,54 @@
-/*
-* Copyright (c) Microsoft Corporation.
-* Licensed under the MIT License.
-*/
-#include <stdlib.h>
-#include <stdint.h>
+#include <stdio.h>
 #include <string.h>
-#include <stdbool.h>
-
-#include "heap_tracker_lib.h"
+#include <errno.h>
+#include <pthread.h>
 
 #include "applibs_versions.h"
 #include <applibs/log.h>
 
+#include "heap_tracker_lib.h"
 
-//////////////////////////////////////////////////////////////////////////////////
-// GLOBAL VARIABLES
-//////////////////////////////////////////////////////////////////////////////////
+#define HEAP_TRACKER_DEBUG
+#define HEAP_MAX_ALIGNMENT_ON_SPHERE	16
 
-// Sets a reference allocation threshold (in bytes) after which the library will log warnings.
-const size_t heap_threshold = 250 * 1024;
+static pthread_mutex_t _lock;
+static volatile ssize_t _heap_allocated = 0;
+static volatile ssize_t _heap_peak_allocated = 0;
+static volatile size_t _leakage = 0;
 
-// Heap allocated amount (in bytes). This is signed so the user can debug allocation issues.
-volatile ssize_t heap_allocated = 0;
+extern void* __real_malloc(size_t size);
+extern void* __real_calloc(size_t num, size_t size);
+extern void __real_free(void* ptr);
 
-
-//////////////////////////////////////////////////////////////////////////////////
-// LOGGING
-//////////////////////////////////////////////////////////////////////////////////
-
-#define HEAP_MAX_ALIGNMENT_ON_SPHERE	8
-#define HEAP_TRACKER_LIB_LOG_PREFIX		"Heap-Tracker lib: "
-#define HeapTracker_Log(...)			if (DEBUG_LOGS_ON) Log_Debug(HEAP_TRACKER_LIB_LOG_PREFIX __VA_ARGS__)
-#define LogHeapStatus()					if (DEBUG_LOGS_ON) log_heap_status()
-
-void log_heap_status(void)
+int heap_tracker_init(void)
 {
-	if (heap_allocated < 0)
-	{
-		Log_Debug("WARNING: heap_allocated (%zd) is NEGATIVE --> 'heap_allocated' will not be reliable from now on!\n", heap_allocated);
+	int ret = 0;
+
+	if (pthread_mutex_init(&_lock, NULL) < 0) {
+#ifdef HEAP_TRACKER_DEBUG
+		Log_Debug("ERROR: Could not init mutex: %s (%d)\n", strerror(errno), errno);
+#endif
+		ret = -1;
 	}
-	else if (heap_allocated > heap_threshold)
-	{
-		Log_Debug("WARNING: heap_allocated (%zd bytes) is above heap_threshold (%zu bytes)\n", heap_allocated, heap_threshold);
-	}
-	else
-	{
-		Log_Debug("SUCCESS: heap_allocated (%zd bytes) - delta with heap_threshold(%zd bytes)\n", heap_allocated, (ssize_t)heap_threshold - heap_allocated);
-	}
+
+	return ret;
 }
 
-//////////////////////////////////////////////////////////////////////////////////
-// NATIVE malloc/free WRAPPERS
-//////////////////////////////////////////////////////////////////////////////////
-/*
-*	NOTE: the library does not intentionally alter the behaviors of the native functions,
-*	in order to not disrupt the functionality on other system libraries that use them.
-*	Altering the implementations is NOT reccomended as it could result in unpredicted App behavior!
-*/
+ssize_t heap_tracker_get_allocated(void)
+{
+	return _heap_allocated;
+}
 
-// C-Library malloc/free stubs, which will be inter-positioned by the wrappers at link-time
-void *__real_malloc(size_t size);
-void *__real_realloc(void *ptr, size_t new_size);
-void *__real_calloc(size_t num, size_t size);
-void *__real_aligned_alloc(size_t alignment, size_t size);
-void __real_free(void *ptr);
+ssize_t heap_tracker_get_peak_allocated(void)
+{
+	return _heap_peak_allocated;
+}
 
+size_t heap_tracker_get_leakage(void)
+{
+	return _leakage;
+}
 
-// Heap-tracking malloc() wrapper
 void *__wrap_malloc(size_t size)
 {	
 	size_t actual_size = size + HEAP_MAX_ALIGNMENT_ON_SPHERE;
@@ -79,12 +61,19 @@ void *__wrap_malloc(size_t size)
 		return NULL;
 	}
 
-	HeapTracker_Log("malloc(%zu)=%p... ", actual_size, ptr);
+#ifdef HEAP_TRACKER_DEBUG
+	Log_Debug("INFO: malloc %zu bytes @ %p\n", actual_size, ptr);
+#endif
 
-	heap_allocated += actual_size;
+	(void)pthread_mutex_lock(&_lock);
+	_leakage++;
+	_heap_allocated += actual_size;
+	if (_heap_allocated > _heap_peak_allocated) {
+		_heap_peak_allocated = _heap_allocated;
+	}
+	(void)pthread_mutex_unlock(&_lock);
+
 	*(size_t *)ptr = size;
-
-	LogHeapStatus();
 
 	return ptr + HEAP_MAX_ALIGNMENT_ON_SPHERE;
 }
@@ -99,85 +88,48 @@ void __wrap_free(void* ptr)
 
 	size_t actual_size = *(size_t *)actual_buffer_pos + HEAP_MAX_ALIGNMENT_ON_SPHERE;
 
-	HeapTracker_Log("free(%p,%zu)... ", actual_buffer_pos, actual_size);
+#ifdef HEAP_TRACKER_DEBUG
+	Log_Debug("INFO: free %zu bytes @ %p\n", actual_size, actual_buffer_pos);
+#endif
 
 	__real_free(actual_buffer_pos);
 
-	heap_allocated -= (ssize_t)actual_size;
-
-	LogHeapStatus();
+	(void)pthread_mutex_lock(&_lock);
+	_leakage--;
+	_heap_allocated -= (ssize_t)actual_size;
+	(void)pthread_mutex_unlock(&_lock);
 }
 
-// Custom heap-tracking calloc() wrapper
 void *__wrap_calloc(size_t num, size_t size)
 {
-	void *ptr = __real_calloc(num, size);
+	size_t total = num * size;
 
-	HeapTracker_Log("calloc(%zu,%zu)=%p...", num, size, ptr);
-	if (ptr)
-	{
-		heap_allocated += (ssize_t)(num * size);
-	}
-	
-	LogHeapStatus();
-
-	return ptr;
-}
-
-// Custom heap-tracking aligned_alloc() wrapper
-void *__wrap_aligned_alloc(size_t alignment, size_t size)
-{
-	void *ptr = __real_aligned_alloc(alignment, size);
-
-	HeapTracker_Log("aligned_alloc(%zu,%zu)=%p...", alignment, size, ptr);
-	if (ptr)
-	{
-		heap_allocated += (ssize_t)size;
-	}
-	
-	LogHeapStatus();
-
-	return ptr;
-}
-
-// Custom heap-tracking realloc() wrapper
-// NOTE: does NOT track heap as it is unaware of the previous memory block size!
-void *__wrap_realloc(void *ptr, size_t new_size)
-{
-	HeapTracker_Log("WARNING! Native realloc(%p,%zu) was called instead of _realloc() helper: 'heap_allocated' will not be reliable from now on!\n", ptr, new_size);
-	return __real_realloc(ptr, new_size);
-}
-
-//////////////////////////////////////////////////////////////////////////////////
-// MUST-USE HELPERS
-//////////////////////////////////////////////////////////////////////////////////
-
-// Custom heap-tracking free() helper
-//void _free(void *ptr, size_t size)
-//{
-//	HeapTracker_Log("_free(%p,%zu)... ", ptr, size);
-//
-//	__real_free(ptr);
-//	if (ptr)
-//	{
-//		heap_allocated -= (ssize_t)size;
-//	}
-//
-//	LogHeapStatus();
-//}
-
-// Custom heap-tracking realloc() helper
-void *_realloc(void *ptr, size_t old_size, size_t new_size)
-{
-	void *new_ptr = __real_realloc(ptr, new_size);	
-	
-	HeapTracker_Log("_realloc(%p,%zu,%zu)=%p... ", ptr, old_size, new_size, new_ptr);
-	if (NULL != new_ptr)
-	{
-		heap_allocated += (ssize_t)(new_size - old_size + 1);
+	size_t actual_size = total + HEAP_MAX_ALIGNMENT_ON_SPHERE;
+	if (actual_size <= HEAP_MAX_ALIGNMENT_ON_SPHERE) {
+		return NULL;
 	}
 
-	LogHeapStatus();
+	void* ptr = __real_malloc(actual_size);
+	if (ptr == NULL) {
+		return NULL;
+	}
 
-	return new_ptr;
+#ifdef HEAP_TRACKER_DEBUG
+	Log_Debug("INFO: calloc() %zu bytes @ %p\n", actual_size, ptr);
+#endif
+
+	(void)pthread_mutex_lock(&_lock);
+	_leakage++;
+	_heap_allocated += actual_size;
+	if (_heap_allocated > _heap_peak_allocated) {
+		_heap_peak_allocated = _heap_allocated;
+	}
+	(void)pthread_mutex_unlock(&_lock);
+
+	*(size_t*)ptr = size;
+
+	return memset(ptr + HEAP_MAX_ALIGNMENT_ON_SPHERE, 0, total);
 }
+
+
+
