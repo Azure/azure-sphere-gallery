@@ -34,6 +34,7 @@ Each folder within this repository contains a README.md file that describes the 
 | [ServiceAPIDeviceCodeAuth](ServiceAPIDeviceCodeAuth) | Code snippet to access public rest api using device code flow from a web app. |
 | [SetIoTCentralPropsForDeviceGroup](SetIoTCentralPropsForDeviceGroup) | Utility that makes it easy to set an Azure IoT Central Device Twin property for all devices in an Azure Sphere Device Group. |
 | [SetTimeFromLocation](SetTimeFromLocation) | Project that shows how to use Reverse IP lookup to get location information, then obtain time for location, and set device time. |
+| [TranslatorCognitiveServices](TranslatorCognitiveServices) | Project that shows how to call Microsoft Translator Cognitive Services APIs from Azure Sphere |
 | [UdpDebugLog](UdpDebugLog) | Code that demonstrates how to override Log_Debug to broadcast on a UDP Socket, includes a Desktop Viewer application. |
 | [WifiConfigurationViaAppResource](WifiConfigurationViaAppResource) | Project that shows how to configure device Wi-Fi settings using an embedded JSON resource file |
 | [WifiConfigurationViaUart](WifiConfigurationViaUart) | Project that shows how to configure device Wi-Fi settings using Uart |

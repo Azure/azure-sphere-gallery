@@ -1,0 +1,11 @@
+{
+  "SchemaVersion": 1,
+  "Name": "TranslatorCognitiveServices_HighLevelApp",
+  "ComponentId": "e40c8dee-9b83-4bde-bd05-eaf83825da37",
+  "EntryPoint": "/bin/app",
+  "CmdArgs": [],
+  "Capabilities": {
+    "AllowedConnections": [ "api.cognitive.microsoft.com", "api.cognitive.microsofttranslator.com", "westus.api.cognitive.microsoft.com" ]
+  },
+  "ApplicationType": "Default"
+}
