@@ -7,13 +7,14 @@
 #include "heap_tracker_lib.h"
 
 // define this to simulate a leakage
-//#define SIMULATE_LEAKAGE
+#define SIMULATE_LEAKAGE
 
 // threshold to alarm in example
 #define CFG_HEAP_THRESHOLD					(1024 * 100)
 
 int main(void)
 {
+    // use should call this API before malloc/free
     heap_tracker_init();
 
     Log_Debug("Starting Heap Tracker test application...\n");
