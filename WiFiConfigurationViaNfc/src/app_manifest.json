@@ -1,0 +1,13 @@
+{
+  "SchemaVersion": 1,
+  "Name": "WiFiProvisioningViaNfc_HighLevelApp",
+  "ComponentId": "7D2E3D7D-E6FC-41D7-9B68-BAFBAA115797",
+  "EntryPoint": "/bin/app",
+  "CmdArgs": [],
+  "Capabilities": {
+    "Gpio": [ "$AVNET_MT3620_SK_GPIO2" ],
+    "I2cMaster": [ "$AVNET_MT3620_SK_ISU2_I2C" ],
+    "WifiConfig": true
+  },
+  "ApplicationType": "Default"
+}
