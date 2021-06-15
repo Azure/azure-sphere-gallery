@@ -37,6 +37,7 @@ Each folder within this repository contains a README.md file that describes the 
 | [TranslatorCognitiveServices](TranslatorCognitiveServices) | Project that shows how to call Microsoft Translator Cognitive Services APIs from Azure Sphere |
 | [UdpDebugLog](UdpDebugLog) | Code that demonstrates how to override Log_Debug to broadcast on a UDP Socket, includes a Desktop Viewer application. |
 | [WifiConfigurationViaAppResource](WifiConfigurationViaAppResource) | Project that shows how to configure device Wi-Fi settings using an embedded JSON resource file |
+| [WifiConfigurationViaNfc](WifiConfigurationViaNfc) | Project that shows how to configure device Wi-Fi settings using NFC |
 | [WifiConfigurationViaUart](WifiConfigurationViaUart) | Project that shows how to configure device Wi-Fi settings using Uart |
 
 ## Contributing
