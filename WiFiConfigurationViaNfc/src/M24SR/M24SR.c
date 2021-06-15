@@ -87,10 +87,10 @@ static uint16_t M24SR_UpdateCrc(uint8_t ch, uint16_t* lpwCrc);
 static int M24SR_SelectFileNdefApp(void);
 static int M24SR_SelectFileNdefFile(void);
 static uint16_t M24SR_GetMessageLength(void);
-static int M24SR_ProcessNDEFMessage(uint8_t* buffer, uint16_t length, struct WifiConfig* wifiConfig);
+static int M24SR_ProcessNDEFMessage(uint8_t* buffer, uint16_t length, struct M24SR_WifiConfig* wifiConfig);
 static void M24SR_ShowSystemFile(void);
 static int M24SR_VerifyI2cPassword(void);
-static int M24SR_GetNdefMessage(uint8_t* buffer, size_t len, struct WifiConfig* wifiConfig);
+static int M24SR_GetNdefMessage(uint8_t* buffer, size_t len, struct M24SR_WifiConfig* wifiConfig);
 static int M24SR_Deselect(void);
 
 static uint8_t MapAuthType(uint16_t authType);
@@ -102,7 +102,7 @@ static void GpoPollTimerEventHandler(EventLoopTimer* timer);
 
 static void CloseFdAndPrintError(int fd, const char* fdName);
 
-GPOCallback _gpoCallback = NULL;
+M24SR_GPOCallback _gpoCallback = NULL;
 
 extern volatile sig_atomic_t exitCode;
 
@@ -159,7 +159,7 @@ static void GpoPollTimerEventHandler(EventLoopTimer* timer)
 
 		if (_gpoCallback != NULL)
 		{
-			struct WifiConfig wifiConfig;
+			struct M24SR_WifiConfig wifiConfig;
 
 			delay_ms(200);
 			Log_Debug("Process NDEF Record\n");
@@ -182,7 +182,7 @@ static void GpoPollTimerEventHandler(EventLoopTimer* timer)
 /// <summary>
 /// store I2C and GPIO Fd values 
 /// </summary>
-int M24SR_Init(EventLoop *eventLoop, GPOCallback callback)
+int M24SR_Init(EventLoop *eventLoop, M24SR_GPOCallback callback)
 {
 	_gpoCallback = callback;
 
@@ -411,7 +411,7 @@ static uint8_t MapAuthType(uint16_t authType)
 ///
 /// Extract the SSID and Network Key from the WiFi NDEF Record
 /// </summary>
-static int M24SR_ProcessNDEFMessage(uint8_t* buffer, uint16_t length, struct WifiConfig *wifiConfig)
+static int M24SR_ProcessNDEFMessage(uint8_t* buffer, uint16_t length, struct M24SR_WifiConfig *wifiConfig)
 {
 	buffer+=2;	// Bytes 0+1 = length of full Message.
 
@@ -589,7 +589,7 @@ static void SwapNDEFRecordItems(struct NDEFRECORD* pSource, struct NDEFRECORD* p
 /// <summary>
 /// Switch from RF Mode to I2C - read and process the NDEF Record
 /// </summary>
-int M24SR_GetNdefMessage(uint8_t* buffer, size_t length, struct WifiConfig* wifiConfig)
+int M24SR_GetNdefMessage(uint8_t* buffer, size_t length, struct M24SR_WifiConfig* wifiConfig)
 {
 #ifdef ENABLE_VERBOSE_DEBUG_OUTPUT
 	Log_Debug("%s\n", __func__);

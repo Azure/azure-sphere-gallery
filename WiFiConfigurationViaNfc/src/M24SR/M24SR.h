@@ -6,13 +6,13 @@
 #include <utils.h>
 #include "eventloop_timer_utilities.h"
 
-struct WifiConfig {
+struct M24SR_WifiConfig {
 	uint8_t ssidString[32];
 	uint8_t networkKeyString[32];
 	uint8_t wifiConfigSecurityType;
 };
 
-typedef void (*GPOCallback) (const struct WifiConfig* wifiConfig);
-int M24SR_Init(EventLoop *eventLoop, GPOCallback callback);
+typedef void (*M24SR_GPOCallback) (const struct M24SR_WifiConfig* wifiConfig);
+int M24SR_Init(EventLoop *eventLoop, M24SR_GPOCallback callback);
 void M24SR_ClosePeripheralsAndHandlers(void);
 

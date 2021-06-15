@@ -33,7 +33,7 @@ static void TerminationHandler(int signalNumber)
 /// Callback from M24SR.c - called on NFC Tap event.
 /// </summary>
 /// 
-void NDEF_Callback(const struct WifiConfig* wificonfig)
+void NDEF_Callback(const struct M24SR_WifiConfig* wificonfig)
 {
 	if (wificonfig != NULL)
 	{
