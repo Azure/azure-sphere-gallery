@@ -33,13 +33,13 @@ The library uses the following Azure Sphere libraries.
 1. The following options must be added to the `target_link_libraries` option in CMakeLists.txt:
 
     ```cmake
-    -Wl,--wrap=malloc -Wl,--wrap=realloc -Wl,--wrap=calloc -Wl,--wrap=alloc_aligned -Wl,--wrap=free
+    -Wl,--wrap=malloc -Wl,--wrap=calloc -Wl,--wrap=free -Wl,--wrap=aligned_alloc -Wl,--wrap=realloc
     ```
     For example, in `CMakeLists.txt`:
 
     ```cmake
     ...
-    target_link_libraries(${PROJECT_NAME} applibs pthread gcc_s c -Wl,--wrap=malloc -Wl,--wrap=realloc -Wl,--wrap=calloc -Wl,--wrap=alloc_aligned -Wl,--wrap=free)
+    target_link_libraries(${PROJECT_NAME} applibs pthread gcc_s c -Wl,--wrap=malloc -Wl,--wrap=calloc -Wl,--wrap=free -Wl,--wrap=aligned_alloc -Wl,--wrap=realloc)
     ...
     ```
 
