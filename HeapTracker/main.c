@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <time.h>
+#include <stdbool.h>
 
 #include "applibs_versions.h"
 #include <applibs/log.h>
@@ -19,6 +20,15 @@
 
 // threshold to alarm in example
 #define CFG_HEAP_THRESHOLD					(1024 * 100)
+
+static bool isPowerOfTwo(int n) 
+{
+    if ((n != 0) && (n != 1) && ((n & (n - 1)) == 0)) {
+        return true;
+    } else {
+        return false;
+    }
+}
 
 int main(void)
 {
@@ -43,8 +53,8 @@ int main(void)
 #elif defined(TEST_CALLOC)
         ptr = calloc(1, n);
 #elif defined(TEST_ALIGNED_ALLOC)
-        if (n % 2 == 0) {
-            ptr = aligned_alloc(n, n);        // alignment must be power of 2, size must be a multiple of alignemtn
+        if (isPowerOfTwo(n)) {
+            ptr = aligned_alloc(n, n);  // alignment must be power of 2, size must be a multiple of alignemtn
         } else {
             continue;
         }

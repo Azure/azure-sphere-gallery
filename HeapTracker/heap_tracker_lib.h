@@ -7,10 +7,7 @@
 #define CFG_HEAP_TRACKER_DEBUG
 //#define CFG_HEAP_TRACKER_TRHEADSAFE
 
-#ifdef CFG_HEAP_TRACKER_COMPATIBLE_API
-#define CFG_HEAP_TRACKER_MAX_ALIGNMENT		16
-#else
-#define CFG_HEAP_TRACKER_MAX_ALIGNMENT		0
+#if !defined(CFG_HEAP_TRACKER_COMPATIBLE_API)
 void	heap_tracker_free(void* ptr, size_t size);
 void*	heap_tracker_realloc(void* ptr, size_t old_size, size_t new_size);
 #endif

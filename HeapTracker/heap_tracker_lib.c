@@ -24,6 +24,12 @@
 	#define PTHREAD_MUTEX_UNLOCK(p1)
 #endif
 
+#ifdef CFG_HEAP_TRACKER_COMPATIBLE_API
+#define CFG_HEAP_TRACKER_MAX_ALIGNMENT		16
+#else
+#define CFG_HEAP_TRACKER_MAX_ALIGNMENT		0
+#endif
+
 static pthread_mutex_t _lock;
 static volatile ssize_t _heap_allocated = 0;
 static volatile ssize_t _heap_peak_allocated = 0;
