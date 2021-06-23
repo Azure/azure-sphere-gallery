@@ -26,7 +26,6 @@ static int _gpioFd = -1;
 	uint8_t tnf;
 	uint8_t typeLength;
 	uint8_t payloadLength;
-	uint8_t idLength;
 } NDEFMSGHDR;
 
  struct NDEFRECORD {
@@ -413,9 +412,10 @@ static uint8_t MapAuthType(uint16_t authType)
 /// </summary>
 static int M24SR_ProcessNDEFMessage(uint8_t* buffer, uint16_t length, struct M24SR_WifiConfig *wifiConfig)
 {
-	buffer+=2;	// Bytes 0+1 = length of full Message.
+	buffer += 2;	// Bytes 0+1 = length of full Message.
+	unsigned int idLengthOffset = 0;
 
-	struct NDEFMSGHDR *pHdr = (struct NDEFMSGHDR*)buffer;
+	struct NDEFMSGHDR* pHdr = (struct NDEFMSGHDR*)buffer;
 
 	// pull out bit fields
 	bool mb = (pHdr->tnf & 0x80) != 0;
@@ -448,6 +448,7 @@ static int M24SR_ProcessNDEFMessage(uint8_t* buffer, uint16_t length, struct M24
 	if (il)
 	{
 		Log_Debug("Record contains ID Length\n");
+		idLengthOffset = 1;
 	}
 
 	if (tnf & 0x02)
@@ -472,9 +473,9 @@ static int M24SR_ProcessNDEFMessage(uint8_t* buffer, uint16_t length, struct M24
 
 	Log_Debug("Type Length %d (0x%02x)\n", pHdr->typeLength, pHdr->typeLength);
 	Log_Debug("Payload Length %d (0x%02x)\n", pHdr->payloadLength, pHdr->payloadLength);
-	Log_Debug("ID Length %d (0x%02x)\n", pHdr->idLength, pHdr->idLength);
+	Log_Debug("ID Length %d (0x%02x)\n", idLengthOffset, idLengthOffset);
 
-	if (strncmp("application/vnd.wfa.wsc", &buffer[sizeof(NDEFMSGHDR)], pHdr->typeLength) == 0)
+	if (strncmp("application/vnd.wfa.wsc", &buffer[sizeof(NDEFMSGHDR) + idLengthOffset], pHdr->typeLength) == 0)
 	{
 		Log_Debug("WiFi MIME type confirmed\n");
 	}
@@ -495,7 +496,7 @@ static int M24SR_ProcessNDEFMessage(uint8_t* buffer, uint16_t length, struct M24
 	// 0x1027 Network Key
 	// 0x1003 Authentication Type(needs to map to Azure Sphere types)
 
-	uint8_t* ptr = &buffer[sizeof(NDEFMSGHDR) + pHdr->typeLength + 1];	// point to first record.
+	uint8_t* ptr = &buffer[sizeof(NDEFMSGHDR) + idLengthOffset + pHdr->typeLength + 1];	// point to first record.
 	size_t bufferOffset = 0;		// offset into the NDEFMSGHDR buffer.
 
 	uint16_t content16t = 0;
@@ -749,6 +750,31 @@ static int WriteI2C(uint8_t* data, size_t len)
 		return -1;
 
 	int ret = I2CMaster_Write(_i2cFd, NFC_CLICK_ADDRESS, data, len);
+
+	if (ret == -1 && errno == 6)	// no device or address.
+	{
+#ifdef ENABLE_VERBOSE_DEBUG_OUTPUT
+		Log_Debug("WriteI2C Retry (errno 6, no device)\n");
+#endif
+		// retry the write.
+		for (int retryLoop = 0; retryLoop < 5; retryLoop++)
+		{
+			delay(1);
+#ifdef ENABLE_VERBOSE_DEBUG_OUTPUT
+			Log_Debug("WriteI2C Retry %d/5 (errno 6, no device)\n", retryLoop + 1);
+#endif
+			ret = I2CMaster_Write(_i2cFd, NFC_CLICK_ADDRESS, data, len);
+			if (ret == 0)
+			{
+#ifdef ENABLE_VERBOSE_DEBUG_OUTPUT
+				Log_Debug("Retry success\n");
+#endif
+				break;
+			}
+
+		}
+	}
+
 	if (ret == -1)
 	{
 		Log_Debug("Write to I2C failed (ret: %d) - %d(%s)\n", ret, errno, strerror(errno));
@@ -809,8 +835,10 @@ int M24SR_Deselect(void)
 #endif
 
 	uint8_t resp[3];
-	static uint8_t data = DESELECT;
-	SendCommand(false, &data, 1);
+
+	uint8_t deselectData = DESELECT;
+	SendCommand(false, &deselectData, 1);
+	delay(10);
 	return ReadI2C(&resp[0], 3);
 }
 
