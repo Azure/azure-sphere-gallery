@@ -1,0 +1,50 @@
+{
+    "Metadata": {
+        "Type": "Azure Sphere Hardware Definition",
+        "Version": 1
+    },
+    "Description":
+    {
+        "Name": "Sample hardware abstraction for MT3620 RDB",
+        "MainCoreHeaderFileTopContent": [
+            "/* Copyright (c) Microsoft Corporation. All rights reserved.",
+            "   Licensed under the MIT License. */",
+            "",
+            "// This file defines the mapping from the MT3620 reference development board (RDB) to the",
+            "// 'Adafruit VS1053 board"
+        ]
+    },
+    "Imports" : [ {"Path": "mt3620_rdb.json"} ],
+  "Peripherals": [
+    {
+      "Name": "VS1053_DREQ",
+      "Type": "Gpio",
+      "Mapping": "MT3620_RDB_HEADER2_PIN6_GPIO",
+      "Comment": "DREQ"
+    },
+    {
+      "Name": "VS1053_RST",
+      "Type": "Gpio",
+      "Mapping": "MT3620_RDB_HEADER2_PIN14_GPIO",
+      "Comment": "RST"
+    },
+    {
+      "Name": "VS1053_DCS",
+      "Type": "Gpio",
+      "Mapping": "MT3620_RDB_HEADER2_PIN12_GPIO",
+      "Comment": "DCS"
+    },
+    {
+      "Name": "VS1053_SPI",
+      "Type": "SpiMaster",
+      "Mapping": "MT3620_RDB_HEADER4_ISU1_SPI",
+      "Comment": "VS1053 SPI"
+    },
+    {
+      "Name": "VS1053_CS",
+      "Type": "Gpio",
+      "Mapping": "MT3620_RDB_HEADER1_PIN3_GPIO",
+      "Comment": "VS1053 CS"
+    }
+  ]
+}
