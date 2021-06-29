@@ -36,6 +36,7 @@ Each folder within this repository contains a README.md file that describes the 
 | [SetTimeFromLocation](SetTimeFromLocation) | Project that shows how to use Reverse IP lookup to get location information, then obtain time for location, and set device time. |
 | [TranslatorCognitiveServices](TranslatorCognitiveServices) | Project that shows how to call Microsoft Translator Cognitive Services APIs from Azure Sphere |
 | [UdpDebugLog](UdpDebugLog) | Code that demonstrates how to override Log_Debug to broadcast on a UDP Socket, includes a Desktop Viewer application. |
+| [VS1053AudioStreaming](VS1053AudioStreaming) | Project that shows how to play audio through a VS1053 codec board |
 | [WifiConfigurationViaAppResource](WifiConfigurationViaAppResource) | Project that shows how to configure device Wi-Fi settings using an embedded JSON resource file |
 | [WifiConfigurationViaNfc](WifiConfigurationViaNfc) | Project that shows how to configure device Wi-Fi settings using NFC |
 | [WifiConfigurationViaUart](WifiConfigurationViaUart) | Project that shows how to configure device Wi-Fi settings using Uart |
