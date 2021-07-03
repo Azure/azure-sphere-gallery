@@ -8,6 +8,22 @@
 
 #include "heap_tracker_lib.h"
 
+/*
+
+	When CFG_HEAP_TRACKER_COMPATIBLE_API is ON, the memory allocated looks like:
+
+	|<-  CFG_HEAP_TRACKER_MAX_ALIGNMENT ->|
+	|									  |
+	+------------------------------------------------------------------------------------+
+	| Magic Number | size |	   Unused     |				 n bytes    					 |
+	+------------------------------------------------------------------------------------+
+*/
+
+#define HEAP_TRACKER_MAGIC_NUBMER		0x55AA1024
+
+#define HEAP_TRACKER_MN_OFFSET			0
+#define HEAP_TRACKER_SIZE_OFFSET		4
+
 #if defined(CFG_HEAP_TRACKER_DEBUG)
 	#define HEAP_TRACKER_DEBUG(...)		Log_Debug(__VA_ARGS__)
 #else
@@ -90,9 +106,9 @@ void *__wrap_malloc(size_t size)
 	}
 	PTHREAD_MUTEX_UNLOCK(&_lock);
 
-
 #if defined(CFG_HEAP_TRACKER_COMPATIBLE_API)
-	*(size_t *)ptr = size;
+	*(size_t *)(ptr + HEAP_TRACKER_MN_OFFSET) = HEAP_TRACKER_MAGIC_NUBMER;
+	*(size_t *)(ptr + HEAP_TRACKER_SIZE_OFFSET) = size;
 #endif
 
 	return ptr + CFG_HEAP_TRACKER_MAX_ALIGNMENT;
@@ -117,7 +133,6 @@ void heap_tracker_free(void* ptr, size_t size)
 	_mismatch_call--;
 	_heap_allocated -= (ssize_t)size;
 	PTHREAD_MUTEX_UNLOCK(&_lock);
-
 }
 
 void __wrap_free(void* ptr)
@@ -128,7 +143,12 @@ void __wrap_free(void* ptr)
 	}
 
 	void *actual_buffer_pos = ptr - CFG_HEAP_TRACKER_MAX_ALIGNMENT;
-	size_t actual_size = *(size_t *)actual_buffer_pos + CFG_HEAP_TRACKER_MAX_ALIGNMENT;
+	if (*(size_t *)(actual_buffer_pos + HEAP_TRACKER_MN_OFFSET) != HEAP_TRACKER_MAGIC_NUBMER) {
+		HEAP_TRACKER_DEBUG("WARNING: free() on a incorrect address @ %p!\n", actual_buffer_pos);
+		return;
+	}
+
+	size_t actual_size = *(size_t *)(actual_buffer_pos + HEAP_TRACKER_SIZE_OFFSET) + CFG_HEAP_TRACKER_MAX_ALIGNMENT;
 
 	heap_tracker_free(actual_buffer_pos, actual_size);
 #else
@@ -162,7 +182,8 @@ void *__wrap_calloc(size_t num, size_t size)
 	PTHREAD_MUTEX_UNLOCK(&_lock);
 
 #if defined(CFG_HEAP_TRACKER_COMPATIBLE_API)
-	*(size_t*)ptr = size;
+	*(size_t *)(ptr + HEAP_TRACKER_MN_OFFSET) = HEAP_TRACKER_MAGIC_NUBMER;
+	*(size_t *)(ptr + HEAP_TRACKER_SIZE_OFFSET) = size;
 #endif
 
 	return memset(ptr + CFG_HEAP_TRACKER_MAX_ALIGNMENT, 0, total);
@@ -171,7 +192,7 @@ void *__wrap_calloc(size_t num, size_t size)
 void* __wrap_aligned_alloc(size_t alignment, size_t size)
 {
 #if defined(CFG_HEAP_TRACKER_COMPATIBLE_API)
-	HEAP_TRACKER_DEBUG("ERROR: aligned_alloc() is not allowed, return NULL!\n");
+	HEAP_TRACKER_DEBUG("WARNING: aligned_alloc() is not allowed, return NULL!\n");
 	return NULL;
 #else
 	void* ptr = __real_aligned_alloc(alignment, size);
@@ -229,12 +250,17 @@ void* __wrap_realloc(void* ptr, size_t new_size)
 	size_t actual_old_size;
 	size_t actual_new_size;
 
-	if (NULL == ptr) {
+	if (NULL == ptr) {				// equal to malloc
 		actual_buffer_pos = NULL;
 		actual_old_size = 0;
 	} else {
 		actual_buffer_pos = ptr - CFG_HEAP_TRACKER_MAX_ALIGNMENT;
-		actual_old_size = *(size_t*)actual_buffer_pos + CFG_HEAP_TRACKER_MAX_ALIGNMENT;
+		if (*(size_t*)(actual_buffer_pos + HEAP_TRACKER_MN_OFFSET) != HEAP_TRACKER_MAGIC_NUBMER) {
+			HEAP_TRACKER_DEBUG("ERROR: realloc() on a incorrect address @ %p!\n", actual_buffer_pos);
+			return NULL;
+		}
+
+		actual_old_size = *(size_t *)(actual_buffer_pos + HEAP_TRACKER_SIZE_OFFSET) + CFG_HEAP_TRACKER_MAX_ALIGNMENT;
 	}
 
 	if (new_size == 0) {
@@ -248,7 +274,8 @@ void* __wrap_realloc(void* ptr, size_t new_size)
 		return NULL;
 	}
 
-	*(size_t*)new_ptr = new_size;
+	*(size_t *)(new_ptr + HEAP_TRACKER_MN_OFFSET) = HEAP_TRACKER_MAGIC_NUBMER;
+	*(size_t *)(new_ptr + HEAP_TRACKER_SIZE_OFFSET) = new_size;
 
 	return new_ptr + CFG_HEAP_TRACKER_MAX_ALIGNMENT;
 #else

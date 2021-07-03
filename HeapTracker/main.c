@@ -62,20 +62,28 @@ int main(void)
 
 #if defined(TEST_REALLOC)
 #if defined(CFG_HEAP_TRACKER_COMPATIBLE_API)
-        ptr = realloc(ptr, n);
+        ptr = realloc(ptr, 2 * n);
 #else
         ptr = heap_tracker_realloc(ptr, n, n);
 #endif
 #endif
 
 #if defined(SIMULATE_LEAKAGE)
-        if (n % 43 != 0)                // A number defined to simulate the (how frequent) leakage
+        if (n % 43 != 0) {                  // A number defined to simulate the (how frequent) leakage
 #endif 
 
 #if defined(CFG_HEAP_TRACKER_COMPATIBLE_API)
-            free(ptr);                  // if CFG_HEAP_TRACKER_COMPATIBLE_API is defined, user can use normal free()
+            free(ptr);                      // if CFG_HEAP_TRACKER_COMPATIBLE_API is defined, user can use normal free()
 #else
             heap_tracker_free(ptr, n);
+#endif
+
+#if defined(SIMULATE_LEAKAGE)
+        } else {
+#if defined(CFG_HEAP_TRACKER_COMPATIBLE_API)
+            free(ptr + 2);                  // error free() will be detected and lead to leakage
+#endif
+        }
 #endif
 
         allocated = heap_tracker_get_allocated();
