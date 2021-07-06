@@ -25,9 +25,15 @@
 #define HEAP_TRACKER_SIZE_OFFSET		4
 
 #if defined(CFG_HEAP_TRACKER_DEBUG)
-	#define HEAP_TRACKER_DEBUG(...)		Log_Debug(__VA_ARGS__)
+	#define HEAP_TRACKER_DEBUG(...)		Log_Debug("INFO: "__VA_ARGS__)
 #else
 	#define HEAP_TRACKER_DEBUG(...)
+#endif
+
+#if defined(CFG_HEAP_TRACKER_ERROR)
+#define HEAP_TRACKER_ERROR(...)			Log_Debug("ERROR: "__VA_ARGS__)
+#else
+#define HEAP_TRACKER_ERROR(...)
 #endif
 
 #if defined(CFG_HEAP_TRACKER_TRHEADSAFE)
@@ -63,7 +69,7 @@ int heap_tracker_init(void)
 
 	ret = PTHREAD_MUTEX_INIT(&_lock, NULL);
 	if (ret < 0) {
-		HEAP_TRACKER_DEBUG("ERROR: Could not init mutex: %s (%d)\n", strerror(errno), errno);
+		HEAP_TRACKER_DEBUG("could not init mutex: %s (%d)\n", strerror(errno), errno);
 	}
 
 	return ret;
@@ -96,7 +102,7 @@ void *__wrap_malloc(size_t size)
 		return NULL;
 	}
 
-	HEAP_TRACKER_DEBUG("INFO: malloc %zu bytes @ %p\n", actual_size, ptr);
+	HEAP_TRACKER_DEBUG("malloc %zu bytes @ %p\n", actual_size, ptr);
 
 	PTHREAD_MUTEX_LOCK(&_lock);
 	_mismatch_call++;
@@ -125,7 +131,7 @@ void heap_tracker_free(void* ptr, size_t size)
 	}
 #endif
 
-	HEAP_TRACKER_DEBUG("INFO: free %zu bytes @ %p\n", size, ptr);
+	HEAP_TRACKER_DEBUG("free %zu bytes @ %p\n", size, ptr);
 
 	__real_free(ptr);
 
@@ -144,7 +150,7 @@ void __wrap_free(void* ptr)
 
 	void *actual_buffer_pos = ptr - CFG_HEAP_TRACKER_MAX_ALIGNMENT;
 	if (*(size_t *)(actual_buffer_pos + HEAP_TRACKER_MN_OFFSET) != HEAP_TRACKER_MAGIC_NUBMER) {
-		HEAP_TRACKER_DEBUG("WARNING: free() on a incorrect address @ %p!\n", actual_buffer_pos);
+		HEAP_TRACKER_ERROR("free() on a incorrect address @ %p!\n", actual_buffer_pos);
 		return;
 	}
 
@@ -152,7 +158,7 @@ void __wrap_free(void* ptr)
 
 	heap_tracker_free(actual_buffer_pos, actual_size);
 #else
-	HEAP_TRACKER_DEBUG("WARNING: free() @ %p instead of heap_tracker_free() helper, heap_allocated will not be reliable from now on!\n", ptr);
+	HEAP_TRACKER_ERROR("free() @ %p instead of heap_tracker_free() helper, heap_allocated will not be reliable from now on!\n", ptr);
 	__real_free(ptr);
 #endif
 }
@@ -171,7 +177,7 @@ void *__wrap_calloc(size_t num, size_t size)
 		return NULL;
 	}
 
-	HEAP_TRACKER_DEBUG("INFO: calloc() %zu bytes @ %p\n", actual_size, ptr);
+	HEAP_TRACKER_DEBUG("calloc() %zu bytes @ %p\n", actual_size, ptr);
 
 	PTHREAD_MUTEX_LOCK(&_lock);
 	_mismatch_call++;
@@ -192,7 +198,7 @@ void *__wrap_calloc(size_t num, size_t size)
 void* __wrap_aligned_alloc(size_t alignment, size_t size)
 {
 #if defined(CFG_HEAP_TRACKER_COMPATIBLE_API)
-	HEAP_TRACKER_DEBUG("WARNING: aligned_alloc() is not allowed, return NULL!\n");
+	HEAP_TRACKER_ERROR("aligned_alloc() is not allowed, return NULL!\n");
 	return NULL;
 #else
 	void* ptr = __real_aligned_alloc(alignment, size);
@@ -219,7 +225,7 @@ void* heap_tracker_realloc(void* ptr, size_t old_size, size_t new_size)
 {
 	void* new_ptr = __real_realloc(ptr, new_size);
 
-	HEAP_TRACKER_DEBUG("INFO: realloc() %zu bytes @ %p, from previous %zu bytes\n", new_size, new_ptr, old_size);
+	HEAP_TRACKER_DEBUG("realloc() %zu bytes @ %p, from previous %zu bytes\n", new_size, new_ptr, old_size);
 
 	ssize_t diff = (ptr == NULL) ? new_size : (ssize_t)(new_size - old_size);
 	if (diff != 0) {
@@ -256,7 +262,7 @@ void* __wrap_realloc(void* ptr, size_t new_size)
 	} else {
 		actual_buffer_pos = ptr - CFG_HEAP_TRACKER_MAX_ALIGNMENT;
 		if (*(size_t*)(actual_buffer_pos + HEAP_TRACKER_MN_OFFSET) != HEAP_TRACKER_MAGIC_NUBMER) {
-			HEAP_TRACKER_DEBUG("ERROR: realloc() on a incorrect address @ %p!\n", actual_buffer_pos);
+			HEAP_TRACKER_ERROR("realloc() on a incorrect address @ %p!\n", actual_buffer_pos);
 			return NULL;
 		}
 
@@ -279,7 +285,7 @@ void* __wrap_realloc(void* ptr, size_t new_size)
 
 	return new_ptr + CFG_HEAP_TRACKER_MAX_ALIGNMENT;
 #else
-	HEAP_TRACKER_DEBUG("WARNING: realloc() @ %p instead of heap_tracker_realloc() helper, heap_allocated will not be reliable from now on!\n", ptr);
+	HEAP_TRACKER_ERROR("realloc() @ % p instead of heap_tracker_realloc() helper, heap_allocated will not be reliable from now on!\n", ptr);
 	return __real_realloc(ptr, new_size);
 #endif
 }
