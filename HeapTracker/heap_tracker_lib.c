@@ -189,7 +189,7 @@ void *__wrap_calloc(size_t num, size_t size)
 
 #if defined(CFG_HEAP_TRACKER_COMPATIBLE_API)
 	*(size_t *)(ptr + HEAP_TRACKER_MN_OFFSET) = HEAP_TRACKER_MAGIC_NUBMER;
-	*(size_t *)(ptr + HEAP_TRACKER_SIZE_OFFSET) = size;
+	*(size_t *)(ptr + HEAP_TRACKER_SIZE_OFFSET) = total;
 #endif
 
 	return memset(ptr + CFG_HEAP_TRACKER_MAX_ALIGNMENT, 0, total);
