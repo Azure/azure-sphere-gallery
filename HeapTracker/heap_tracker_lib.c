@@ -40,6 +40,7 @@
 	#define PTHREAD_MUTEX_INIT(p1, p2)	pthread_mutex_init(p1, p2)
 	#define PTHREAD_MUTEX_LOCK(p1)		pthread_mutex_lock(p1)
 	#define PTHREAD_MUTEX_UNLOCK(p1)	pthread_mutex_unlock(p1)
+	static pthread_mutex_t _lock;
 #else
 	#define PTHREAD_MUTEX_INIT(p1, p2)	0 
 	#define PTHREAD_MUTEX_LOCK(p1)		
@@ -52,7 +53,6 @@
 #define CFG_HEAP_TRACKER_MAX_ALIGNMENT		0
 #endif
 
-static pthread_mutex_t _lock;
 static volatile ssize_t _heap_allocated = 0;
 static volatile ssize_t _heap_peak_allocated = 0;
 static volatile size_t _mismatch_call = 0;
@@ -61,7 +61,7 @@ extern void* __real_malloc(size_t size);
 extern void* __real_calloc(size_t num, size_t size);
 extern void __real_free(void* ptr);
 extern void* __real_aligned_alloc(size_t alignment, size_t size);
-extern void* __real_realloc(size_t num, size_t size);
+extern void* __real_realloc(void *ptr, size_t size);
 
 int heap_tracker_init(void)
 {
@@ -106,7 +106,7 @@ void *__wrap_malloc(size_t size)
 
 	PTHREAD_MUTEX_LOCK(&_lock);
 	_mismatch_call++;
-	_heap_allocated += actual_size;
+	_heap_allocated += (ssize_t)actual_size;
 	if (_heap_allocated > _heap_peak_allocated) {
 		_heap_peak_allocated = _heap_allocated;
 	}
@@ -181,7 +181,7 @@ void *__wrap_calloc(size_t num, size_t size)
 
 	PTHREAD_MUTEX_LOCK(&_lock);
 	_mismatch_call++;
-	_heap_allocated += actual_size;
+	_heap_allocated += (ssize_t)actual_size;
 	if (_heap_allocated > _heap_peak_allocated) {
 		_heap_peak_allocated = _heap_allocated;
 	}
@@ -227,7 +227,7 @@ void* heap_tracker_realloc(void* ptr, size_t old_size, size_t new_size)
 
 	HEAP_TRACKER_DEBUG("realloc() %zu bytes @ %p, from previous %zu bytes\n", new_size, new_ptr, old_size);
 
-	ssize_t diff = (ptr == NULL) ? new_size : (ssize_t)(new_size - old_size);
+	ssize_t diff = (ptr == NULL) ? (ssize_t)new_size : (ssize_t)(new_size - old_size);
 	if (diff != 0) {
 		PTHREAD_MUTEX_LOCK(&_lock);
 		_heap_allocated += diff;
