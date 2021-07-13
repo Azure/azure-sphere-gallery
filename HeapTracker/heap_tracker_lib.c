@@ -10,7 +10,7 @@
 
 /*
 
-	When CFG_HEAP_TRACKER_COMPATIBLE_API is ON, the memory allocated looks like:
+	When CFG_HEAP_TRACKER_COMPATIBLE_API is ON, the memory allocated looks like on sphere:
 
 	|<-  CFG_HEAP_TRACKER_MAX_ALIGNMENT ->|
 	|									  |
@@ -22,7 +22,7 @@
 #define HEAP_TRACKER_MAGIC_NUBMER		0x55AA1024
 
 #define HEAP_TRACKER_MN_OFFSET			0
-#define HEAP_TRACKER_SIZE_OFFSET		4
+#define HEAP_TRACKER_SIZE_OFFSET		sizeof(size_t)
 
 #if defined(CFG_HEAP_TRACKER_DEBUG)
 	#define HEAP_TRACKER_DEBUG(...)		Log_Debug("INFO: "__VA_ARGS__)

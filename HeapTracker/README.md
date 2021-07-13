@@ -97,9 +97,13 @@ WARNING: allocated memory is/was above limit!
 
 ```
 
-## Key concepts
+## Key concepts and limitations
 
-The goal of the Heap Tracker library, is to support developers track their High-level application's memory requests to match the expected behavior throughout the application execution time (i.e. a constant raise value from `heap_tracker_get_allocated` may indicate a potential memory leak).
+The goal of the Heap Tracker library, is to support developers track their High-level application's memory requests to match the expected behavior throughout the application execution time. It only trackes the memory in user code and static libraries, and does not include usage from Azure Sphere OS library and other C libraries. There are some cases where the memory is allocated by a library but must be freed by user code, in this case `__real_free()` should be used instead of `free()` to avoid error message from heap tracker library. 
+
+Known case:
+
+- Pointer returned by `Storage_GetAbsolutePathInImagePackage()` API
 
 ## Next steps
 For more information and recommendations on Azure Sphere memory usage and debugging, see [Memory use in high-level applications](https://docs.microsoft.com/en-us/azure-sphere/app-development/application-memory-usage).
