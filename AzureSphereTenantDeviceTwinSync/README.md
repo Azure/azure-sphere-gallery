@@ -54,7 +54,25 @@ Add the three secrets to Key Vault.
 
 Open the [REST_API project](./REST_API/AzureSphereTenantDeviceTwinSync.sln), open **Utils.cs** and paste your Key Vault URI into the empty string called **KeyVaultUrl**.
 
-This is the only change you need to make to the REST_API project.
+**Note**: The project supports `Device Code Flow`, and `Managed Identity` for authentication - The REST_API project is configured to use `Managed Identity` by default.
+
+If you want to use `Device Code Flow` instead of `Managed Identity` you will need to edit the `appsettings.json` file, modify **MySettings/UseDeviceCodeFlow** to **true**.
+
+```json
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft": "Warning",
+      "Microsoft.Hosting.Lifetime": "Information"
+    }
+  },
+  "MySettings": {
+    "UseDeviceCodeFlow": false
+  },
+  "AllowedHosts": "*"
+}
+```
 
 **Build and Deploy the REST_API project to your Azure Resource Group**
 
@@ -68,7 +86,7 @@ The API Service exposes two REST APIs, these are:
 
 **root** if you use your browser to navigate to the REST API project url/root this will display a message showing that the API service is running, and the authentication state of the service.
 
-**webhook** the /webhook endpoint supports GET and POST - GET is used to initialize the authentication process, and POST is the webhook endpoint that IoT Hub/Event Grid will post data.
+**webhook** the /webhook endpoint supports GET and POST - GET is used to initialize the authentication process if `Device Code Flow` is enabled, and POST is the webhook endpoint that IoT Hub/Event Grid will post data.
 
 Note that you need to authorize the REST API project to have access to your key vault before the service will work (the service reads the key vault secrets when the /webhook endpoint is accessed).
 
@@ -81,7 +99,7 @@ Follow [this guide](https://docs.microsoft.com/azure/key-vault/general/assign-ac
 
 In the Azure Portal go to your REST API service resource, select **Configuration** | **General Settings** - then locate **Always On**, enable this (if not set), and save the changes (this will restart the service).
 
-**Authenticating against the REST API service**
+**Authenticating against the REST API service (Only needed if you are using `Device Code Flow`)**
 The REST API service uses the [Device Code Flow](https://github.com/AzureAD/microsoft-authentication-library-for-dotnet/wiki/Device-Code-Flow) authentication model - you initiate authentication using your browser.
 
 Using your web browser navigate to the REST API service URL/webhook and add the APIKey that's stored in Key Vault - the browser URL might look something like:

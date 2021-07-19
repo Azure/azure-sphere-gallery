@@ -11,7 +11,7 @@
     <PackageReference Include="Microsoft.Azure.Devices" Version="1.32.0" />
     <PackageReference Include="Microsoft.Identity.Client" Version="4.30.1" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-    <PackageReference Include="RestSharp" Version="106.11.7" />
+    <PackageReference Include="RestSharp" Version="106.12.0" />
   </ItemGroup>
 
 
