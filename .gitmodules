@@ -18,3 +18,9 @@
 [submodule "MQTT-C_Client/src/HighLevelApp/AzureSphereDevX"]
 	path = MQTT-C_Client/src/HighLevelApp/AzureSphereDevX
 	url = https://github.com/gloveboxes/AzureSphereDevX.git
+[submodule "LittleFs_SDCard/src/littlefs"]
+	path = LittleFs_SDCard/src/littlefs
+	url = https://github.com/littlefs-project/littlefs.git
+[submodule "LittleFs_SDCard/src/AzureSphere/SDCard_RealTimeApp/lib"]
+	path = LittleFs_SDCard/src/AzureSphere/SDCard_RealTimeApp/lib
+	url = https://github.com/CodethinkLabs/mt3620-m4-drivers.git
