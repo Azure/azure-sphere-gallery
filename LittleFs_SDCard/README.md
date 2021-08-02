@@ -42,6 +42,8 @@ Modify the TOTAL_BLOCKS definition to match the size of your SD Card - the defau
 #define TOTAL_BLOCKS   8192     // TODO: Modify TOTAL_BLOCKS to match your SD Card configuration (total bytes/512)
 ```
 
+**Note:** The project is configured to use the Avnet MT3620 Starter Kit Version 2 which uses ISU0 on Click Socket 1 and a [Mikroe SD Click board](https://www.mikroe.com/microsd-click). If you want to use the project with the Avnet MT3620 Starter Kit Version 1 you will need to modify the Real-Time applications app_manifest.json, and main.c to use ISU0. If you are using a stand-alone SD Card board such as the [AdaFruit SD Card breakout board](https://www.adafruit.com/product/254) and the Seeed RDB then you can choose an appropriate ISU.
+
 Note that you can increase the amount of debug information displayed from the High-Level and Real-Time Capable applications by uncommenting this line in CMakeLists.txt
 
 ```python
