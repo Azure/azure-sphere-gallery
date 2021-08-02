@@ -317,7 +317,7 @@ void FormatCard(void)
     {
         if (SDCard_WriteBlock(x, &formatBuffer[0], BLOCK_SIZE) != LFS_ERR_OK)
         {
-            Log_Debug("\nFaied to write block %d\n", x);
+            Log_Debug("\nFailed to write block %d\n", x);
             break;
         }
     }

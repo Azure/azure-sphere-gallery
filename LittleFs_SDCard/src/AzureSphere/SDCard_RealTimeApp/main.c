@@ -289,8 +289,8 @@ _Noreturn void RTCoreMain(void)
     }
 
     // Open SPI 
-    // ISU1 was chosen so the code could run on the Avnet board with a Mikroe SD Card Click board and Adafruit SD Card board on the Seeed RDB
-    driver = SPIMaster_Open(MT3620_UNIT_ISU1);
+    // ISU0 was chosen so the code could run on the Avnet V2 board with a Mikroe SD Card Click board.
+    driver = SPIMaster_Open(MT3620_UNIT_ISU0);
     if (!driver) {
         UART_Print(debug,
             "ERROR: SPI initialisation failed\r\n");
