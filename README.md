@@ -9,7 +9,7 @@ For maintained samples and designs, see the official Azure Sphere Samples and Az
 
 ## Using the samples and designs
 
-See the [Azure Sphere Getting Started](https://www.microsoft.com/en-us/azure-sphere/get-started/) page for background on Azure Sphere.
+See the [Azure Sphere Getting Started](https://www.microsoft.com/en-us/azure-sphere/get-started/e for background on Azure Sphere.
 
 Each sample/hardware design will include instructions in the readme for any system requirements, maintenance expectations, who to contact for support, and the amount of testing completed.
 
@@ -21,6 +21,7 @@ Each folder within this repository contains a README.md file that describes the 
 | ----------- | ----------- |
 | [BalancingRobot](BalancingRobot) | This project contains the hardware, enclosure, and software files needed to build an Azure Sphere and Azure RTOS self-balancing robot. |
 | [CrashDumpsConfigure](CrashDumpsConfigure) | Script that can be used to get or set crash dump policy for your device groups in the Azure Sphere Security Service |
+| [AzureIoTMessageWithProperties](AzureIoTMessageWithProperties) | A project that shows how to add custom properties to an Azure IoT Hub telemetry message, which can then be used for message routing |
 | [AzureSphereTenantDeviceTwinSync](AzureSphereTenantDeviceTwinSync) | A project that shows how to update IoT Hub device twin with OS Version, Product/Device Group and more based on telemetry triggers using Azure IoT Hub/EventGrid and a custom ASP.NET Core REST API  |
 | [DeviceTenantFinder](DeviceTenantFinder) | Utility that makes it easy to find the Azure Sphere tenant name/Id within your tenants for a given Device Id |
 | [Grove_16x2_RGB_LCD](Grove_16x2_RGB_LCD) | A project that shows how to integrate a Seeed Grove LCD/RGB 16x2 display |
