@@ -75,7 +75,7 @@ const t_endpoint endpoints[] =
 #define NTP_PORT			123				// NTP standard listening port
 #define NTP_PORT_OUT		124				// NTP requests from Azure Sphere are sourced through local port 124
 #define NTP_TIMESTAMP_DELTA 2208988800ull	// 70 years in seconds
-#define SOCKET_TIMEOUT_SEC	10				// A socket timeout for receiving
+#define SOCKET_TIMEOUT_SEC	10				// The socket timeout for receiving (in seconds)
 
 typedef struct
 {
@@ -191,7 +191,7 @@ int query_ntp_server(const char *hostname, int ntp_port, int src_port)
 			// Set a receive timeout
 #if defined(_WIN32) || defined(__WIN32__) || defined(_MSC_VER)
 			DWORD timeout = SOCKET_TIMEOUT_SEC * 1000;
-			if (setsockopt(sock_fd, SOL_SOCKET, SO_RCVTIMEO, (const char *)&timeout, sizeof timeout) < 0)
+			if (setsockopt(sock_fd, SOL_SOCKET, SO_RCVTIMEO, (const char *)&timeout, sizeof(timeout)) < 0)
 			{
 				iRes = getSocketErrorCode();
 				std::cerr << "setsockopt() failed with error " << iRes << std::endl;
