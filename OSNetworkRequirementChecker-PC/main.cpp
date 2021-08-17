@@ -20,7 +20,7 @@
 #include <string.h>
 #include <iostream>
 
-const char* const ntpServers[] =
+const char *const ntpServers[] =
 {
 	"time.windows.com",
 	"time.sphere.azure.net",
@@ -35,7 +35,7 @@ const char* const ntpServers[] =
 	""
 };
 
-typedef struct 
+typedef struct
 {
 	const char *hostname;
 	int port;
@@ -67,7 +67,7 @@ const t_endpoint endpoints[] =
 	{ "sphere.sb.dl.delivery.mp.microsoft.com", 443 },
 
 	// Termination element
-	{ "", 0} 
+	{ "", 0}
 };
 
 
@@ -75,6 +75,7 @@ const t_endpoint endpoints[] =
 #define NTP_PORT			123				// NTP standard listening port
 #define NTP_PORT_OUT		124				// NTP requests from Azure Sphere are sourced through local port 124
 #define NTP_TIMESTAMP_DELTA 2208988800ull	// 70 years in seconds
+#define SOCKET_TIMEOUT_SEC	10				// The socket timeout for receiving (in seconds)
 
 typedef struct
 {
@@ -85,7 +86,7 @@ typedef struct
 			uint8_t mode : 3;	// mode - i.e. client will pick mode 3 for client
 			uint8_t vn : 3;		// vn	- Version number of the protocol.
 			uint8_t li : 2;		// li	- Leap indicator
-		};	
+		};
 		uint8_t li_vn_mode;		// 8 bits. li, vn, and mode.							 
 	};
 
@@ -128,7 +129,7 @@ int getSocketErrorCode(void)
 int query_ntp_server(const char *hostname, int ntp_port, int src_port)
 {
 	int iRes = 0;
-	
+
 	// Build the NTP packet
 	ntp_packet packet = { 0 };
 	packet.li = 0;		// No warning
@@ -139,10 +140,10 @@ int query_ntp_server(const char *hostname, int ntp_port, int src_port)
 #if defined(_WIN32) || defined(__WIN32__) || defined(_MSC_VER)
 	WSADATA wsaData;
 	if (WSAStartup(MAKEWORD(2, 2), &wsaData) != 0)
-	{		
+	{
 		iRes = getSocketErrorCode();
 		std::cerr << "WSAStartup() failed with error code " << iRes << std::endl;
-		
+
 		WSACleanup();
 		return iRes;
 	}
@@ -187,6 +188,24 @@ int query_ntp_server(const char *hostname, int ntp_port, int src_port)
 		}
 		else
 		{
+			// Set a receive timeout
+#if defined(_WIN32) || defined(__WIN32__) || defined(_MSC_VER)
+			DWORD timeout = SOCKET_TIMEOUT_SEC * 1000;
+			if (setsockopt(sock_fd, SOL_SOCKET, SO_RCVTIMEO, (const char *)&timeout, sizeof(timeout)) < 0)
+			{
+				iRes = getSocketErrorCode();
+				std::cerr << "setsockopt() failed with error " << iRes << std::endl;
+			}
+#else
+			struct timeval tv;
+			tv.tv_sec = SOCKET_TIMEOUT_SEC;
+			tv.tv_usec = 0;
+			if (setsockopt(sock_fd, SOL_SOCKET, SO_RCVTIMEO, (const char *)&tv, sizeof(tv)) < 0)
+			{
+				iRes = getSocketErrorCode();
+				std::cerr << "setsockopt() failed with error " << iRes << std::endl;
+			}
+#endif
 			// Bind it to the client w/optional desired source port
 			if (bind(sock_fd, (struct sockaddr *)&client_addr, sizeof(client_addr)) < 0)
 			{
@@ -213,11 +232,11 @@ int query_ntp_server(const char *hostname, int ntp_port, int src_port)
 						std::cerr << "recvfrom() failed with error " << iRes << std::endl;
 					}
 					else
-					{						
+					{
 						// Firstly, the "endianness" of txTm_s needs to be converted from the network's big-endian to the local host's one.
 						// txTm_s contains the number of seconds passed since 00:00:00 UTC Jan 1st 1900, as of when the packet left the NTP server.
 						packet.txTm_s = ntohl(packet.txTm_s);
-												
+
 						// The Unix epoch is the number of seconds since 00:00:00 UTC Jan 1st 1970,
 						// therefore we subtract 70 years worth of seconds from the time returned by the NTP server.
 						time_t txTm = (time_t)((uint64_t)packet.txTm_s - NTP_TIMESTAMP_DELTA);
@@ -233,7 +252,7 @@ int query_ntp_server(const char *hostname, int ntp_port, int src_port)
 			close(sock_fd);
 #endif
 		}
-	}	
+	}
 
 #if defined(_WIN32) || defined(__WIN32__) || defined(_MSC_VER)
 	WSACleanup();
@@ -287,7 +306,7 @@ int resolve_hostname(const char *hostname, int port)
 		{
 			server_addr.sin_port = htons(port);
 			if (connect(sock_fd, (struct sockaddr *)&server_addr, sizeof(server_addr)) < 0)
-			{				
+			{
 				iRes = getSocketErrorCode();
 				std::cout << "FAILED (errno=" << iRes << ")" << std::endl;
 			}
@@ -317,7 +336,7 @@ int main(int argc, char **argv)
 	{
 		std::cout << "Querying required NTP servers..." << std::endl;
 		for (int i = 0; *ntpServers[i]; i++)
-		{			
+		{
 			query_ntp_server(ntpServers[i], NTP_PORT, NTP_PORT_OUT);
 		}
 
