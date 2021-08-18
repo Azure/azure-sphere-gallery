@@ -1,7 +1,8 @@
 ﻿{
   "environments": [
     {
-      "environment": "AzureSphere"
+      "environment": "AzureSphere",
+      "BuildAllBuildsAllRoots": "true"
     }
   ],
   "configurations": [
@@ -20,7 +21,7 @@
       "variables": [
         {
           "name": "AZURE_SPHERE_TARGET_API_SET",
-          "value": "7"
+          "value": "latest-lts"
         }
       ]
     },
@@ -39,7 +40,7 @@
       "variables": [
         {
           "name": "AZURE_SPHERE_TARGET_API_SET",
-          "value": "7"
+          "value": "latest-lts"
         }
       ]
     }
