@@ -59,19 +59,23 @@ To build and run this app, follow the instructions in [Build a high-level applic
 ### Testing the app
 When you run the application, towards the very end, it should displays a summary section in this format:
 
-        Index:  0
-        Name:   prod end-point name
-        IPv4:   ###.###.###.###
-        Alias:  alias
-       
-       ...... 
+      Index:  0
+      Name:   prod end-point name
+      IPv4:   ###.###.###.###
+      Alias:  alias
 
-        Custom NTP Time Server Sync list:
-        Index: 0, Name: ###.###.###.###, UTC time before sync: t1, after sync: t2
+      ...... 
+
+      Custom NTP Time Server Sync list:
+      Index: 0, Name: ###.###.###.###, UTC time before sync: t1, after sync: t2
 
       ......
 
-**Note**: issues connecting to 40.81.188.85 are expected when using a commercial ISP in the U.S.. In case this happens, it does not represent a problem as far as at least one NTP server can be reached and replies with the correct time-sync.
+**Note**: issues connecting to 40.81.188.85 are expected when using a commercial ISP in the U.S.. In case this happens, it does not represent a problem as far as at least one NTP server can be reached and replies with the correct time-sync. There will be no specific error shown, but the failure can bee seen from the Device Output console, where the time-sync will come from a secondary NTP server rather than the primary one, i.e.:
+
+      INFO: Primary Server: 40.81.188.85
+      INFO: Fallback Server NTP Option: 1
+      EVENT: Successfully time synced to server prod.time.sphere.azure.net
 
 ## Next steps
 
