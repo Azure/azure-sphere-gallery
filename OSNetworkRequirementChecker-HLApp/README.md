@@ -71,6 +71,8 @@ When you run the application, towards the very end, it should displays a summary
 
       ......
 
+**Note**: issues connecting to 40.81.188.85 are expected when using a commercial ISP in the U.S.. In case this happens, it does not represent a problem as far as at least one NTP server can be reached and replies with the correct time-sync.
+
 ## Next steps
 
 ### Project expectations
