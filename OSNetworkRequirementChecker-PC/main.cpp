@@ -26,9 +26,11 @@ const char *const ntpServers[] =
 	"time.sphere.azure.net",
 	"prod.time.sphere.azure.net",
 
-	"13.86.101.172",  "20.43.94.199",   "20.189.79.72",
-	"40.81.94.65",    "40.81.188.85",   "40.119.6.228",
-	"51.105.208.173", "51.137.137.111", "51.145.123.29",
+	"168.61.215.74",
+	"20.43.94.199", "20.189.79.72",
+	"40.81.94.65", "40.81.188.85", "40.119.6.228", "40.119.148.38",
+	"20.101.57.9",
+	"51.137.137.111", "51.145.123.29",
 	"52.148.114.188", "52.231.114.183",
 
 	// Termination element
@@ -137,6 +139,9 @@ int query_ntp_server(const char *hostname, int ntp_port, int src_port)
 	packet.mode = 3;	// Client Mode
 
 
+	// Log the requested hostname.
+	std::cout << "- time from " << hostname;
+
 #if defined(_WIN32) || defined(__WIN32__) || defined(_MSC_VER)
 	WSADATA wsaData;
 	if (WSAStartup(MAKEWORD(2, 2), &wsaData) != 0)
@@ -154,7 +159,7 @@ int query_ntp_server(const char *hostname, int ntp_port, int src_port)
 	if (server == NULL)
 	{
 		iRes = getSocketErrorCode();
-		std::cerr << "gethostbyname() error " << iRes << std::endl;
+		std::cerr << "<???> --> gethostbyname() error " << iRes << std::endl;
 	}
 	else
 	{
@@ -166,6 +171,9 @@ int query_ntp_server(const char *hostname, int ntp_port, int src_port)
 		server_addr.sin_port = htons(ntp_port);
 		char server_ip_addr[INET_ADDRSTRLEN];
 		sprintf(server_ip_addr, "%s", inet_ntoa(*((struct in_addr *)server->h_addr)));
+
+		// Log the resolved IP address.
+		std::cout << "<" << server_ip_addr << "> --> ";
 
 		// Setup the source address (for source port customization)
 		struct sockaddr_in client_addr;
@@ -242,7 +250,7 @@ int query_ntp_server(const char *hostname, int ntp_port, int src_port)
 						time_t txTm = (time_t)((uint64_t)packet.txTm_s - NTP_TIMESTAMP_DELTA);
 
 						// Print the time we got from the NTP server, accounting the local timezone and conversion from UTC time.
-						std::cout << "- time from " << hostname << "<" << server_ip_addr << "> --> " << ctime((const time_t *)&txTm);
+						std::cout << ctime((const time_t *)&txTm);
 					}
 				}
 			}
