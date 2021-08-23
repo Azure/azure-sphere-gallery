@@ -19,7 +19,7 @@ int ntpIndex = 0;
 int ntpRetryCounter = 0;
 
 const char *secondaryNtpServer = NULL;
-Networking_NtpOption fallbackServerNtpOption = Networking_NtpOption_FallbackServerEnabled;
+Networking_NtpOption fallbackServerNtpOption = Networking_NtpOption_FallbackServerDisabled;
 
 bool networkReady = false;
 EventLoopTimer *ntpSyncStatusTimer = NULL;
