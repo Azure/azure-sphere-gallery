@@ -8,10 +8,10 @@
 #define NTP_SERVER_LEN 256
 
 // List of time server to be tested
-const char *NTPServerList[] = {"13.86.101.172",  "20.43.94.199",   "20.189.79.72",
-                               "40.81.94.65",    "40.81.188.85",   "40.119.6.228",
-                               "51.105.208.173", "51.137.137.111", "51.145.123.29",
-                               "52.148.114.188", "52.231.114.183"};
+const char *NTPServerList[] = { "168.61.215.74", "20.43.94.199", "20.189.79.72",
+                                "40.81.94.65", "40.81.188.85", "40.119.6.228", "40.119.148.38",
+                                "20.101.57.9", "51.137.137.111", "51.145.123.29",
+                                "52.148.114.188", "52.231.114.183"};
 const unsigned int NTPServerListLen = 11;
 char **timeBeforeSyncList = NULL;
 char **timeAfterSyncList = NULL;
@@ -19,7 +19,7 @@ int ntpIndex = 0;
 int ntpRetryCounter = 0;
 
 const char *secondaryNtpServer = NULL;
-Networking_NtpOption fallbackServerNtpOption = Networking_NtpOption_FallbackServerEnabled;
+Networking_NtpOption fallbackServerNtpOption = Networking_NtpOption_FallbackServerDisabled;
 
 bool networkReady = false;
 EventLoopTimer *ntpSyncStatusTimer = NULL;

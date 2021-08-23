@@ -1,3 +1,4 @@
 # Ignore output directories
+.vs/
 /out/
 /build/
