@@ -24,3 +24,6 @@
 [submodule "LittleFs_SDCard/src/AzureSphere/SDCard_RealTimeApp/lib"]
 	path = LittleFs_SDCard/src/AzureSphere/SDCard_RealTimeApp/lib
 	url = https://github.com/CodethinkLabs/mt3620-m4-drivers.git
+[submodule "RS485Driver/RTApp/lib"]
+	path = RS485Driver/RTApp/lib
+	url = https://github.com/CodethinkLabs/mt3620-m4-drivers.git
