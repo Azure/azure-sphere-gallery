@@ -149,8 +149,8 @@ static ExitCode InitHandlers(void)
 		return ExitCode_Init_EventLoop;
 	}
 
-	// Register a 4sec timer to send a message to the real-time RS-485 driver (RTApp).
-	static const struct timespec sendPeriod = { .tv_sec = 4, .tv_nsec = 0 };
+	// Register a one-second timer to send a message to the real-time RS-485 driver (RTApp).
+	static const struct timespec sendPeriod = { .tv_sec = 1, .tv_nsec = 0 };
 	sendTimer = CreateEventLoopPeriodicTimer(eventLoop, &SendTimerEventHandler, &sendPeriod);
 	if (sendTimer == NULL) {
 		return ExitCode_Init_SendTimer;

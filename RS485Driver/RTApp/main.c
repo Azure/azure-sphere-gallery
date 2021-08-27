@@ -15,6 +15,7 @@
 #include "lib/NVIC.h"
 #include "lib/Print.h"
 
+#include "..\common_defs.h"
 #include "Socket.h"
 #include "ringBuffer.h"
 #include "rs485_driver.h"
@@ -266,7 +267,7 @@ _Noreturn void RTCoreMain(void)
 			UART_Printf(debug, "ERROR: GPT_SetMode failed %ld\r\n", error);
 		}
 		if ((error = GPT_StartTimeout(
-			sendTimer, 1, GPT_UNITS_SECOND,
+			sendTimer, RTDRV_SEND_DELAY_MSEC, GPT_UNITS_MILLISEC,
 			handleSendMsgTimerWrapper)) != ERROR_NONE) {
 			UART_Printf(debug, "ERROR: GPT_StartTimeout failed %ld\r\n", error);
 		}

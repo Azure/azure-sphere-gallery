@@ -101,6 +101,11 @@ The following diagram shows how to connect all the devices listed in the [Prereq
     // This is the maximum message size that the HLApp can send
     // to the RS-485 RTApp driver. This header is used by both Apps.
     #define MAX_HLAPP_MESSAGE_SIZE	64
+
+    // This is essentially the buffering time (in milliseconds),
+    // after which the real-time RS485 driver will send out 
+    // any received bytes to the HLApp.
+    #define RTDRV_SEND_DELAY_MSEC	10
     ```
 2. Configure the driver defines in `rs485_driver.h` to match your hardware setup (i.e. the below values match what illustrated in the [Wiring diagram](###Wiring-diagram)):
     ```c
@@ -174,7 +179,7 @@ If you're running the sample from the command line you will need to build and ru
 
 ## Example
 
-Once every 3 seconds, the high-level application sends a message to the RS-485 driver to request in turn:
+Once every second, the high-level application sends a message to the RS-485 driver to request in turn:
 
 - a baudrate change
 - a temperature reading
