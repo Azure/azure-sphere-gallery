@@ -105,6 +105,8 @@ The following diagram shows how to connect all the devices listed in the [Prereq
     // This is essentially the buffering time (in milliseconds),
     // after which the real-time RS485 driver will send out 
     // any received bytes to the HLApp.
+    // Bytes are any ways sent in case the received amount
+    // overflows DRIVER_MAX_RX_BUFFER_FILL_SIZE (defined in rs485_driver.h).
     #define RTDRV_SEND_DELAY_MSEC	10
     ```
 2. Configure the driver defines in `rs485_driver.h` to match your hardware setup (i.e. the below values match what illustrated in the [Wiring diagram](###Wiring-diagram)):
@@ -112,10 +114,11 @@ The following diagram shows how to connect all the devices listed in the [Prereq
     //////////////////////////////////////////////////////////////////////////////////
     // GLOBAL VARIABLES
     //////////////////////////////////////////////////////////////////////////////////
-    #define DRIVER_ISU                 MT3620_UNIT_ISU0
-    #define DRIVER_ISU_DEFAULT_BAURATE 9600
-    #define DRIVER_DE_GPIO             42
-    #define DRIVER_MAX_RX_BUFFER_SIZE  2000
+    #define DRIVER_ISU                      MT3620_UNIT_ISU0
+    #define DRIVER_ISU_DEFAULT_BAURATE      9600
+    #define DRIVER_DE_GPIO                  42
+    #define DRIVER_MAX_RX_BUFFER_SIZE		2048
+    #define DRIVER_MAX_RX_BUFFER_FILL_SIZE  2000
     ```
 3. Comment/uncomment the `DEBUG_INFO` definition in `RTApp\main.c`, wither or not the App is ready for production (for saving MCU cycles):
       ```c

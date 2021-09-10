@@ -13,10 +13,11 @@
 //////////////////////////////////////////////////////////////////////////////////
 // GLOBAL VARIABLES
 //////////////////////////////////////////////////////////////////////////////////
-#define DRIVER_ISU                 MT3620_UNIT_ISU0
-#define DRIVER_ISU_DEFAULT_BAURATE 9600
-#define DRIVER_DE_GPIO             42
-#define DRIVER_MAX_RX_BUFFER_SIZE  2000
+#define DRIVER_ISU						MT3620_UNIT_ISU0
+#define DRIVER_ISU_DEFAULT_BAURATE		9600
+#define DRIVER_DE_GPIO					42
+#define DRIVER_MAX_RX_BUFFER_SIZE		2048
+#define DRIVER_MAX_RX_BUFFER_FILL_SIZE  2000
 
 extern ringBuffer_t rs485_rxRingBuffer;
 

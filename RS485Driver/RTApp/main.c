@@ -164,7 +164,7 @@ static void handleRecvMsgWrapper(Socket *handle)
 	EnqueueCallback(&cbn);
 }
 
-// Handlers for messages to be sent to the HLApp
+// Handler for messages to be sent to the HLApp
 static void handleSendMsgTimer(void *data)
 {
 	// Dequeue the bytes to be sent to the HLApp
@@ -198,7 +198,8 @@ static void handleSendMsgTimer(void *data)
 }
 static void handleSendMsgTimerWrapper(GPT *timer)
 {
-	(void)(timer);
+	if (NULL != timer)
+		(void)(timer);
 
 	static CallbackNode cbn = { .enqueued = false, .cb_void = NULL, .cb_void_ptr = handleSendMsgTimer, .data = NULL };
 	EnqueueCallback(&cbn);
@@ -231,7 +232,14 @@ static void HandleUartRxIrqDeferred(void)
 	UART_Printf(debug, "\r\n");
 #endif
 
-	// Enqueue the received bytes in the ring buffer, to be sent to the HLApp upon GPT interrupts    .
+	// If the RX buffer overflows the desired limit, immediately send the bytes to the HLApp
+	// so to lower chances of losing bytes from the serial port in between GPT interrupts.
+	if (ring_buffer_count(&rs485_rxRingBuffer) > DRIVER_MAX_RX_BUFFER_FILL_SIZE)
+	{
+		handleSendMsgTimerWrapper(NULL);
+	}
+
+	// Enqueue the received bytes in the ring buffer, to be sent to the HLApp upon GPT interrupts.
 	if (ring_buffer_push_bytes(&rs485_rxRingBuffer, buffer, avail) == -1)
 	{
 		UART_Print(debug, "Message from UART LOST (rs485_rxRingBuffer overflow)!! ");
