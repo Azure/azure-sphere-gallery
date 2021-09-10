@@ -1,0 +1,10 @@
+{
+  "SchemaVersion": 1,
+  "Name": "RS-485 HighLevelApp",
+  "ComponentId": "96ACA524-8113-4171-9C76-6FBDBB441131",
+  "EntryPoint": "/bin/app",
+  "Capabilities": {
+    "AllowedApplicationConnections": [ "1CCE66F1-28E9-4DA4-AD25-D247FD362DE7" ]
+  },
+  "ApplicationType": "Default"
+}
