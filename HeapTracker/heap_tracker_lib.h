@@ -6,15 +6,31 @@
 #include <stdio.h>
 
 //////////////////////////////////////////////////////////////////////////////////
-// GLOBAL VARIABLES
+// GLOBAL VARIABLES & DEFINES
 //////////////////////////////////////////////////////////////////////////////////
-#define DEBUG_LOGS_ON	1				// Enables(1)/Disables(0) verbose loggging.
-extern const size_t		heap_threshold;	// Sets a reference allocation threshold (in bytes) after which the library will log warnings.
-extern volatile ssize_t	heap_allocated;	// Currently allocated heap (in bytes).
+#define ENABLE_DEBUG_VERBOSE_LOGS				1	// Enables(1)/Disables(0) verbose logging.
+#define ENABLE_THREAD_SAFETY					1	// Enables(1)/Disables(0) thread safety.
+#define ENABLE_POINTER_TRACKING                 1	// Enables(1)/Disables(0) pointer tracking.
+#define POINTER_TRACK_INC						50	// Defines the growth size (in # of elements) for the internal pointer tracking array, 
+													// once the number of allocated pointers overflows the current array size.
+extern const size_t		heap_threshold;				// Sets a reference allocation threshold (in bytes) after which the library will log warnings.
+extern volatile ssize_t	heap_allocated;				// Currently allocated heap (in bytes).
+
 
 //////////////////////////////////////////////////////////////////////////////////
-// Heap-tracking free and realloc function
+// Heap-tracker initialization function
 //////////////////////////////////////////////////////////////////////////////////
+
+/// <summary>
+///		Heap-Tracker initialization function. Must be called before any memory function is used.
+/// </summary>
+/// <param name="">none</param>
+void heap_track_init(void);
+
+#if !ENABLE_POINTER_TRACKING
+////////////////////////////////////////////////////////////////////////////////////
+// Heap-tracking free and realloc functions (when pointer tracking is disabled)
+////////////////////////////////////////////////////////////////////////////////////
 
 /// <summary>
 ///		A custom heap-tracking free() wrapper.
@@ -38,3 +54,4 @@ void _free(void *ptr, size_t size);
 ///		On failure, it returns NULL.
 /// </returns>
 void *_realloc(void *ptr, size_t old_size, size_t new_size);
+#endif // ENABLE_POINTER_TRACKING

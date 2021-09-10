@@ -29,11 +29,20 @@ size_t consumeHeap_malloc(void)
         ptr = malloc(allocated);
         if (heap_allocated > heap_threshold)
         {
+#if ENABLE_POINTER_TRACKING
+            free(ptr);
+#else
             _free(ptr, allocated);
+#endif // ENABLE_POINTER_TRACKING
+            
             break;
         }
 
+#if ENABLE_POINTER_TRACKING
+        free(ptr);
+#else
         _free(ptr, allocated);
+#endif // ENABLE_POINTER_TRACKING
     }
 
     Log_Debug("consumeHeap_malloc --> Currently available heap up to given heap_threshold: %zuKb (%zu bytes)\n", allocated / block_sz, allocated);
@@ -51,13 +60,28 @@ size_t consumeHeap_realloc(void)
 
     while (true)
     {
+        
+#if ENABLE_POINTER_TRACKING
+        new_ptr = realloc(ptr, allocated + block_sz);
+#else
         new_ptr = _realloc(ptr, allocated, allocated + block_sz);
+#endif // ENABLE_POINTER_TRACKING
+
         if (heap_allocated > heap_threshold)
         {
             if (new_ptr)
+                
+#if ENABLE_POINTER_TRACKING
+                free(new_ptr);
+#else
                 _free(new_ptr, allocated + block_sz);
+#endif // ENABLE_POINTER_TRACKING
             else
+#if ENABLE_POINTER_TRACKING
+                free(ptr);
+#else
                 _free(ptr, allocated);
+#endif // ENABLE_POINTER_TRACKING
 
             break;
         }
@@ -77,9 +101,10 @@ int main(void)
 
     const struct timespec sleepTime = {.tv_sec = 5, .tv_nsec = 0};
 
+    heap_track_init();
     while (true) {
 
-#if (1)
+#if (0)
         consumeHeap_malloc();
 #else
         consumeHeap_realloc();
