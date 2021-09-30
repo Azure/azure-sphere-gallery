@@ -46,7 +46,7 @@ add_compile_definitions(PC_HOST_IP="YOUR_PC_IP_ADDRESS")
 
 `AzureIoT/common/main.c` - The AzureIoT sample uses the `telemetryUploadEnabled` boolean to define whether telemetry will be uploaded or not, the sample has been extended to store telemetry in the simple file system when telemetryUploadEnabled == false. 
 
-The original AzureIoT sample uses a 5 second tick to generate telemetry, the tick has been modified to be 1 second. Every five seconds new telemetry will be generated - if there are no stored telemetry items and telemetryUploadEnabled is true the new telemetry will be uploaded, if there are existing stored telemetry items the new telemetry will be written to the simple file system (this preserves date/time order of uploaded telemetry). For the other four seconds stored telemetry will be uploaded if telemetryUploadEnabled is true. 
+The original AzureIoT sample uses a 5 second tick to generate telemetry, the tick has been modified to be 1 second. Every fifth tick new telemetry will be generated - if there are no stored telemetry items and telemetryUploadEnabled is true the new telemetry will be uploaded, if there are existing stored telemetry items the new telemetry will be written to the simple file system (this preserves date/time order of uploaded telemetry). For the other four seconds stored telemetry will be uploaded if telemetryUploadEnabled is true. 
 
 The project uploads stored telemetry over time rather than uploading all stored data when telemetryUploadEnabled is true. This approach may not be suitable for your specific application, you should adapt the upload model to suit your needs.
 
