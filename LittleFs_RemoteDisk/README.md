@@ -123,6 +123,6 @@ or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any addi
 
 ## License
 
-See [LICENSE.txt](./LICENCE.txt)
+See [LICENSE.txt](./LICENSE.txt)
 
 Littlefs is included via a submodule. The license for Littlefs can be [found here](https://github.com/littlefs-project/littlefs/blob/master/LICENSE.md).

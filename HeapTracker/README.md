@@ -153,4 +153,5 @@ or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any addi
 
 ## License
 
-For information about the licenses that apply to this library, see [LICENSE.txt](./LICENCE.txt)
+For information about the licenses that apply to this library, see [LICENSE.txt](./LICENSE.txt)
+
