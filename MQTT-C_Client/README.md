@@ -103,7 +103,7 @@ For more information see the [Code of Conduct FAQ](https://opensource.microsoft.
 
 ## License
 
-See [LICENSE.txt](./LICENCE.txt)
+See [LICENSE.txt](./LICENSE.txt)
 
 - MQTT-C is included via a submodule. The license for MQTT-C can be [found here](https://github.com/LiamBindle/MQTT-C/blob/master/LICENSE).
 - AzureSphereDevX is include via a submodule. The license for AzureSphereDevX can be [found here](https://github.com/gloveboxes/AzureSphereDevX/blob/main/LICENSE).

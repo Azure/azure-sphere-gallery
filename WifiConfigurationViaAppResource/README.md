@@ -69,6 +69,6 @@ or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any addi
 
 ## License
 
-See [LICENSE.txt](./LICENCE.txt)
+See [LICENSE.txt](./LICENSE.txt)
 
 This project builds on open source components, these are listed in [ThirdPartyNotices.txt](./ThirdPartyNotices.txt)

@@ -18,7 +18,7 @@ You should have at least one [Azure Sphere tenant](https://docs.microsoft.com/en
 
 DeviceTenantFinder is a console application, the application takes one command line argument `device id`, which can be obtained using the Azure Sphere CLI command `azsphere dev show-attached`.
 
-* Build and run the [DeviceTenantFinder](./DeviceTenantFinder) application on your PC
+* Build and run the `DeviceTenantFinder` application on your PC
 
 You will be prompted to login using your Azure Sphere tenant credentials
 
@@ -62,4 +62,4 @@ or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any addi
 
 ## License
 
-See [LICENSE.txt](./LICENCE.txt)
+See [LICENSE.txt](./LICENSE.txt)
