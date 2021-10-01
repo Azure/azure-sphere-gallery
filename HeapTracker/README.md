@@ -53,13 +53,13 @@ The library uses the following Azure Sphere libraries.
     //////////////////////////////////////////////////////////////////////////////////
     // GLOBAL VARIABLES
     //////////////////////////////////////////////////////////////////////////////////
-    #define ENABLE_DEBUG_VERBOSE_LOGS				1	// Enables(1)/Disables(0) verbose logging.
-    #define ENABLE_THREAD_SAFETY					1	// Enables(1)/Disables(0) thread safety.
-    #define ENABLE_POINTER_TRACKING	                1	// Enables(1)/Disables(0) pointer tracking.
-    #define POINTER_TRACK_INC						50	// Defines the growth size (in # of elements) for the internal pointer tracking array, 
+    #define ENABLE_DEBUG_VERBOSE_LOGS               1   // Enables(1)/Disables(0) verbose logging.
+    #define ENABLE_THREAD_SAFETY                    1   // Enables(1)/Disables(0) thread safety.
+    #define ENABLE_POINTER_TRACKING                 1   // Enables(1)/Disables(0) pointer tracking.
+    #define POINTER_TRACK_INC                       50  // Defines the growth size (in # of elements) for the internal pointer tracking array, 
                                                         // once the number of allocated pointers overflows the current array size.
-    extern const size_t		heap_threshold;				// Sets a reference allocation threshold (in bytes) after which the library will log warnings.
-    extern volatile ssize_t	heap_allocated;				// Currently allocated heap (in bytes).
+    extern const size_t		heap_threshold;             // Sets a reference allocation threshold (in bytes) after which the library will log warnings.
+    extern volatile ssize_t	heap_allocated;             // Currently allocated heap (in bytes).
     ```
 
 3. In the library's implementation file `heap_tracker_lib.c`, define an initial value for the `heap_threshold` constant. Please refer to [Memory available on Azure Sphere](https://docs.microsoft.com/en-us/azure-sphere/app-development/mt3620-memory-available) for more information on memory availability for High-level applications.
@@ -153,4 +153,4 @@ or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any addi
 
 ## License
 
-For information about the licenses that apply to this library, see [LICENSE.txt](./LICENCE.txt)
+For information about the licenses that apply to this library, see [LICENSE.txt](./LICENSE.txt)
