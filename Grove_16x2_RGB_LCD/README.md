@@ -60,4 +60,4 @@ or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any addi
 
 ## License
 
-See [LICENSE.txt](./LICENCE.txt)
+See [LICENSE.txt](./LICENSE.txt)

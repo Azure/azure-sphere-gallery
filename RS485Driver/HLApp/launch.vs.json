@@ -1,0 +1,14 @@
+{
+  "version": "0.2.1",
+  "configurations": [
+    {
+      "type": "azurespheredbg",
+      "name": "RS-485 App (HLCore)",
+      "project": "CMakeLists.txt",
+      "workingDirectory": "${workspaceRoot}",
+      "applicationPath": "${debugInfo.target}",
+      "imagePath": "${debugInfo.targetImage}",
+      "partnerComponents": [ "1CCE66F1-28E9-4DA4-AD25-D247FD362DE7" ]
+    }
+  ]
+}
