@@ -1,5 +1,5 @@
 ﻿/***************************************************************************************
-	This is an EAP-TLS Client reference solution for Azure Sphere-based devices.
+	This is an EAP-TLS Client library & demo solution for Azure Sphere-based devices.
 	The App will continuously attempt to establish and maintain the connection
 	to the configured RADIUS network, by leveraging the eap_tls_lib client library.
 ***************************************************************************************/
@@ -21,7 +21,7 @@
 
 
 // Global conditional compiling sections
-#define RUN_TESTS					// Run test cases in test.c
+#define RUN_TESTS					// Run test cases in tests.c
 #define START_FROM_CLEAN_DEVICE		// This is for testing zero-touch provisioning (when not running tests)
 
 // Conditional includes

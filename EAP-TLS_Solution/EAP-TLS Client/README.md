@@ -22,8 +22,8 @@ It comprises an HL-App and a specifically-designed EAP-TLS library that fully ma
 | \lib\eap_tls_lib.c    | Implementation source file for the EAP-TLS library. |
 | \lib\web_api_client.h    | Header source file for the Web API client library. |
 | \lib\web_api_client.c    | Implementation source file for the Web API client library. |
-| \tests\test.h    | Header source file for the client library Test suite. |
-| \tests\test.c    | Implementation source file for the client library Test suite. |
+| \tests\tests.h    | Header source file for the client library Test suite. |
+| \tests\tests.c    | Implementation source file for the client library Test suite. |
 | README.md | This readme file. |
 
 
@@ -65,11 +65,11 @@ Before its usage, the client solution needs a few configuration steps to be exec
     #define USE_CLIENT_CERT_PRIVATE_KEY_PASS_FROM_WEBAPI
     ```
 
-2. Enable running the full API tests by uncommenting, in [mainc.c](.\main.c), the following preprocessor definitions, which include if the device needs to be completely reset (i.e. in order to simulate zero-touch provision scenarios):
+2. Enable running the full API tests by uncommenting, in [main.c](.\main.c), the following preprocessor definitions, which include if the device needs to be completely reset (i.e. in order to simulate zero-touch provision scenarios):
 
     ```c
     // Global conditional compiling sections
-    #define RUN_TESTS                // Run test cases in test.c
+    #define RUN_TESTS                // Run test cases in tests.c
     #define START_FROM_CLEAN_DEVICE  // This is for testing zero-touch provisioning (when not running tests)
     ```
 
@@ -104,7 +104,7 @@ Before its usage, the client solution needs a few configuration steps to be exec
     #
     **NOTE**: all the above certificate names refer to the sample certificates described in the in [Prerequisites](#Prerequisites) section above.
 
-5. In [tests\test.c](.\tests\test.c), modify the following constant definitions to reflect your network/certificates setup, as described in the [Prerequisites](#Prerequisites) section above:
+5. In [tests\tests.c](.\tests\test.c), modify the following constant definitions to reflect your network/certificates setup, as described in the [Prerequisites](#Prerequisites) section above:
 
     |Variable|Purpose|
     |-|-|

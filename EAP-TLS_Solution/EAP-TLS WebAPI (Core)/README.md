@@ -22,7 +22,7 @@ Make sure to:
   - The WebAPI's private certificate, in PFX format (i.e. `eap-tls-webapi.pfx`).
   - The RADIUS public RootCA certificate, in PEM format (i.e. `az-CA.pem`).
   - The RADIUS public Client certificate and related private key, both in PEM format (i.e. `iotuser_public.pem`).
-- In order for the DAA process to succeed, on the machine in which the WebAPI will be running, you must download and register (*) the public certificate of the AS3 Tenant into which the Azure Sphere device was claimed in:
+- In order for the DAA process to succeed, on the machine in which the WebAPI will be running, you must download and register (*) the public certificate of the AS3 Tenant in which the Azure Sphere device was claimed in:
 
     ```cmd
     azsphere tenant download-ca-certificate-chain --output CA-cert-chain.p7b
