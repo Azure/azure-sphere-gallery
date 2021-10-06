@@ -9,7 +9,7 @@ For maintained samples and designs, see the official Azure Sphere Samples and Az
 
 ## Using the samples and designs
 
-See the [Azure Sphere Getting Started](https://www.microsoft.com/en-us/azure-sphere/get-started) for background on Azure Sphere.
+See the [Azure Sphere Getting Started](https://www.microsoft.com/en-us/azure-sphere/get-started) page for background on Azure Sphere.
 
 Each sample/hardware design will include instructions in the readme for any system requirements, maintenance expectations, who to contact for support, and the amount of testing completed.
 
