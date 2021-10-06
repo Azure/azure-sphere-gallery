@@ -1,0 +1,8 @@
+/.vs
+/obj
+/bin
+/packages/*
+/*.user
+
+# Typically, certificates should not be checked in for security reasons
+/**/*.pem

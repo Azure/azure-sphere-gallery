@@ -1,0 +1,18 @@
+{
+  "SchemaVersion": 1,
+  "Name": "EAP-TLS Client",
+  "ComponentId": "011b3254-6b4e-4af1-bc81-22e7f677f4bf",
+  "EntryPoint": "/bin/app",
+  "CmdArgs": [],
+  "Capabilities": {
+    "DeviceAuthentication": "52fecdd6-5a57-4cd2-bea1-ec7fa1773c43",
+    "AllowedConnections": [ "global.azure-devices-provisioning.net", "azurecattenant.deviceauthority.com", "stage.deviceauthority.com", "51.140.152.91", "40.69.64.232", "192.168.0.2", "192.168.1.200" ],
+    "MutableStorage": { "SizeKB": 8 },
+    "TimeSyncConfig": true,
+    "CertStore": true,
+    "WifiConfig": true,
+    "EnterpriseWifiConfig": true,
+    "NetworkConfig": true
+  },
+  "ApplicationType": "Default"
+}

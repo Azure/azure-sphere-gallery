@@ -1,0 +1,7 @@
+/.vs
+/.vscode
+/packages
+/obj
+/bin
+/*.user
+/*.db
