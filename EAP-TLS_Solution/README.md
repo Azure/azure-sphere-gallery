@@ -7,12 +7,10 @@ The overall solution architecture is summarized in the following animated presen
 
 **Note**: all the (greyed-out) IT backend components are out of scope of this solution (i.e. CMS, IT Services, Directory, DB and CA).
 
-<span style="display:block;text-align:center">![EAP-TLS&#32;solution](.\EAP-TLS&#32;solution.gif)</span>
-
+<span style="display:block;text-align:center"><img src=".\EAP-TLS&#32;solution.gif" width="80%" style="border-radius:2%"></span>
 
 and the related network flow is represented in the following diagram:
 
-[](![EAP-TLS&#32;network&#32;flow](.\EAP-TLS&#32;network&#32;flow.png))
 <span style="display:block;text-align:center"><img src=".\EAP-TLS&#32;network&#32;flow.png" width="80%" style="border-radius:2%"></span>
 
 
