@@ -1,11 +1,10 @@
 # Ignore output directories
+/.vs
 /out/
 /install/
-/.vs
-/.vscode
 
 # Ignore passwords file
-_environment_config.c
+lib/_environment_config.c
 
 # Typically, certificates should not be checked in for security reasons
 /**/*.pem
