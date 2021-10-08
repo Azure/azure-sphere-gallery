@@ -7,19 +7,19 @@ The overall solution architecture is summarized in the following animated presen
 
 **Note**: all the (greyed-out) IT backend components are out of scope of this solution (i.e. CMS, IT Services, Directory, DB and CA).
 
-<span style="display:block;text-align:center"><img src=".\EAP-TLS&#32;solution.gif" width="80%" style="border-radius:2%"></span>
+<span style="display:block;text-align:center"><img src="./EAP-TLS&#32;solution.gif" width="80%" style="border-radius:2%"></span>
 
 and the related network flow is represented in the following diagram:
 
-<span style="display:block;text-align:center"><img src=".\EAP-TLS&#32;network&#32;flow.png" width="80%" style="border-radius:2%"></span>
+<span style="display:block;text-align:center"><img src="./EAP-TLS&#32;network&#32;flow.png" width="80%" style="border-radius:2%"></span>
 
 
 ## Prerequisites
 
 Please refer to the *Prerequisites* paragraph within each of the following  README.md files:
 
-- [WebAPI Server - README.md](.\EAP-TLS&#32;WebAPI&#32;(Core)\README.md)
-- [Azure Sphere EAP-TLS Client - README.md](.\EAP-TLS&#32;Client\README.md)
+- [EAP-TLS&#32;WebAPI&#32;(Core)/README.md](./EAP-TLS&#32;WebAPI&#32;(Core)/README.md)
+- [EAP-TLS&#32;Client/README.md](./EAP-TLS&#32;Client/README.md)
 
 ## Overview of the solution
 
@@ -92,4 +92,4 @@ or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any addi
 
 ## License
 
-For information about the licenses that apply to this solution, see [LICENSE.txt](.\LICENSE.txt)
+For information about the licenses that apply to this solution, see [LICENSE.txt](./LICENSE.txt)

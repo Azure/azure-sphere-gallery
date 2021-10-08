@@ -2,7 +2,7 @@
 /obj
 /bin
 /packages/*
-/*.user
+*.user
 
 # Typically, certificates should not be checked in for security reasons
 /**/*.pem

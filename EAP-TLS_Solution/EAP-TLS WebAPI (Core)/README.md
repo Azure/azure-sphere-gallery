@@ -5,7 +5,7 @@ This is an EAP-TLS WebAPI Server solution, developed on top of the [ASP.NET Core
 ## Prerequisites
 
 - The web server can be hosted on a dedicated machine, or self-hosted for easy development purposes. When self-hosted, the WebAPI's endpoint, `api/certs`, will be located at the Host machine's IP Address, typically on port 44378 (i.e. `https://192.168.0.2:44378/api/certs`, if the development Host machine's IP address is `192.168.0.2`).
-- The Host machine must be accessible from the devices that will be running the [Azure Sphere EAP-TLS&#32;Client](..\EAP-TLS&#32;Client) solution.
+- The Host machine must be accessible from the devices that will be running the [Azure Sphere EAP-TLS&#32;Client](../EAP-TLS&#32;Client) solution.
 - A test-WebAPI private certificate, in **PFX** format (i.e. `eap-tls-webapi.pfx`).
 - A test-RADIUS RootCA public certificate, in **PEM** format (i.e. `az-CA.pem`), for authenticating RADIUS Server.
 - A test-RADIUS Client private certificate, split in two different files, both in **PEM** format: the *public* portion (i.e. `iotuser_public.pem`) and the *private key* portion (i.e. `iotuser_private.pem`).
@@ -14,11 +14,11 @@ This is an EAP-TLS WebAPI Server solution, developed on top of the [ASP.NET Core
 
 ## Configuring the WebAPI Server
 
-For demo purposes, the WebAPI Server handles just one Client, while a full solution should rely on a proper CMS (Certificate Management System) to identify multiple incoming device IDs, and issue the corresponding certificates and identities. See the WebAPI's controller source code ([CertsController.cs](.\/Controllers/CertsController.cs)) for full details and recommendations within the comments.
+For demo purposes, the WebAPI Server handles just one Client, while a full solution should rely on a proper CMS (Certificate Management System) to identify multiple incoming device IDs, and issue the corresponding certificates and identities. See the WebAPI's controller source code ([Controllers\CertsController.cs](./Controllers/CertsController.cs)) for full details and recommendations within the comments.
 
 Make sure to:
 
-- Copy th following certificates in the [EAP-TLS&#32;WebAPI&#32;(Core)\certs](.\EAP-TLS&#32;WebAPI&#32;(Core)/certs) folder:
+- Copy the following certificates in the `EAP-TLS WebAPI (Core)\certs` folder:
   - The WebAPI's private certificate, in PFX format (i.e. `eap-tls-webapi.pfx`).
   - The RADIUS public RootCA certificate, in PEM format (i.e. `az-CA.pem`).
   - The RADIUS public Client certificate and related private key, both in PEM format (i.e. `iotuser_public.pem`).
@@ -30,7 +30,7 @@ Make sure to:
 
     (*) See [Installing the trusted root certificate](https://docs.microsoft.com/en-us/skype-sdk/sdn/articles/installing-the-trusted-root-certificate) for full instructions on how to install the resulting *CA-cert-chain.p7b* in your machine's *Current User/Trusted Certificate Authorities*.
 
-- Configure all the certificate file names, WiFi SSID, WebAPI's certificate password and client identity within the [appsettings.json](.\appsettings.json) configuration file:
+- Configure all the certificate file names, WiFi SSID, WebAPI's certificate password and client identity within the [appsettings.json](./appsettings.json) configuration file:
 
   ```json
   {
@@ -91,4 +91,4 @@ or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any addi
 
 ## License
 
-For information about the licenses that apply to this sample project, see [LICENSE.txt](..\LICENSE.txt)
+For information about the licenses that apply to this sample project, see [LICENSE.txt](../LICENSE.txt)
