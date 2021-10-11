@@ -166,6 +166,8 @@ The BUZZ Click piezo speaker alerts you when recorded CO2 levels are above the C
 
 The BUZZ Click is a Pulse Width Module (PWM) controlled peripheral. You control the tone by changing the PWM frequency and the volume by altering the PWM duty cycle. The piezo speaker is driven at a frequency of 5kHz, with a 1% duty cycle, for ten milliseconds. This combination produces a pip sound, enough to alert you without being too annoying.
 
+This oscilloscope screenshot shows the PWM signal generated to drive the piezo speaker.
+
 ![PWM control of BUZZ Click buzzer](media/buzz_click_pwm.png)
 
 ### The Sensirion SDC30 CO2 Sensor
@@ -774,4 +776,4 @@ See [LICENSE.txt](./LICENSE.txt)
 - AzureSphereDevX.HardwareDefinitions is include via a submodule. The license for AzureSphereDevX.HardwareDefinitions can be [found here](https://github.com/Azure-Sphere-DevX/AzureSphereDevX.HardwareDefinitions/blob/main/LICENSE).
 - AzureSphereDevX.Tools is include via a submodule. The license for AzureSphereDevX.Tools can be [found here](https://github.com/Azure-Sphere-DevX/AzureSphereDevX.Tools/blob/main/LICENSE).
 - AzureSphereDrivers is include via a submodule. The license for AzureSphereDrivers can be [found here](https://github.com/Azure-Sphere-DevX/AzureSphereDrivers/blob/master/LICENSE).
-- 
+-
