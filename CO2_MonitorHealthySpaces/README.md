@@ -2,7 +2,7 @@
 
 How to create a healthier living and working environment by monitoring CO2, temperature, and humidity levels with [Azure Sphere](https://azure.microsoft.com/en-gb/services/azure-sphere/?WT.mc_id=julyot-co2-dglover), and [Azure IoT Central](https://azure.microsoft.com/en-gb/services/iot-central/?WT.mc_id=julyot-co2-dglover).
 
-![](https://raw.githubusercontent.com/gloveboxes/CO2-levels-making-you-happy-grumpy-sleepy-or-sad/master/resources/banner.png)
+![The image shows a banner with CO2 data](media/banner.png)
 
 ---
 
@@ -166,7 +166,7 @@ The BUZZ Click piezo speaker alerts you when recorded CO2 levels are above the C
 
 The BUZZ Click is a Pulse Width Module (PWM) controlled peripheral. You control the tone by changing the PWM frequency and the volume by altering the PWM duty cycle. The piezo speaker is driven at a frequency of 5kHz, with a 1% duty cycle, for ten milliseconds. This combination produces a pip sound, enough to alert you without being too annoying.
 
-![PWM control of BUZZ Click buzzer](./media/buzz_click_pwm.png)
+![PWM control of BUZZ Click buzzer](media/buzz_click_pwm.png)
 
 ### The Sensirion SDC30 CO2 Sensor
 
@@ -390,22 +390,6 @@ Follow these steps to list the network endpoints of your IoT Central web applica
 1. Copy the output from the **ShowIoTCentralConfig** tool to Notepad, as you'll need this information soon.
 
 
-<!-- ---
-
-## Azure IoT Central Device Templates
-
-A device template is a blueprint that defines the characteristics and behaviors of a type of device that connects to an Azure IoT Central application.
-
-For more information on device templates, review the [Define a new IoT device type in your Azure IoT Central application](https://docs.microsoft.com/en-us/azure/iot-central/core/howto-set-up-template?WT.mc_id=julyot-co2-dglover) article.
-
-1. From Azure IoT Central, navigate to **Device templates**, and select the **Azure Sphere** template.
-2. Click on **Interfaces** to list the interface capabilities.
-3. Explore the IoT Central device template interfaces, properties, and views.
-
-![](https://raw.githubusercontent.com/gloveboxes/Track-CO2-levels-in-your-workspace-to-improve-health-wellbeing-and-productivity/master/resources/iot-central-device-template-display.png) -->
-
----
-
 ## Clone the CO2 monitor healthy spaces repo
 
 The CO2 healthy spaces solution is part of the [Azure Sphere Gallery](https://github.com/Azure/azure-sphere-gallery). Clone the Azure Sphere Gallery repository to your computer.
@@ -518,7 +502,7 @@ If you have an Avnet Starter Kit Rev 2 board, then follow these instructions.
 
 1. Select **CMake: [Debug]: Ready** from the Visual Studio Code Status Bar.
 
-    ![](https://raw.githubusercontent.com/gloveboxes/Track-CO2-levels-in-your-workspace-to-improve-health-wellbeing-and-productivity/master/resources/vs-code-start-application.png)
+    ![The image shows how to set build mode from the VS Code status bar](media/vs-code-start-application.png)
 
 1. From Visual Studio Code, press <kbd>F5</kbd> to build, deploy, and attached the debugger to the CO2 monitor application now running the Azure Sphere device.
 
@@ -673,7 +657,7 @@ The IoT Central "Deferred update status" property is updated every time **Deferr
 1. Open the CO2 Monitor solution in Visual Studio Code.
 1. Select **CMake: [Release]: Ready** from the Visual Studio Code Status Bar.
 
-    ![The image shows using VS Code to select release mode](https://raw.githubusercontent.com/gloveboxes/Track-CO2-levels-in-your-workspace-to-improve-health-wellbeing-and-productivity/master/resources/vs-code-start-application.png)
+    ![The image shows using VS Code to select release mode](media/vs-code-start-application.png)
 
 1. Select **Build**  from the Visual Studio Code Status Bar to build the project in release mode.
 1. From a command prompt, navigate to the **azure-sphere-gallery/CO2_MonitorHealthySpaces/src/out/ARM-Release** folder.
