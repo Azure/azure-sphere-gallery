@@ -84,7 +84,7 @@ The goal of the solution is also to demonstrate best practices for Azure Sphere 
     1. [Download device error reports](https://docs.microsoft.com/azure-sphere/deployment/interpret-error-data).
 1. IoT Plug and Play.
     1. An IoT Plug and Play CO2 monitor model has been published to the [public repository of IoT Plug and Play](https://github.com/Azure/iot-plugandplay-models) models.
-    1. When your device first connects to IoT Central, the IoT Plug and play model will be retrieved from the public repository of models. IoT Central will then create default views using the Plug and Play model.
+    1. When your device first connects to IoT Central, the IoT Plug and Play model will be retrieved from the public repository of models. IoT Central will then create default views using the Plug and Play model.
 
 > IoT Central is a cloud-based IoT solution built on Azure IoT Hub. IoT Central properties use IoT Hub Device Twins. IoT Central commands use IoT Hub direct methods.
 
