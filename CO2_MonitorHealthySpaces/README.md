@@ -6,6 +6,37 @@ How to create a healthier living and working environment by monitoring CO2, temp
 
 ---
 
+## Contents
+
+| Folder | Description |
+|-------------|-------------|
+| `src`       | Azure Sphere CO2 monitor code |
+| `README.md` | This README file. |
+| `LICENSE.txt`   | The license for the project. |
+
+### Project expectations
+
+The code has been developed to show how to create a Azure Sphere CO2 monitor and integrate with IoT Central -  It is not official, maintained, or production-ready code.
+
+### Expected support for the code
+
+This code is not formally maintained, but we will make a best effort to respond to/address any issues you encounter.
+
+### How to report an issue
+
+If you run into an issue with this code, please open a GitHub issue against this repo.
+
+## Contributing
+
+This project welcomes contributions and suggestions. Most contributions require you to agree to a Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us the rights to use your contribution. For details, visit https://cla.microsoft.com.
+
+When you submit a pull request, a CLA-bot will automatically determine whether you need to provide a CLA and decorate the PR appropriately (e.g., label, comment). Simply follow the instructions provided by the bot. You will only need to do this once across all repositories using our CLA.
+
+This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
+For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
+
+---
+
 ## Learning resources
 
 1. [Azure Sphere Documentation](https://docs.microsoft.com/azure-sphere/)
@@ -748,3 +779,15 @@ For production applications, remove this block and replace it with the following
     azsphere_configure_tools(TOOLS_REVISION "<YOUR_TOOLS_VERSION>")
     azsphere_configure_api(TARGET_API_SET "<THE_TARGET_API_SET_YOU_ARE_TESTING_AGAINST")
 ```
+
+---
+
+## License
+
+See [LICENSE.txt](./LICENSE.txt)
+
+- AzureSphereDevX is include via a submodule. The license for AzureSphereDevX can be [found here](https://github.com/Azure-Sphere-DevX/AzureSphereDevX/blob/master/LICENSE).
+- AzureSphereDevX.HardwareDefinitions is include via a submodule. The license for AzureSphereDevX.HardwareDefinitions can be [found here](https://github.com/Azure-Sphere-DevX/AzureSphereDevX.HardwareDefinitions/blob/main/LICENSE).
+- AzureSphereDevX.Tools is include via a submodule. The license for AzureSphereDevX.Tools can be [found here](https://github.com/Azure-Sphere-DevX/AzureSphereDevX.Tools/blob/main/LICENSE).
+- AzureSphereDrivers is include via a submodule. The license for AzureSphereDrivers can be [found here](https://github.com/Azure-Sphere-DevX/AzureSphereDrivers/blob/master/LICENSE).
+- 
