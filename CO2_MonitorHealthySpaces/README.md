@@ -40,6 +40,7 @@ These are the solution requirements:
 
 The goal of the solution is also to demonstrate best practices for Azure Sphere solutions. You will learn how to do the following:
 
+1. Set up Azure Sphere security.
 1. Publish telemetry to IoT Central.
 1. Update "device to cloud" properties for point in time reporting in IoT Central.
 1. IoT Central "cloud to device" properties to set CO2 "Buzzer" alert levels.
