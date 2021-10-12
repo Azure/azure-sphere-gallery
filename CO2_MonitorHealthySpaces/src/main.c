@@ -277,16 +277,22 @@ static void DeviceTwinGenericHandler(DX_DEVICE_TWIN_BINDING *deviceTwinBinding)
 static uint32_t DeferredUpdateCalculate(uint32_t max_deferral_time_in_minutes, SysEvent_UpdateType type, SysEvent_Status status,
                                         const char *typeDescription, const char *statusDescription)
 {
+    // UTC +10 is for Australia/Sydney.
+    // Set the time_zone_offset to your time zone offset.
+    const int time_zone_offset = 10;
+
+    //  Get UTC time
     time_t now = time(NULL);
     struct tm *t = gmtime(&now);
-    char utc[40];
-
-    // UTC +10 is good for Australia :)
-    t->tm_hour += 10;
+    
+    // Calculate UTC plus offset and normalize.
+    t->tm_hour += time_zone_offset;
     t->tm_hour = t->tm_hour % 24;
 
-    // If local time between 1am and 5am defer for zero minutes else defer for 15 minutes
+    // If local time is between 1 am and 5 am defer for zero minutes else defer for 15 minutes
     uint32_t requested_minutes = IN_RANGE(t->tm_hour, 1, 5) ? 0 : 15;
+
+    char utc[40];
 
     // Update defer requested device twin
     snprintf(msgBuffer, sizeof(msgBuffer), "Utc: %s, Type: %s, Status: %s, Max defer minutes: %i, Requested minutes: %i",

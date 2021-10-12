@@ -16,11 +16,11 @@ How to create a healthier living and working environment by monitoring CO2, temp
 
 ### Project expectations
 
-The code has been developed to show how to create a Azure Sphere CO2 monitor and integrate with IoT Central -  It is not official, maintained, or production-ready code.
+The code demonstrates how to create an Azure Sphere CO2 monitor and integrate it with IoT Central. It is not official, maintained, or production-ready code.
 
 ### Expected support for the code
 
-This code is not formally maintained, but we will make a best effort to respond to/address any issues you encounter.
+This code is not formally maintained, but we will do our best to respond and address issues you encounter.
 
 ### How to report an issue
 
@@ -51,7 +51,7 @@ When working from home, it's easy to close the door to shut out the noise of eve
 
 Check out "[Indoor carbon dioxide levels could be a health hazard, scientists warn](https://www.theguardian.com/environment/2019/jul/08/indoor-carbon-dioxide-levels-could-be-a-health-hazard-scientists-warn)".
 
-The problem is we cannot see or smell Carbon Dioxide, it just keeps building up, and we have no way of knowing it's happening other than getting tired or a headache. So, with that in mind, I figured it was the Internet of Things to the rescue!
+The problem is we cannot see or smell Carbon Dioxide, it keeps building up, and we have no way of knowing it's happening other than getting tired or a headache. So, with that in mind, I figured it was the Internet of Things to the rescue!
 
 ---
 
@@ -100,9 +100,9 @@ The goal of the solution is also to demonstrate best practices for Azure Sphere 
 
 ## Azure Sphere
 
-Azure Sphere is a general-purpose IoT platform that is secure by design and by default. You focus on your IoT application, and Azure Sphere looks after the ongoing security of the platform.
+Azure Sphere is a general-purpose IoT platform that is secure by design and by default. You focus on your IoT application, and Azure Sphere looks after ongoing platform security.
 
-Azure Sphere is made up of the following components:
+Azure Sphere consists of the following components:
 
 * **Azure Sphere–certified chips** from hardware partners include built-in Microsoft security technology to provide connectivity and a dependable hardware root of trust.
 * **Azure Sphere OS** adds layers of protection and ongoing security updates to create a trustworthy platform for new IoT experiences.
@@ -176,7 +176,7 @@ This oscilloscope screenshot shows the PWM signal generated to drive the piezo s
 
 Sensirion, the company that manufactures the SCD30 CO2 sensor in the [Seeed Studio Grove CO2 & Temperature & Humidity Sensor](https://www.seeedstudio.com/Grove-CO2-Temperature-Humidity-Sensor-SCD30-p-2911.html) makes it easy to port their drivers to different platforms, including Azure Sphere.
 
-It was just a matter of implementing the I2C init/read/write functions and a microsecond sleep function. The CO2 monitor project includes the ported driver. You can view the driver here [sensirion_hw_i2c_implementation.c](src/embedded-scd/embedded-common/hw_i2c/sensirion_hw_i2c_implementation.c)
+It was a matter of implementing the I2C init/read/write functions and a microsecond sleep function. The CO2 monitor project includes the ported driver. You can view the driver here [sensirion_hw_i2c_implementation.c](src/embedded-scd/embedded-common/hw_i2c/sensirion_hw_i2c_implementation.c)
 
 #### Calibrating the SCD30 sensor
 
@@ -186,7 +186,7 @@ When scd30 automatic self-calibration (ASC) is activated for the first time, the
 
 ### The Sensirion SDC41 CO2 Sensor
 
-The MikroE HVAC Click uses the Sensirion SDC41 CO2, Temperature, and humidity sensor. Sensirion, follow the same pattern for the [SDC41 driver](https://github.com/Sensirion/embedded-i2c-scd4x) as the SDC30 sensor, there is a HAL, and it's just a matter of implementing Azure Sphere I2C support. Calibration of the sensor is also required.
+The MikroE HVAC Click uses the Sensirion SDC41 CO2, Temperature, and humidity sensor. Sensirion, follow the same pattern for the [SDC41 driver](https://github.com/Sensirion/embedded-i2c-scd4x) as the SDC30 sensor, there is a HAL, and it's a matter of implementing Azure Sphere I2C support. Calibration of the sensor is also required.
 
 ![This image shows the MikroE HVAC click](media/hvac-click-thickbox_default-1.jpg)
 
@@ -198,7 +198,7 @@ The Avnet Azure Sphere starter kit has several onboard sensors, including temper
 
 So, with the CO2 sensor from Sensirion and the Avnet onboard sensors, there are sensors for carbon dioxide, temperature, humidity, pressure, and light.
 
-Drivers for the STM sensors on the Avnet starter kit follow the same pattern as drivers from Sensirion. You just need to implement I2C platform_read, platform_write, platform_init, and platform_delay. To review the driver implementation, refer to [imu_temp_pressure.c](src/AzureSphereDrivers/AVNET/HL/imu_temp_pressure.c)
+Drivers for the STM sensors on the Avnet starter kit follow the same pattern as drivers from Sensirion. You need to implement I2C platform_read, platform_write, platform_init, and platform_delay. To review the driver implementation, refer to [imu_temp_pressure.c](src/AzureSphereDrivers/AVNET/HL/imu_temp_pressure.c)
 
 ### Light sensor
 
@@ -605,16 +605,22 @@ You can't defer updates forever. For an OS update, the maximum deferral is 1440 
 static uint32_t DeferredUpdateCalculate(uint32_t max_deferral_time_in_minutes, SysEvent_UpdateType type, SysEvent_Status status,
                                         const char *typeDescription, const char *statusDescription)
 {
+    // UTC +10 is good for Australia.
+    // Update time_zone_offset to your time zone offset.
+    const int time_zone_offset = 10;
+
+    //  Get UTC time
     time_t now = time(NULL);
     struct tm *t = gmtime(&now);
-    char utc[40];
 
-    // UTC +10 is good for Australia :)
-    t->tm_hour += 10;
+    // Calculate UTC plus offset and normalize.
+    t->tm_hour += time_zone_offset;
     t->tm_hour = t->tm_hour % 24;
 
     // If local time between 1am and 5am defer for zero minutes else defer for 15 minutes
     uint32_t requested_minutes = IN_RANGE(t->tm_hour, 1, 5) ? 0 : 15;
+
+    char utc[40];
 
     // Update defer requested device twin
     snprintf(msgBuffer, sizeof(msgBuffer), "Utc: %s, Type: %s, Status: %s, Max defer minutes: %i, Requested minutes: %i",
@@ -626,11 +632,36 @@ static uint32_t DeferredUpdateCalculate(uint32_t max_deferral_time_in_minutes, S
 }
 ```
 
-The IoT Central "Deferred update status" property is updated every time **DeferredUpdateCalculate** is called. You can view the latest deferred update status from the IoT Central device **About** tab. Select the **expand** icon to expand the page view.
+---
 
-![](media/iot_central_about_tab.png)
+## Set your time zone
 
-### Prepare the device for Over-the-Air updates and Deferred updates
+1. **Open** the CO2 Monitor project in Visual Studio Code.
+1. Locate the **DeferredUpdateCalculate** function in **main.c**.
+1. **Update** the DeferredUpdateCalculate function with your time zone offset. The default time zone offset is 10 (Australian/Sydney AEST).
+
+    ```c
+    // UTC +10 is for Australia/Sydney.
+    // Set the time_zone_offset to your time zone offset.
+    const int time_zone_offset = 10;
+    ```
+
+1. Review the deferred update time. The default is between 1 am and 5 am.
+
+    ```c
+    // If local time is between 1 am and 5 am defer for zero minutes else defer for 15 minutes
+    uint32_t requested_minutes = IN_RANGE(t->tm_hour, 1, 5) ? 0 : 15;
+    ```
+
+1. Select **CMake: [Release]: Ready** from the Visual Studio Code Status Bar.
+
+    ![The image shows using VS Code to select release mode](media/vs-code-start-application.png)
+
+1. Select **Build** from the Visual Studio Code Status Bar to build the project in release mode.
+
+---
+
+## Enable deferred updates
 
 1. Delete the existing CO2 monitor application on your Azure Sphere. From the command prompt, run.
 
@@ -638,7 +669,11 @@ The IoT Central "Deferred update status" property is updated every time **Deferr
     azsphere device sideload delete
     ```
 
-1. Hard reset the Azure Sphere by unplugging and replugging the Azure Sphere USB cable.
+1. Restart your device. From the command prompt, run.
+
+    ```powershell
+    azsphere device restart
+    ```
 
 1. Create an Azure Sphere Product. From the command prompt, run.
 
@@ -652,16 +687,6 @@ The IoT Central "Deferred update status" property is updated every time **Deferr
     azsphere device update --device-group "CO2Monitor/Field Test"
     ```
 
-    > Note, when you move your device to the Field Test group, you'll not be able to deploy an application to your device from Visual Studio Code. Later, you can reenable local development by running the ```azsphere device enable-development``` command.
-
-### Deploy the CO2 Monitor Image Package file
-
-1. Open the CO2 Monitor solution in Visual Studio Code.
-1. Select **CMake: [Release]: Ready** from the Visual Studio Code Status Bar.
-
-    ![The image shows using VS Code to select release mode](media/vs-code-start-application.png)
-
-1. Select **Build**  from the Visual Studio Code Status Bar to build the project in release mode.
 1. From a command prompt, navigate to the **azure-sphere-gallery/CO2_MonitorHealthySpaces/src/out/ARM-Release** folder.
 1. Upload the imagepackage to your Azure Sphere tenant. From the command prompt, run:
 
@@ -688,7 +713,53 @@ The IoT Central "Deferred update status" property is updated every time **Deferr
     azsphere device-group deployment create --device-group "CO2Monitor/Field Test" --images 3962c015-8f52-4d85-a043-acbc38f8b4aa
     ```
 
-1. Wait for a minute or two, and the CO2 monitor application will be deployed to your Azure Sphere. The status LEDs will blink, and device data will start streaming data to IoT Central.
+
+1. Enable your device for cloud testing. From the command prompt, run.
+
+    ```powershell
+    azsphere device enable-cloud-test
+    ```
+
+It will take approximately 30 seconds for the application to be deployed to your Azure Sphere from your Azure Sphere tenant.
+
+> Note, when you enable your device for cloud testing, you'll not be able to deploy an application to your device from Visual Studio Code. Later, you can reenable local development by running the ```azsphere device enable-development``` command.
+
+---
+
+## Deploy an application update
+
+Next, deploy an update that will be deferred.
+
+1. Ensure the CO2 Monitor solution is open in Visual Studio Code.
+1. Open the **main.h** file.
+1. Locate the **#define CO2_MONITOR_FIRMWARE_VERSION "3.02"** statement.
+1. Update the version number to **3.03**.
+
+    ```c
+    #define CO2_MONITOR_FIRMWARE_VERSION "3.03"
+    ```
+
+1. Select **Build**  from the Visual Studio Code Status Bar to build the project in release mode.
+1. From a command prompt, navigate to the **azure-sphere-gallery/CO2_MonitorHealthySpaces/src/out/ARM-Release** folder.
+1. Upload the imagepackage to your Azure Sphere tenant. From the command prompt, run:
+
+    ```powershell
+    azsphere image add --image co2monitor.imagepackage
+    ```
+
+1. Create a new deployment for a device group for the uploaded co2monitor image.
+
+    ```powershell
+    azsphere device-group deployment create --device-group "CO2Monitor/Field Test" --images <the_image_id>
+    ```
+
+### Monitor the deferred update status
+
+The IoT Central **Deferred update status** property is updated every time **DeferredUpdateCalculate** is called. You can view the deferred update status and deployed software version from the IoT Central device **About** tab. Select the **expand** icon to expand the page view.
+
+> Note, there may be no status updates for hours. If you get impatient, press the reset button on the Avnet Azure Sphere board. When the device restarts, deferred updates will be applied.
+
+![This image shows the state of the deferred update](media/iot_central_about_tab.png)
 
 ### Application deployment status
 
@@ -772,8 +843,7 @@ For production applications, remove this block and replace it with the following
 
 See [LICENSE.txt](./LICENSE.txt)
 
-- AzureSphereDevX is include via a submodule. The license for AzureSphereDevX can be [found here](https://github.com/Azure-Sphere-DevX/AzureSphereDevX/blob/master/LICENSE).
-- AzureSphereDevX.HardwareDefinitions is include via a submodule. The license for AzureSphereDevX.HardwareDefinitions can be [found here](https://github.com/Azure-Sphere-DevX/AzureSphereDevX.HardwareDefinitions/blob/main/LICENSE).
-- AzureSphereDevX.Tools is include via a submodule. The license for AzureSphereDevX.Tools can be [found here](https://github.com/Azure-Sphere-DevX/AzureSphereDevX.Tools/blob/main/LICENSE).
-- AzureSphereDrivers is include via a submodule. The license for AzureSphereDrivers can be [found here](https://github.com/Azure-Sphere-DevX/AzureSphereDrivers/blob/master/LICENSE).
--
+* The AzureSphereDevX repository is included via a submodule. The license for AzureSphereDevX can be [found here](https://github.com/Azure-Sphere-DevX/AzureSphereDevX/blob/master/LICENSE).
+* The AzureSphereDevX.HardwareDefinitions repository is included via a submodule. The license for AzureSphereDevX.HardwareDefinitions can be [found here](https://github.com/Azure-Sphere-DevX/AzureSphereDevX.HardwareDefinitions/blob/main/LICENSE).
+* The AzureSphereDevX.Tools repository is included via a submodule. The license for AzureSphereDevX.Tools can be [found here](https://github.com/Azure-Sphere-DevX/AzureSphereDevX.Tools/blob/main/LICENSE).
+* The AzureSphereDrivers repository is included via a submodule. The license for AzureSphereDrivers can be [found here](https://github.com/Azure-Sphere-DevX/AzureSphereDrivers/blob/master/LICENSE).
