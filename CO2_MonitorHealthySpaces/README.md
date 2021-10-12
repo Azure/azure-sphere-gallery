@@ -559,7 +559,7 @@ Create an IoT Central Settings View to set the CO2 alert level for the CO2 monit
 1. Select **Back**.
 1. Select **Publish**.
 
-![This image shows how to add a new form](media/iot_central_edit_template_add_form.png)
+    ![This image shows how to add a new form](media/iot_central_edit_template_add_form.png)
 
 ---
 
