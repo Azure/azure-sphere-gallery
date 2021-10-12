@@ -74,7 +74,7 @@ The goal of the solution is also to demonstrate best practices for Azure Sphere 
 1. Set up Azure Sphere security.
 1. Publish telemetry to IoT Central.
 1. Update "device to cloud" properties for point in time reporting in IoT Central.
-1. IoT Central "cloud to device" properties to set CO2 "Buzzer" alert levels.
+1. Update IoT Central "cloud to device" properties to set CO2 "Buzzer" alert levels.
 1. Validate sensor and cloud data.
 1. Implement a button to mute the CO2 alert buzzer.
 1. Production considerations.
@@ -82,9 +82,7 @@ The goal of the solution is also to demonstrate best practices for Azure Sphere 
     1. Watchdog support. Auto-restart the CO2 monitor if the application fails.
     1. Report device start date and time, plus software version information.
     1. [Download device error reports](https://docs.microsoft.com/azure-sphere/deployment/interpret-error-data).
-1. IoT Plug and Play.
-    1. An IoT Plug and Play CO2 monitor model has been published to the [public repository of IoT Plug and Play](https://github.com/Azure/iot-plugandplay-models) models.
-    1. When your device first connects to IoT Central, the IoT Plug and Play model will be retrieved from the public repository of models. IoT Central will then create default views using the Plug and Play model.
+1. Enable IoT Plug and Play.
 
 > IoT Central is a cloud-based IoT solution built on Azure IoT Hub. IoT Central properties use IoT Hub Device Twins. IoT Central commands use IoT Hub direct methods.
 
@@ -128,20 +126,20 @@ The CO2 monitor project supports the following hardware configurations.
 
 ### Avnet Azure Sphere with Click and Grove peripherals
 
-1. [AVNET Azure Sphere Starter Kit Rev 1 or Rev 2](https://www.avnet.com/shop/us/products/avnet-engineering-services/aes-ms-mt3620-sk-g-3074457345636825680/)
+1. [Avnet Azure Sphere Starter Kit Rev 1 or Rev 2](https://www.avnet.com/shop/us/products/avnet-engineering-services/aes-ms-mt3620-sk-g-3074457345636825680/)
 1. [Seeed Studio Grove CO2 & Temperature & Humidity Sensor](https://www.seeedstudio.com/Grove-CO2-Temperature-Humidity-Sensor-SCD30-p-2911.html)
 1. [MikroE BUZZ Click](https://www.mikroe.com/buzz-click)
 
 #### Set up
 
 1. Insert the MikroE BUZZ Click into socket 1 of the Avnet Azure Sphere starter kit.
-1. Plug the Seeed Studio Grove CO2 & Temperature & Humidity Sensor into Grove Socket on the AVNET Starter Kit.
+1. Plug the Seeed Studio Grove CO2 & Temperature & Humidity Sensor into Grove Socket on the Avnet Starter Kit.
 
 ![This image shows the Avnet Azure Sphere with click and grove peripherals](media/avnet_plus_click_grove.png)
 
 ### Avnet Azure Sphere with Click peripherals
 
-1. [AVNET Azure Sphere Starter Kit Rev 1 or Rev 2](https://www.avnet.com/shop/us/products/avnet-engineering-services/aes-ms-mt3620-sk-g-3074457345636825680/)
+1. [Avnet Azure Sphere Starter Kit Rev 1 or Rev 2](https://www.avnet.com/shop/us/products/avnet-engineering-services/aes-ms-mt3620-sk-g-3074457345636825680/)
 1. [MikroE HVAC Click](https://www.mikroe.com/hvac-click)
 1. [MikroE BUZZ Click](https://www.mikroe.com/buzz-click)
 
@@ -156,7 +154,7 @@ The CO2 monitor project supports the following hardware configurations.
 
 ## Device drivers
 
-Device drivers can be daunting to start with, but most silicon vendors drivers generally have a hardware abstraction layer (HAL) where you implement platform-specific support for the driver.
+Device drivers can be daunting to start with, but most silicon vendors drivers have a hardware abstraction layer (HAL) where you implement platform-specific support for the driver.
 
 ### MikroE BUZZ Click
 
@@ -164,7 +162,7 @@ Device drivers can be daunting to start with, but most silicon vendors drivers g
 
 The BUZZ Click piezo speaker alerts you when recorded CO2 levels are above the CO2 alert level.
 
-The BUZZ Click is a Pulse Width Module (PWM) controlled peripheral. You control the tone by changing the PWM frequency and the volume by altering the PWM duty cycle. The piezo speaker is driven at a frequency of 5kHz, with a 1% duty cycle, for ten milliseconds. This combination produces a pip sound, enough to alert you without being too annoying.
+The BUZZ Click is a Pulse Width Module (PWM) peripheral. You control the tone by changing the PWM frequency and the volume by altering the PWM duty cycle. The piezo speaker is driven at a frequency of 5kHz, with a 1% duty cycle, for ten milliseconds. This combination produces a pip sound, enough to alert you without being too annoying.
 
 This oscilloscope screenshot shows the PWM signal generated to drive the piezo speaker.
 
@@ -182,7 +180,7 @@ It was a matter of implementing the I2C init/read/write functions and a microsec
 
 **IMPORTANT**. Be sure to read calibrating the [Grove - CO2 & Temperature & Humidity Sensor (SCD30) Calibration](https://wiki.seeedstudio.com/Grove-CO2_Temperature_Humidity_Sensor-SCD30/#calibration) sensor. This solution enables auto-calibration of the sensor.
 
-When scd30 automatic self-calibration (ASC) is activated for the first time, the sensor must remain powered on for at least 7 days. This time is needed for the sensor algorithm to calculate its initial parameter set for ASC. The sensor must be exposed to fresh air for at least 1 hour every day.
+When scd30 automatic self-calibration (ASC) is activated for the first time, the sensor must remain powered on for at least 7 days. The calibration process restarts if the sensor is powered off during these 7 days. This time is needed for the sensor algorithm to calculate its initial parameter set for ASC. The sensor must be exposed to fresh air for at least 1 hour every day.
 
 ### The Sensirion SDC41 CO2 Sensor
 
@@ -214,7 +212,8 @@ The easiest way to control LEDs is to treat them as GPIO peripherals. But to be 
 
 Perform the following steps to set up the developer tools and your Azure Sphere.
 
-1. Install Visual Studio Code
+1. Install Visual Studio Code.
+1. Install the Visual Studio Code Azure Sphere extension.
 1. Install the Azure Sphere SDK.
 1. Claim your Azure Sphere device.
 1. Configure the Azure Sphere Wi-Fi network.
@@ -237,11 +236,13 @@ Your Azure Sphere device can securely connect and communicate with cloud service
 
 ## IoT Plug and Play
 
-This solution uses IoT Plug and Play (PnP) with IoT Central. PnP defines a model that a device uses to advertise its capabilities to a PnP-enabled application like IoT Central. PnP is an open specification, to learn more, refer to [What is IoT Plug and Play](https://docs.microsoft.com/azure/iot-pnp/overview-iot-plug-and-play).
+This solution uses IoT Plug and Play with IoT Central. IoT Plug and Play (PnP) defines a model that a device uses to advertise its capabilities to a PnP-enabled application like IoT Central. PnP is an open specification, to learn more, refer to [What is IoT Plug and Play](https://docs.microsoft.com/azure/iot-pnp/overview-iot-plug-and-play).
+
+An IoT Plug and Play CO2 monitor model has been published to the [public repository of IoT Plug and Play](https://github.com/Azure/iot-plugandplay-models) models. When your device first connects to IoT Central, the IoT Plug and Play model will be retrieved from the public repository of models. IoT Central will then create default views using the Plug and Play model.
 
 The PnP model for the CO2 monitor solution is in the iot_plug_and_play directory. This model has been uploaded to the public repository of [IoT Plug and Play models](https://github.com/Azure/iot-plugandplay-models/tree/main/dtmi/com/example/azuresphere)
 
-The PnP model is declared in main.h.
+The IoT Plug and Play model the CO2 monitor uses is declared in main.h.
 
 ```c
 #define IOT_PLUG_AND_PLAY_MODEL_ID "dtmi:com:example:azuresphere:co2monitor;1"
@@ -261,7 +262,7 @@ The PnP model is declared in main.h.
 
     ![Diagram that shows how to expand the sidebar menu.](media/menu.png)
 
-1. Navigate to **Build**, select **Custom app**, and select **Create app**.
+1. Navigate to **Build**, select **Custom app**, then select **Create app**.
 
     ![Screenshot that shows how to create custom app.](media/new-application.png)
 
@@ -277,7 +278,7 @@ The PnP model is declared in main.h.
 
 Once your IoT Central application has been created, you must enable trust between your Azure Sphere tenant and your Azure IoT Central application. Trust is enabled by sharing your Azure Sphere tenant Certificate Authority certificate with your IoT Central application.
 
-When trust is enabled, any device claimed into your trusted Azure Sphere tenant will be enrolled in your Azure IoT Central application when it first connects.
+When trust is enabled, any device claimed into your trusted Azure Sphere tenant will be enrolled when it first connects to IoT Central.
 
 Follow these steps to enable trust.
 
@@ -297,8 +298,6 @@ Follow these steps to enable trust.
    azsphere ca-certificate download --destination CAcertificate.cer
    ```
 
-   The output file must have the .cer extension.
-
 ### Create an Enrollment Group
 
 1. From the IoT Central web portal, select the hamburger button on the top-left corner of the screen to expand the sidebar menu.
@@ -310,7 +309,7 @@ Follow these steps to enable trust.
 1. Name the enrollment group **Azure Sphere**.
 1. Leave group type set to **IoT devices**.
 1. Select Certificates (X.509) from the Attestation type dropdown.
-1. Select Save.
+1. Select **Save**.
 
 ### Upload the Azure Sphere tenant CA certificate to Azure IoT Central
 
@@ -333,9 +332,9 @@ Follow these steps to enable trust.
    azsphere ca-certificate download-proof --destination ValidationCertification.cer --verification-code <code>
    ```
 
-1. The Azure Sphere Security Service signs the validation certificate with the verification code to prove that you own the Certificate Authority (CA).
+    The Azure Sphere Security Service signs the validation certificate with the verification code to prove that you own the Certificate Authority (CA).
 
-### Use the validation certificate to verify the tenant's identity
+<!-- ### Verify the tenant's identity -->
 
 1. Return to Azure IoT Central and select **Verify**.
 
@@ -352,9 +351,9 @@ Follow these steps to enable trust.
 
 Azure Sphere applications are secure by default, including hardware and network endpoints. You must declare your IoT Central network endpoints, otherwise, your Azure Sphere application will not be able to connect to IoT Central.
 
-Follow these steps to list the network endpoints of your IoT Central web application.
+Follow these steps to list the network endpoints of your IoT Central application.
 
-1. Open the command prompt.
+1. Open a command prompt.
 1. Clone the Azure Sphere samples as you will need the **ShowIoTCentralConfig** tool.
 
     ```
@@ -375,7 +374,7 @@ Follow these steps to list the network endpoints of your IoT Central web applica
    | **API token**                                                | The API token can be generated from your Azure IoT Central application. In the Azure IoT Central application, select **Administration**, select **API Tokens**, select **Generate Token**, provide a name for the token (for example, "AzureSphere"), select **Administrator** as the role, and select **Generate**. Copy the token to the clipboard. The token starts with **SharedAccessSignature**. |
    | **ID Scope**                                                 | In the Azure IoT Central application, select **Administration** > **Device Connection** and then copy the **ID Scope**. |
 
-1. Run the **ShowIoTCentralConfig** tool and follow the prompts that the tool provides.
+1. Run the **ShowIoTCentralConfig** tool and follow the prompts.
 
    > Note, your organization might require consent for the **ShowIoTCentralConfig** tool to access your Azure IoT Central data in the same way that the Azure API requires such consent.
 
@@ -422,6 +421,8 @@ There're five files in the project you need to understand.
 1. main.c: The main code/logic for the application.
 1. main.h: All the declarations for the application.
 
+Take a moment to familiarize yourself with these files.
+
 ![The image shows the CO2 project structure in Visual Studio Code](media/co2_monitor_project_structure.png)
 
 ---
@@ -444,7 +445,7 @@ If you have an Avnet Starter Kit Rev 2 board, then follow these instructions.
 
 1. In Visual Studio Code, open the **app_manifest.json** file.
 1. Update **CmdArgs** with your Azure IoT Central **ID Scope**.
-1. Update **DeviceAuthentication** with your **Azure Sphere Tenant ID**. From the **command prompt**, run the following command.
+1. Update **DeviceAuthentication** with your **Azure Sphere Tenant ID**. From a **command prompt**, run the following command.
 
     ```
     azsphere tenant show-selected
@@ -456,11 +457,11 @@ If you have an Avnet Starter Kit Rev 2 board, then follow these instructions.
     ------------------------------------ ------------------- -------------
     Id                                   Name                Roles
     ======================================================================
-    9d7e79eb-e021-43ce-9f2b-fa944b447494 dgloverSphereTenant Administrator
+    9abc79eb-9999-43ce-9999-fa8888888894 myAzureSphereTenant Administrator
     ------------------------------------ ------------------- -------------
     ```
 
-1. Update the network endpoints **AllowedConnections** with your Azure IoT Central Application endpoint URLs you copied to Notepad.
+1. Update the network endpoints **AllowedConnections** with the Azure IoT Central Application endpoint URLs you copied to Notepad.
 1. **Review** your updated manifest_app.json file. It should look similar to the following.
 
     ```json
@@ -500,7 +501,7 @@ If you have an Avnet Starter Kit Rev 2 board, then follow these instructions.
 
 ## Deploying the CO2 monitor application to Azure Sphere
 
-### Start the app build deploy process
+Start the app build deploy process.
 
 1. Select **CMake: [Debug]: Ready** from the Visual Studio Code Status Bar.
 
@@ -523,19 +524,20 @@ If you have an Avnet Starter Kit Rev 2 board, then follow these instructions.
 ![The image shows a photo in the Azure Sphere with the CO2 sensor and the click buzzer](media/avnet_status_leds.png)
 
 1. The yellow App LED will blink rapidly when the application starts.
-1. The App LED will then blink on and off while the device connects to IoT Central.
+1. The App LED will blink on and off while the device connects to IoT Central.
 1. When connected to IoT Central, the App LED will flash briefly every 4 seconds.
-1. The User LED will most likely turn blue to indicate the current CO2 level is below the CO2 alert level. The User LED will turn red if the recorded CO2 level is higher than the CO2 alert level.
+1. The User LED will most likely turn blue to indicate the current CO2 level is below the CO2 alert level.
+1. The User LED will turn red if the recorded CO2 level is higher than the CO2 alert level.
 1. The BUZZ click will emit a high-pitched sound if the current CO2 level is greater than the CO2 alert level. You can press button B to mute the buzzer.
 
 ---
 
-## View your device on IoT Central Dashboard
+## View your device on the IoT Central Dashboard
 
 1. Switch back to Azure IoT Central in your web browser.
 1. Select **Devices** from the IoT Central sidebar menu.
 1. Select the **CO2 Monitor** template.
-1. When your device is enrolled into IoT Central, you may be prompted to **Refresh** the device list.
+1. When your device is enrolls into IoT Central, you may be prompted to **Refresh** the device list.
 1. Select your device, the device details page will open to display the device telemetry.
 1. Navigate the **About**, **Overview**, and **Raw data** tabs to familiarize yourself with IoT Central device view.
 
@@ -590,11 +592,13 @@ Azure Sphere supports deferred updates. Deferred updates are an important produc
 
 The criteria you use to determine the best time to apply updates will be application-specific. For example, it might make sense to apply updates in the early hours of the morning.
 
-The deferred update example included in the solution is a simple time of day solution. **DeferredUpdateCalculate**  is called when an application or OS update is pending.
+The deferred update example included in the CO2 monitor project is a simple time of day calculation. **DeferredUpdateCalculate**  is called when an application or OS update is pending.
 
 The CO2 monitor calculates the local time using UTC (Universal Time Coordinate) plus the local time zone offset. If the calculated local time is between 1 am and 5 am then a zero-minute deferral is requested, and updates are applied. Failing that, a 15-minute deferral extension is requested.
 
 You can't defer updates forever. For an OS update, the maximum deferral is 1440 minutes (24 hours). For an application update, the maximum deferral period is 10,020 minutes (167 hours). To learn more about deferred updates, refer to [Defer device updates](https://docs.microsoft.com/azure-sphere/app-development/device-update-deferral).
+
+The following deferred update code is located in main.c of the CO2 monitor project.
 
 ```c
 /// <summary>
@@ -638,7 +642,7 @@ static uint32_t DeferredUpdateCalculate(uint32_t max_deferral_time_in_minutes, S
 
 1. **Open** the CO2 Monitor project in Visual Studio Code.
 1. Locate the **DeferredUpdateCalculate** function in **main.c**.
-1. **Update** the DeferredUpdateCalculate function with your time zone offset. The default time zone offset is 10 (Australian/Sydney AEST).
+1. **Update** the DeferredUpdateCalculate function with your time zone offset. The default time zone offset is 10 (Australia/Sydney AEST).
 
     ```c
     // UTC +10 is for Australia/Sydney.
@@ -646,7 +650,7 @@ static uint32_t DeferredUpdateCalculate(uint32_t max_deferral_time_in_minutes, S
     const int time_zone_offset = 10;
     ```
 
-1. Review the deferred update time. The default is between 1 am and 5 am.
+1. Review the deferred update time calculation. Deferred updates will be applied between 1 am and 5 am.
 
     ```c
     // If local time is between 1 am and 5 am defer for zero minutes else defer for 15 minutes
@@ -663,25 +667,25 @@ static uint32_t DeferredUpdateCalculate(uint32_t max_deferral_time_in_minutes, S
 
 ## Enable deferred updates
 
-1. Delete the existing CO2 monitor application on your Azure Sphere. From the command prompt, run.
+1. Delete the existing CO2 monitor application on your Azure Sphere. From the command prompt, run:
 
     ```powershell
     azsphere device sideload delete
     ```
 
-1. Restart your device. From the command prompt, run.
+1. Restart your device. From the command prompt, run:
 
     ```powershell
     azsphere device restart
     ```
 
-1. Create an Azure Sphere Product. From the command prompt, run.
+1. Create an Azure Sphere Product. From the command prompt, run:
 
     ```powershell
     azsphere product create --name CO2Monitor
     ```
 
-1. Move your device to the Field Test group. From the command prompt, run.
+1. Move your device to the Field Test group. From the command prompt, run:
 
     ```powershell
     azsphere device update --device-group "CO2Monitor/Field Test"
@@ -713,14 +717,13 @@ static uint32_t DeferredUpdateCalculate(uint32_t max_deferral_time_in_minutes, S
     azsphere device-group deployment create --device-group "CO2Monitor/Field Test" --images 3962c015-8f52-4d85-a043-acbc38f8b4aa
     ```
 
-
-1. Enable your device for cloud testing. From the command prompt, run.
+1. Enable your device for cloud testing. From the command prompt, run:
 
     ```powershell
     azsphere device enable-cloud-test
     ```
 
-It will take approximately 30 seconds for the application to be deployed to your Azure Sphere from your Azure Sphere tenant.
+It will take approximately 30 seconds for the application to be deployed to your Azure Sphere.
 
 > Note, when you enable your device for cloud testing, you'll not be able to deploy an application to your device from Visual Studio Code. Later, you can reenable local development by running the ```azsphere device enable-development``` command.
 
@@ -747,7 +750,7 @@ Next, deploy an update that will be deferred.
     azsphere image add --image co2monitor.imagepackage
     ```
 
-1. Create a new deployment for a device group for the uploaded co2monitor image.
+1. Create a new deployment for a device group for the uploaded co2monitor image. From the command prompt, run:
 
     ```powershell
     azsphere device-group deployment create --device-group "CO2Monitor/Field Test" --images <the_image_id>
@@ -804,6 +807,17 @@ static void watchdog_handler(EventLoopTimer *eventLoopTimer)
         return;
     }
     timer_settime(watchdogTimer, 0, &watchdogInterval, NULL);
+}
+```
+
+The application watchdog is disabled by default. If you are debugging the CO2 monitor and pause execution for longer than 60 seconds the Azure Sphere OS thinks the application has failed and will restart it. To enable the watchdog for production, uncomment the call to **start_watchdog** in the **InitPeripheralsAndHandlers** function.
+
+```c
+static void InitPeripheralsAndHandlers(void)
+{
+    ...
+    // Uncomment for production
+    // start_watchdog();
 }
 ```
 
