@@ -240,9 +240,9 @@ This solution uses IoT Plug and Play with IoT Central. IoT Plug and Play (PnP) d
 
 An IoT Plug and Play CO2 monitor model has been published to the [public repository of IoT Plug and Play](https://github.com/Azure/iot-plugandplay-models) models. When your device first connects to IoT Central, the IoT Plug and Play model will be retrieved from the public repository of models. IoT Central will then create default views using the Plug and Play model.
 
-The PnP model for the CO2 monitor solution is in the iot_plug_and_play directory. This model has been uploaded to the public repository of [IoT Plug and Play models](https://github.com/Azure/iot-plugandplay-models/tree/main/dtmi/com/example/azuresphere)
+A copy of the IoT Plug and Play model is located in the *iot_plug_and_play* directory.
 
-The IoT Plug and Play model the CO2 monitor uses is declared in main.h.
+The IoT Plug and Play model the CO2 monitor project uses is declared in main.h.
 
 ```c
 #define IOT_PLUG_AND_PLAY_MODEL_ID "dtmi:com:example:azuresphere:co2monitor;1"
