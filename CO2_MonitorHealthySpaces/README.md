@@ -526,9 +526,9 @@ Start the app build deploy process.
 1. The yellow App LED will blink rapidly when the application starts.
 1. The App LED will blink on and off while the device connects to IoT Central.
 1. When connected to IoT Central, the App LED will flash briefly every 4 seconds.
-1. The User LED will most likely turn blue to indicate the current CO2 level is below the CO2 alert level.
+1. The User LED will most likely turn blue to indicate the recorded CO2 level is below the CO2 alert level.
 1. The User LED will turn red if the recorded CO2 level is higher than the CO2 alert level.
-1. The BUZZ click will emit a high-pitched sound if the current CO2 level is greater than the CO2 alert level. You can press button B to mute the buzzer.
+1. The BUZZ click will emit a high-pitched sound if the recorded CO2 level is greater than the CO2 alert level. You can press button B to mute the buzzer.
 
 ---
 
