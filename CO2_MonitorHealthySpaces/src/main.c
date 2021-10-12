@@ -23,7 +23,8 @@
  *
  *	 1. Open azsphere_board.txt
  *	 2. Uncomment the set command that matches your developer board.
- *	 3. Click File, then Save to auto-generate the CMake Cache.
+ *	 3. Visual Studio, save to auto-generate the CMake Cache.
+ *   4. Visual Studio Code, ctrl+shift+p, type and select CMake: configure
  *
  ************************************************************************************************/
 
@@ -78,7 +79,7 @@ static void publish_telemetry_handler(EventLoopTimer *eventLoopTimer)
 }
 
 /// <summary>
-/// Determine in telemetry value changed and if so, update it's device twin
+/// Determine if telemetry value changed. If so, update it's device twin
 /// </summary>
 /// <param name="new_value"></param>
 /// <param name="previous_value"></param>
@@ -93,8 +94,7 @@ static void device_twin_update(int *latest_value, int *previous_value, DX_DEVICE
 }
 
 /// <summary>
-/// Update temperature and pressure device twins
-/// Only update if data changes to minimise costs
+/// Only update device twins if data changed to minimize network and cloud costs
 /// </summary>
 /// <param name="temperature"></param>
 /// <param name="pressure"></param>
@@ -117,8 +117,8 @@ static void update_device_twins(EventLoopTimer *eventLoopTimer)
 
 /// <summary>
 /// Handler called every 20 seconds
-/// The SDC30 and Avnet Onboard sensors read
-/// 20 second timer reloaded
+/// The CO2 sensor and Avnet Onboard sensors are read
+/// Then reload 20 second oneshot timer
 /// </summary>
 /// <param name="eventLoopTimer"></param>
 static void read_telemetry_handler(EventLoopTimer *eventLoopTimer)
@@ -158,7 +158,7 @@ static void read_telemetry_handler(EventLoopTimer *eventLoopTimer)
 
 /***********************************************************************************************************
  *
- * Generate buzzer alert if CO2 level above CO2 alert level
+ * Generate buzzer alert if recorded CO2 level above CO2 alert level
  * Press Button B to Be Quiet. This overides the buzzer alert
  **********************************************************************************************************/
 
@@ -183,7 +183,7 @@ static void read_buttons_handler(EventLoopTimer *eventLoopTimer)
 }
 
 /// <summary>
-/// Oneshot timer handler to turn off BUZZ Click
+/// Oneshot handler to turn off BUZZ Click buzzer
 /// </summary>
 /// <param name="eventLoopTimer"></param>
 static void co2_alert_buzzer_off_handler(EventLoopTimer *eventLoopTimer)
@@ -197,7 +197,7 @@ static void co2_alert_buzzer_off_handler(EventLoopTimer *eventLoopTimer)
 }
 
 /// <summary>
-/// Turn on CO2 Buzzer if CO2 ppm greater than dt_co2_ppm_alert_level device twin
+/// Turn on CO2 Buzzer if recorded CO2 ppm greater than co2_alert_level
 /// </summary>
 static void co2_alert_handler(EventLoopTimer *eventLoopTimer)
 {
@@ -260,7 +260,7 @@ static void DeviceTwinGenericHandler(DX_DEVICE_TWIN_BINDING *deviceTwinBinding)
 /***********************************************************************************************************
  * PRODUCTION
  *
- * Defferred update support
+ * Deferred update support
  * Enable application level watchdog
  * Update software version and Azure connect UTC time device twins on first connection
  **********************************************************************************************************/
@@ -304,7 +304,7 @@ static uint32_t DeferredUpdateCalculate(uint32_t max_deferral_time_in_minutes, S
 }
 
 /************************************************************************************************************
- * Add application level watchdox
+ * Add application level watchdog
  ***********************************************************************************************************/
 
 /// <summary>

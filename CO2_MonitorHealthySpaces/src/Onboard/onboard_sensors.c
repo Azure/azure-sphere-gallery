@@ -50,7 +50,7 @@ bool onboard_sensors_init(void) {
 }
 
 /// <summary>
-///     Generate fake telemetry for Seeed Studi dev boards
+///     Generate fake telemetry for Seeed Studio dev boards
 /// </summary>
 bool onboard_sensors_read(SENSOR *telemetry)
 {
