@@ -574,7 +574,7 @@ Navigate back to the IoT Central device view.
 1. Set the CO2 alert level to 400 ppm, and select **Save**. This low value should trigger the CO2 alert buzzer.
 1. Set the CO2 alert level to a more realistic value like 800 pmm, and select **Save**.
 
-You can test CO2 alert levels by breathing onto the CO2 sensor.
+> You can test CO2 alert levels by breathing onto the CO2 sensor.
 
 ---
 
