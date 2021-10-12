@@ -537,7 +537,7 @@ Start the app build deploy process.
 1. Switch back to Azure IoT Central in your web browser.
 1. Select **Devices** from the IoT Central sidebar menu.
 1. Select the **CO2 Monitor** template.
-1. When your device is enrolls into IoT Central, you may be prompted to **Refresh** the device list.
+1. When your device enrolls into IoT Central, you may be prompted to **Refresh** the device list.
 1. Select your device, the device details page will open to display the device telemetry.
 1. Navigate the **About**, **Overview**, and **Raw data** tabs to familiarize yourself with IoT Central device view.
 
