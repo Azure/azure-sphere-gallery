@@ -47,8 +47,8 @@ void azure_status_led_on_handler(EventLoopTimer *eventLoopTimer)
     else
     {
         dx_gpioOn(&gpio_network_led);
-        // on for 100ms off for 1300ms = 1400 ms in total
-        dx_timerOneShotSet(&tmr_azure_status_led_on, &(struct timespec){1, 400 * ONE_MS});
-        dx_timerOneShotSet(&tmr_azure_status_led_off, &(struct timespec){0, 700 * ONE_MS});
+        // on for 1000ms off for 1000ms = 2000 ms in total
+        dx_timerOneShotSet(&tmr_azure_status_led_on, &(struct timespec){2, 0});
+        dx_timerOneShotSet(&tmr_azure_status_led_off, &(struct timespec){1, 0});
     }
 }

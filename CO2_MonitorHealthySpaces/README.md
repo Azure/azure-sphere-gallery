@@ -178,9 +178,11 @@ It was a matter of implementing the I2C init/read/write functions and a microsec
 
 #### Calibrating the SCD30 sensor
 
-**IMPORTANT**. Be sure to read calibrating the [Grove - CO2 & Temperature & Humidity Sensor (SCD30) Calibration](https://wiki.seeedstudio.com/Grove-CO2_Temperature_Humidity_Sensor-SCD30/#calibration) sensor. This solution enables auto-calibration of the sensor.
+**IMPORTANT**. Be sure to read calibrating the [Grove - CO2 & Temperature & Humidity Sensor (SCD30) Calibration](https://wiki.seeedstudio.com/Grove-CO2_Temperature_Humidity_Sensor-SCD30/#calibration) sensor.
 
-When scd30 automatic self-calibration (ASC) is activated for the first time, the sensor must remain powered on for at least 7 days. The calibration process restarts if the sensor is powered off during these 7 days. This time is needed for the sensor algorithm to calculate its initial parameter set for ASC. The sensor must be exposed to fresh air for at least 1 hour every day.
+This solution enables auto-calibration of the sensor. When scd30 automatic self-calibration (ASC) is activated for the first time, the sensor must remain powered on for at least seven days. The calibration process restarts if the sensor is powered off during these seven days.
+
+This calibration time is needed for the sensor algorithm to calculate its initial parameter set for ASC. The sensor must be exposed to fresh air for at least 1 hour every day.
 
 ### The Sensirion SDC41 CO2 Sensor
 
@@ -268,7 +270,7 @@ The IoT Plug and Play model for the CO2 monitor project is declared in main.h.
 
 1. Specify the **Application name** and **URL**.
 
-1. Select the pricing plan, for now, select **Free**, you can migrate to a standard plan with 2 free devices after 7 days.
+1. Select the **Free** pricing plan. You can migrate to a standard plan with two free devices after seven days.
 
 1. Select **Create**.
 
@@ -315,7 +317,7 @@ Follow these steps to enable trust.
 
 1. Select **+ Manage primary**.
 
-1. Select the folder icon next to the **Primary** box and navigate to the folder where you downloaded the certificate. If you don't see the .cer file in the list, ensure the view filter is set to **All files (*)**. Select the certificate and then select the gear icon next to the **Primary** box.
+1. Select the folder icon next to the **Primary** box and navigate to the folder where you downloaded the certificate. If you don't see the .cer file in the list, set the view filter to **All files (*)**. Select the certificate and then select the gear icon next to the **Primary** box.
 
 1. The **Primary Certificate** dialog box appears. The **Subject** and **Thumbprint** fields contain information about the current Azure Sphere tenant and primary root certificate.
 
@@ -436,8 +438,9 @@ If you have an Avnet Starter Kit Rev 2 board, then follow these instructions.
 1. In Visual Studio Code, open the **azsphere_board.txt** file.
 1. Comment out the Avnet Rev 1 board with a **#**.
 1. Uncomment the Avnet Rev 2 board by removing the leading **#** character.
-1. Save the changes.
-1. Rebuild the CMake cache. Press <kbd>Ctrl+Shift+P</kbd> to open the Visual Studio Code command palette. Type **cmake: configure**, and select the CMake:configure option to rebuild the CMake cache.
+1. **Save** the changes.
+1. Press <kbd>Ctrl+Shift+P</kbd> to open the Visual Studio Code command palette.
+1. Type and select **CMake: Delete Cache and Reconfigure**.
 
 ---
 
@@ -503,10 +506,8 @@ If you have an Avnet Starter Kit Rev 2 board, then follow these instructions.
 
 Start the app build deploy process.
 
-1. Select **CMake: [Debug]: Ready** from the Visual Studio Code Status Bar.
-
-    ![The image shows how to set build mode from the VS Code status bar](media/vs-code-start-application.png)
-
+1. Press <kbd>Ctrl+Shift+P</kbd> to open the Visual Studio Code command palette.
+1. Type and select **CMake: Select Variant**, then select **Debug**.
 1. From Visual Studio Code, press <kbd>F5</kbd> to build, deploy, and attached the debugger to the CO2 monitor application now running the Azure Sphere device.
 
 ### View debugger output
@@ -657,11 +658,12 @@ static uint32_t DeferredUpdateCalculate(uint32_t max_deferral_time_in_minutes, S
     uint32_t requested_minutes = IN_RANGE(t->tm_hour, 1, 5) ? 0 : 15;
     ```
 
-1. Select **CMake: [Release]: Ready** from the Visual Studio Code Status Bar.
-
-    ![The image shows using VS Code to select release mode](media/vs-code-start-application.png)
-
-1. Select **Build** from the Visual Studio Code Status Bar to build the project in release mode.
+1. Press <kbd>Ctrl+Shift+P</kbd> to open the Visual Studio Code command palette.
+1. Type and select **CMake: Select Variant**, then select **Release**.
+1. Press <kbd>Ctrl+Shift+P</kbd> to open the Visual Studio Code command palette.
+1. Type and select **CMake: Delete Cache and Reconfigure**.
+1. Press <kbd>Ctrl+Shift+P</kbd> to open the Visual Studio Code command palette.
+1. Type and select **CMake: Clean Rebuild**.
 
 ---
 
@@ -742,7 +744,13 @@ Next, deploy an update that will be deferred.
     #define CO2_MONITOR_FIRMWARE_VERSION "3.03"
     ```
 
-1. Select **Build**  from the Visual Studio Code Status Bar to build the project in release mode.
+1. Press <kbd>Ctrl+Shift+P</kbd> to open the Visual Studio Code command palette.
+1. Type and select **CMake: Delete Cache and Reconfigure**.
+1. Press <kbd>Ctrl+Shift+P</kbd> to open the Visual Studio Code command palette.
+1. Type and select **CMake: Clean Rebuild**.
+
+### Deploy the update
+
 1. From a command prompt, navigate to the **azure-sphere-gallery/CO2_MonitorHealthySpaces/src/out/ARM-Release** folder.
 1. Upload the imagepackage to your Azure Sphere tenant. From the command prompt, run:
 
