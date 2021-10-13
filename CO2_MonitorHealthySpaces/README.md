@@ -133,7 +133,7 @@ The CO2 monitor project supports the following hardware configurations.
 #### Set up
 
 1. Insert the MikroE BUZZ Click into socket 1 of the Avnet Azure Sphere starter kit.
-1. Plug the Seeed Studio Grove CO2 & Temperature & Humidity Sensor into Grove Socket on the Avnet Starter Kit.
+1. Plug the Seeed Studio Grove CO2 & Temperature & Humidity Sensor into the Grove Socket on the Avnet Starter Kit.
 
 ![This image shows the Avnet Azure Sphere with click and grove peripherals](media/avnet_plus_click_grove.png)
 
@@ -258,7 +258,7 @@ The IoT Plug and Play model for the CO2 monitor project is declared in main.h.
 
 1. Select **Build a solution**.
 
-1. You'll need to sign with your Microsoft personal, work, or school account. If you don't have a Microsoft account, then you can create one for free by using the **Create one!** link.
+1. log in with your Microsoft personal, work, or school account. If you don't have a Microsoft account, then you can create one for free by using the **Create one!** link.
 
 1. Expand the sidebar menu by selecting the **Menu** icon.
 
@@ -416,7 +416,7 @@ git clone --recurse-submodules https://github.com/Azure/azure-sphere-gallery.git
 
 ## The CO2 monitor project structure
 
-There're five files in the project you need to understand.
+There're four files in the project you need to understand.
 
 1. app_manifest.json: Used for network configuration and security settings.
 1. azsphere_board.txt: Used to select your Azure Sphere developer board.
@@ -508,11 +508,11 @@ Start the app build deploy process.
 
 1. Press <kbd>Ctrl+Shift+P</kbd> to open the Visual Studio Code command palette.
 1. Type and select **CMake: Select Variant**, then select **Debug**.
-1. From Visual Studio Code, press <kbd>F5</kbd> to build, deploy, and attached the debugger to the CO2 monitor application now running the Azure Sphere device.
+1. Press <kbd>F5</kbd> to build, deploy, and attached the debugger to the CO2 monitor application now running the Azure Sphere device.
 
 ### View debugger output
 
-1. Open the Visual Studio Code **Output** tab to view the output from **Log_Debug** statements in the code.
+1. Open the Visual Studio Code **Output** tab to view the output from the **Log_Debug** statements in the code.
 
     > Pro Tip. You can open the output window by using the Visual Studio Code <kbd>Ctrl+K Ctrl+H</kbd> shortcut or click the **Output** tab.
 
@@ -535,7 +535,7 @@ Start the app build deploy process.
 
 ## View your device on the IoT Central Dashboard
 
-1. Switch back to Azure IoT Central in your web browser.
+1. Switch back to the Azure IoT Central web portal.
 1. Select **Devices** from the IoT Central sidebar menu.
 1. Select the **CO2 Monitor** template.
 1. When your device enrolls into IoT Central, you may be prompted to **Refresh** the device list.
@@ -581,7 +581,7 @@ Navigate back to the IoT Central device view.
 
 ## Extend and integrate Azure IoT Central applications with other cloud services
 
-Azure IoT Central is also extensible using rules and workflows. For more information, review [Use workflows to integrate your Azure IoT Central application with other cloud services](https://docs.microsoft.com/en-us/azure/iot-central/core/howto-configure-rules-advanced?WT.mc_id=julyot-co2-dglover)
+Azure IoT Central is extensible using rules and workflows. For more information, review [Use workflows to integrate your Azure IoT Central application with other cloud services](https://docs.microsoft.com/en-us/azure/iot-central/core/howto-configure-rules-advanced?WT.mc_id=julyot-co2-dglover)
 
 ---
 
@@ -790,7 +790,7 @@ azsphere device image list-installed
 
 ### Application watchdog
 
-Azure Sphere supports application-level watchdogs. The CO2 monitor application includes a watchdog timer. The timer's role is to keep extending the watchdog period.
+Azure Sphere supports an application-level watchdog. The CO2 monitor application includes a watchdog timer. The timer's role is to keep extending the watchdog period.
 
 The watchdog period is set to 60 seconds. If the application fails to extend the watchdog period within 60 seconds, the Azure Sphere OS assumes the application has failed and restarts the application.
 
@@ -818,7 +818,7 @@ static void watchdog_handler(EventLoopTimer *eventLoopTimer)
 }
 ```
 
-The application watchdog is disabled by default. If you are debugging the CO2 monitor and pause execution for longer than 60 seconds the Azure Sphere OS thinks the application has failed and will restart it. To enable the watchdog for production, uncomment the call to **start_watchdog** in the **InitPeripheralsAndHandlers** function.
+The application watchdog is disabled by default. If you are debugging the CO2 monitor and pause execution for longer than 60 seconds the Azure Sphere OS thinks the application has failed and will restart it. To enable the watchdog for production, uncomment the call to **start_watchdog** in the **InitPeripheralsAndHandlers** function located in main.c.
 
 ```c
 static void InitPeripheralsAndHandlers(void)
