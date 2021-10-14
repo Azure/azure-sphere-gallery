@@ -58,8 +58,8 @@ static void publish_telemetry_handler(EventLoopTimer *eventLoopTimer)
         if (dx_jsonSerialize(msgBuffer, sizeof(msgBuffer), 7,
             DX_JSON_INT, "msgId", msgId++,
             DX_JSON_INT, "co2ppm", telemetry.latest.co2ppm,
-            DX_JSON_INT, "humidity", telemetry.latest.humidity,            
-            DX_JSON_INT, "pressure", telemetry.latest.pressure,            
+            DX_JSON_INT, "humidity", telemetry.latest.humidity,
+            DX_JSON_INT, "pressure", telemetry.latest.pressure,
             DX_JSON_INT, "temperature", telemetry.latest.temperature,
             DX_JSON_INT, "peakUserMemoryKiB", (int)Applications_GetPeakUserModeMemoryUsageInKB(),
             DX_JSON_INT, "totalMemoryKiB", (int)Applications_GetTotalMemoryUsageInKB()))
@@ -284,7 +284,7 @@ static uint32_t DeferredUpdateCalculate(uint32_t max_deferral_time_in_minutes, S
     //  Get UTC time
     time_t now = time(NULL);
     struct tm *t = gmtime(&now);
-    
+
     // Calculate UTC plus offset and normalize.
     t->tm_hour += time_zone_offset;
     t->tm_hour = t->tm_hour % 24;
