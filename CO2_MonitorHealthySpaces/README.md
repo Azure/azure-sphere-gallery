@@ -418,10 +418,12 @@ git clone --recurse-submodules https://github.com/Azure/azure-sphere-gallery.git
 
 There're four files in the project you need to understand.
 
-1. app_manifest.json: Used for network configuration and security settings.
-1. azsphere_board.txt: Used to select your Azure Sphere developer board.
-1. main.c: The main code/logic for the application.
-1. main.h: All the declarations for the application.
+| File  | Function  |
+|---|---|
+| app_manifest.json  | Used for network configuration and security settings. |
+| azsphere_board.txt |  Used to select your Azure Sphere developer board. |
+| main.c | The application code. |
+| main.h | The application declarations.
 
 Take a moment to familiarize yourself with these files.
 
