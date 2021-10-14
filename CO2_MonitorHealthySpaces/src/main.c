@@ -277,9 +277,9 @@ static void DeviceTwinGenericHandler(DX_DEVICE_TWIN_BINDING *deviceTwinBinding)
 static uint32_t DeferredUpdateCalculate(uint32_t max_deferral_time_in_minutes, SysEvent_UpdateType type, SysEvent_Status status,
                                         const char *typeDescription, const char *statusDescription)
 {
-    // UTC +10 is for Australia/Sydney.
+    // UTC +11 is for Australia/Sydney AEDT
     // Set the time_zone_offset to your time zone offset.
-    const int time_zone_offset = 10;
+    const int time_zone_offset = 11;
 
     //  Get UTC time
     time_t now = time(NULL);
