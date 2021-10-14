@@ -36,6 +36,3 @@
 [submodule "CO2_MonitorHealthySpaces/src/HardwareDefinitions"]
 	path = CO2_MonitorHealthySpaces/src/HardwareDefinitions
 	url = https://github.com/Azure-Sphere-DevX/AzureSphereDevX.HardwareDefinitions.git
-[submodule "CO2_MonitorHealthySpaces/src/AzureSphereDrivers"]
-	path = CO2_MonitorHealthySpaces/src/AzureSphereDrivers
-	url = https://github.com/Azure-Sphere-DevX/AzureSphereDrivers.git

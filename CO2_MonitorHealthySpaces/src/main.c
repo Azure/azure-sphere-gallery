@@ -389,7 +389,7 @@ static bool InitializeSdc30(void)
     int retry = 0;
     uint8_t asc_enabled, enable_asc;
 
-    sensirion_i2c_init(I2C_ISU2);
+    sensirion_i2c_init(I2C_ISU2, I2C_BUS_SPEED_FAST_PLUS);
 
     while (scd30_probe() != STATUS_OK && ++retry < 5)
     {
