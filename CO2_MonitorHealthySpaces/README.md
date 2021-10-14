@@ -410,7 +410,7 @@ git clone --recurse-submodules https://github.com/Azure/azure-sphere-gallery.git
 1. Start Visual Studio Code
 1. From the main menu, select **File**, then select **Open Folder...**.
 1. Open the **azure-sphere-gallery/CO2_MonitorHealthySpaces/src** project folder.
-1. Select **Select Folder** or the **OK** button to open the project.
+1. Select **Select Folder** or **OK** to open the project.
 
 ---
 
@@ -450,7 +450,7 @@ If you have an Avnet Starter Kit Rev 2 board, then follow these instructions.
 1. Update the **CmdArgs** property with your IoT Central **ID Scope**.
 1. Get your Azure Sphere Tenant ID. From a **command prompt**, run the following command.
 
-    ```
+    ```powershell
     azsphere tenant show-selected -o yaml
     ```
 
