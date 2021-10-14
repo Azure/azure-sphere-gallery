@@ -465,7 +465,7 @@ If you have an Avnet Starter Kit Rev 2 board, then follow these instructions.
     - Administrator
     ```
 
-1. Update **DeviceAuthentication** property with your **Azure Sphere Tenant ID**.
+1. Update the **DeviceAuthentication** property with your **Azure Sphere Tenant ID**.
 1. Update the **AllowedConnections** property with the IoT Central Application endpoint URLs you copied to Notepad.
 1. **Review** your updated manifest_app.json file. It should be similar to the following.
 
