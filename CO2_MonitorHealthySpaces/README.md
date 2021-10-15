@@ -114,9 +114,42 @@ Together these components implement [The Seven Properties of Highly Secure Devic
 
 ## Azure Sphere DevX
 
-The CO2 monitoring project uses the community-maintained Azure Sphere DevX library. The focus of the Azure Sphere DevX library is communications and simplification of common scenarios. The library is modular, lightweight, and well tested. The Azure Sphere DevX library will help reduce the amount of code you write and improve readability and long-term application maintenance.
+The CO2 monitoring project uses the community-maintained Azure Sphere DevX library. The focus of the Azure Sphere DevX library is communications and simplification of common scenarios. The library is modular, lightweight, and well tested. The Azure Sphere DevX library will reduce the amount of code you write, improve readability and maintenance. You are free to use the library for your solutions.
 
-For more information, refer to the [Azure Sphere DevX Wiki](https://github.com/Azure-Sphere-DevX/AzureSphereDevX.Examples/wiki).
+### Azure Sphere DevX bindings
+
+Bindings are the fundamental concept of the Azure Sphere DevX library. Bindings allow you to declare elements of a solution. For example, there are bindings for GPIO, PWM, Timers, inter-core messaging, Azure device twins and direct methods, and more.
+
+Here is an example declaring a GPIO binding for an LED.
+
+```c
+static DX_GPIO_BINDING gpio_network_led = {
+    .pin = NETWORK_CONNECTED_LED,
+    .name = "network_led",
+    .direction = DX_OUTPUT,
+    .initialState = GPIO_Value_Low,
+    .invertPin = true
+};
+```
+
+### Azure Sphere DevX binding functions
+
+Binding functions support bindings. For example, let's control the GPIO binding for the LED.
+
+| binding function  | Purpose   |
+|---|---|
+| dx_gpioOpen(&gpio_network_led) | Opens the LED |
+| dx_gpioOn(&gpio_network_led) | Turns on the LED |
+| dx_gpioOff(&gpio_network_led) | Turns off the LED |
+| dx_gpioClose(&gpio_network_led) | Closes the LED |
+
+### Azure Sphere DevX naming conventions
+
+All bindings and binding functions are prefixed with **dx_**. Following the prefix, is the name of the binding that is supported. In the above example, the binding functions support GPIO bindings.
+
+### Azure Sphere DevX Examples
+
+For more information about Azure Sphere DevX bindings and binding functions, refer to the [Azure Sphere DevX Examples Wiki](https://github.com/Azure-Sphere-DevX/AzureSphereDevX.Examples/wiki).
 
 ---
 
