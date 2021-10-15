@@ -98,7 +98,7 @@ The goal of the solution is also to demonstrate best practices for Azure Sphere 
 
 ## Azure Sphere
 
-Azure Sphere is a general-purpose IoT platform that is secure by design and by default. You focus on your IoT application, and Azure Sphere looks after ongoing platform security.
+Azure Sphere is a general-purpose Edge-to-Cloud platform that is secure by design and by default. You focus on your IoT application, and Azure Sphere looks after ongoing platform security.
 
 Azure Sphere consists of the following components:
 
