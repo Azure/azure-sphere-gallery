@@ -27,15 +27,10 @@
 [submodule "RS485Driver/RTApp/lib"]
 	path = RS485Driver/RTApp/lib
 	url = https://github.com/CodethinkLabs/mt3620-m4-drivers.git
-[submodule "CO2_MonitorHealthySpaces/src/AzureSphereDevX"]
-	path = CO2_MonitorHealthySpaces/src/AzureSphereDevX
-	url = https://github.com/Azure-Sphere-DevX/AzureSphereDevX.git
 [submodule "CO2_MonitorHealthySpaces/src/Tools"]
 	path = CO2_MonitorHealthySpaces/src/Tools
 	url = https://github.com/Azure-Sphere-DevX/AzureSphereDevX.Tools
 [submodule "CO2_MonitorHealthySpaces/src/HardwareDefinitions"]
 	path = CO2_MonitorHealthySpaces/src/HardwareDefinitions
 	url = https://github.com/Azure-Sphere-DevX/AzureSphereDevX.HardwareDefinitions.git
-[submodule "CO2_MonitorHealthySpaces/src/AzureSphereDrivers"]
-	path = CO2_MonitorHealthySpaces/src/AzureSphereDrivers
-	url = https://github.com/Azure-Sphere-DevX/AzureSphereDrivers.git
+
