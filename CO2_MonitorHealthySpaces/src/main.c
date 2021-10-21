@@ -131,6 +131,7 @@ static void read_telemetry_handler(EventLoopTimer *eventLoopTimer)
 
     onboard_sensors_read(&telemetry.latest);
 
+#ifdef SCD30
     if (scd30_read_measurement(&co2_ppm, &temperature, &relative_humidity) == STATUS_OK)
     {
         if (!isnan(co2_ppm) && !isnan(temperature) && !isnan(relative_humidity))
@@ -140,6 +141,14 @@ static void read_telemetry_handler(EventLoopTimer *eventLoopTimer)
             telemetry.latest.humidity = (int)relative_humidity;
         }
     }
+#else
+    if (scd4x_read_measurement(&co2_ppm, &temperature, &relative_humidity) == NO_ERROR)
+    {
+        telemetry.latest.co2ppm = co2_ppm;
+        telemetry.latest.temperature = temperature / 1000;
+        telemetry.latest.humidity = relative_humidity / 1000;
+    }
+#endif
 
     telemetry.updated = true;
 
@@ -150,8 +159,6 @@ static void read_telemetry_handler(EventLoopTimer *eventLoopTimer)
         IN_RANGE(telemetry.latest.humidity, 0, 100) &&
         IN_RANGE(telemetry.latest.co2ppm, 0, 20000);
     // clang-format on
-
-    dx_Log_Debug("Light: %d\n", telemetry.latest.light);
 
     dx_timerOneShotSet(&tmr_read_telemetry, &(struct timespec){20, 0});
 }
@@ -378,18 +385,20 @@ void azure_connection_state(bool connected)
     azure_connected = connected;
 }
 
+#ifdef SCD30
+
 /// <summary>
 /// Initialize the SDC30 CO2 and Humidity sensor
 /// </summary>
 /// <param name=""></param>
 /// <returns></returns>
-static bool InitializeSdc30(void)
+static bool InitializeScd30(void)
 {
     uint16_t interval_in_seconds = 2;
     int retry = 0;
     uint8_t asc_enabled, enable_asc;
 
-    sensirion_i2c_init(I2C_ISU2, I2C_BUS_SPEED_FAST_PLUS);
+    sensirion_i2c_init(i2c_isu2.fd);
 
     while (scd30_probe() != STATUS_OK && ++retry < 5)
     {
@@ -428,6 +437,61 @@ static bool InitializeSdc30(void)
     return true;
 }
 
+#else
+
+/// <summary>
+/// Initialize the SDC30 CO2 and Humidity sensor
+/// </summary>
+/// <param name=""></param>
+/// <returns></returns>
+static bool InitializeScd4x(void)
+{
+    uint16_t asc_enabled, enable_asc;
+    sensirion_i2c_hal_init(i2c_isu2.fd);
+
+    // Clean up potential SCD40 states
+    scd4x_wake_up();
+    scd4x_stop_periodic_measurement();
+    scd4x_reinit();
+
+    uint16_t serial_0;
+    uint16_t serial_1;
+    uint16_t serial_2;
+    int error = scd4x_get_serial_number(&serial_0, &serial_1, &serial_2);
+    if (error)
+    {
+        printf("Error executing scd4x_get_serial_number(): %i\n", error);
+    }
+    else
+    {
+        printf("serial: 0x%04x%04x%04x\n", serial_0, serial_1, serial_2);
+    }
+
+    if (scd4x_get_automatic_self_calibration(&asc_enabled) == NO_ERROR)
+    {
+        if (asc_enabled == 0)
+        {
+            enable_asc = 1;
+            if (scd4x_set_automatic_self_calibration(enable_asc) == NO_ERROR)
+            {
+                Log_Debug("scd30 automatic self calibration enabled. Takes 7 days, at least 1 hour/day outside, powered continuously");
+            }
+        }
+    }
+
+    error = scd4x_start_periodic_measurement();
+    if (error)
+    {
+        printf("Error executing scd4x_start_periodic_measurement(): %i\n", error);
+    }
+
+    sensirion_i2c_hal_sleep_usec(5000000);
+
+    return 0;
+}
+
+#endif
+
 /// <summary>
 ///  Initialize peripherals, device twins, direct methods, timer_bindings.
 /// </summary>
@@ -436,6 +500,7 @@ static void InitPeripheralsAndHandlers(void)
     dx_Log_Debug_Init(Log_Debug_Time_buffer, sizeof(Log_Debug_Time_buffer));
 
     dx_pwmSetOpen(pwm_bindings, NELEMS(pwm_bindings));
+    dx_i2cSetOpen(i2c_bindings, NELEMS(i2c_bindings));
 
     // Onboard LEDs are wired such that high voltage is off, low is on
     // Slightly unintuitive, but a 100% duration cycle turns the LED off
@@ -445,7 +510,12 @@ static void InitPeripheralsAndHandlers(void)
 
     dx_azureConnect(&dx_config, NETWORK_INTERFACE, IOT_PLUG_AND_PLAY_MODEL_ID);
 
-    InitializeSdc30();
+#ifdef SCD30
+    InitializeScd30();
+#else
+    InitializeScd4x();
+#endif
+
     onboard_sensors_init();
 
     dx_gpioSetOpen(gpio_bindings, NELEMS(gpio_bindings));
@@ -474,6 +544,7 @@ static void ClosePeripheralsAndHandlers(void)
     dx_timerSetStop(timer_bindings, NELEMS(timer_bindings));
     dx_deviceTwinUnsubscribe();
     dx_gpioSetClose(gpio_bindings, NELEMS(gpio_bindings));
+    dx_i2cSetClose(i2c_bindings, NELEMS(i2c_bindings));
     dx_timerEventLoopStop();
 }
 

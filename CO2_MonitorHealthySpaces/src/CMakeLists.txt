@@ -14,7 +14,7 @@ if (EXISTS "${CMAKE_SOURCE_DIR}/Tools/cmake/azsphere_config.cmake")
 
 else()
 
-    # For information on setting tools revision and target api set see 
+    # For information on setting tools revision and target api set see
     # https://docs.microsoft.com/en-us/azure-sphere/app-development/using-cmake-functions
 
     azsphere_configure_tools(TOOLS_REVISION "21.07")
@@ -22,14 +22,43 @@ else()
 
 endif()
 
+if (SCD4x)
+    set(scd4x
+        "AzureSphereDrivers/embedded-i2c-scd4x/scd4x_i2c.c"
+        "AzureSphereDrivers/embedded-i2c-scd4x/sensirion_common.c"
+        "AzureSphereDrivers/embedded-i2c-scd4x/sensirion_i2c.c"
+        "AzureSphereDrivers/embedded-i2c-scd4x/sensirion_i2c_hal.c"
+    )
+    source_group("scd4x" FILES ${scd4x})
+endif(SCD4x)
+
 # Create executable
-add_executable (${PROJECT_NAME} main.c  "Onboard/azure_status.c" "Onboard/onboard_sensors.c")
-target_link_libraries (${PROJECT_NAME} applibs pthread gcc_s c azure_sphere_devx scd30_lib)
+add_executable (${PROJECT_NAME}
+    "main.c"
+    "Onboard/azure_status.c"
+    "Onboard/onboard_sensors.c"
+    ${scd4x}
+)
+
+target_link_libraries (${PROJECT_NAME} applibs pthread gcc_s c azure_sphere_devx)
 target_include_directories(${PROJECT_NAME} PUBLIC AzureSphereDevX/include)
 target_include_directories(${PROJECT_NAME} PUBLIC Onboard)
 
 add_subdirectory("AzureSphereDevX" out)
-add_subdirectory("AzureSphereDrivers/EmbeddedScd30" scd30)
+
+set_source_files_properties("AzureSphereDrivers/embedded-i2c-scd4x/sensirion_common.c" PROPERTIES COMPILE_FLAGS -Wno-conversion)
+set_source_files_properties("AzureSphereDrivers/embedded-i2c-scd4x/sensirion_i2c.c" PROPERTIES COMPILE_FLAGS -Wno-conversion)
+
+if(SCD30)
+    add_definitions( -DSCD30=TRUE )
+    target_link_libraries (${PROJECT_NAME} scd30_lib)
+    add_subdirectory("AzureSphereDrivers/EmbeddedScd30" scd30)
+endif(SCD30)
+
+if (SCD4x)
+    add_definitions( -DSCD4x=TRUE )
+    target_include_directories(${PROJECT_NAME} PUBLIC AzureSphereDrivers/embedded-i2c-scd4x scd4x)
+endif(SCD4x)
 
 if(AVNET OR AVNET_REV_2)
     add_subdirectory("AzureSphereDrivers/AVNET/HL" drivers)

@@ -6,6 +6,7 @@
 #include "dx_deferred_update.h"
 #include "dx_gpio.h"
 #include "dx_json_serializer.h"
+#include "dx_i2c.h"
 #include "dx_pwm.h"
 #include "dx_terminate.h"
 #include "dx_timer.h"
@@ -21,7 +22,13 @@
 #include <applibs/log.h>
 #include <applibs/powermanagement.h>
 
+#ifdef SCD30
 #include "AzureSphereDrivers/EmbeddedScd30/scd30/scd30.h"
+#else
+#include "scd4x_i2c.h"
+#include "sensirion_i2c_hal.h"
+#include "sensirion_common.h"
+#endif
 
 // https://docs.microsoft.com/en-us/azure/iot-pnp/overview-iot-plug-and-play
 #define IOT_PLUG_AND_PLAY_MODEL_ID "dtmi:com:example:azuresphere:co2monitor;1"
@@ -55,7 +62,15 @@ static char msgBuffer[JSON_MESSAGE_BYTES] = {0};
 
 // Set alert level to a reasonable default. This is updated by CO2PPMAlertLevel device twin
 static int32_t co2_alert_level = 1000;
+
+#ifdef SCD30
 static float co2_ppm, temperature, relative_humidity;
+#else
+static uint16_t co2_ppm;
+static int32_t temperature;
+static int32_t relative_humidity;
+#endif
+
 static bool be_quiet = false;
 
 ENVIRONMENT telemetry;
@@ -101,7 +116,8 @@ static DX_DEVICE_TWIN_BINDING dt_defer_requested = {.propertyName = "DeferredUpd
  * declare gpio bindings
  **********************************************************************************************************/
 
-DX_GPIO_BINDING gpio_network_led = {.pin = AZURE_CONNECTED_LED, .name = "network_led", .direction = DX_OUTPUT, .initialState = GPIO_Value_Low, .invertPin = true};
+DX_GPIO_BINDING gpio_network_led = {
+    .pin = AZURE_CONNECTED_LED, .name = "network_led", .direction = DX_OUTPUT, .initialState = GPIO_Value_Low, .invertPin = true};
 static DX_GPIO_BINDING gpio_button_b = {.pin = BUTTON_B, .name = "button_b", .direction = DX_INPUT, .detect = DX_GPIO_DETECT_LOW};
 
 /***********************************************************************************************************
@@ -109,7 +125,8 @@ static DX_GPIO_BINDING gpio_button_b = {.pin = BUTTON_B, .name = "button_b", .di
  **********************************************************************************************************/
 
 DX_TIMER_BINDING tmr_azure_status_led_off = {.name = "tmr_azure_status_led_off", .handler = azure_status_led_off_handler};
-DX_TIMER_BINDING tmr_azure_status_led_on = {.period = {0, 500 * ONE_MS}, .name = "tmr_azure_status_led_on", .handler = azure_status_led_on_handler};
+DX_TIMER_BINDING tmr_azure_status_led_on = {
+    .period = {0, 500 * ONE_MS}, .name = "tmr_azure_status_led_on", .handler = azure_status_led_on_handler};
 static DX_TIMER_BINDING tmr_co2_alert_buzzer_off_oneshot = {.name = "tmr_co2_alert_buzzer_off_oneshot",
                                                             .handler = co2_alert_buzzer_off_handler};
 static DX_TIMER_BINDING tmr_co2_alert_timer = {.period = {8, 0}, .name = "tmr_co2_alert_timer", .handler = co2_alert_handler};
@@ -132,24 +149,32 @@ static DX_PWM_BINDING pwm_led_green = {.pwmController = &pwm_rgb_controller, .ch
 static DX_PWM_BINDING pwm_led_blue = {.pwmController = &pwm_rgb_controller, .channelId = 2, .name = "pwm green led"};
 
 /***********************************************************************************************************
+ * declare i2c bindings
+ **********************************************************************************************************/
+
+DX_I2C_BINDING i2c_isu2 = {.interfaceId = I2C_ISU2, .speedInHz = I2C_BUS_SPEED_STANDARD, .name = "i2c co2 sensor"};
+
+/***********************************************************************************************************
  * declare binding sets
  **********************************************************************************************************/
 
 // All bindings referenced in the following binding sets are initialised in the InitPeripheralsAndHandlers function
 static DX_DEVICE_TWIN_BINDING *device_twin_bindings[] = {&dt_co2_ppm_alert_level, &dt_startup_utc,    &dt_sw_version,
-                                                  &dt_temperature,         &dt_pressure,       &dt_humidity,
-                                                  &dt_carbon_dioxide,      &dt_defer_requested};
+                                                         &dt_temperature,         &dt_pressure,       &dt_humidity,
+                                                         &dt_carbon_dioxide,      &dt_defer_requested};
 
 static DX_PWM_BINDING *pwm_bindings[] = {&pwm_buzz_click, &pwm_led_green, &pwm_led_red, &pwm_led_blue};
+
+static DX_I2C_BINDING *i2c_bindings[] = {&i2c_isu2};
 
 static DX_GPIO_BINDING *gpio_bindings[] = {&gpio_network_led, &gpio_button_b};
 
 static DX_TIMER_BINDING *timer_bindings[] = {&tmr_read_telemetry,
-                                      &tmr_co2_alert_buzzer_off_oneshot,
-                                      &tmr_co2_alert_timer,
-                                      &tmr_azure_status_led_on,
-                                      &tmr_azure_status_led_off,
-                                      &tmr_publish_telemetry,
-                                      &tmr_update_device_twins,
-                                      &tmr_read_buttons,
-                                      &tmr_watchdog};
+                                             &tmr_co2_alert_buzzer_off_oneshot,
+                                             &tmr_co2_alert_timer,
+                                             &tmr_azure_status_led_on,
+                                             &tmr_azure_status_led_off,
+                                             &tmr_publish_telemetry,
+                                             &tmr_update_device_twins,
+                                             &tmr_read_buttons,
+                                             &tmr_watchdog};

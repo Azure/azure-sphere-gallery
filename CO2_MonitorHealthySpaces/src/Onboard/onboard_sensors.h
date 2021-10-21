@@ -3,11 +3,11 @@
 
 #pragma once
 
+#include "dx_i2c.h"
+#include "hw/co2_monitor.h"
 #include <stdbool.h>
 #include <stdlib.h>
 #include <time.h>
-
-#include "hw/co2_monitor.h"
 
 #ifdef OEM_AVNET
 #include "../AzureSphereDrivers/AVNET/HL/imu_temp_pressure.h"
@@ -32,3 +32,5 @@ typedef struct {
 bool onboard_sensors_read(SENSOR *telemetry);
 bool onboard_sensors_init(void);
 bool onboard_sensors_close(void);
+
+extern DX_I2C_BINDING i2c_isu2;
