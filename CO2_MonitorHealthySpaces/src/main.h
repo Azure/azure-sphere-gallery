@@ -130,10 +130,10 @@ DX_TIMER_BINDING tmr_azure_status_led_on = {
 static DX_TIMER_BINDING tmr_co2_alert_buzzer_off_oneshot = {.name = "tmr_co2_alert_buzzer_off_oneshot",
                                                             .handler = co2_alert_buzzer_off_handler};
 static DX_TIMER_BINDING tmr_co2_alert_timer = {.period = {8, 0}, .name = "tmr_co2_alert_timer", .handler = co2_alert_handler};
-static DX_TIMER_BINDING tmr_publish_telemetry = {.period = {5, 0}, .name = "tmr_publish_telemetry", .handler = publish_telemetry_handler};
+static DX_TIMER_BINDING tmr_publish_telemetry = {.period = {20, 0}, .name = "tmr_publish_telemetry", .handler = publish_telemetry_handler};
 static DX_TIMER_BINDING tmr_read_buttons = {.period = {0, 100 * ONE_MS}, .name = "tmr_read_buttons", .handler = read_buttons_handler};
 static DX_TIMER_BINDING tmr_read_telemetry = {.name = "tmr_read_telemetry", .handler = read_telemetry_handler};
-static DX_TIMER_BINDING tmr_update_device_twins = {.period = {10, 0}, .name = "tmr_update_device_twins", .handler = update_device_twins};
+static DX_TIMER_BINDING tmr_update_device_twins = {.period = {15, 0}, .name = "tmr_update_device_twins", .handler = update_device_twins};
 static DX_TIMER_BINDING tmr_watchdog = {.period = {30, 0}, .name = "tmr_publish_telemetry", .handler = watchdog_handler};
 
 /***********************************************************************************************************

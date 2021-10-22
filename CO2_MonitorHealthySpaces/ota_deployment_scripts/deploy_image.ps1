@@ -1,5 +1,6 @@
 ﻿$image_path_filename = "../src/out/ARM-Release/co2monitor.imagepackage"
-$device_group = "CO2Monitor/Field Test"
+$device_group = "CO2Monitor/SCD30"
+# $device_group = "CO2Monitor/SCD4X"
 
 Write-Output "`nRun this script from the ota_deployment_scripts folder`n"
 
