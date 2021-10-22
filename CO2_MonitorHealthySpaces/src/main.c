@@ -203,7 +203,7 @@ static void co2_alert_buzzer_off_handler(EventLoopTimer *eventLoopTimer)
     dx_pwmStop(&pwm_buzz_click);
 }
 
-static void co2_alert_update(void) {
+static void update_co2_alert_status(void) {
     if (!telemetry.valid)
     {
         return;
@@ -242,7 +242,7 @@ static void co2_alert_handler(EventLoopTimer *eventLoopTimer)
         dx_terminate(DX_ExitCode_ConsumeEventLoopTimeEvent);
         return;
     }
-    co2_alert_update();
+    update_co2_alert_status();
 }
 
 /***********************************************************************************************************
@@ -259,7 +259,7 @@ static void DeviceTwinGenericHandler(DX_DEVICE_TWIN_BINDING *deviceTwinBinding)
     if (IN_RANGE(*(int *)deviceTwinBinding->propertyValue, 0, 20000))
     {
         co2_alert_level = *(int *)deviceTwinBinding->propertyValue;
-        co2_alert_update();
+        update_co2_alert_status();
         dx_deviceTwinAckDesiredValue(deviceTwinBinding, deviceTwinBinding->propertyValue, DX_DEVICE_TWIN_RESPONSE_COMPLETED);
     }
     else
