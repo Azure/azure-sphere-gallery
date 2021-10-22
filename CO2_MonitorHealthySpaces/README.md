@@ -219,7 +219,7 @@ This calibration time is needed for the sensor algorithm to calculate its initia
 
 ### The Sensirion SDC41 CO2 Sensor
 
-The MikroE HVAC Click uses the Sensirion SDC41 CO2, Temperature, and humidity sensor. Sensirion, follow the same pattern for the [SDC41 driver](https://github.com/Sensirion/embedded-i2c-scd4x) as the SDC30 sensor, there is a HAL, and it's a matter of implementing Azure Sphere I2C support. Calibration of the sensor is also required.
+The MikroE HVAC Click uses the Sensirion SDC41 CO2, Temperature, and humidity sensor. Sensirion, follow the same pattern for the [SDC41 driver](https://github.com/Sensirion/embedded-i2c-scd4x) as the SDC30 sensor, there is a HAL, and it's a matter of implementing Azure Sphere I2C support. The SCD41 driver for Azure Sphere is included in the project. Calibration of the sensor is also required.
 
 ![This image shows the MikroE HVAC click](media/hvac-click-thickbox_default-1.jpg)
 
@@ -464,15 +464,16 @@ Take a moment to familiarize yourself with these files.
 
 ---
 
-## Select your Avnet starter board
+## Select your Avnet starter board and CO2 sensor
 
-The default board is the Avnet Starter Kit Rev 1. If this is the board you're using, then skip to the next step.
+The default board is the Avnet Starter Kit Rev 1, and the default sensor is the MikroE HVAC CO2 Click. If this is the board and sensor you're using, then skip to the next step.
 
-If you have an Avnet Starter Kit Rev 2 board, then follow these instructions.
+If you have an Avnet Starter Kit Rev 2 board, or the Seeed Studio CO2 sensor, then follow these instructions.
 
 1. Open the **azsphere_board.txt** file.
 1. Comment out the Avnet Rev 1 board with a **#**.
 1. Uncomment the Avnet Rev 2 board by removing the leading **#** character.
+1. Comment out the default CO2 sensor, and uncomment the Seeed Studio CO2 sensor.
 1. **Save** the changes.
 1. Press <kbd>Ctrl+Shift+P</kbd> to open the Visual Studio Code command palette.
 1. Type and select **CMake: Delete Cache and Reconfigure**.

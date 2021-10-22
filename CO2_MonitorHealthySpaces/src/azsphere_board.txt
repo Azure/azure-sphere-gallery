@@ -5,5 +5,7 @@ set(AVNET TRUE "AVNET Azure Sphere Starter Kit Revision 1")
 # set(AVNET_REV_2 TRUE "AVNET Azure Sphere Starter Kit Revision 2")
 
 
-set(SCD30 TRUE "Seeed Studio Grove CO2 sensor with SCD30 sensor")
-# set(SCD4x TRUE "MikroE HVAC Click with SCD4x sensor")
+# Select your CO2 sensor
+
+set(SCD4x TRUE "MikroE HVAC Click with SCD4x sensor")
+# set(SCD30 TRUE "Seeed Studio Grove CO2 sensor with SCD30 sensor")
