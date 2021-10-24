@@ -549,6 +549,7 @@ static void ClosePeripheralsAndHandlers(void)
     dx_deviceTwinUnsubscribe();
     dx_gpioSetClose(gpio_bindings, NELEMS(gpio_bindings));
     dx_i2cSetClose(i2c_bindings, NELEMS(i2c_bindings));
+    dx_pwmSetClose(pwm_bindings, NELEMS(pwm_bindings));
     dx_timerEventLoopStop();
 }
 
