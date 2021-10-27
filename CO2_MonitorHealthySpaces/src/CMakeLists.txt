@@ -37,6 +37,7 @@ add_executable (${PROJECT_NAME}
     "main.c"
     "Onboard/azure_status.c"
     "Onboard/onboard_sensors.c"
+    "co2_sensor.c"
     ${scd4x}
 )
 

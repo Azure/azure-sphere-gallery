@@ -1,6 +1,6 @@
 # Improve health, wellbeing, and productivity by tracking CO2 levels
 
-Create healthier spaces by monitoring CO2, temperature, and humidity levels with [Azure Sphere](https://azure.microsoft.com/en-gb/services/azure-sphere/?WT.mc_id=julyot-co2-dglover) and [Azure IoT Central](https://azure.microsoft.com/en-gb/services/iot-central/?WT.mc_id=julyot-co2-dglover).
+Create healthier safer spaces by monitoring CO2, temperature, and humidity levels with [Azure Sphere](https://azure.microsoft.com/en-gb/services/azure-sphere/?WT.mc_id=julyot-co2-dglover) and [Azure IoT Central](https://azure.microsoft.com/en-gb/services/iot-central/?WT.mc_id=julyot-co2-dglover).
 
 ![The image shows a banner with CO2 data](media/banner.png)
 
@@ -45,13 +45,23 @@ For more information see the [Code of Conduct FAQ](https://opensource.microsoft.
 
 ---
 
-## Are CO2 levels making you grumpy, sleepy, or sad
+## Why monitor CO2 levels
+
+The COVID-19 pandemic inspired this project. CO2 levels can impact your productivity and mental health. CO2 levels can also indicate how ventilated an area is. Well ventilated shared spaces will be critical as we return to a "new" normal.
+
+### Create safer spaces
+
+Although CO2 levels are not a direct measure of possible exposure to COVID-19, checking levels using a monitor can help you identify poorly ventilated areas. 
+
+Learn more about [Ventilation and air conditioning during the coronavirus (COVID-19) pandemic](https://www.hse.gov.uk/coronavirus/equipment-and-machinery/air-conditioning-and-ventilation/identifying-poorly-ventilated-areas.htm).
+
+### Create productive and healthy spaces
 
 When working from home, it's easy to close the door to shut out the noise of everyday life while we get on with work. Closing the door can lead to a build-up of CO2 gas, a by-product of our breathing. High CO2 levels can impact our wellbeing, concentration, and productivity levels.
 
-Check out "[Indoor carbon dioxide levels could be a health hazard, scientists warn](https://www.theguardian.com/environment/2019/jul/08/indoor-carbon-dioxide-levels-could-be-a-health-hazard-scientists-warn)".
+Learn how [Indoor carbon dioxide levels could be a health hazard, scientists warn](https://www.theguardian.com/environment/2019/jul/08/indoor-carbon-dioxide-levels-could-be-a-health-hazard-scientists-warn).
 
-The problem is we cannot see or smell Carbon Dioxide, it keeps building up, and we have no way of knowing it's happening other than getting tired or a headache. So, with that in mind, I figured it was the Internet of Things to the rescue!
+The problem is we cannot see or smell Carbon Dioxide, it keeps building up, and we have no way of knowing it's happening other than getting tired or a headache.
 
 ---
 
@@ -582,7 +592,7 @@ Start the app build deploy process.
 
 ## Create a Settings View
 
-Create an IoT Central Settings View to set the CO2 alert level for the CO2 monitor.
+Create an IoT Central Settings View to set the CO2 alert level and altitude for the CO2 monitor.
 
 1. From the device view page, select **Manage template**, then select **Edit template**.
 1. Select **Views**.
@@ -591,6 +601,7 @@ Create an IoT Central Settings View to set the CO2 alert level for the CO2 monit
 1. Name the form **Settings**.
 1. Expand the **Properties**.
 1. Select **CO2 alert level (ppm)**.
+1. Select **Device altitude (meters)**.
 1. Select **Add section**.
 1. Select **Save**.
 1. Select **Back**.

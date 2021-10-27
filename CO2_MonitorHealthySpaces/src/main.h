@@ -17,18 +17,11 @@
 #include "app_exit_codes.h" // application specific exit codes
 #include "Onboard/onboard_sensors.h"
 #include "Onboard/azure_status.h"
+#include "co2_sensor.h"
 
 #include <applibs/applications.h>
 #include <applibs/log.h>
 #include <applibs/powermanagement.h>
-
-#ifdef SCD30
-#include "AzureSphereDrivers/EmbeddedScd30/scd30/scd30.h"
-#else
-#include "scd4x_i2c.h"
-#include "sensirion_i2c_hal.h"
-#include "sensirion_common.h"
-#endif
 
 // https://docs.microsoft.com/en-us/azure/iot-pnp/overview-iot-plug-and-play
 #define IOT_PLUG_AND_PLAY_MODEL_ID "dtmi:com:example:azuresphere:co2monitor;1"
@@ -39,12 +32,16 @@
  * Forward declarations
  **********************************************************************************************************/
 
+static DX_DIRECT_METHOD_RESPONSE_CODE restart_device_handler(JSON_Value *json, DX_DIRECT_METHOD_BINDING *directMethodBinding,
+                                                             char **responseMsg);
 static void co2_alert_buzzer_off_handler(EventLoopTimer *eventLoopTimer);
 static void co2_alert_handler(EventLoopTimer *eventLoopTimer);
-static void DeviceTwinGenericHandler(DX_DEVICE_TWIN_BINDING *deviceTwinBinding);
+static void delayed_restart_device_handler(EventLoopTimer *eventLoopTimer);
 static void publish_telemetry_handler(EventLoopTimer *eventLoopTimer);
 static void read_buttons_handler(EventLoopTimer *eventLoopTimer);
 static void read_telemetry_handler(EventLoopTimer *eventLoopTimer);
+static void set_co2_alert_level(DX_DEVICE_TWIN_BINDING *deviceTwinBinding);
+static void set_device_altitude(DX_DEVICE_TWIN_BINDING *deviceTwinBinding);
 static void update_device_twins(EventLoopTimer *eventLoopTimer);
 static void watchdog_handler(EventLoopTimer *eventLoopTimer);
 void azure_status_led_off_handler(EventLoopTimer *eventLoopTimer);
@@ -62,14 +59,6 @@ static char msgBuffer[JSON_MESSAGE_BYTES] = {0};
 
 // Set alert level to a reasonable default. This is updated by CO2PPMAlertLevel device twin
 static int32_t co2_alert_level = 1000;
-
-#ifdef SCD30
-static float co2_ppm, temperature, relative_humidity;
-#else
-static uint16_t co2_ppm;
-static int32_t temperature;
-static int32_t relative_humidity;
-#endif
 
 static bool be_quiet = false;
 
@@ -100,7 +89,9 @@ static DX_MESSAGE_CONTENT_PROPERTIES contentProperties = {.contentEncoding = "ut
  **********************************************************************************************************/
 
 static DX_DEVICE_TWIN_BINDING dt_co2_ppm_alert_level = {
-    .propertyName = "AlertLevel", .twinType = DX_DEVICE_TWIN_INT, .handler = DeviceTwinGenericHandler};
+    .propertyName = "AlertLevel", .twinType = DX_DEVICE_TWIN_INT, .handler = set_co2_alert_level};
+static DX_DEVICE_TWIN_BINDING dt_altitude_in_meters = {
+    .propertyName = "AltitudeInMeters", .twinType = DX_DEVICE_TWIN_INT, .handler = set_device_altitude};
 
 static DX_DEVICE_TWIN_BINDING dt_humidity = {.propertyName = "Humidity", .twinType = DX_DEVICE_TWIN_INT};
 static DX_DEVICE_TWIN_BINDING dt_pressure = {.propertyName = "Pressure", .twinType = DX_DEVICE_TWIN_INT};
@@ -111,6 +102,12 @@ static DX_DEVICE_TWIN_BINDING dt_startup_utc = {.propertyName = "StartupUtc", .t
 static DX_DEVICE_TWIN_BINDING dt_sw_version = {.propertyName = "SoftwareVersion", .twinType = DX_DEVICE_TWIN_STRING};
 
 static DX_DEVICE_TWIN_BINDING dt_defer_requested = {.propertyName = "DeferredUpdateRequest", .twinType = DX_DEVICE_TWIN_STRING};
+
+/***********************************************************************************************************
+ * declare direct methods
+ **********************************************************************************************************/
+
+static DX_DIRECT_METHOD_BINDING dm_restart_device = {.methodName = "RestartDevice", .handler = restart_device_handler};
 
 /***********************************************************************************************************
  * declare gpio bindings
@@ -130,6 +127,7 @@ DX_TIMER_BINDING tmr_azure_status_led_on = {
 static DX_TIMER_BINDING tmr_co2_alert_buzzer_off_oneshot = {.name = "tmr_co2_alert_buzzer_off_oneshot",
                                                             .handler = co2_alert_buzzer_off_handler};
 static DX_TIMER_BINDING tmr_co2_alert_timer = {.period = {8, 0}, .name = "tmr_co2_alert_timer", .handler = co2_alert_handler};
+static DX_TIMER_BINDING tmr_delayed_restart_device = {.name = "tmr_delayed_restart_device", .handler = delayed_restart_device_handler};
 static DX_TIMER_BINDING tmr_publish_telemetry = {.period = {20, 0}, .name = "tmr_publish_telemetry", .handler = publish_telemetry_handler};
 static DX_TIMER_BINDING tmr_read_buttons = {.period = {0, 100 * ONE_MS}, .name = "tmr_read_buttons", .handler = read_buttons_handler};
 static DX_TIMER_BINDING tmr_read_telemetry = {.name = "tmr_read_telemetry", .handler = read_telemetry_handler};
@@ -159,15 +157,16 @@ DX_I2C_BINDING i2c_isu2 = {.interfaceId = I2C_ISU2, .speedInHz = I2C_BUS_SPEED_S
  **********************************************************************************************************/
 
 // All bindings referenced in the following binding sets are initialised in the InitPeripheralsAndHandlers function
-static DX_DEVICE_TWIN_BINDING *device_twin_bindings[] = {&dt_co2_ppm_alert_level, &dt_startup_utc,    &dt_sw_version,
-                                                         &dt_temperature,         &dt_pressure,       &dt_humidity,
-                                                         &dt_carbon_dioxide,      &dt_defer_requested};
+static DX_DEVICE_TWIN_BINDING *device_twin_bindings[] = {&dt_co2_ppm_alert_level, &dt_startup_utc,     &dt_sw_version,
+                                                         &dt_temperature,         &dt_pressure,        &dt_humidity,
+                                                         &dt_carbon_dioxide,      &dt_defer_requested, &dt_altitude_in_meters};
 
 static DX_PWM_BINDING *pwm_bindings[] = {&pwm_buzz_click, &pwm_led_green, &pwm_led_red, &pwm_led_blue};
 
-static DX_I2C_BINDING *i2c_bindings[] = {&i2c_isu2};
+DX_I2C_BINDING *i2c_bindings[] = {&i2c_isu2};
 
 static DX_GPIO_BINDING *gpio_bindings[] = {&gpio_network_led, &gpio_button_b};
+static DX_DIRECT_METHOD_BINDING *direct_method_bindings[] = {&dm_restart_device};
 
 static DX_TIMER_BINDING *timer_bindings[] = {&tmr_read_telemetry,
                                              &tmr_co2_alert_buzzer_off_oneshot,
@@ -177,4 +176,5 @@ static DX_TIMER_BINDING *timer_bindings[] = {&tmr_read_telemetry,
                                              &tmr_publish_telemetry,
                                              &tmr_update_device_twins,
                                              &tmr_read_buttons,
-                                             &tmr_watchdog};
+                                             &tmr_watchdog,
+                                             &tmr_delayed_restart_device};

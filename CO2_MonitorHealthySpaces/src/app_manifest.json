@@ -7,6 +7,7 @@
   "Capabilities": {
     "SystemEventNotifications": true,
     "SoftwareUpdateDeferral": true,
+    "PowerControls": [ "ForceReboot" ],
     "Gpio": [ "$AZURE_CONNECTED_LED", "$BUTTON_B" ],
     "Pwm": [ "$PWM_CLICK_CONTROLLER", "$PWM_RGB_CONTROLLER" ],
     "I2cMaster": [ "$I2C_ISU2" ],
