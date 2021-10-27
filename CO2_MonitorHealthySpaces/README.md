@@ -51,7 +51,7 @@ The COVID-19 pandemic inspired this project. CO2 levels can impact your producti
 
 ### Create safer spaces
 
-Although CO2 levels are not a direct measure of possible exposure to COVID-19, checking levels using a monitor can help you identify poorly ventilated areas. 
+Although CO2 levels are not a direct measure of possible exposure to COVID-19, checking levels using a monitor can help you identify poorly ventilated areas.
 
 Learn more about [Ventilation and air conditioning during the coronavirus (COVID-19) pandemic](https://www.hse.gov.uk/coronavirus/equipment-and-machinery/air-conditioning-and-ventilation/identifying-poorly-ventilated-areas.htm).
 
@@ -611,7 +611,7 @@ Create an IoT Central Settings View to set the CO2 alert level and altitude for 
 
 ---
 
-## Setting the CO2 alert level
+## Setting the CO2 alert level and device altitude
 
 Navigate back to the IoT Central device view.
 
@@ -622,7 +622,9 @@ Navigate back to the IoT Central device view.
 1. Set the CO2 alert level to 400 ppm, and select **Save**. This low value should trigger the CO2 alert buzzer.
 1. Set the CO2 alert level to a more realistic value like 800 pmm, and select **Save**.
 
-> You can test CO2 alert levels by breathing onto the CO2 sensor.
+    > You can test CO2 alert levels by breathing onto the CO2 sensor.
+
+1. Set the device altitude to tune the CO2 measurements for your location.
 
 ---
 
