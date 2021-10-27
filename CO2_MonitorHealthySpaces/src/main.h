@@ -150,7 +150,8 @@ static DX_PWM_BINDING pwm_led_blue = {.pwmController = &pwm_rgb_controller, .cha
  * declare i2c bindings
  **********************************************************************************************************/
 
-DX_I2C_BINDING i2c_isu2 = {.interfaceId = I2C_ISU2, .speedInHz = I2C_BUS_SPEED_STANDARD, .name = "i2c co2 sensor"};
+DX_I2C_BINDING i2c_co2_sensor = {.interfaceId = I2C_ISU2, .speedInHz = I2C_BUS_SPEED_STANDARD, .name = "i2c co2 sensor"};
+DX_I2C_BINDING i2c_onboard_sensors = {.interfaceId = I2C_ISU2, .speedInHz = I2C_BUS_SPEED_STANDARD, .name = "i2c co2 sensor"};
 
 /***********************************************************************************************************
  * declare binding sets
@@ -163,7 +164,7 @@ static DX_DEVICE_TWIN_BINDING *device_twin_bindings[] = {&dt_co2_ppm_alert_level
 
 static DX_PWM_BINDING *pwm_bindings[] = {&pwm_buzz_click, &pwm_led_green, &pwm_led_red, &pwm_led_blue};
 
-DX_I2C_BINDING *i2c_bindings[] = {&i2c_isu2};
+DX_I2C_BINDING *i2c_bindings[] = {&i2c_co2_sensor, &i2c_onboard_sensors};
 
 static DX_GPIO_BINDING *gpio_bindings[] = {&gpio_network_led, &gpio_button_b};
 static DX_DIRECT_METHOD_BINDING *direct_method_bindings[] = {&dm_restart_device};

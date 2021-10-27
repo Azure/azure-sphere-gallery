@@ -33,4 +33,4 @@ bool onboard_sensors_read(SENSOR *telemetry);
 bool onboard_sensors_init(void);
 bool onboard_sensors_close(void);
 
-extern DX_I2C_BINDING i2c_isu2;
+extern DX_I2C_BINDING i2c_onboard_sensors;

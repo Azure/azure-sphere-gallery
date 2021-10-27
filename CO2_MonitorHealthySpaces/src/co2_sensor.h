@@ -11,7 +11,7 @@
 #include "sensirion_common.h"
 #endif
 
-extern DX_I2C_BINDING i2c_isu2;
+extern DX_I2C_BINDING i2c_co2_sensor;
 
 /// <summary>
 /// Initialize the CO2 sensor

@@ -13,7 +13,7 @@ bool co2_initialize(void)
     int retry = 0;
     uint8_t asc_enabled, enable_asc;
 
-    sensirion_i2c_init(i2c_isu2.fd);
+    sensirion_i2c_init(i2c_co2_sensor.fd);
 
     while (scd30_probe() != STATUS_OK && ++retry < 5)
     {
@@ -62,7 +62,7 @@ bool co2_initialize(void)
 bool co2_initialize(void)
 {
     uint16_t asc_enabled, enable_asc;
-    sensirion_i2c_hal_init(i2c_isu2.fd);
+    sensirion_i2c_hal_init(i2c_co2_sensor.fd);
 
     // Clean up potential SCD40 states
     scd4x_wake_up();
