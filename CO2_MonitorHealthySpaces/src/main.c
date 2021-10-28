@@ -295,7 +295,6 @@ static void delayed_restart_device_handler(EventLoopTimer *eventLoopTimer)
     PowerManagement_ForceSystemReboot();
 }
 
-
 /// <summary>
 /// Direct method sets oneshot timer to restart the device.
 /// The delayed restart is to allow for the direct method to return success status to IoT Hub
