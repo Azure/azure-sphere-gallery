@@ -24,7 +24,7 @@
 #include <applibs/powermanagement.h>
 
 // https://docs.microsoft.com/en-us/azure/iot-pnp/overview-iot-plug-and-play
-#define IOT_PLUG_AND_PLAY_MODEL_ID "dtmi:com:example:azuresphere:co2monitor;1"
+#define IOT_PLUG_AND_PLAY_MODEL_ID "dtmi:com:example:azuresphere:co2monitor;2"
 #define NETWORK_INTERFACE "wlan0"
 #define CO2_MONITOR_FIRMWARE_VERSION "3.02"
 

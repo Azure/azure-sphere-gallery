@@ -1,6 +1,6 @@
 {
   "@context": "dtmi:dtdl:context;2",
-  "@id": "dtmi:com:example:azuresphere:co2monitor;1",
+  "@id": "dtmi:com:example:azuresphere:co2monitor;2",
   "@type": "Interface",
   "displayName": "Azure Sphere C02 Monitor",
   "contents": [

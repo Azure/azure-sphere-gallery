@@ -114,7 +114,7 @@ Azure Sphere consists of the following components:
 
 * **Azure Sphere–certified chips** from hardware partners include built-in Microsoft security technology to provide connectivity and a dependable hardware root of trust.
 * **Azure Sphere OS** adds layers of protection and ongoing security updates to create a trustworthy platform for new IoT experiences.
-* **Azure Sphere Security Service** brokers trust for device-to-cloud communication, detects threats and renews device security.
+* **Azure Sphere Security Service** brokers trust for device-to-cloud communication, detects threats, and renews device security.
 
 Together these components implement [The Seven Properties of Highly Secure Devices](https://www.microsoft.com/research/publication/seven-properties-highly-secure-devices?azure-portal=true).
 
@@ -478,7 +478,7 @@ Take a moment to familiarize yourself with these files.
 
 The default board is the Avnet Starter Kit Rev 1, and the default sensor is the MikroE HVAC CO2 Click. If this is the board and sensor you're using, then skip to the next step.
 
-If you have an Avnet Starter Kit Rev 2 board, or the Seeed Studio CO2 sensor, then follow these instructions.
+If you have an Avnet Starter Kit Rev 2 board or the Seeed Studio CO2 sensor, then follow these instructions.
 
 1. Open the **azsphere_board.txt** file.
 1. Comment out the Avnet Rev 1 board with a **#**.
@@ -554,13 +554,13 @@ Start the app build deploy process.
 
 1. Press <kbd>Ctrl+Shift+P</kbd> to open the Visual Studio Code command palette.
 1. Type and select **CMake: Select Variant**, then select **Debug**.
-1. Press <kbd>F5</kbd> to build, deploy, and attached the debugger to the CO2 monitor application now running the Azure Sphere device.
+1. Press <kbd>F5</kbd> to build, deploy, and attach the debugger to the CO2 monitor application now running the Azure Sphere device.
 
 ### View debugger output
 
 1. Open the Visual Studio Code **Output** tab to view the output from the **Log_Debug** statements in the code.
 
-    > Pro Tip. You can open the output window by using the Visual Studio Code <kbd>Ctrl+K Ctrl+H</kbd> shortcut or click the **Output** tab.
+    > Pro Tip. You can open the output window by using the Visual Studio Code <kbd>Ctrl+K Ctrl+H</kbd> shortcut or selecting the **Output** tab.
 
 1. You will see the device negotiating security, and then it will start sending telemetry to Azure IoT Central.
 
@@ -622,7 +622,7 @@ Navigate back to the IoT Central device view.
 1. Set the CO2 alert level to 400 ppm, and select **Save**. This low value should trigger the CO2 alert buzzer.
 1. Set the CO2 alert level to a more realistic value like 800 pmm, and select **Save**.
 
-    > You can test CO2 alert levels by breathing onto the CO2 sensor.
+    > You can test CO2 alert levels by breathing on the CO2 sensor.
 
 1. Set the device altitude to tune the CO2 measurements for your location.
 
@@ -659,9 +659,9 @@ The following deferred update code is located in main.c of the CO2 monitor proje
 static uint32_t DeferredUpdateCalculate(uint32_t max_deferral_time_in_minutes, SysEvent_UpdateType type, SysEvent_Status status,
                                         const char *typeDescription, const char *statusDescription)
 {
-    // UTC +10 is good for Australia.
-    // Update time_zone_offset to your time zone offset.
-    const int time_zone_offset = 10;
+    // UTC +11 is for Australia/Sydney AEDT
+    // Set the time_zone_offset to your time zone offset.
+    const int time_zone_offset = 11;
 
     //  Get UTC time
     time_t now = time(NULL);
@@ -671,7 +671,7 @@ static uint32_t DeferredUpdateCalculate(uint32_t max_deferral_time_in_minutes, S
     t->tm_hour += time_zone_offset;
     t->tm_hour = t->tm_hour % 24;
 
-    // If local time between 1am and 5am defer for zero minutes else defer for 15 minutes
+    // If local time is between 1 am and 5 am defer for zero minutes else defer for 15 minutes
     uint32_t requested_minutes = IN_RANGE(t->tm_hour, 1, 5) ? 0 : 15;
 
     char utc[40];
@@ -762,7 +762,7 @@ static uint32_t DeferredUpdateCalculate(uint32_t max_deferral_time_in_minutes, S
 
 1. Make a note of the Image ID returned from the image add command as you will need it for the next command.
 1. Create a new deployment for a device group for the uploaded co2monitor image.
-    The following example uses the image ID returned from the previous command for illustrative purposes. Be sure to **your image ID** when you running the following command.
+    The following example uses the image ID returned from the previous command for illustrative purposes. Be sure to use **your image ID** when you run the following command.
 
     ```powershell
     azsphere device-group deployment create --device-group "CO2Monitor/Field Test" --images 3962c015-8f52-4d85-a043-acbc38f8b4aa
@@ -892,7 +892,7 @@ if (EXISTS "${CMAKE_SOURCE_DIR}/Tools/cmake/azsphere_config.cmake")
 
 else()
 
-    # For information on setting tools revision and target api set see
+    # For information on setting tools revision and target API set see
     # https://docs.microsoft.com/en-us/azure-sphere/app-development/using-cmake-functions
 
     azsphere_configure_tools(TOOLS_REVISION "21.07")
