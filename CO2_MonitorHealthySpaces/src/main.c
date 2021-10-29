@@ -131,27 +131,20 @@ static void read_telemetry_handler(EventLoopTimer *eventLoopTimer)
 
     onboard_sensors_read(&telemetry.latest);
 
-    if (scd30_read_measurement(&co2_ppm, &temperature, &relative_humidity) == STATUS_OK)
+    if (co2_read(&telemetry))
     {
-        if (!isnan(co2_ppm) && !isnan(temperature) && !isnan(relative_humidity))
-        {
-            telemetry.latest.co2ppm = (int)co2_ppm;
-            telemetry.latest.temperature = (int)temperature;
-            telemetry.latest.humidity = (int)relative_humidity;
-        }
+        // clang-format off
+        telemetry.valid =
+            IN_RANGE(telemetry.latest.temperature, -20, 50) &&
+            IN_RANGE(telemetry.latest.pressure, 800, 1200) &&
+            IN_RANGE(telemetry.latest.humidity, 0, 100) &&
+            IN_RANGE(telemetry.latest.co2ppm, 0, 20000);
+        // clang-format on
     }
-
-    telemetry.updated = true;
-
-    // clang-format off
-    telemetry.valid =
-        IN_RANGE(telemetry.latest.temperature, -20, 50) &&
-        IN_RANGE(telemetry.latest.pressure, 800, 1200) &&
-        IN_RANGE(telemetry.latest.humidity, 0, 100) &&
-        IN_RANGE(telemetry.latest.co2ppm, 0, 20000);
-    // clang-format on
-
-    dx_Log_Debug("Light: %d\n", telemetry.latest.light);
+    else
+    {
+        telemetry.valid = false;
+    }
 
     dx_timerOneShotSet(&tmr_read_telemetry, &(struct timespec){20, 0});
 }
@@ -196,17 +189,8 @@ static void co2_alert_buzzer_off_handler(EventLoopTimer *eventLoopTimer)
     dx_pwmStop(&pwm_buzz_click);
 }
 
-/// <summary>
-/// Turn on CO2 Buzzer if recorded CO2 ppm greater than co2_alert_level
-/// </summary>
-static void co2_alert_handler(EventLoopTimer *eventLoopTimer)
+static void update_co2_alert_status(void)
 {
-    if (ConsumeEventLoopTimerEvent(eventLoopTimer) != 0)
-    {
-        dx_terminate(DX_ExitCode_ConsumeEventLoopTimeEvent);
-        return;
-    }
-
     if (!telemetry.valid)
     {
         return;
@@ -217,7 +201,7 @@ static void co2_alert_handler(EventLoopTimer *eventLoopTimer)
     uint32_t brightness = 100 - (uint32_t)telemetry.latest.light;
     brightness = brightness == 100 ? 99 : brightness;
 
-    if (co2_ppm > co2_alert_level)
+    if (telemetry.latest.co2ppm > co2_alert_level)
     {
         if (!be_quiet)
         {
@@ -235,6 +219,19 @@ static void co2_alert_handler(EventLoopTimer *eventLoopTimer)
     }
 }
 
+/// <summary>
+/// Turn on CO2 Buzzer if recorded CO2 ppm greater than co2_alert_level
+/// </summary>
+static void co2_alert_handler(EventLoopTimer *eventLoopTimer)
+{
+    if (ConsumeEventLoopTimerEvent(eventLoopTimer) != 0)
+    {
+        dx_terminate(DX_ExitCode_ConsumeEventLoopTimeEvent);
+        return;
+    }
+    update_co2_alert_status();
+}
+
 /***********************************************************************************************************
  * REMOTE OPERATIONS: DEVICE TWINS
  *
@@ -244,11 +241,25 @@ static void co2_alert_handler(EventLoopTimer *eventLoopTimer)
 /// <summary>
 /// Update the co2_alert_level from the device twin callback
 /// </summary>
-static void DeviceTwinGenericHandler(DX_DEVICE_TWIN_BINDING *deviceTwinBinding)
+static void set_co2_alert_level(DX_DEVICE_TWIN_BINDING *deviceTwinBinding)
 {
     if (IN_RANGE(*(int *)deviceTwinBinding->propertyValue, 0, 20000))
     {
         co2_alert_level = *(int *)deviceTwinBinding->propertyValue;
+        update_co2_alert_status();
+        dx_deviceTwinAckDesiredValue(deviceTwinBinding, deviceTwinBinding->propertyValue, DX_DEVICE_TWIN_RESPONSE_COMPLETED);
+    }
+    else
+    {
+        dx_deviceTwinAckDesiredValue(deviceTwinBinding, deviceTwinBinding->propertyValue, DX_DEVICE_TWIN_RESPONSE_ERROR);
+    }
+}
+
+static void set_device_altitude(DX_DEVICE_TWIN_BINDING *deviceTwinBinding)
+{
+    if (IN_RANGE(*(int *)deviceTwinBinding->propertyValue, 0, 10000))
+    {
+        co2_set_altitude(*(int *)deviceTwinBinding->propertyValue);
         dx_deviceTwinAckDesiredValue(deviceTwinBinding, deviceTwinBinding->propertyValue, DX_DEVICE_TWIN_RESPONSE_COMPLETED);
     }
     else
@@ -260,10 +271,44 @@ static void DeviceTwinGenericHandler(DX_DEVICE_TWIN_BINDING *deviceTwinBinding)
 /***********************************************************************************************************
  * PRODUCTION
  *
+ * Remote device restart
  * Deferred update support
  * Enable application level watchdog
  * Update software version and Azure connect UTC time device twins on first connection
  **********************************************************************************************************/
+
+/***********************************************************************************************************
+ * Add remote device restart support
+ **********************************************************************************************************/
+
+/// <summary>
+/// Oneshot timer set from the restart direct method handler
+/// </summary>
+/// <param name="eventLoopTimer"></param>
+static void delayed_restart_device_handler(EventLoopTimer *eventLoopTimer)
+{
+    if (ConsumeEventLoopTimerEvent(eventLoopTimer) != 0)
+    {
+        dx_terminate(DX_ExitCode_ConsumeEventLoopTimeEvent);
+        return;
+    }
+    PowerManagement_ForceSystemReboot();
+}
+
+/// <summary>
+/// Direct method sets oneshot timer to restart the device.
+/// The delayed restart is to allow for the direct method to return success status to IoT Hub
+/// </summary>
+/// <param name="json"></param>
+/// <param name="directMethodBinding"></param>
+/// <param name="responseMsg"></param>
+/// <returns></returns>
+static DX_DIRECT_METHOD_RESPONSE_CODE restart_device_handler(JSON_Value *json, DX_DIRECT_METHOD_BINDING *directMethodBinding,
+                                                             char **responseMsg)
+{
+    dx_timerOneShotSet(&tmr_delayed_restart_device, &(struct timespec){2, 0});
+    return DX_METHOD_SUCCEEDED;
+}
 
 /***********************************************************************************************************
  * Add deferred update support
@@ -379,56 +424,6 @@ void azure_connection_state(bool connected)
 }
 
 /// <summary>
-/// Initialize the SDC30 CO2 and Humidity sensor
-/// </summary>
-/// <param name=""></param>
-/// <returns></returns>
-static bool InitializeSdc30(void)
-{
-    uint16_t interval_in_seconds = 2;
-    int retry = 0;
-    uint8_t asc_enabled, enable_asc;
-
-    sensirion_i2c_init(I2C_ISU2, I2C_BUS_SPEED_FAST_PLUS);
-
-    while (scd30_probe() != STATUS_OK && ++retry < 5)
-    {
-        printf("SCD30 sensor probing failed\n");
-        sensirion_sleep_usec(1000000u);
-    }
-
-    if (retry >= 5)
-    {
-        return false;
-    }
-
-    /*
-    When scd30 automatic self calibration activated for the first time a period of minimum 7 days is needed so
-    that the algorithm can find its initial parameter set for ASC. The sensor has to be exposed to fresh air for at least 1 hour every day.
-    Refer to the datasheet for further conditions and scd30.h for more info.
-    */
-
-    if (scd30_get_automatic_self_calibration(&asc_enabled) == 0)
-    {
-        if (asc_enabled == 0)
-        {
-            enable_asc = 1;
-            if (scd30_enable_automatic_self_calibration(enable_asc) == 0)
-            {
-                Log_Debug("scd30 automatic self calibration enabled. Takes 7 days, at least 1 hour/day outside, powered continuously");
-            }
-        }
-    }
-
-    scd30_set_measurement_interval(interval_in_seconds);
-    sensirion_sleep_usec(20000u);
-    scd30_start_periodic_measurement(0);
-    sensirion_sleep_usec(interval_in_seconds * 1000000u);
-
-    return true;
-}
-
-/// <summary>
 ///  Initialize peripherals, device twins, direct methods, timer_bindings.
 /// </summary>
 static void InitPeripheralsAndHandlers(void)
@@ -436,6 +431,7 @@ static void InitPeripheralsAndHandlers(void)
     dx_Log_Debug_Init(Log_Debug_Time_buffer, sizeof(Log_Debug_Time_buffer));
 
     dx_pwmSetOpen(pwm_bindings, NELEMS(pwm_bindings));
+    dx_i2cSetOpen(i2c_bindings, NELEMS(i2c_bindings));
 
     // Onboard LEDs are wired such that high voltage is off, low is on
     // Slightly unintuitive, but a 100% duration cycle turns the LED off
@@ -445,12 +441,14 @@ static void InitPeripheralsAndHandlers(void)
 
     dx_azureConnect(&dx_config, NETWORK_INTERFACE, IOT_PLUG_AND_PLAY_MODEL_ID);
 
-    InitializeSdc30();
+    co2_initialize();
+
     onboard_sensors_init();
 
     dx_gpioSetOpen(gpio_bindings, NELEMS(gpio_bindings));
     dx_timerSetStart(timer_bindings, NELEMS(timer_bindings));
     dx_deviceTwinSubscribe(device_twin_bindings, NELEMS(device_twin_bindings));
+    dx_directMethodSubscribe(direct_method_bindings, NELEMS(direct_method_bindings));
 
     dx_deferredUpdateRegistration(DeferredUpdateCalculate, NULL);
 
@@ -474,6 +472,8 @@ static void ClosePeripheralsAndHandlers(void)
     dx_timerSetStop(timer_bindings, NELEMS(timer_bindings));
     dx_deviceTwinUnsubscribe();
     dx_gpioSetClose(gpio_bindings, NELEMS(gpio_bindings));
+    dx_i2cSetClose(i2c_bindings, NELEMS(i2c_bindings));
+    dx_pwmSetClose(pwm_bindings, NELEMS(pwm_bindings));
     dx_timerEventLoopStop();
 }
 

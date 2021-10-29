@@ -1,6 +1,6 @@
 {
   "@context": "dtmi:dtdl:context;2",
-  "@id": "dtmi:com:example:azuresphere:co2monitor;1",
+  "@id": "dtmi:com:example:azuresphere:co2monitor;2",
   "@type": "Interface",
   "displayName": "Azure Sphere C02 Monitor",
   "contents": [
@@ -100,6 +100,17 @@
         "Property"
       ],
       "displayName": {
+        "en": "Device altitude (meters)"
+      },
+      "name": "AltitudeInMeters",
+      "schema": "integer",
+      "writable": true
+    },
+    {
+      "@type": [
+        "Property"
+      ],
+      "displayName": {
         "en": "Carbon dioxide (ppm)"
       },
       "name": "CarbonDioxide",
@@ -169,6 +180,14 @@
       },
       "name": "DeferredUpdateRequest",
       "schema": "string"
+    },
+    {
+      "@type": "Command",
+      "commandType": "synchronous",
+      "displayName": {
+        "en": "Restart the device"
+      },
+      "name": "RestartDevice"
     }
   ]
 }

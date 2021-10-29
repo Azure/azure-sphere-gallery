@@ -1,6 +1,6 @@
 # Improve health, wellbeing, and productivity by tracking CO2 levels
 
-Create healthier spaces by monitoring CO2, temperature, and humidity levels with [Azure Sphere](https://azure.microsoft.com/en-gb/services/azure-sphere/?WT.mc_id=julyot-co2-dglover) and [Azure IoT Central](https://azure.microsoft.com/en-gb/services/iot-central/?WT.mc_id=julyot-co2-dglover).
+Create healthier safer spaces by monitoring CO2, temperature, and humidity levels with [Azure Sphere](https://azure.microsoft.com/en-gb/services/azure-sphere/?WT.mc_id=julyot-co2-dglover) and [Azure IoT Central](https://azure.microsoft.com/en-gb/services/iot-central/?WT.mc_id=julyot-co2-dglover).
 
 ![The image shows a banner with CO2 data](media/banner.png)
 
@@ -45,13 +45,23 @@ For more information see the [Code of Conduct FAQ](https://opensource.microsoft.
 
 ---
 
-## Are CO2 levels making you grumpy, sleepy, or sad
+## Why monitor CO2 levels
+
+The COVID-19 pandemic inspired this project. CO2 levels can impact your productivity and mental health. CO2 levels can also indicate how ventilated an area is. Well ventilated shared spaces will be critical as we return to a "new" normal.
+
+### Create safer spaces
+
+Although CO2 levels are not a direct measure of possible exposure to COVID-19, checking levels using a monitor can help you identify poorly ventilated areas.
+
+Learn more about [Ventilation and air conditioning during the coronavirus (COVID-19) pandemic](https://www.hse.gov.uk/coronavirus/equipment-and-machinery/air-conditioning-and-ventilation/identifying-poorly-ventilated-areas.htm).
+
+### Create productive and healthy spaces
 
 When working from home, it's easy to close the door to shut out the noise of everyday life while we get on with work. Closing the door can lead to a build-up of CO2 gas, a by-product of our breathing. High CO2 levels can impact our wellbeing, concentration, and productivity levels.
 
-Check out "[Indoor carbon dioxide levels could be a health hazard, scientists warn](https://www.theguardian.com/environment/2019/jul/08/indoor-carbon-dioxide-levels-could-be-a-health-hazard-scientists-warn)".
+Learn how [Indoor carbon dioxide levels could be a health hazard, scientists warn](https://www.theguardian.com/environment/2019/jul/08/indoor-carbon-dioxide-levels-could-be-a-health-hazard-scientists-warn).
 
-The problem is we cannot see or smell Carbon Dioxide, it keeps building up, and we have no way of knowing it's happening other than getting tired or a headache. So, with that in mind, I figured it was the Internet of Things to the rescue!
+The problem is we cannot see or smell Carbon Dioxide, it keeps building up, and we have no way of knowing it's happening other than getting tired or a headache.
 
 ---
 
@@ -104,7 +114,7 @@ Azure Sphere consists of the following components:
 
 * **Azure Sphere–certified chips** from hardware partners include built-in Microsoft security technology to provide connectivity and a dependable hardware root of trust.
 * **Azure Sphere OS** adds layers of protection and ongoing security updates to create a trustworthy platform for new IoT experiences.
-* **Azure Sphere Security Service** brokers trust for device-to-cloud communication, detects threats and renews device security.
+* **Azure Sphere Security Service** brokers trust for device-to-cloud communication, detects threats, and renews device security.
 
 Together these components implement [The Seven Properties of Highly Secure Devices](https://www.microsoft.com/research/publication/seven-properties-highly-secure-devices?azure-portal=true).
 
@@ -219,7 +229,7 @@ This calibration time is needed for the sensor algorithm to calculate its initia
 
 ### The Sensirion SDC41 CO2 Sensor
 
-The MikroE HVAC Click uses the Sensirion SDC41 CO2, Temperature, and humidity sensor. Sensirion, follow the same pattern for the [SDC41 driver](https://github.com/Sensirion/embedded-i2c-scd4x) as the SDC30 sensor, there is a HAL, and it's a matter of implementing Azure Sphere I2C support. Calibration of the sensor is also required.
+The MikroE HVAC Click uses the Sensirion SDC41 CO2, Temperature, and humidity sensor. Sensirion, follow the same pattern for the [SDC41 driver](https://github.com/Sensirion/embedded-i2c-scd4x) as the SDC30 sensor, there is a HAL, and it's a matter of implementing Azure Sphere I2C support. The SCD41 driver for Azure Sphere is included in the project. Calibration of the sensor is also required.
 
 ![This image shows the MikroE HVAC click](media/hvac-click-thickbox_default-1.jpg)
 
@@ -464,15 +474,16 @@ Take a moment to familiarize yourself with these files.
 
 ---
 
-## Select your Avnet starter board
+## Select your Avnet starter board and CO2 sensor
 
-The default board is the Avnet Starter Kit Rev 1. If this is the board you're using, then skip to the next step.
+The default board is the Avnet Starter Kit Rev 1, and the default sensor is the MikroE HVAC CO2 Click. If this is the board and sensor you're using, then skip to the next step.
 
-If you have an Avnet Starter Kit Rev 2 board, then follow these instructions.
+If you have an Avnet Starter Kit Rev 2 board or the Seeed Studio CO2 sensor, then follow these instructions.
 
 1. Open the **azsphere_board.txt** file.
 1. Comment out the Avnet Rev 1 board with a **#**.
 1. Uncomment the Avnet Rev 2 board by removing the leading **#** character.
+1. Comment out the default CO2 sensor, and uncomment the Seeed Studio CO2 sensor.
 1. **Save** the changes.
 1. Press <kbd>Ctrl+Shift+P</kbd> to open the Visual Studio Code command palette.
 1. Type and select **CMake: Delete Cache and Reconfigure**.
@@ -543,13 +554,13 @@ Start the app build deploy process.
 
 1. Press <kbd>Ctrl+Shift+P</kbd> to open the Visual Studio Code command palette.
 1. Type and select **CMake: Select Variant**, then select **Debug**.
-1. Press <kbd>F5</kbd> to build, deploy, and attached the debugger to the CO2 monitor application now running the Azure Sphere device.
+1. Press <kbd>F5</kbd> to build, deploy, and attach the debugger to the CO2 monitor application now running the Azure Sphere device.
 
 ### View debugger output
 
 1. Open the Visual Studio Code **Output** tab to view the output from the **Log_Debug** statements in the code.
 
-    > Pro Tip. You can open the output window by using the Visual Studio Code <kbd>Ctrl+K Ctrl+H</kbd> shortcut or click the **Output** tab.
+    > Pro Tip. You can open the output window by using the Visual Studio Code <kbd>Ctrl+K Ctrl+H</kbd> shortcut or selecting the **Output** tab.
 
 1. You will see the device negotiating security, and then it will start sending telemetry to Azure IoT Central.
 
@@ -581,7 +592,7 @@ Start the app build deploy process.
 
 ## Create a Settings View
 
-Create an IoT Central Settings View to set the CO2 alert level for the CO2 monitor.
+Create an IoT Central Settings View to set the CO2 alert level and altitude for the CO2 monitor.
 
 1. From the device view page, select **Manage template**, then select **Edit template**.
 1. Select **Views**.
@@ -590,6 +601,7 @@ Create an IoT Central Settings View to set the CO2 alert level for the CO2 monit
 1. Name the form **Settings**.
 1. Expand the **Properties**.
 1. Select **CO2 alert level (ppm)**.
+1. Select **Device altitude (meters)**.
 1. Select **Add section**.
 1. Select **Save**.
 1. Select **Back**.
@@ -599,7 +611,7 @@ Create an IoT Central Settings View to set the CO2 alert level for the CO2 monit
 
 ---
 
-## Setting the CO2 alert level
+## Setting the CO2 alert level and device altitude
 
 Navigate back to the IoT Central device view.
 
@@ -610,7 +622,9 @@ Navigate back to the IoT Central device view.
 1. Set the CO2 alert level to 400 ppm, and select **Save**. This low value should trigger the CO2 alert buzzer.
 1. Set the CO2 alert level to a more realistic value like 800 pmm, and select **Save**.
 
-> You can test CO2 alert levels by breathing onto the CO2 sensor.
+    > You can test CO2 alert levels by breathing on the CO2 sensor.
+
+1. Set the device altitude to tune the CO2 measurements for your location.
 
 ---
 
@@ -645,9 +659,9 @@ The following deferred update code is located in main.c of the CO2 monitor proje
 static uint32_t DeferredUpdateCalculate(uint32_t max_deferral_time_in_minutes, SysEvent_UpdateType type, SysEvent_Status status,
                                         const char *typeDescription, const char *statusDescription)
 {
-    // UTC +10 is good for Australia.
-    // Update time_zone_offset to your time zone offset.
-    const int time_zone_offset = 10;
+    // UTC +11 is for Australia/Sydney AEDT
+    // Set the time_zone_offset to your time zone offset.
+    const int time_zone_offset = 11;
 
     //  Get UTC time
     time_t now = time(NULL);
@@ -657,7 +671,7 @@ static uint32_t DeferredUpdateCalculate(uint32_t max_deferral_time_in_minutes, S
     t->tm_hour += time_zone_offset;
     t->tm_hour = t->tm_hour % 24;
 
-    // If local time between 1am and 5am defer for zero minutes else defer for 15 minutes
+    // If local time is between 1 am and 5 am defer for zero minutes else defer for 15 minutes
     uint32_t requested_minutes = IN_RANGE(t->tm_hour, 1, 5) ? 0 : 15;
 
     char utc[40];
@@ -748,7 +762,7 @@ static uint32_t DeferredUpdateCalculate(uint32_t max_deferral_time_in_minutes, S
 
 1. Make a note of the Image ID returned from the image add command as you will need it for the next command.
 1. Create a new deployment for a device group for the uploaded co2monitor image.
-    The following example uses the image ID returned from the previous command for illustrative purposes. Be sure to **your image ID** when you running the following command.
+    The following example uses the image ID returned from the previous command for illustrative purposes. Be sure to use **your image ID** when you run the following command.
 
     ```powershell
     azsphere device-group deployment create --device-group "CO2Monitor/Field Test" --images 3962c015-8f52-4d85-a043-acbc38f8b4aa
@@ -878,7 +892,7 @@ if (EXISTS "${CMAKE_SOURCE_DIR}/Tools/cmake/azsphere_config.cmake")
 
 else()
 
-    # For information on setting tools revision and target api set see
+    # For information on setting tools revision and target API set see
     # https://docs.microsoft.com/en-us/azure-sphere/app-development/using-cmake-functions
 
     azsphere_configure_tools(TOOLS_REVISION "21.07")
@@ -893,6 +907,76 @@ For production applications, remove this block and replace it with the following
     azsphere_configure_tools(TOOLS_REVISION "<YOUR_TOOLS_VERSION>")
     azsphere_configure_api(TARGET_API_SET "<THE_TARGET_API_SET_YOU_ARE_TESTING_AGAINST")
 ```
+
+<!-- ---
+
+## Understanding exits codes
+
+Azure Sphere DevX exit codes
+
+Application level exit codes
+
+---
+
+## The main event loop
+
+In computer science, the event loop, message dispatcher, message loop, message pump, or run loop is a programming construct that waits for and dispatches events or messages in a program.
+
+It works by making a request to some internal or external "event provider" (that generally blocks the request until an event has arrived), and then it calls the relevant event handler ("dispatches the event").
+
+The event-loop may be used in conjunction with a reactor, if the event provider follows the file interface, which can be selected or 'polled' (the Unix system call, not actual polling).
+
+The event loop almost always operates asynchronously with the message originator.
+
+The Azure Sphere platform supports several common POSIX and Linux mechanisms to handle asynchronous events and concurrency, including event loops and POSIX pthreads.
+
+### Asynchronous events and concurrency
+
+[Asynchronous events and concurrency](https://docs.microsoft.com/azure-sphere/app-development/threads-concurrency)
+
+The Azure Sphere platform supports several common POSIX and Linux mechanisms to handle asynchronous events and concurrency, including event loops and POSIX pthreads.
+
+Event loops are a standard part of most graphical user interfaces and a standard Linux pattern. Azure Sphere event loops are a specific implementation of event loops that allow Azure Sphere applications to receive system notifications such as events related to updates.
+
+The event loop pattern is recommended for the following reasons:
+
+* Azure Sphere event loops are required for managing system events such as OS and application update notifications. You must use event loops to defer device updates.
+
+* Event loops allow for asynchronous programming so that multiple tasks can progress concurrently.
+
+* Event loops minimize memory overhead. Every thread carries the memory overhead of a separate stack. Linux stacks are allocated with virtual memory and grow on-demand to an upper limit so there is no fixed cost. Threads are therefore harder to implement on a constrained system such as the Azure Sphere MT3620 because of the additional resource cost.
+
+* Synchronization between threads is complex and can lead to issues such as deadlocks. Event loops are simpler in this regard.
+
+* Although we recommend using event loops where practicable, if your application requires threads, Azure Sphere supports POSIX pthreads. It is the responsibility of the application to ensure thread-safe execution. Application calls to some applibs functions are thread safe, but others are not, as indicated in the header files. If the header file does not mention thread safety, you should assume that the relevant function or library is not thread safe.
+
+[Event Loop](https://gist.github.com/kassane/f2330ef44b070f4a5fa9d59c770f68e9)
+
+### Event loop implementation in the main entry point for the application
+
+After the call to InitPeripheralsAndHandlers the application runs the event loop forever unless termination is requested by the application or system.
+
+```c
+int main(int argc, char *argv[])
+{
+
+    ...
+
+    // Main loop
+    while (!dx_isTerminationRequired())
+    {
+        int result = EventLoop_Run(dx_timerGetEventLoop(), -1, true);
+        // Continue if interrupted by signal, e.g. due to breakpoint being set.
+        if (result == -1 && errno != EINTR)
+        {
+            dx_terminate(DX_ExitCode_Main_EventLoopFail);
+        }
+    }
+
+    ...
+
+}
+``` -->
 
 ---
 
