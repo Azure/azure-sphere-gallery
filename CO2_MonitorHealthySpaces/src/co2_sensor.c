@@ -1,3 +1,6 @@
+/* Copyright (c) Microsoft Corporation. All rights reserved.
+   Licensed under the MIT License. */
+
 #include "co2_sensor.h"
 
 #ifdef SCD30
