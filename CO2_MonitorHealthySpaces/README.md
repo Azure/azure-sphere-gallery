@@ -928,7 +928,33 @@ The event-loop may be used in conjunction with a reactor, if the event provider 
 
 The event loop almost always operates asynchronously with the message originator.
 
+The Azure Sphere platform supports several common POSIX and Linux mechanisms to handle asynchronous events and concurrency, including event loops and POSIX pthreads.
+
+### Asynchronous events and concurrency
+
+[Asynchronous events and concurrency](https://docs.microsoft.com/azure-sphere/app-development/threads-concurrency)
+
+The Azure Sphere platform supports several common POSIX and Linux mechanisms to handle asynchronous events and concurrency, including event loops and POSIX pthreads.
+
+Event loops are a standard part of most graphical user interfaces and a standard Linux pattern. Azure Sphere event loops are a specific implementation of event loops that allow Azure Sphere applications to receive system notifications such as events related to updates.
+
+The event loop pattern is recommended for the following reasons:
+
+* Azure Sphere event loops are required for managing system events such as OS and application update notifications. You must use event loops to defer device updates.
+
+* Event loops allow for asynchronous programming so that multiple tasks can progress concurrently.
+
+* Event loops minimize memory overhead. Every thread carries the memory overhead of a separate stack. Linux stacks are allocated with virtual memory and grow on-demand to an upper limit so there is no fixed cost. Threads are therefore harder to implement on a constrained system such as the Azure Sphere MT3620 because of the additional resource cost.
+
+* Synchronization between threads is complex and can lead to issues such as deadlocks. Event loops are simpler in this regard.
+
+* Although we recommend using event loops where practicable, if your application requires threads, Azure Sphere supports POSIX pthreads. It is the responsibility of the application to ensure thread-safe execution. Application calls to some applibs functions are thread safe, but others are not, as indicated in the header files. If the header file does not mention thread safety, you should assume that the relevant function or library is not thread safe.
+
 [Event Loop](https://gist.github.com/kassane/f2330ef44b070f4a5fa9d59c770f68e9)
+
+### Event loop implementation in the main entry point for the application
+
+After the call to InitPeripheralsAndHandlers the application runs the event loop forever unless termination is requested by the application or system.
 
 ```c
 int main(int argc, char *argv[])
