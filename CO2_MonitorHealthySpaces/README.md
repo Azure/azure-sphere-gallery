@@ -908,6 +908,50 @@ For production applications, remove this block and replace it with the following
     azsphere_configure_api(TARGET_API_SET "<THE_TARGET_API_SET_YOU_ARE_TESTING_AGAINST")
 ```
 
+<!-- ---
+
+## Understanding exits codes
+
+Azure Sphere DevX exit codes
+
+Application level exit codes
+
+---
+
+## The main event loop
+
+In computer science, the event loop, message dispatcher, message loop, message pump, or run loop is a programming construct that waits for and dispatches events or messages in a program.
+
+It works by making a request to some internal or external "event provider" (that generally blocks the request until an event has arrived), and then it calls the relevant event handler ("dispatches the event").
+
+The event-loop may be used in conjunction with a reactor, if the event provider follows the file interface, which can be selected or 'polled' (the Unix system call, not actual polling).
+
+The event loop almost always operates asynchronously with the message originator.
+
+[Event Loop](https://gist.github.com/kassane/f2330ef44b070f4a5fa9d59c770f68e9)
+
+```c
+int main(int argc, char *argv[])
+{
+
+    ...
+
+    // Main loop
+    while (!dx_isTerminationRequired())
+    {
+        int result = EventLoop_Run(dx_timerGetEventLoop(), -1, true);
+        // Continue if interrupted by signal, e.g. due to breakpoint being set.
+        if (result == -1 && errno != EINTR)
+        {
+            dx_terminate(DX_ExitCode_Main_EventLoopFail);
+        }
+    }
+
+    ...
+
+}
+``` -->
+
 ---
 
 ## License
