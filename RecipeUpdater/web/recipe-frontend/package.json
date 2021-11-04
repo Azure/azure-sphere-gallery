@@ -1,5 +1,5 @@
 {
-  "name": "ms-recipe-frontend",
+  "name": "recipe-frontend",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
