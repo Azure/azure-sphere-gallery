@@ -1,0 +1,29 @@
+{
+  "SchemaVersion": 1,
+  "Name": "RecipePusher",
+  "ComponentId": "88c9de9f-0197-41ee-be97-0138722ea53f",
+  "EntryPoint": "/bin/app",
+  "CmdArgs": [
+    "--Hostname", "YOUR_IOT_HUB.azure-devices.net",
+    "--Endpoint", "http://172.16.0.2:8081/",
+    "--CertPath=certs/RootCert.pem"
+  ],
+  "Capabilities": {
+    "AllowedConnections": [
+      "172.16.0.2",
+      "YOUR_IOT_HUB.azure-devices.net",
+      "YOUR_BLOB_STORAGE.blob.core.windows.net"
+    ],
+    "Gpio": [
+      "$MT3620_GPIO4",
+      "$MT3620_GPIO8",
+      "$MT3620_GPIO9",
+      "$MT3620_GPIO10"
+    ],
+    "NetworkConfig": true,
+    "SntpService": true,
+    "DhcpService": true,
+    "DeviceAuthentication": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+  },
+  "ApplicationType": "Default"
+}
