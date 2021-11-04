@@ -1,0 +1,4 @@
+build/
+# Ignore output directories
+/out/
+/install/

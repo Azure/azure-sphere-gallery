@@ -1,0 +1,22 @@
+version: "3"
+
+services:
+  frontend:
+    container_name: frontend
+    build: ./recipe-frontend
+    image: YOUR_ACR.azurecr.io/frontend:latest
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+  backend:
+    restart: always
+    build: ./recipe-backend
+    container_name: backend
+    image: YOUR_ACR.azurecr.io/backend:latest
+    expose:
+      - "5000"
+    environment:
+      - FLASK_ENV=development
+      - FLASK_APP=app.py
+      - FLASK_DEBUG=1
