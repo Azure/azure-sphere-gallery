@@ -54,7 +54,6 @@ const t_endpoint endpoints[] =
 
 	{ "Communication with web services and Azure Sphere Security service:", -1 }, // Group description
 	{ "anse.azurewatson.microsoft.com", 443 },
-	{ "eastus-prod-azuresphere.azure-devices.net", 443 },
 	{ "prod.core.sphere.azure.net", 443 },
 	{ "prod.device.core.sphere.azure.net", 443 },
 	{ "prod.deviceauth.sphere.azure.net", 443 },
