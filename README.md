@@ -42,6 +42,7 @@ Each folder within this repository contains a README.md file that describes the 
 | [SetIoTCentralPropsForDeviceGroup](SetIoTCentralPropsForDeviceGroup) | Utility that makes it easy to set an Azure IoT Central Device Twin property for all devices in an Azure Sphere Device Group. |
 | [SetTimeFromLocation](SetTimeFromLocation) | Project that shows how to use Reverse IP lookup to get location information, then obtain time for location, and set device time. |
 | [SimpleFileSystem_RemoteDisk](SimpleFileSystem_RemoteDisk) | Project that shows how to add a simple FIFO/circular buffer file system to an Azure Sphere project, uses Curl to talk to remote storage|
+| [ToggleClassicCLI](ToggleClassicCLI) | Scripts for Windows and Linux that allow you to test the removal (and restore) of the Azure Sphere Classic CLI. |
 | [TranslatorCognitiveServices](TranslatorCognitiveServices) | Project that shows how to call Microsoft Translator Cognitive Services APIs from Azure Sphere |
 | [UdpDebugLog](UdpDebugLog) | Code that demonstrates how to override Log_Debug to broadcast on a UDP Socket, includes a Desktop Viewer application. |
 | [VS1053AudioStreaming](VS1053AudioStreaming) | Project that shows how to play audio through a VS1053 codec board |
