@@ -1,0 +1,27 @@
+{
+  "SchemaVersion": 1,
+  "Name": "mt3620-idc-1.0b",
+  "ComponentId": "77c1568c-bae1-470d-abe7-eb3fef9b6b00",
+  "EntryPoint": "/bin/app",
+  "CmdArgs": [ "mt3620-idc-1.0b" ],
+  "Capabilities": {
+    "PowerControls": [ "ForceReboot" ],
+    "NetworkConfig": true,
+    "WifiConfig": true,
+    "Gpio": [
+      "$BOARD_LED1_RED",
+      "$BOARD_LED1_GREEN",
+      "$BOARD_LED2_RED",
+      "$BOARD_LED2_GREEN",
+      "$BOARD_UART_TX_ENABLE"
+    ],
+    "AllowedApplicationConnections": [ "f9676ffa-3060-4c7a-8dc0-a464262bc993" ],
+    "MutableStorage": { "SizeKB": 64 },
+    "DeviceAuthentication": "00000000-0000-0000-0000-000000000000",
+    "AllowedConnections": [
+      "global.azure-devices-provisioning.net"
+    ],
+    "SystemEventNotifications": true,
+    "SoftwareUpdateDeferral": true
+  }
+}

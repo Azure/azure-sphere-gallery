@@ -1,0 +1,12 @@
+{
+  "SchemaVersion": 1,
+  "Name": "MT3620_IDC_RTApp",
+  "ComponentId": "f9676ffa-3060-4c7a-8dc0-a464262bc993",
+  "EntryPoint": "/bin/app",
+  "CmdArgs": [],
+  "Capabilities": {
+    "Uart": [ "ISU0" ],
+    "AllowedApplicationConnections": [ "77c1568c-bae1-470d-abe7-eb3fef9b6b00" ]
+  },
+  "ApplicationType": "RealTimeCapable"
+}

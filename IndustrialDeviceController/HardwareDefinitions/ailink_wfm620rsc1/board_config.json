@@ -1,0 +1,33 @@
+{
+    "Metadata": {
+        "Type": "Azure Sphere Hardware Definition",
+        "Version": 1
+    },
+    "Description":
+    {
+        "Name": "Sample hardware abstraction for WF-M620-RSC1",
+        "MainCoreHeaderFileTopContent": [
+            "/* Copyright (c) Microsoft Corporation. All rights reserved.",
+            "   Licensed under the MIT License. */",
+            "",
+            "// This file defines the mapping from the MT3620 reference development board (RDB) to the",
+            "// 'sample hardware' abstraction used by the samples at https://github.com/Azure/azure-sphere-samples.",
+            "// Some peripherals are on-board on the RDB, while other peripherals must be attached externally if needed.",
+            "// See TODO(85663) for more information on how to use hardware abstractions",
+            "// to enable apps to work across multiple hardware variants."
+        ]
+    },
+    "Imports" : [ {"Path": "ailink_wfm620rsc1.json"} ],
+    "Peripherals": [
+        {"Name": "BOARD_BUTTON_1", "Type": "Gpio", "Mapping": "AILINK_WFM620RSC1_PIN19_GPIO47", "Comment": "Application button"},
+    	{"Name": "BOARD_LED1_RED", "Type": "Gpio", "Mapping": "AILINK_WFM620RSC1_PIN2_GPIO42", "Comment": "LED 1 Red channel uses GPIO42."},
+    	{"Name": "BOARD_LED1_GREEN", "Type": "Gpio", "Mapping": "AILINK_WFM620RSC1_PIN3_GPIO43", "Comment": "LED 1 Green channel uses GPIO43."},
+    	{"Name": "BOARD_LED2_RED", "Type": "Gpio", "Mapping": "AILINK_WFM620RSC1_PIN17_GPIO45", "Comment": "LED 2 Red channel uses GPIO45."},
+    	{"Name": "BOARD_LED2_GREEN", "Type": "Gpio", "Mapping": "AILINK_WFM620RSC1_PIN18_GPIO46", "Comment": "LED 2 Green channel uses GPIO46."},
+        {"Name": "BOARD_UART_TX_ENABLE", "Type": "Gpio", "Mapping": "AILINK_WFM620RSC1_PIN23_GPIO23", "Comment": "Uart Enable channel uses GPIO23."},
+        {"Name": "BOARD_UART", "Type": "Uart", "Mapping": "AILINK_WFM620RSC1_ISU1_UART", "Comment": "AILINK WF-M620-RSC1: WF-M620-RSC1 ISU 1 configured as UART, pin 15 (RX), pin 14 (TX), pin 11 (CTS), pin 10 (RTS)."},
+        {"Name": "BOARD_I2C", "Type": "I2cMaster", "Mapping": "AILINK_WFM620RSC1_ISU3_I2C", "Comment": "AILINK WF-M620-RSC1: WF-M620-RSC1 ISU 0 configured as I2C,  pin 68 (SDA) and pin 67 (SCL)."},
+        {"Name": "BOARD_SPI", "Type": "SpiMaster", "Mapping": "AILINK_WFM620RSC1_ISU0_SPI", "Comment": "AILINK WF-M620-RSC1: WF-M620-RSC1 ISU 0 configured as SPI, pin 7 (MISO), pin 5 (SCLK), pin 8 (CSA), pin 6 (MOSI) and pin 9 (CSB)"},
+        {"Name": "BOARD_SPI_CS", "Type": "int", "Mapping": "MT3620_SPI_CS_A", "Comment": "MT3620 SPI Chip Select (CS) value \"A\". This is not a peripheral identifier, and so has no meaning in an app manifest."}
+    ]
+}

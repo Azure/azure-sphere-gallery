@@ -1,0 +1,32 @@
+/* Copyright (c) Codethink Ltd. All rights reserved.
+   Licensed under the MIT License. */
+
+#ifndef AZURE_SPHERE_PLATFORM_H_
+#define AZURE_SPHERE_PLATFORM_H_
+
+typedef enum {
+    MT3620_UNIT_UART_DEBUG,
+    MT3620_UNIT_ISU0,
+    MT3620_UNIT_ISU1,
+    MT3620_UNIT_ISU2,
+    MT3620_UNIT_ISU3,
+    MT3620_UNIT_ISU4,
+    MT3620_UNIT_ISU5,
+    MT3620_UNIT_I2S0,
+    MT3620_UNIT_I2S1,
+    MT3620_UNIT_ADC0,
+    MT3620_UNIT_GPT0,
+    MT3620_UNIT_GPT1,
+    MT3620_UNIT_GPT2,
+    MT3620_UNIT_GPT3,
+    MT3620_UNIT_GPT4,
+    MT3620_UNIT_MBOX_CA7,
+    MT3620_UNIT_MBOX_CM4,
+} Platform_Unit;
+
+#define MT3620_UNIT_ISU_COUNT  6
+#define MT3620_UNIT_ADC_COUNT  1
+#define MT3620_UNIT_GPT_COUNT  5
+#define MT3620_UNIT_MBOX_COUNT 2
+
+#endif // #ifndef AZURE_SPHERE_PLATFORM_H_
