@@ -19,7 +19,6 @@ Each folder within this repository contains a README.md file that describes the 
 
 | Folder name | Description |
 | ----------- | ----------- |
-| [OpenSourceProjectsSupportingExternalPeripherals](OpenSourceProjectsSupportingExternalPeripherals) | This is a list of open-source projects supporting external hardware on the Azure Sphere MT3620 platform |
 | [AzureIoT_StoreAndForward](AzureIoT_StoreAndForward) | This project shows how to add telemetry store and forward capability to the AzureIoT sample |
 | [BalancingRobot](BalancingRobot) | This project contains the hardware, enclosure, and software files needed to build an Azure Sphere and Azure RTOS self-balancing robot. |
 | [CO2 Monitor healthy spaces](CO2_MonitorHealthySpaces) | This project integrates a CO2 monitor with IoT Central. It covers security, driver development, IoT Plug and Play, deferred updates, and watchdogs. |
@@ -38,6 +37,7 @@ Each folder within this repository contains a README.md file that describes the 
 | [NetworkInterfaceAddresses](NetworkInterfaceAddresses) | A minimal Azure Sphere app that prints the MAC and IP address of the given network interface. |
 | [OSNetworkRequirementChecker-HLApp](OSNetworkRequirementChecker-HLApp) | A sample app that performs DNS resolver and custom NTP test for diagnosing networking connectivity problems. |
 | [OSNetworkRequirementChecker-PC](OSNetworkRequirementChecker-PC) | A PC command line utility for diagnosing networking connectivity issues. |
+| [OpenSourceProjectsSupportingExternalPeripherals](OpenSourceProjectsSupportingExternalPeripherals) | This is a list of open-source projects supporting external hardware on the Azure Sphere MT3620 platform |
 | [RS485Driver](RS485Driver) | An RS-485 real-time driver with HL-Core interfacing API. |
 | [ServiceAPIDeviceCodeAuth](ServiceAPIDeviceCodeAuth) | Code snippet to access public rest api using device code flow from a web app. |
 | [SetIoTCentralPropsForDeviceGroup](SetIoTCentralPropsForDeviceGroup) | Utility that makes it easy to set an Azure IoT Central Device Twin property for all devices in an Azure Sphere Device Group. |
