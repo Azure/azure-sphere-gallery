@@ -30,13 +30,14 @@ Each folder within this repository contains a README.md file that describes the 
 | [Grove_16x2_RGB_LCD](Grove_16x2_RGB_LCD) | A project that shows how to integrate a Seeed Grove LCD/RGB 16x2 display |
 | [HeapTracker](HeapTracker) | A memory allocation tracking library that can help diagnose memory leaks. |
 | [LittleFs_RemoteDisk](LittleFs_RemoteDisk) | A project that shows how to add [Littlefs](https://github.com/littlefs-project/littlefs) to an Azure Sphere project, uses Curl to talk to remote storage |
-| [LittleFs_SDCard](LittleFs_SDCard) | A project that combines [Littlefs](https://github.com/littlefs-project/littlefs) with SD Card support, and PC utilities to read the SD Card and extract files/folders.
+| [LittleFs_SDCard](LittleFs_SDCard) | A project that combines [Littlefs](https://github.com/littlefs-project/littlefs) with SD Card support, and PC utilities to read the SD Card and extract files/folders.|
 | [MQTT-C_Client](MQTT-C_Client) | A project that shows how to add the  [MQTT-C](https://github.com/LiamBindle/MQTT-C.git) library to an Azure Sphere project. There is also a host Python app provided for testing purposes. |
 | [MultiDeviceProvisioning](MultiDeviceProvisioning) | Shows how multiple Azure Sphere devices can be provisioned automatically and simultaneously from a single PC. |
 | [MutableStorageKVP](MutableStorageKVP) | Provides a set of functions that expose Key/Value pair functions (write, read, delete) over Azure Sphere Mutable Storage. |
 | [NetworkInterfaceAddresses](NetworkInterfaceAddresses) | A minimal Azure Sphere app that prints the MAC and IP address of the given network interface. |
 | [OSNetworkRequirementChecker-HLApp](OSNetworkRequirementChecker-HLApp) | A sample app that performs DNS resolver and custom NTP test for diagnosing networking connectivity problems. |
 | [OSNetworkRequirementChecker-PC](OSNetworkRequirementChecker-PC) | A PC command line utility for diagnosing networking connectivity issues. |
+| [OpenSourceProjectsSupportingExternalPeripherals](OpenSourceProjectsSupportingExternalPeripherals) | This is a list of open-source projects supporting external hardware on the Azure Sphere MT3620 platform |
 | [RS485Driver](RS485Driver) | An RS-485 real-time driver with HL-Core interfacing API. |
 | [ServiceAPIDeviceCodeAuth](ServiceAPIDeviceCodeAuth) | Code snippet to access public rest api using device code flow from a web app. |
 | [SetIoTCentralPropsForDeviceGroup](SetIoTCentralPropsForDeviceGroup) | Utility that makes it easy to set an Azure IoT Central Device Twin property for all devices in an Azure Sphere Device Group. |
@@ -65,4 +66,4 @@ contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additio
 ## Licenses
 
 For information about the licenses that apply to a particular sample or hardware design, see the License and README.md files in each subdirectory.
- 
+
