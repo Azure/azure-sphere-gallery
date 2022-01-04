@@ -1,0 +1,33 @@
+{
+  "SchemaVersion": 1,
+  "Name": "OSNetworkRequirementChecker-HLApp",
+  "ComponentId": "8128f290-f4b1-4986-945c-1868d38e33a5",
+  "EntryPoint": "/bin/app",
+  "CmdArgs": [],
+  "Capabilities": {
+    "AllowedConnections": [ 
+      "anse.azurewatson.microsoft.com",
+      "eastus-prod-azuresphere.azure-devices.net",
+      "global.azure-devices-provisioning.net",
+      "prod.core.sphere.azure.net",
+      "prod.device.core.sphere.azure.net", 
+      "prod.deviceauth.sphere.azure.net", 
+      "prod.dinsights.core.sphere.azure.net",
+      "prod.releases.sphere.azure.net",
+      "prod.time.sphere.azure.net",
+      "prod.update.sphere.azure.net",
+      "prodmsimg.blob.core.windows.net",
+      "prodmsimg-secondary.blob.core.windows.net",
+      "prodptimg.blob.core.windows.net",
+      "prodptimg-secondary.blob.core.windows.net",
+      "sphereblobeus.azurewatson.microsoft.com",
+      "sphereblobweus.azurewatson.microsoft.com",
+      "sphere.sb.dl.delivery.mp.microsoft.com", 
+      "time.sphere.azure.net", 
+      "www.msftconnecttest.com"
+    ],
+    "NetworkConfig": true,
+    "TimeSyncConfig": true
+  },
+  "ApplicationType": "Default"
+}

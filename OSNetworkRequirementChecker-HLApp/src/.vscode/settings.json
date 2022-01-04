@@ -1,0 +1,12 @@
+{
+    "cmake.buildDirectory": "${workspaceRoot}/out/ARM-${buildType}",
+    "cmake.buildToolArgs": [
+        "-v"
+    ],
+    "cmake.generator": "Ninja",
+    "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools",
+    "cmake.configureSettings": {
+        "CMAKE_TOOLCHAIN_FILE": "${command:azuresphere.AzureSphereSdkDir}/CMakeFiles/AzureSphereToolchain.cmake",
+        "AZURE_SPHERE_TARGET_API_SET": "7"
+    }
+}

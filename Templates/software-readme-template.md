@@ -1,6 +1,3 @@
-<!--- Optional Metadata goes here
-Include the metadata if you want your project to be discoverable by the Microsoft samples browser. See samples-metadata-guide.md for details. --->
-
 # Name of software project
 
 <!---Start with a short description of what the project does--no more than two paragraphs
@@ -16,7 +13,7 @@ Include the metadata if you want your project to be discoverable by the Microsof
 | `src`       | source code. |
 | `CHANGELOG.md` | List of changes to the project. |
 | `README.md` | This README file. |
-| `LICENSE`   | The license for the project. |
+| `LICENSE.txt`   | The license for the project. |
 
 ## Prerequisites
 
@@ -92,6 +89,6 @@ or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any addi
 
 ## License
 
-<!---Make sure you've added the [MIT license](https://docs.opensource.microsoft.com/content/releasing/license.html) to the repository.--->
+<!---Make sure you've added the [MIT license](https://docs.opensource.microsoft.com/content/releasing/license.html) to the project folder.--->
 
 For details on license, see LICENSE.txt in this directory.

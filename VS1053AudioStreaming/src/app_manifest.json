@@ -1,0 +1,13 @@
+{
+  "SchemaVersion": 1,
+  "Name": "VS1053AudioStream_HighLevelApp",
+  "ComponentId": "E3054BAF-808F-46E2-A7DC-A520BB81AF1F",
+  "EntryPoint": "/bin/app",
+  "CmdArgs": [],
+  "Capabilities": {
+    "AllowedConnections": [ "17853.live.streamtheworld.com" ],
+    "SpiMaster": [ "$VS1053_SPI" ],
+    "Gpio": [ "$VS1053_DREQ", "$VS1053_RST", "$VS1053_DCS", "$VS1053_CS" ]
+  },
+  "ApplicationType": "Default"
+}

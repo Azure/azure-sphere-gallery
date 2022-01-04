@@ -1,0 +1,12 @@
+{
+  "SchemaVersion": 1,
+  "Name": "ConfigureWifiViaAppResource_HighLevelApp",
+  "ComponentId": "5874dc7e-87a7-4f0e-8a6a-509766a7a11b",
+  "EntryPoint": "/bin/app",
+  "CmdArgs": [],
+  "Capabilities": {
+    "AllowedConnections": [],
+    "WifiConfig": true
+  },
+  "ApplicationType": "Default"
+}

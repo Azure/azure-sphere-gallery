@@ -1,0 +1,45 @@
+[submodule "src/cJSON"]
+	path = MutableStorageKVP/src/cJSON
+	url = https://github.com/DaveGamble/cJSON
+
+[submodule "LittleFs_RemoteDisk/src/HighLevelApp/littlefs"]
+	path = LittleFs_RemoteDisk/src/HighLevelApp/littlefs
+	url = https://github.com/littlefs-project/littlefs.git
+[submodule "BalancingRobot/Software/RTOS/threadx"]
+	path = BalancingRobot/Software/RTOS/threadx
+	url = https://github.com/azure-rtos/threadx.git
+[submodule "BalancingRobot/Software/RTOS/mt3620_m4_software"]
+	path = BalancingRobot/Software/RTOS/mt3620_m4_software
+	url = https://github.com/MediaTek-Labs/mt3620_m4_software.git
+[submodule "MQTT-C_Client/src/HighLevelApp/MQTT-C"]
+	path = MQTT-C_Client/src/HighLevelApp/MQTT-C
+	url = https://github.com/LiamBindle/MQTT-C.git
+
+[submodule "MQTT-C_Client/src/HighLevelApp/AzureSphereDevX"]
+	path = MQTT-C_Client/src/HighLevelApp/AzureSphereDevX
+	url = https://github.com/gloveboxes/AzureSphereDevX.git
+[submodule "LittleFs_SDCard/src/littlefs"]
+	path = LittleFs_SDCard/src/littlefs
+	url = https://github.com/littlefs-project/littlefs.git
+[submodule "LittleFs_SDCard/src/AzureSphere/SDCard_RealTimeApp/lib"]
+	path = LittleFs_SDCard/src/AzureSphere/SDCard_RealTimeApp/lib
+	url = https://github.com/CodethinkLabs/mt3620-m4-drivers.git
+[submodule "RS485Driver/RTApp/lib"]
+	path = RS485Driver/RTApp/lib
+	url = https://github.com/CodethinkLabs/mt3620-m4-drivers.git
+
+[submodule "CO2_MonitorHealthySpaces/src/HardwareDefinitions"]
+	path = CO2_MonitorHealthySpaces/src/HardwareDefinitions
+	url = https://github.com/Azure-Sphere-DevX/AzureSphereDevX.HardwareDefinitions.git
+
+[submodule "CO2_MonitorHealthySpaces/src/AzureSphereDrivers"]
+	path = CO2_MonitorHealthySpaces/src/AzureSphereDrivers
+	url = https://github.com/Azure-Sphere-DevX/AzureSphereDrivers.git
+
+[submodule "CO2_MonitorHealthySpaces/src/AzureSphereDevX"]
+	path = CO2_MonitorHealthySpaces/src/AzureSphereDevX
+	url = https://github.com/Azure-Sphere-DevX/AzureSphereDevX.git
+
+[submodule "CO2_MonitorHealthySpaces/src/Tools"]
+	path = CO2_MonitorHealthySpaces/src/Tools
+	url = https://github.com/Azure-Sphere-DevX/AzureSphereDevX.Tools

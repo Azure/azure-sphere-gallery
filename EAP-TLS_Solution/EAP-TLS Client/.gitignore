@@ -1,0 +1,10 @@
+# Ignore output directories
+/.vs
+/out/
+/install/
+
+# Ignore passwords file
+lib/_environment_config.c
+
+# Typically, certificates should not be checked in for security reasons
+/**/*.pem

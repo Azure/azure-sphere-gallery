@@ -1,0 +1,22 @@
+{
+  "SchemaVersion": 1,
+  "Name": "co2monitor",
+  "ComponentId": "25025d2c-66da-4448-bae1-ac26fcdd3627",
+  "EntryPoint": "/bin/app",
+  "CmdArgs": [ "--ScopeID", "REPLACE_WITH_YOUR_AZURE_DPS_OR_IOT_CENTRAL_ID_SCOPE" ],
+  "Capabilities": {
+    "SystemEventNotifications": true,
+    "SoftwareUpdateDeferral": true,
+    "PowerControls": [ "ForceReboot" ],
+    "Gpio": [ "$AZURE_CONNECTED_LED", "$BUTTON_B" ],
+    "Pwm": [ "$PWM_CLICK_CONTROLLER", "$PWM_RGB_CONTROLLER" ],
+    "I2cMaster": [ "$I2C_ISU2" ],
+    "Adc": [ "$AVNET_MT3620_SK_ADC_CONTROLLER0" ],
+    "AllowedConnections": [
+      "global.azure-devices-provisioning.net",
+      "REPLACE_WITH_YOUR_AZURE_IOT_HUB_OR_IOT_CENTRAL_URLS"
+    ],
+    "DeviceAuthentication": "REPLACE_WITH_YOUR_AZURE_SPHERE_TENANT_ID"
+  },
+  "ApplicationType": "Default"
+}

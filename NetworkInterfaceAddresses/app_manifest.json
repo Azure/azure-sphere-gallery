@@ -1,0 +1,10 @@
+{
+  "SchemaVersion": 1,
+  "Name": "PrintNetworkInterfaceAddresses_HighLevelApp",
+  "ComponentId": "2e604441-c96d-486f-83cc-3d174a733b00",
+  "EntryPoint": "/bin/app",
+  "CmdArgs": [],
+  "Capabilities": {
+  },
+  "ApplicationType": "Default"
+}

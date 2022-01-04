@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "ReadRawSDCard": {
+      "commandName": "Project",
+      "commandLineArgs": ""
+    }
+  }
+}

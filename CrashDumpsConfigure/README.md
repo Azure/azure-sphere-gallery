@@ -14,6 +14,7 @@ This script can be used to get or set crash dump policy by making `GET` or `PATC
 
 ## Prerequisites
 
+- This script can be run on Windows, Mac, or Linux. It does not depend on the Azure Sphere SDK or azsphere CLI.
 - An internet connection
 - [`python`](https://www.python.org/downloads/) (3.x) and [`pip`](https://pip.pypa.io/en/stable/installing/)
 
@@ -137,13 +138,13 @@ python crashdumps_configure.py --set off --tenantid xxxxxxxx-xxxx-xxxx-xxxx-xxxx
 
 ## Key concepts
 
-- Note that you must select a user account that has the [Administrator role](https://docs.microsoft.com/en-us/azure-sphere/deployment/add-tenant-users#user-management) in your Azure Sphere tenant to run the `--set` command. Any role will work for the `--get` command.
+- Note that you must select a user account that has the [Administrator role](https://docs.microsoft.com/azure-sphere/deployment/add-tenant-users#user-management) in your Azure Sphere tenant to run the `--set` command. Any role will work for the `--get` command.
 - A 500 (Internal Server Error) response when updating the `AllowCrashDumpsCollection` field usually indicates a transient error. We recommend that you retry the operation in this case.
 
 ## Next steps
 
-- For more information on Azure Sphere crash dumps, see [Configure crash dumps](https://review.docs.microsoft.com/en-us/azure-sphere/deployment/configure-crash-dumps?branch=CEV)
-- For more information on how Azure Sphere classifies diagnostic data, see [Overview of diagnostic data types](https://review.docs.microsoft.com/azure-sphere/deployment/diagnostic-data-types?branch=CEV)
+- For more information on Azure Sphere crash dumps, see [Configure crash dumps](https://docs.microsoft.com/azure-sphere/deployment/configure-crash-dumps)
+- For more information on how Azure Sphere classifies diagnostic data, see [Overview of diagnostic data types](https://docs.microsoft.com/azure-sphere/deployment/diagnostic-data-types)
 
 ## Sample expectations
 
