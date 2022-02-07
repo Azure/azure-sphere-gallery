@@ -24,9 +24,9 @@ The project also shows how to transmit device lifecycle events from the Azure Sp
 
 You will need the following:
 * Azure Sphere device claimed into a tenant
-* A copy of the [Azure Sphere Github samples repository](https://github.com/Azure/azure-sphere-samples) (specifically the [Azure IoT sample](https://github.com/Azure/azure-sphere-samples/tree/master/Samples/AzureIoT))
+* A copy of the [Azure Sphere Github samples repository](https://github.com/Azure/azure-sphere-samples) (specifically the [Azure IoT sample](https://github.com/Azure/azure-sphere-samples/tree/main/Samples/AzureIoT))
 
-Follow the Azure IoT sample instructions, you can choose the [IoT Hub](https://github.com/Azure/azure-sphere-samples/blob/master/Samples/AzureIoT/READMEStartWithIoTHub.md) or [IoT Hub with DPS](https://github.com/Azure/azure-sphere-samples/blob/master/Samples/AzureIoT/READMEAddDPS.md) instructions. 
+Follow the Azure IoT sample instructions, you can choose the [IoT Hub](https://github.com/Azure/azure-sphere-samples/blob/main/Samples/AzureIoT/READMEStartWithIoTHub.md) or [IoT Hub with DPS](https://github.com/Azure/azure-sphere-samples/blob/main/Samples/AzureIoT/READMEAddDPS.md) instructions. 
 
 * An [Azure Key Vault](https://azure.microsoft.com/en-gb/services/key-vault/) - this will hold three secrets (Azure IoT Hub connection string, your Azure Sphere tenant Id [guid], and an APIKey used by the ASP.NET Core app service to validate a web session for initializing Active Directory Authentication)
 
@@ -240,4 +240,4 @@ or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any addi
 
 ## License
 
-See [LICENSE.txt](./LICENSE.txt)
+See [LICENSE.txt](./LICENCE.txt)

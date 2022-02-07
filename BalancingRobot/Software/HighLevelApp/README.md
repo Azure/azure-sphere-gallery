@@ -21,7 +21,7 @@ The second CmdArgs array entry contains the App identifier (either 'AppA' or 'Ap
 
 ### AllowedConnections
 
-`AllowedConnections` contains the list of endpoints this application can talk to, follow the [instructions in the Azure IoT sample](https://github.com/Azure/azure-sphere-samples/blob/master/Samples/AzureIoT/IoTCentral.md#configure-the-sample-application-to-work-with-your-azure-sphere-tenant-and-devices) to configure the AllowedConnections list.
+`AllowedConnections` contains the list of endpoints this application can talk to, follow the [instructions in the Azure IoT sample](https://github.com/Azure/azure-sphere-samples/blob/main/Samples/AzureIoT/IoTCentral.md#configure-the-sample-application-to-work-with-your-azure-sphere-tenant-and-devices) to configure the AllowedConnections list.
 
 ### DeviceAuthentication
 
