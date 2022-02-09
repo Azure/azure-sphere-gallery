@@ -1,6 +1,6 @@
 # Azure IoT sample with Store and Forward
 
-The goal of this project is to show how to add store and forward capability to the [Azure Sphere AzureIoT sample](https://github.com/Azure/azure-sphere-samples/tree/master/Samples/AzureIoT). The storage implementation is based on the [simple file system gallery project and python disk host](https://github.com/Azure/azure-sphere-gallery/tree/main/SimpleFileSystem_RemoteDisk).
+The goal of this project is to show how to add store and forward capability to the [Azure Sphere AzureIoT sample](https://github.com/Azure/azure-sphere-samples/tree/main/Samples/AzureIoT). The storage implementation is based on the [simple file system gallery project and python disk host](https://github.com/Azure/azure-sphere-gallery/tree/main/SimpleFileSystem_RemoteDisk).
 
 ## Contents
 
@@ -23,7 +23,7 @@ Note that the Azure Sphere High Level application is configured for the 21.07 SD
 
 You will need the following:
 * Azure Sphere device claimed into a tenant
-* A copy of the [Azure Sphere Github samples repository](https://github.com/Azure/azure-sphere-samples) (specifically the [Azure IoT sample](https://github.com/Azure/azure-sphere-samples/tree/master/Samples/AzureIoT))
+* A copy of the [Azure Sphere Github samples repository](https://github.com/Azure/azure-sphere-samples) (specifically the [Azure IoT sample](https://github.com/Azure/azure-sphere-samples/tree/main/Samples/AzureIoT))
 * A copy of the [Azure Sphere Github Gallery repository](https://github.com/Azure/azure-sphere-gallery)
 
 Copy the files from this project `src` to your copy of the root of the Azure Sphere `AzureIoT` sample project.
@@ -46,11 +46,11 @@ add_compile_definitions(PC_HOST_IP="YOUR_PC_IP_ADDRESS")
 
 `AzureIoT/common/main.c` - The AzureIoT sample uses the `telemetryUploadEnabled` boolean to define whether telemetry will be uploaded or not, the sample has been extended to store telemetry in the simple file system when telemetryUploadEnabled == false. 
 
-The original AzureIoT sample uses a 5 second tick to generate telemetry, the tick has been modified to be 1 second. Every fifth tick new telemetry will be generated - if there are no stored telemetry items and telemetryUploadEnabled is true the new telemetry will be uploaded, if there are existing stored telemetry items the new telemetry will be written to the simple file system (this preserves date/time order of uploaded telemetry). For the other four seconds stored telemetry will be uploaded if telemetryUploadEnabled is true. 
+The original AzureIoT sample uses a 5 second tick to generate telemetry, the tick has been modified to be 1 second. Every five seconds new telemetry will be generated - if there are no stored telemetry items and telemetryUploadEnabled is true the new telemetry will be uploaded, if there are existing stored telemetry items the new telemetry will be written to the simple file system (this preserves date/time order of uploaded telemetry). For the other four seconds stored telemetry will be uploaded if telemetryUploadEnabled is true. 
 
 The project uploads stored telemetry over time rather than uploading all stored data when telemetryUploadEnabled is true. This approach may not be suitable for your specific application, you should adapt the upload model to suit your needs.
 
-Follow the Azure IoT sample instructions, you can choose the [IoT Hub](https://github.com/Azure/azure-sphere-samples/blob/master/Samples/AzureIoT/READMEStartWithIoTHub.md) or [IoT Hub with DPS](https://github.com/Azure/azure-sphere-samples/blob/master/Samples/AzureIoT/READMEAddDPS.md) instructions. 
+Follow the Azure IoT sample instructions, you can choose the [IoT Hub](https://github.com/Azure/azure-sphere-samples/blob/main/Samples/AzureIoT/READMEStartWithIoTHub.md) or [IoT Hub with DPS](https://github.com/Azure/azure-sphere-samples/blob/main/Samples/AzureIoT/READMEAddDPS.md) instructions. 
 
 To enable remote storage you will need to run the [Python remote disk host application](../SimpleFileSystem_RemoteDisk/src/PyDiskHost/PyDiskHost.py).
 

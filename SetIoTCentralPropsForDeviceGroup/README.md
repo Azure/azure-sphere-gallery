@@ -16,7 +16,7 @@ You should have at least one [Azure Sphere tenant](https://docs.microsoft.com/en
 
 You should clone the Azure IoT sample from the [Azure Sphere Samples](https://github.com/Azure/azure-sphere-samples) Github Repository.
 
-Follow the instructions to [setup an Azure IoT Central application](https://github.com/Azure/azure-sphere-samples/blob/master/Samples/AzureIoT/IoTCentral.md)
+Follow the instructions to [setup an Azure IoT Central application](https://github.com/Azure/azure-sphere-samples/blob/main/Samples/AzureIoT/IoTCentral.md)
 
 ## How to use
 

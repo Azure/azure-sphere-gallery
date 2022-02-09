@@ -20,9 +20,9 @@ The goal of this project is to show how to add custom properties to a telemetry 
 
 You will need the following:
 * Azure Sphere device claimed into a tenant
-* A copy of the [Azure Sphere Github samples repository](https://github.com/Azure/azure-sphere-samples) (specifically the [Azure IoT sample](https://github.com/Azure/azure-sphere-samples/tree/master/Samples/AzureIoT))
+* A copy of the [Azure Sphere Github samples repository](https://github.com/Azure/azure-sphere-samples) (specifically the [Azure IoT sample](https://github.com/Azure/azure-sphere-samples/tree/main/Samples/AzureIoT))
 
-Follow the Azure IoT sample instructions, you can choose the [IoT Hub](https://github.com/Azure/azure-sphere-samples/blob/master/Samples/AzureIoT/READMEStartWithIoTHub.md) or [IoT Hub with DPS](https://github.com/Azure/azure-sphere-samples/blob/master/Samples/AzureIoT/READMEAddDPS.md) instructions. 
+Follow the Azure IoT sample instructions, you can choose the [IoT Hub](https://github.com/Azure/azure-sphere-samples/blob/main/Samples/AzureIoT/READMEStartWithIoTHub.md) or [IoT Hub with DPS](https://github.com/Azure/azure-sphere-samples/blob/main/Samples/AzureIoT/READMEAddDPS.md) instructions. 
 
 ### Using the Azure IoT sample
 
@@ -123,4 +123,4 @@ or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any addi
 
 ## License
 
-See [LICENSE.txt](./LICENSE.txt)
+See [LICENSE.txt](./LICENCE.txt)
