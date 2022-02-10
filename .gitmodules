@@ -43,3 +43,6 @@
 [submodule "CO2_MonitorHealthySpaces/src/Tools"]
 	path = CO2_MonitorHealthySpaces/src/Tools
 	url = https://github.com/Azure-Sphere-DevX/AzureSphereDevX.Tools
+[submodule "IndustrialDeviceController/Software/MT3620_IDC_RTApp/lib"]
+	path = IndustrialDeviceController/Software/MT3620_IDC_RTApp/lib
+	url = https://github.com/CodethinkLabs/mt3620-m4-drivers

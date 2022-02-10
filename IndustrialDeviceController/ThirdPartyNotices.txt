@@ -1,0 +1,12 @@
+THIRD-PARTY SOFTWARE NOTICES AND INFORMATION
+Do Not Translate or Localize
+
+Industrial Device Controller solution uses the following third party software:
+
+1. frozen - https://github.com/cesanta/frozen
+
+License - https://github.com/cesanta/frozen/blob/master/LICENSE
+
+2. libsafec - https://sourceforge.net/projects/safeclib/files/libsafec-10052013.tar.gz/download
+
+License - https://sourceforge.net/p/safeclib/code/ci/master/tree/COPYING

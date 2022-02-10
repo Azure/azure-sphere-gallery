@@ -1,0 +1,15 @@
+List of developers and maintainers of this codebase:
+
+Maintainer                                                  | Subsystems worked on
+============================================================|===========================================
+Ben Brewer (ben.brewer@codethink.co.uk)                     | I2C, SPI, I2S, UART
+[ben-brewer-codethink]                                      |
+                                                            |
+Connor Driscoll (connor.driscoll@codethink.co.uk)           | ADC, GPIO, PWM
+[Cpt-Quantum]                                               |
+                                                            |
+Aiden Jeffrey (aiden.jeffrey@codethink.co.uk)               | GPT, Print, I2S
+[aiden-ct]                                                  |
+                                                            |
+Kostas Andrikopoulos (kostas.andrikopoulos@codethink.co.uk) | SPI
+[kostas-andrik]                                             |

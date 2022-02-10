@@ -51,6 +51,7 @@ Each folder within this repository contains a README.md file that describes the 
 | [WifiConfigurationViaAppResource](WifiConfigurationViaAppResource) | Project that shows how to configure device Wi-Fi settings using an embedded JSON resource file |
 | [WifiConfigurationViaNfc](WifiConfigurationViaNfc) | Project that shows how to configure device Wi-Fi settings using NFC |
 | [WifiConfigurationViaUart](WifiConfigurationViaUart) | Project that shows how to configure device Wi-Fi settings using Uart |
+| [IndustrialDeviceController](IndustrialDeviceController) | Project that provides a set of tools, service and software to enable collecting real time telemetry data from various CE devices through MODBUS protocol in a secure, low latency and reliable way.|
 
 ## Contributing
 This project contains a collection of Microsoft employee demos, hacks, hardware designs, and proof of concepts.  Microsoft authors of new contributions should fork the repo and create a pull request using a new folder, using the appropriate README template for [software](Templates/software-readme-template.md) or [hardware](Templates/hardware-readme-template.md) contributions, and following the checklist in the [pull request template](.github/pull_request_template.md).
