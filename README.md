@@ -19,6 +19,7 @@ Each folder within this repository contains a README.md file that describes the 
 
 | Folder name | Description |
 | ----------- | ----------- |
+| [AzureFunctionApp_AzureSpherePublicAPI](AzureFunctionApp_AzureSpherePublicAPI) | This project shows how to create a Python Azure Function app that uses Managed Service Identity to call the Azure Sphere Public API |
 | [AzureIoT_StoreAndForward](AzureIoT_StoreAndForward) | This project shows how to add telemetry store and forward capability to the AzureIoT sample |
 | [BalancingRobot](BalancingRobot) | This project contains the hardware, enclosure, and software files needed to build an Azure Sphere and Azure RTOS self-balancing robot. |
 | [CO2 Monitor healthy spaces](CO2_MonitorHealthySpaces) | This project integrates a CO2 monitor with IoT Central. It covers security, driver development, IoT Plug and Play, deferred updates, and watchdogs. |
