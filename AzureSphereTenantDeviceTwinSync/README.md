@@ -52,7 +52,7 @@ Add the three secrets to Key Vault.
 
 ### Build and Deploy the ASP.NET Core REST API project.
 
-Open the [REST_API project](./REST_API/AzureSphereTenantDeviceTwinSync.sln), open **Utils.cs** and paste your Key Vault URI into the empty string called **KeyVaultUrl**.
+Open the [REST_API project](./src/DesktopSimulator), open **Utils.cs** and paste your Key Vault URI into the empty string called **KeyVaultUrl**.
 
 **Note**: The project supports `Device Code Flow`, and `Managed Identity` for authentication - The REST_API project is configured to use `Managed Identity` by default.
 
