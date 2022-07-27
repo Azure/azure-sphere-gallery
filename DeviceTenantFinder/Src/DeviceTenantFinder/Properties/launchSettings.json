@@ -1,8 +1,7 @@
 {
   "profiles": {
     "DeviceTenantFinder": {
-      "commandName": "Project",
-      "commandLineArgs": ""
+      "commandName": "Project"
     }
   }
 }
