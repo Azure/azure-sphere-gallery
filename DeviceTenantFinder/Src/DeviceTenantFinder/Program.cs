@@ -2,13 +2,13 @@
    Licensed under the MIT License. */
 
 using Microsoft.Identity.Client;
-using RestSharp;
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
 using System.Linq;
-using System.Collections.Immutable;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text.Json;
+using System.Threading.Tasks;
 
 namespace DeviceTenantFinder
 {
@@ -29,7 +29,7 @@ namespace DeviceTenantFinder
         /// <summary>
         /// Azure Sphere Public API URI
         /// </summary>
-        private const string AzureSphereApiUri = "https://prod.core.sphere.azure.net";
+        private const string AzureSphereApiUri = "https://prod.core.sphere.azure.net/v2/";
         /// <summary>
         /// Program entry-point.
         /// </summary>
@@ -60,7 +60,7 @@ namespace DeviceTenantFinder
 
             string result = GetData("tenants", token);
 
-            List<Tenant> tenantList = JsonConvert.DeserializeObject<List<Tenant>>(result);
+            List<Tenant> tenantList = JsonSerializer.Deserialize<List<Tenant>>(result);
 
             if (tenantList.Count == 0)
             {
@@ -82,7 +82,7 @@ namespace DeviceTenantFinder
             {
                 result = GetData($"tenants/{tenant.Id}/devices", token);
 
-                Devices devices = JsonConvert.DeserializeObject<Devices>(result);
+                Devices devices = JsonSerializer.Deserialize<Devices>(result);
                 foreach (Item item in devices.Items)
                 {
                     if (item.DeviceId.ToLower() == args[0].ToLower())
@@ -117,14 +117,13 @@ namespace DeviceTenantFinder
 
         private static string GetData(string relativeUrl, string token)
         {
-            var client = new RestClient(AzureSphereApiUri);
-            var request = new RestRequest($"/v2/{relativeUrl}", Method.GET);
-            request.AddParameter("Authorization", string.Format("Bearer " + token), ParameterType.HttpHeader);
-            var response = client.Execute(request);
-
-            if (response.IsSuccessful)
+            Uri uri = new Uri(new Uri(AzureSphereApiUri), relativeUrl);
+            HttpClient client = new HttpClient();
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            HttpResponseMessage result = client.GetAsync(uri.ToString()).GetAwaiter().GetResult();
+            if (result.IsSuccessStatusCode)
             {
-                return response.Content;
+                return result.Content.ReadAsStringAsync().GetAwaiter().GetResult();
             }
             return string.Empty;
         }
