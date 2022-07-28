@@ -2,13 +2,13 @@
    Licensed under the MIT License. */
 
 using Microsoft.Identity.Client;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using RestSharp;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace SetIoTCentralPropsForDeviceGroup
@@ -45,11 +45,21 @@ namespace SetIoTCentralPropsForDeviceGroup
             // args[0] : Azure IoT Central app URL (example: https://myapp.azureiotcentral.com)
             // args[1] : Azure IoT Central API Token (quoted, since there's probably a space)
             // args[2] : Azure Sphere Device Group GUID (containing the list of devices to apply the property change)
-            // args[3] : Valid JSON containing the property to change (example: { "StatusLed" : false } )
+            // args[3] : JSON file containing the property to change - example: {"thermometerTelemetryUploadEnabled": true}
+
+            // Note: the JSON containing the property to change needs to be a read/write property in the IoT Central Device Template.
 
             // The DeviceUpdateList will contain the Device IDs for devices in the supplied Device Group
-            List<string> DeviceUpdateList = new List<string>();
 
+            // Get JSON from args[3]
+            string json = LoadJsonFromFile(args[3]);
+            if (!IsValidJson(json))
+            {
+                Console.WriteLine("The JSON you supplied doesn't appear to be correctly formatted, please fix");
+                return -1;
+            }
+
+            List<string> DeviceUpdateList = new List<string>();
 
             string token = await GetTokenAsync().ConfigureAwait(false);
             if (string.IsNullOrEmpty(token))
@@ -60,9 +70,9 @@ namespace SetIoTCentralPropsForDeviceGroup
 
             string result = GetData("tenants", token);
 
-            List<Tenant> tenantList = JsonConvert.DeserializeObject<List<Tenant>>(result);
+            List<Tenant> tenantList = JsonSerializer.Deserialize<List<Tenant>>(result);
 
-            if (tenantList.Count == 0)
+            if (tenantList == null || tenantList.Count == 0)
             {
                 Console.WriteLine("No tenants found\n");
                 return -1;
@@ -77,7 +87,7 @@ namespace SetIoTCentralPropsForDeviceGroup
             {
                 result = GetData($"tenants/{tenant.Id}/devices", token);
 
-                Devices devices = JsonConvert.DeserializeObject<Devices>(result);
+                Devices devices = JsonSerializer.Deserialize<Devices>(result);
                 foreach (Item item in devices.Items)
                 {
                     if (item.DeviceGroupId != null && item.DeviceGroupId == args[2])
@@ -102,11 +112,9 @@ namespace SetIoTCentralPropsForDeviceGroup
                 if (isValidIoTCDevice(iotcAppUrl, s.ToLower(), args[1]))
                 {
                     Console.Write($"Setting device id: {s} - ");
-                    string currentProperties=GetDeviceProperties(iotcAppUrl, s.ToLower(), args[1]);
-                    Debug.WriteLine(currentProperties);
-                    if (setIoTCDeviceProperties(iotcAppUrl, s.ToLower(), args[1], args[3],currentProperties))
+                    if (setIoTCDeviceProperties(iotcAppUrl, s.ToLower(), args[1], json))
                     {
-                        Console.WriteLine("Successed");
+                        Console.WriteLine("Success");
                     }
                     else
                     {
@@ -142,7 +150,7 @@ namespace SetIoTCentralPropsForDeviceGroup
                 Console.WriteLine("Azure IoT Central Application URL i.e. https://myapp.azureiotcentral.com");
                 Console.WriteLine("Azure IoT Central Application API Token");
                 Console.WriteLine("Azure Sphere Device Group Id (guid)");
-                Console.WriteLine("JSON properties i.e. \"{\"StatusLED\": true}\"");
+                Console.WriteLine("JSON file path containing properties to be set - i.e. {\"thermometerTelemetryUploadEnabled\": true}");
 
                 return false;
             }
@@ -171,10 +179,9 @@ namespace SetIoTCentralPropsForDeviceGroup
                 return false;
             }
 
-            if (!IsValidJson(args[3]))
+            if (!File.Exists(args[3]))
             {
-                Console.WriteLine("The JSON you supplied doesn't appear to be correctly formatted, please fix");
-                return false;
+                Console.WriteLine($"File '{args[3]}' not found, please fix");
             }
 
             return true;
@@ -187,58 +194,20 @@ namespace SetIoTCentralPropsForDeviceGroup
         /// <param name="deviceId"></param> The device id that to apply settings to
         /// <param name="token"></param> The IoTC API Token
         /// <param name="JsonContent"></param> Content to be applied to the device
-        /// <param name="currentProperties"></param> IoTC device properties (contains the device template)
         /// <returns></returns>
-        // PUT https://appsubdomain.azureiotcentral.com/api/preview/devices/{deviceId}/properties
-        static bool setIoTCDeviceProperties(string baseURI, string deviceId, string token, string JsonContent, string currentProperties)
+        // PUT https://appsubdomain.azureiotcentral.com/api/devices/{deviceId}/properties
+        static bool setIoTCDeviceProperties(string baseURI, string deviceId, string token, string JsonContent)
         {
-            // get first key from properties
-            IList<JToken> templateObj = JObject.Parse(currentProperties);
-            var iotcTemplate = ((JProperty)templateObj[0]).Name;
-
-            IList<JToken> userObj = JObject.Parse(JsonContent);
-            var userKey = ((JProperty)userObj[0]).Name;
-            var userValue= ((JProperty)userObj[0]).Value;
-
-            bool quoteUserValue = false;
-            if (userValue.Type == JTokenType.String)
-                quoteUserValue = true;
-
-            // now build the JSON to send to the IoTC API
-            string json = "{\"" + iotcTemplate + "\":{\"" + userKey + "\":";
-            if (quoteUserValue)
-                json += "\"";
-            if (userValue.Type == JTokenType.Boolean)
-            {
-                if (userValue.ToString() == "True")
-                    json += "true";
-                else
-                    json += "false";
-            }
-            else
-            {
-                json += userValue;
-            }
-            if (quoteUserValue)
-                json += "\"";
-            json += "}}";
-
-            Debug.WriteLine(json);
-
-            bool retVal = false;
-
             RestClient client = new RestClient(baseURI);
-
-            var request = new RestRequest($"api/preview/devices/{deviceId.ToLower()}/properties", Method.PUT);
-            request.AddJsonBody(json);
-
+            var request = new RestRequest($"api/devices/{deviceId.ToLower()}/properties?api-version=2022-05-31", Method.Patch).AddJsonBody(JsonContent);
             request.AddParameter("Authorization", token, ParameterType.HttpHeader);
             var response = client.Execute(request);
 
+            bool retVal = false;
             if (response.IsSuccessful)
             {
                 retVal = true;
-                Debug.WriteLine($"Device Get Successed: {response.Content}");
+                Debug.WriteLine($"Success: {response.Content}");
             }
             else
             {
@@ -254,37 +223,21 @@ namespace SetIoTCentralPropsForDeviceGroup
         /// <param name="deviceId"></param> Azure Sphere Device Id
         /// <param name="token"></param> Azure Sphere API Token
         /// <returns></returns>
-        // GET https://appsubdomain.azureiotcentral.com/api/preview/devices/{deviceId}
+        // GET https://appsubdomain.azureiotcentral.com/api/devices/{deviceId}
         private static bool isValidIoTCDevice(string baseURI, string deviceId, string token)
         {
             bool retVal = false;
             RestClient client = new RestClient(baseURI);
-            var request = new RestRequest($"api/preview/devices/{deviceId}", Method.GET);
+            var request = new RestRequest($"api/devices/{deviceId}?api-version=2022-05-31", Method.Get);
             request.AddParameter("Authorization", token, ParameterType.HttpHeader);
             var response = client.Execute(request);
 
             if (response.IsSuccessful)
             {
                 retVal = true;
-                Debug.WriteLine($"Device Get Successed: {response.Content}");
+                Debug.WriteLine($"Device Get Success: {response.Content}");
             }
             return retVal;
-        }
-
-        // GET https://appsubdomain.azureiotcentral.com/api/preview/devices/{deviceId}
-        private static string GetDeviceProperties(string baseURI, string deviceId, string token)
-        {
-            RestClient client = new RestClient(baseURI);
-            var request = new RestRequest($"api/preview/devices/{deviceId.ToLower()}/properties", Method.GET);
-            request.AddParameter("Authorization", token, ParameterType.HttpHeader);
-            var response = client.Execute(request);
-
-            if (response.IsSuccessful)
-            {
-                return response.Content;
-            }
-
-            return string.Empty;
         }
 
         /// <summary>
@@ -296,7 +249,7 @@ namespace SetIoTCentralPropsForDeviceGroup
         private static string GetData(string relativeUrl, string token)
         {
             var client = new RestClient(AzureSphereApiUri);
-            var request = new RestRequest($"/v2/{relativeUrl}", Method.GET);
+            var request = new RestRequest($"/v2/{relativeUrl}", Method.Get);
             request.AddParameter("Authorization", string.Format("Bearer " + token), ParameterType.HttpHeader);
             var response = client.Execute(request);
 
@@ -325,35 +278,42 @@ namespace SetIoTCentralPropsForDeviceGroup
         }
 
         /// <summary>
+        /// Function to load JSON from a file
+        /// </summary>
+        /// <param name="JsonFilePath"></param>
+        /// <returns>String.Empty on failure, or string containing Json on success</returns>
+        private static string LoadJsonFromFile(string JsonFilePath)
+        {
+            string result = String.Empty;
+            if (File.Exists(JsonFilePath))
+            {
+                result = File.ReadAllText(JsonFilePath);
+            }
+            else
+            {
+                Console.WriteLine($"File '{JsonFilePath}' not found.");
+            }
+            return result;
+        }
+
+        /// <summary>
         /// Check to see if user input Json is valid
         /// </summary>
         /// <param name="strInput"></param>
         /// <returns></returns>
         private static bool IsValidJson(string strInput)
         {
-            if (string.IsNullOrWhiteSpace(strInput)) { return false; }
-            strInput = strInput.Trim();
-            if ((strInput.StartsWith("{") && strInput.EndsWith("}")) || //For object
-                (strInput.StartsWith("[") && strInput.EndsWith("]"))) //For array
+            bool isValid = true;
+            try
             {
-                try
-                {
-                    var obj = JToken.Parse(strInput);
-                    return true;
-                }
-                catch (JsonReaderException jex)
-                {
-                    return false;
-                }
-                catch (Exception ex) //some other exception
-                {
-                    return false;
-                }
+                JsonDocument doc = JsonDocument.Parse(strInput);
             }
-            else
+            catch (Exception ex)
             {
-                return false;
+                Debug.WriteLine(ex.Message);
+                isValid = false;
             }
+            return isValid;
         }
     }
 }

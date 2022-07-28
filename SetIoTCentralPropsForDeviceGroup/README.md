@@ -27,7 +27,9 @@ SetIoTCentralPropsForDeviceGroup is a console application, the application takes
 | `Azure IoT Central App URL`       | example: https://myapp.azureiotcentral.com |
 | `Azure IoT Central API Token` | [Create an API token in the IoT Central App](https://docs.microsoft.com/en-us/azure/iot-central/core/overview-iot-central-tour#administration) |
 | `Azure Sphere Device group guid`   | The guid of the Azure Sphere Device Group to update |
-| `JSON Setting to apply`       | example: {"StatusLED":true} |
+| `JSON File containing settings to apply`       | example: `{"thermometerTelemetryUploadEnable": true}` |
+
+**Note that the JSON property needs to be read/write in the Azure IoT Central Application.**
 
 To obtain the Azure Sphere Device Group ID you can:
 * Determine the list of Azure Sphere tenants you have access to `azsphere tenant list`
