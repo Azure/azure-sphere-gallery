@@ -1,8 +1,7 @@
 {
   "profiles": {
     "SetIoTCentralPropsForDeviceGroup": {
-      "commandName": "Project",
-      "commandLineArgs": ""
+      "commandName": "Project"
     }
   }
 }
