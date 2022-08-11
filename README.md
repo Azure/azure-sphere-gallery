@@ -28,6 +28,7 @@ Each folder within this repository contains a README.md file that describes the 
 | [AzureSphereTenantDeviceTwinSync](AzureSphereTenantDeviceTwinSync) | A project that shows how to update IoT Hub device twin with OS Version, Product/Device Group and more based on telemetry triggers using Azure IoT Hub/EventGrid and a custom ASP.NET Core REST API  |
 | [DeviceTenantFinder](DeviceTenantFinder) | Utility that makes it easy to find the Azure Sphere tenant name/Id within your tenants for a given Device Id |
 | [EAP-TLS_Solution](EAP-TLS_Solution) | A library & demo solution implementation for Azure Sphere-based devices connecting to Extensible Authentication Protocol – Transport Layer Security (EAP-TLS) networks. |
+| [GetDeviceOSVersion](GetDeviceOSVersion)| A project that retrieves the OS versions for all Azure Sphere based devices.|
 | [Grove_16x2_RGB_LCD](Grove_16x2_RGB_LCD) | A project that shows how to integrate a Seeed Grove LCD/RGB 16x2 display |
 | [HeapTracker](HeapTracker) | A memory allocation tracking library that can help diagnose memory leaks. |
 | [LittleFs_RemoteDisk](LittleFs_RemoteDisk) | A project that shows how to add [Littlefs](https://github.com/littlefs-project/littlefs) to an Azure Sphere project, uses Curl to talk to remote storage |
