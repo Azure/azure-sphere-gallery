@@ -1,0 +1,733 @@
+{
+    "version": "1.0",
+    "categoryId": 16,
+    "categoryName": "appman_apps",
+    "msgIds": [
+        {
+            "msgName": "FailedToGetUidForComponentId",
+            "msgId": 1,
+            "msgString": "Failed to get UID for component",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "componentId",
+                    "paramType": "uniqueId"
+                }
+            ]
+        },
+        {
+            "msgName": "BadUserId",
+            "msgId": 2,
+            "msgString": "User 'nobody' has no rights.",
+            "msgPriority": "Error"
+        },
+        {
+            "msgName": "ErrorAcquiringUart",
+            "msgId": 3,
+            "msgString": "Error acquiring uart.",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "uart",
+                    "paramType": "string"
+                }
+            ],
+            "obsolete": true
+        },
+        {
+            "msgName": "ErrorAcquiringGpio",
+            "msgId": 4,
+            "msgString": "Could not acquire one or more of the requested gpios.",
+            "msgPriority": "Error",
+            "obsolete": true
+        },
+        {
+            "msgName": "ErrorReleasingUart",
+            "msgId": 5,
+            "msgString": "Error releasing uart.",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "uart",
+                    "paramType": "string"
+                }
+            ],
+            "obsolete": true
+        },
+        {
+            "msgName": "ErrorReleasingGpio",
+            "msgId": 6,
+            "msgString": "Error while releasing gpios.",
+            "msgPriority": "Error",
+            "obsolete": true
+        },
+        {
+            "msgName": "EntryPointDoesNotExist",
+            "msgId": 7,
+            "msgString": "Entry point specified in application manifest does not exist on disk.",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "error",
+                    "paramType": "integer"
+                }
+            ]
+        },
+        {
+            "msgName": "EntryPointIsNotAFile",
+            "msgId": 8,
+            "msgString": "Entry point specified in application manifest is not a file.",
+            "msgPriority": "Error"
+        },
+        {
+            "msgName": "FailedToCreateCapServerFile",
+            "msgId": 9,
+            "msgString": "Failed to create file for capability server.",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "error",
+                    "paramType": "integer"
+                }
+            ],
+            "obsolete": true
+        },
+        {
+            "msgName": "FailedChown",
+            "msgId": 10,
+            "msgString": "Failed to chown file",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "error",
+                    "paramType": "integer"
+                }
+            ]
+        },
+        {
+            "msgName": "StoppingApp",
+            "msgId": 11,
+            "msgString": "Stopping app...",
+            "msgPriority": "Info",
+            "params": [
+                {
+                    "paramName": "appId",
+                    "paramType": "uniqueId"
+                }
+            ]
+        },
+        {
+            "msgName": "AppInWrongState",
+            "msgId": 12,
+            "msgString": "App is in the wrong state for the requested operation",
+            "msgPriority": "Info",
+            "params": [
+                {
+                    "paramName": "appName",
+                    "paramType": "string"
+                },
+                {
+                    "paramName": "currentState",
+                    "paramType": "integer"
+                },
+                {
+                    "paramName": "requestedState",
+                    "paramType": "integer"
+                }
+            ]
+        },
+        {
+            "msgName": "FailedToStopApp",
+            "msgId": 13,
+            "msgString": "Fail to stop app.",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "appId",
+                    "paramType": "uniqueId"
+                },
+                {
+                    "paramName": "appType",
+                    "paramType": "integer"
+                },
+                {
+                    "paramName": "error",
+                    "paramType": "commonError"
+                }
+            ]
+        },
+        {
+            "msgName": "DebuggingApp",
+            "msgId": 14,
+            "msgString": "Debugging app...",
+            "msgPriority": "Info",
+            "params": [
+                {
+                    "paramName": "appId",
+                    "paramType": "uniqueId"
+                }
+            ]
+        },
+        {
+            "msgName": "FailedToStartAppDebugging",
+            "msgId": 15,
+            "msgString": "Error starting debugging of app. ",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "error",
+                    "paramType": "string"
+                }
+            ]
+        },
+        {
+            "msgName": "StartingApp",
+            "msgId": 16,
+            "msgString": "Starting app...",
+            "msgPriority": "Debug",
+            "params": [
+                {
+                    "paramName": "appId",
+                    "paramType": "uniqueId"
+                }
+            ]
+        },
+        {
+            "msgName": "AppIsRunning",
+            "msgId": 17,
+            "msgString": "App is running. App needs to be stopped before remove",
+            "msgPriority": "Error"
+        },
+        {
+            "msgName": "FailedToStartApp",
+            "msgId": 18,
+            "msgString": "Error starting app. ",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "appId",
+                    "paramType": "uniqueId"
+                },
+                {
+                    "paramName": "error",
+                    "paramType": "commonError"
+                },
+                {
+                    "paramName": "posixError",
+                    "paramType": "integer"
+                }
+            ]
+        },
+        {
+            "msgName": "InitializingNetworkd",
+            "msgId": 19,
+            "msgString": "Initializing networkd",
+            "msgPriority": "Info"
+        },
+        {
+            "msgName": "FailedChmod",
+            "msgId": 20,
+            "msgString": "Failed to chmod: ",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "error",
+                    "paramType": "integer"
+                }
+            ]
+        },
+        {
+            "msgName": "FailedToGetRngdUid",
+            "msgId": 21,
+            "msgString": "Failed to get uid for rngd application.",
+            "msgPriority": "Error"
+        },
+        {
+            "msgName": "ErrorAcquiringMutableStorage",
+            "msgId": 22,
+            "msgString": "Error acquiring mutable storage",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "error",
+                    "paramType": "commonError"
+                }
+            ]
+        },
+        {
+            "msgName": "ErrorReleasingMutableStorage",
+            "msgId": 23,
+            "msgString": "Error releasing mutable storage",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "error",
+                    "paramType": "commonError"
+                },
+                {
+                    "paramName": "userId",
+                    "paramType": "unsignedInteger"
+                }
+            ]
+        },
+        {
+            "msgName": "CouldNotResetUserQuota",
+            "msgId": 24,
+            "msgString": "Could not reset user quota, continuing",
+            "msgPriority": "Warning",
+            "params": [
+                {
+                    "paramName": "error",
+                    "paramType": "commonError"
+                }
+            ]
+        },
+        {
+            "msgName": "ErrorRemovingWifiDir",
+            "msgId": 25,
+            "msgString": "Error occurred when removing deprecated wifi directory",
+            "msgPriority": "Error",
+            "obsolete": true
+        },
+        {
+            "msgName": "CouldNotStatDirectory",
+            "msgId": 26,
+            "msgString": "Stat failed while looking for wifi directory",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "error",
+                    "paramType": "commonError"
+                }
+            ],
+            "obsolete": true
+        },
+        {
+            "msgName": "CouldNotCopyMacFile",
+            "msgId": 27,
+            "msgString": "Failed to copy old wlan0 mac file to new location",
+            "msgPriority": "Error",
+            "obsolete": true
+        },
+        {
+            "msgName": "CouldNotCopySupplicantFile",
+            "msgId": 28,
+            "msgString": "Failed to copy old wpa_supplicant file to new location",
+            "msgPriority": "Error",
+            "obsolete": true
+        },
+        {
+            "msgName": "CouldNotDeleteWifiDir",
+            "msgId": 29,
+            "msgString": "Failed to delete deprecated wifi directory and contents",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "error",
+                    "paramType": "commonError"
+                }
+            ],
+            "obsolete": true
+        },
+        {
+            "msgName": "CouldNotStatFile",
+            "msgId": 30,
+            "msgString": "Stat failed",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "error",
+                    "paramType": "commonError"
+                }
+            ],
+            "obsolete": true
+        },
+        {
+            "msgName": "CouldNotCopyFile",
+            "msgId": 31,
+            "msgString": "File copy failed",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "error",
+                    "paramType": "commonError"
+                }
+            ],
+            "obsolete": true
+        },
+        {
+            "msgName": "CouldNotChownFile",
+            "msgId": 32,
+            "msgString": "File chown failed",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "error",
+                    "paramType": "commonError"
+                }
+            ],
+            "obsolete": true
+        },
+        {
+            "msgName": "CouldNotDeleteFile",
+            "msgId": 33,
+            "msgString": "Removing file failed",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "error",
+                    "paramType": "commonError"
+                }
+            ],
+            "obsolete": true
+        },
+        {
+            "msgName": "RequestedPinsAlreadyUsed",
+            "msgId": 34,
+            "msgString": "Application requested pins that are already used",
+            "msgPriority": "Error",
+            "obsolete": true
+        },
+        {
+            "msgName": "MultipleRequestForPin",
+            "msgId": 35,
+            "msgString": "Application requested multiple peripherals that map to the same logical pin",
+            "msgPriority": "Error",
+            "obsolete": true
+        },
+        {
+            "msgName": "CouldNotFindUartIndex",
+            "msgId": 36,
+            "msgString": "Error finding index of UART",
+            "msgPriority": "Error",
+            "obsolete": true
+        },
+        {
+            "msgName": "CouldNotRemoveUIDEntriesForUninstalledApps",
+            "msgId": 37,
+            "msgString": "Could not remove uid entries for uninstalled apps",
+            "msgPriority": "Warning"
+        },
+        {
+            "msgName": "CouldNotGetUidOfApplicationToKeep",
+            "msgId": 38,
+            "msgString": "Could not get the uid of an application meant to be kept during garbage collection",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "componentId",
+                    "paramType": "uniqueId"
+                },
+                {
+                    "paramName": "error",
+                    "paramType": "commonError"
+                }
+            ]
+        },
+        {
+            "msgName": "CouldNotOpenMutableStorageParentDirectory",
+            "msgId": 39,
+            "msgString": "Could not open the directory where Mutable Storage directories are located",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "error",
+                    "paramType": "commonError"
+                }
+            ]
+        },
+        {
+            "msgName": "ErrorRemovingMutableStorageForUninstalledApps",
+            "msgId": 40,
+            "msgString": "Could not remove mutable storage capabilities for uninstalled apps",
+            "msgPriority": "Warning",
+            "params": [
+                {
+                    "paramName": "error",
+                    "paramType": "commonError"
+                }
+            ]
+        },
+        {
+            "msgName": "CouldNotResetStorageQuotaForUninstalledApps",
+            "msgId": 41,
+            "msgString": "Could not reset storage quota for uninstalled apps",
+            "msgPriority": "Warning",
+            "params": [
+                {
+                    "paramName": "error",
+                    "paramType": "commonError"
+                }
+            ]
+        },
+        {
+            "msgName": "CouldNotGetDirectoryInformation",
+            "msgId": 42,
+            "msgString": "Could not get information about a directory",
+            "msgPriority": "Warning",
+            "params": [
+                {
+                    "paramName": "error",
+                    "paramType": "commonError"
+                }
+            ]
+        },
+        {
+            "msgName": "CouldNotFindPeripheralIndex",
+            "msgId": 43,
+            "msgString": "Error finding index of peripheral",
+            "msgPriority": "Error",
+            "obsolete": true
+        },
+        {
+            "msgName": "ErrorAcquiringPeripheral",
+            "msgId": 44,
+            "msgString": "Error acquiring peripheral.",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "peripheralType",
+                    "paramType": "unsignedInteger"
+                },
+                {
+                    "paramName": "peripheralName",
+                    "paramType": "string"
+                },
+                {
+                    "paramName": "error",
+                    "paramType": "commonError"
+                }
+            ],
+            "obsolete": true
+        },
+        {
+            "msgName": "ErrorReleasingPeripheral",
+            "msgId": 45,
+            "msgString": "Error releasing peripheral.",
+            "msgPriority": "Error",
+            "obsolete": true,
+            "params": [
+                {
+                    "paramName": "peripheralType",
+                    "paramType": "unsignedInteger"
+                },
+                {
+                    "paramName": "peripheralName",
+                    "paramType": "string"
+                },
+                {
+                    "paramName": "error",
+                    "paramType": "commonError"
+                }
+            ]
+        },
+        {
+            "msgName": "NoCoreAvailable",
+            "msgId": 46,
+            "msgString": "No core was available to run application",
+            "msgPriority": "Error",
+            "obsolete": true
+        },
+        {
+            "msgName": "ErrorAcquiringGpioPeripheral",
+            "msgId": 47,
+            "msgString": "Allocation conflict of GPIO peripheral - unsupported sharing of GPIO block",
+            "msgPriority": "Error",
+            "obsolete": true
+        },
+        {
+            "msgName": "FailedToGetSysUid",
+            "msgId": 48,
+            "msgString": "Failed to get uid for sys user.",
+            "msgPriority": "Error"
+        },
+        {
+            "msgName": "CreateNetworkStatusFileFailed",
+            "msgId": 49,
+            "msgString": "Failed to create and take ownership of network status file.",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "error",
+                    "paramType": "commonError"
+                }
+            ]
+        },
+        {
+            "msgName": "ErrorAcquiringGpioInstance",
+            "msgId": 50,
+            "msgString": "Could not acquire requested gpio.",
+            "msgPriority": "Error",
+            "obsolete": true,
+            "params": [
+                {
+                    "paramName": "requestedGpioInstance",
+                    "paramType": "integer"
+                }
+            ]
+        },
+        {
+            "msgName": "ConflictAcquiringPeripheral",
+            "msgId": 51,
+            "msgString": "Conflict acquiring peripheral.",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "conflictType",
+                    "paramType": "unsignedInteger"
+                },
+                {
+                    "paramName": "peripheralType",
+                    "paramType": "unsignedInteger"
+                },
+                {
+                    "paramName": "peripheralNumber",
+                    "paramType": "unsignedInteger"
+                },
+                {
+                    "paramName": "conflictPeripheralType",
+                    "paramType": "unsignedInteger"
+                },
+                {
+                    "paramName": "conflictPeripheralNumber",
+                    "paramType": "unsignedInteger"
+                },
+                {
+                    "paramName": "conflictAppUid",
+                    "paramType": "unsignedInteger"
+                }
+            ],
+            "obsolete": true
+        },
+        {
+            "msgName": "PwmPeripheralExportFailure",
+            "msgId": 52,
+            "msgString": "Failed to export/unexport PWM.",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "isExport",
+                    "paramType": "unsignedInteger"
+                },
+                {
+                    "paramName": "pwmInstance",
+                    "paramType": "unsignedInteger"
+                }
+            ],
+            "obsolete": true
+        },
+        {
+            "msgName": "FailureReleasingAllPeripherals",
+            "msgId": 53,
+            "msgString": "Failed to release all peripherals for app",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "error",
+                    "paramType": "commonError"
+                }
+            ],
+            "obsolete": true
+        },
+        {
+            "msgName": "FailedToReleasePeripheralInstance",
+            "msgId": 54,
+            "msgString": "Failed to release peripheral instance",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "peripheralType",
+                    "paramType": "unsignedInteger"
+                },
+                {
+                    "paramName": "peripheralInstance",
+                    "paramType": "unsignedInteger"
+                },
+                {
+                    "paramName": "error",
+                    "paramType": "commonError"
+                }
+            ],
+            "obsolete": true
+        },
+        {
+            "msgName": "NoPinsAssociatedWithPeripheral",
+            "msgId": 55,
+            "msgString": "No GPIO pins were associated with peripheral",
+            "msgPriority": "Warning",
+            "params": [
+                {
+                    "paramName": "peripheralType",
+                    "paramType": "unsignedInteger"
+                },
+                {
+                    "paramName": "peripheralInstance",
+                    "paramType": "unsignedInteger"
+                }
+            ],
+            "obsolete": true
+        },
+        {
+            "msgName": "FailedToReleaseGpioPinsBackToSystem",
+            "msgId": 56,
+            "msgString": "Failed to release pins back to the system",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "error",
+                    "paramType": "commonError"
+                }
+            ],
+            "obsolete": true
+        },
+        {
+            "msgName": "FailedToAddLineAccessControlToGpios",
+            "msgId": 57,
+            "msgString": "Failed add line access control to GPIOs",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "error",
+                    "paramType": "commonError"
+                }
+            ],
+            "obsolete": true
+        },
+        {
+            "msgName": "FailedToFindPeripheralInDeviceTree",
+            "msgId": 58,
+            "msgString": "Failed to find the capability peripheral in the device tree",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "capabilityId",
+                    "paramType": "unsignedInteger"
+                },
+                {
+                    "paramName": "error",
+                    "paramType": "commonError"
+                }
+            ]
+        },
+        {
+            "msgName": "CreatedApplicationProfile",
+            "msgId": 59,
+            "msgString": "Created user profile for application",
+            "msgPriority": "Trace",
+            "params": [
+                {
+                    "paramName": "uid",
+                    "paramType": "unsignedInteger"
+                },
+                {
+                    "paramName": "coreType",
+                    "paramType": "unsignedInteger"
+                },
+                {
+                    "paramName": "coreId",
+                    "paramType": "unsignedInteger"
+                }
+            ]
+        }
+    ]
+}

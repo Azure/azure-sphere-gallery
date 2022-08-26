@@ -1,0 +1,6 @@
+category_id: 0
+name: LinuxError
+namespace: azure_sphere
+# Temporary alias
+namespaceAlias: exp23
+include: <errno.h>

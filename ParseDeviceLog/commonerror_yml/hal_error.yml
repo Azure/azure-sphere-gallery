@@ -1,0 +1,244 @@
+category_id: 32
+name: HalError
+enumPrefix: HalError
+inlineDefs: true
+namespace: azure_sphere::hal
+codes:
+  - id: 100
+    name: IoCoreInitialSyncTimeout
+    msg: IO Core initial sync failed (bootloader did not start?)
+  - id: 101
+    name: IoCoreInitialSyncIncorrect
+    msg: IO Core initial sync incorrect (incorrect bootloader version?)
+  - id: 102
+    name: IoCoreLoadBinaryTimeout
+    msg: IO Core timeout while loading binary (bootloader not catching fatal issue with supplied binary?)
+  - id: 103
+    name: IoCoreLoadBinaryFailure
+    msg: IO Core returned invalid status (bad binary to load)
+  - id: 104
+    name: IoCoreCommunicationTimeout
+    msg: IO Core communication timeout
+  - id: 105
+    name: IoCoreFinalSyncIncorrect
+    msg: IO Core final sync incorrect
+  - id: 106
+    name: PowerManagementRequestFailed
+    msg: Power Management request to Pluton Runtime failed
+  - id: 107
+    name: IoCoreInvalidXipOffset
+    msg: IO Core returned out-of-range XIP offset (bad binary to load)
+  - id: 108
+    name: IoCoreExecutableTooSmall
+    msg: IO Core executable not large enough to contain header
+  - id: 109
+    name: IoCoreExecutableHeaderInvalid
+    msg: IO Core executable failed header check
+  - id: 110
+    name: IoCoreExecutableIncompatiblePhdr
+    msg: IO Core executable has invalid segment
+  - id: 111
+    name: IoCoreExecutableAlignmentRequired
+    msg: IO Core executable XIP region is not sufficiently aligned
+  - id: 112
+    name: IoCoreExecutableInvalidBase
+    msg: IO Core executable not in a valid location
+  - id: 113
+    name: IoCoreCommunicationInvalidBufferLocation
+    msg: IO Core communication buffer is not in SYSRAM
+  - id: 114
+    name: IoCoreCommunicationInvalidBufferAlignment
+    msg: IO Core communication buffer not sufficiently aligned
+  - id: 115
+    name: IoCoreCommunicationInvalidBufferType
+    msg: IO Core communication buffer invalid type
+  - id: 116
+    name: IoCoreInvalidId
+    msg: IO Core invalid core ID
+  - id: 117
+    name: InterruptControllerInvalidIrq
+    msg: Invalid IRQ number
+  - id: 118
+    name: InterruptControllerUnsupported
+    msg: Unsupported Interrupt Controller operation
+  - id: 119
+    name: FlashOperationOutOfBounds
+    msg: The requested operation is beyond the bounds of the flash
+  - id: 120
+    name: FlashNoMoreChunks
+    msg: There are no more chunks to perform
+  - id: 121
+    name: FlashUnexpectedOpType
+    msg: The flash API encountered an unexpected operation type
+  - id: 122
+    name: FlashDriverUnexpectedBytesRead
+    msg: The flash device read an unexpected number of bytes
+  - id: 123
+    name: FlashDriverUnexpectedBytesWritten
+    msg: The flash device wrote an unexpected number of bytes
+  - id: 124
+    name: FlashDriverUnexpectedBytesErased
+    msg: The flash device erased an unexpected number of bytes
+  - id: 125
+    name: FlashDriverUnsupportedOperationParameters
+    msg: The flash driver is reporting minimum, maximum, and preferred operation sizes that are not supported
+  - id: 126
+    name: FlashDriverUnsupportedOperation
+    msg: The flash driver does not support the requested operation
+  - id: 127
+    name: FlashDriverInvalidArgument
+    msg: An argument passed to the flash driver is invalid
+  - id: 128
+    name: FlashDriverWriteCrossesBoundary
+    msg: The requested write would cross a page boundary
+  - id: 129
+    name: FlashDriverFlashTimeout
+    msg: The flash hardware timed out while attempting the requested operation
+  - id: 130
+    name: FlashDriverReadError
+    msg: An error occurred during the read operation
+  - id: 131
+    name: FlashDriverWriteError
+    msg: An error occurred during the write operation
+  - id: 132
+    name: FlashDriverEraseError
+    msg: An error occurred during the erase operation
+  - id: 133
+    name: SignalManagerNoMoreSignals
+    msg: All available signals have been allocated from the signal manager
+  - id: 134
+    name: IpcSendFull
+    msg: The send buffer is full
+  - id: 135
+    name: IpcReceiveEmpty
+    msg: The receive buffer is empty
+  - id: 136
+    name: MemoryMapFailed
+    msg: Memory protection driver failed to map memory
+  - id: 137
+    name: VirtualPhysicalDifferentlyAligned
+    msg: The requested physical to virtual mapping results in addresses that are aligned differently
+  - id: 138
+    name: TranslationTableFactoryFailure
+    msg: The translation table factory failed to create an entry for the request
+  - id: 139
+    name: NoMoreAddressRegions
+    msg: The memory protection driver does not have any remaining regions
+  - id: 140
+    name: AddressRegionConflict
+    msg: The requested mapping conflicts with a previous entry
+  - id: 141
+    name: InvalidAddressRegionLength
+    msg: The requested mapping has an invalid length
+  - id: 142
+    name: PeripheralsUnsupported
+    msg: Requested peripheral is not supported on this hardware
+  - id: 143
+    name: PeripheralsReleasingUnreferencedResource
+    msg: Attempting to release a peripheral with resources that don't have any current references
+  - id: 144
+    name: PeripheralExistingOwner
+    msg: Attempting to acquire a peripheral that is already owned
+  - id: 145
+    name: PeripheralResourceDisallowedDomain
+    msg: Attempting to acquire a resource to a disallowed domain
+  - id: 146
+    name: PeripheralResourceOnOtherDomain
+    msg: Attempting to acquire a resource that is already assigned to another domain
+  - id: 147
+    name: PeripheralPinExistingOwner
+    msg: Attempting to acquire a pin that is already owned
+  - id: 148
+    name: PeripheralResourceExistingOwner
+    msg: Attempting to acquire a resource that is already owned
+  - id: 149
+    name: PeripheralAcquireErrors
+    msg: Peripheral acquisition resulted in errors. Check error list.
+  - id: 150
+    name: PeripheralInvalidAppId
+    msg: Releasing peripherals for an invalid App ID
+  - id: 151
+    name: RtcInvalidTime
+    msg: The supplied time is invalid for the RTC
+  - id: 152
+    name: RtcNotPresent
+    msg: There is no present RTC hardware
+  - id: 153
+    name: RtcInvalidOperationMode
+    msg: The supplied operation mode is invalid for the RTC
+  - id: 154
+    name: PinmuxInvalidPin
+    msg: Specified pin is outside the valid range
+  - id: 155
+    name: PinmuxConfigurationLocked
+    msg: Unable to change the configuration due to it being locked
+  - id: 156
+    name: PeripheralConfigurationLocked
+    msg: Unable to change the configuration due to it being locked
+  - id: 157
+    name: IpcInvalidMessageSize
+    msg: Message does not fit in allocated buffer size
+  - id: 158
+    name: IpcResponseTimeout
+    msg: Timed out waiting for IPC response
+  - id: 159
+    name: IpcMalformedResponse
+    msg: IPC response message is malformed
+  - id: 160
+    name: IpcConnectionSetupFailure
+    msg: IPC setup connection failed
+  - id: 161
+    name: IpcNoConnection
+    msg: IPC endpoint not connected to remote
+  - id: 162
+    name: IpcConnectTimeout
+    msg: Timed out trying to connect to remote peer
+  - id: 163
+    name: FlashInvalidReadSize
+    msg: The read size is invalid
+  - id: 164
+    name: FlashOperationOverlap
+    msg: The requested destination overlaps origin
+  - id: 165
+    name: FlashRegionInUse
+    msg: The requested flash region is already in use
+  - id: 166
+    name: FlashPtrSizeTooLarge
+    msg: The requested size is too large for the FlashPtr's buffer
+  - id: 167
+    name: FlashPtrSizeTooSmall
+    msg: The requested size is too small for the FlashPtr
+  - id: 168
+    name: FlashModifyInProgress
+    msg: Flash is currently being modified and cannot be read
+  - id: 169
+    name: DvfsInvalidDomain
+    msg: DVFS is not supported for this code execution domain
+  - id: 170
+    name: DvfsInvalidOppTable
+    msg: DVFS is not supported due to invalid OppTable information
+  - id: 171
+    name: DvfsMismatchedEnterExitCalls
+    msg: Mismatched calls to DVFS methods Enter/ExitDefaultFrequencyMode
+  - id: 172
+    name: DvfsUnsupportedFrequency
+    msg: Invalid frequency parameter provided to SetDomainFrequency()
+  - id: 200
+    name: UnsupportedExecutionLevel
+    msg: Unsupported execution level supplied
+
+    # Board config errors
+  - id: 300
+    name: BoardConfigParseError
+    msg: Error in parsing boot config image
+  - id: 301
+    name: BoardConfigEntryNotFound
+    msg: Entry not found in boot config image index
+  - id: 302
+    name: BoardConfigInvalidIndexLength
+    msg: GetSetting does not support this length
+
+    # Recovery API errors
+  - id: 400
+    name: InvalidImageRequestId
+    msg: An invalid message ID was passed to InitializeTransfer

@@ -1,0 +1,223 @@
+{
+    "version": "1.0",
+    "categoryId": 31,
+    "categoryName": "appman_sysevent",
+    "msgIds": [
+        {
+            "msgName": "SendSystemEventNotificationFailed",
+            "msgId": 1,
+            "msgString": "Failed to send system event",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "error",
+                    "paramType": "integer"
+                }
+            ]
+        },
+        {
+            "msgName": "FailedToReadSystemEventTimer",
+            "msgId": 2,
+            "msgString": "Failed to read system event timer",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "error",
+                    "paramType": "integer"
+                }
+            ]
+        },
+        {
+            "msgName": "SystemEventFiredTooSoon",
+            "msgId": 3,
+            "msgString": "The system event timer fired too soon",
+            "msgPriority": "Warning",
+            "params": [
+                {
+                    "paramName": "next_event_time",
+                    "paramType": "integer"
+                }
+            ]
+        },
+        {
+            "msgName": "InvalidDeferralRequest",
+            "msgId": 4,
+            "msgString": "Invalid software update deferral request",
+            "msgPriority": "Error"
+        },
+        {
+            "msgName": "DeferFailedNoMatchingSystemEvent",
+            "msgId": 5,
+            "msgString": "No matching event for deferral",
+            "msgPriority": "Warning",
+            "params": [
+                {
+                    "paramName": "event",
+                    "paramType": "integer"
+                }
+            ]
+        },
+        {
+            "msgName": "InvalidEventResumeRequest",
+            "msgId": 6,
+            "msgString": "Invalid software update resume request",
+            "msgPriority": "Error"
+        },
+        {
+            "msgName": "ResumeFailedNoMatchingSystemEvent",
+            "msgId": 7,
+            "msgString": "No matching event for event resume",
+            "msgPriority": "Warning",
+            "params": [
+                {
+                    "paramName": "event",
+                    "paramType": "integer"
+                }
+            ]
+        },
+        {
+            "msgName": "FailedToCreateSystemEventTimer",
+            "msgId": 8,
+            "msgString": "Failed to create system event timer",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "error",
+                    "paramType": "commonError"
+                }
+            ]
+        },
+        {
+            "msgName": "FailedToSetSystemEventTimer",
+            "msgId": 9,
+            "msgString": "Failed to set system event timer",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "error",
+                    "paramType": "integer"
+                }
+            ]
+        },
+        {
+            "msgName": "FailedToCreateSystemNotificationSocketForApp",
+            "msgId": 10,
+            "msgString": "Failed to create system event notification socket for app",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "error",
+                    "paramType": "integer"
+                }
+            ]
+        },
+        {
+            "msgName": "FailedToConnectToSystemToAppSocket",
+            "msgId": 11,
+            "msgString": "Failed to connect the system to app event socket",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "error",
+                    "paramType": "integer"
+                }
+            ]
+        },
+        {
+            "msgName": "CloudLoadFailed",
+            "msgId": 12,
+            "msgString": "Failed to install cloud loaded software",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "error",
+                    "paramType": "commonError"
+                }
+            ]
+        },
+        {
+            "msgName": "FailedToCreateSystemEventManager",
+            "msgId": 13,
+            "msgString": "Failed to create system event manager",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "error",
+                    "paramType": "commonError"
+                }
+            ]
+        },
+        {
+            "msgName": "UnknownUpdateEventNotificationCommand",
+            "msgId": 14,
+            "msgString": "Unknown command ID for update event notification handler",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "commandID",
+                    "paramType": "integer"
+                }
+            ]
+        },
+        {
+            "msgName": "UpdateDeferralFailure",
+            "msgId": 15,
+            "msgString": "Unable to defer software update",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "error",
+                    "paramType": "commonError"
+                }
+            ]
+        },
+        {
+            "msgName": "UpdateResumeFailure",
+            "msgId": 16,
+            "msgString": "Unable to resume software update",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "error",
+                    "paramType": "commonError"
+                }
+            ]
+        },
+        {
+            "msgName": "InvalidUpdateStateParameter",
+            "msgId": 17,
+            "msgString": "Invalid update state parameter",
+            "msgPriority": "Error"
+        },
+        {
+            "msgName": "InvalidUpdateState",
+            "msgId": 18,
+            "msgString": "Invalid update state",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "state",
+                    "paramType": "integer"
+                }
+            ]
+        },
+        {
+            "msgName": "FailedToSetUpdateState",
+            "msgId": 19,
+            "msgString": "Failed to set update state",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "error",
+                    "paramType": "commonError"
+                }
+            ]
+        },
+        {
+            "msgName": "FailedToCreateUpdateNotificationEvent",
+            "msgId": 20,
+            "msgString": "Failed to create a system event",
+            "msgPriority": "Error"
+        }
+    ]
+}
