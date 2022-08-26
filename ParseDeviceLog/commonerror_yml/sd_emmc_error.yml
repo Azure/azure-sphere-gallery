@@ -1,0 +1,24 @@
+category_id: 47
+name: SdEmmcError
+enumPrefix: SdEmmcError
+inlineDefs: true
+namespace: azure_sphere::hal::drivers
+codes:
+  - id: 100
+    name: SdCommandBusError
+    msg: SD Bus error during command sequence
+  - id: 101
+    name: SdCommandTimeout
+    msg: SD Bus timeout during command sequence
+  - id: 102
+    name: SdTransferBusError
+    msg: SD Bus error during transfer sequence
+  - id: 103
+    name: SdTransferTimeout
+    msg: SD Bus timeout during transfer sequence
+  - id: 104
+    name: SdCardInitError
+    msg: SD Card initialization error
+  - id: 105
+    name: SdCardUnsupported
+    msg: The SD card is not supported by the host driver

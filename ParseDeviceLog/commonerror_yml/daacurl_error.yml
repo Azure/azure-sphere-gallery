@@ -1,0 +1,15 @@
+category_id: 36
+name: DAACurlError 
+codes: 
+  - 
+    id: 1
+    name: GetTenantIdError 
+    msg: Error retrieving tenant id
+  - 
+    id: 2
+    name: GetTenantCertificateError 
+    msg: Error retrieving tenant's DAA certificate
+  - 
+    id: 3
+    name: EnableHwSignError
+    msg: Failed to enable HW signing in wolfSSL

@@ -1,0 +1,105 @@
+# Appman error codes
+category_id: 3
+name: LifetimeManagerError
+namespace: azure_sphere
+codes:
+  -
+    id: 1
+    name: AppAlreadyExists
+    msg: Application already exists on the device
+  -
+    id: 2
+    name: NullOrInvalidAppFoundation
+    msg: Application has not been correctly initialized
+  -
+    id: 3
+    name: NullAppManifest
+    msg: Application manifest is null
+  -
+    id: 4
+    name: MountedImageIsNotADirectory
+    msg: Application's image is not a directory
+  -
+    id: 5
+    name: UnknownAppRequestingInstall
+    msg: Unknown application is requesting an installation
+  -
+    id: 6
+    name: FailedToMakeImageManager
+    msg: Could not make an image manager
+  -
+    id: 7
+    name: RebootRequired
+    msg: Reboot is required
+  -
+    id: 8
+    name: FailedToUpdateFirewallRules
+    msg: Failed to update firewall rules
+  -
+    id: 9
+    name: FailedToUpdateDeviceAuthTenantList
+    msg: Failed to update device auth tenant list
+  -
+    id: 10
+    name: NoDebuggerAvailable
+    msg: Attempt to debug an application without a debugger
+  -
+    id: 11
+    name: CantDebugDebugger
+    msg: Attempt to debug the debugger application
+  -
+    id: 12
+    name: CantStartDebugger
+    msg: Attempt to manually start the debugger
+  -
+    id: 13
+    name: CantStopDebugger
+    msg: Attempt to manually stop the debugger
+  -
+    id: 14
+    name: CouldNotRemountDebugger
+    msg: Failed to remount the debugger application
+  -
+    id: 15
+    name: DebuggingNotSupported
+    msg: Attempt to debug a non-customer application
+  -
+    id: 16
+    name: CouldNotDeleteUid
+    msg: An error occurred when attempting to delete entry from uid_map
+  -
+    id: 17
+    name: CouldNotInvalidateImage
+    msg: An error occurred when attempting to invalidate the image
+  -
+    id: 18
+    name: ErrorDeletingDeviceTenant
+    msg: An error occurred when attempting to delete application's device tenant entry
+  -
+    id: 19
+    name: ErrorDeletingFirewallRules
+    msg: An error occurred when attempting to delete application's firewall entries
+  -
+    id: 20
+    name: DuplicateTcpUdpPortDetected
+    msg: Application tried to add a TCP or UDP port that a previous application added
+  -
+    id: 21
+    name: CouldNotDeleteApp
+    msg: An error occurred while deleting application
+  -
+    id: 22
+    name: IncompatibleApplicationRuntime
+    msg: The application is incompatible with the current runtime.
+  -
+    id: 23
+    name: FailedToUpdateAzSpioFirewallRules
+    msg: Failed to update application communication firewall rules
+  -
+    id: 24
+    name: ErrorDeletingAzSpioFirewallRules
+    msg: Failed to update application communication firewall rules
+  -
+    id: 25
+    name: PeripheralManagerIsNull
+    msg: Could not make peripheral manager - likely an issue with getting system user or group ID
