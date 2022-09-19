@@ -25,7 +25,7 @@
 #include <iot/iot.h>
 #include <iot/azure_iot_utilities.h>
 
-// Refer to https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-device-sdk-c-intro for more
+// Refer to https://learn.microsoft.com/en-us/azure/iot-hub/iot-hub-device-sdk-c-intro for more
 // information on Azure IoT SDK for C
 
 typedef struct d2c_context_t d2c_context_t;
@@ -337,7 +337,7 @@ int azure_iot_send_message_async(const char *message, const char *message_type,
     d2c_context_t *ctx = CALLOC(1, sizeof(d2c_context_t));
     ctx->payload_size = message_len;
     ctx->delivery_callback = callback;
-    ctx->context = context;    
+    ctx->context = context;
 
     if (IoTHubDeviceClient_LL_SendEventAsync(iothub_client_handle, message_handle, send_message_callback,
                                              (void *)ctx) != IOTHUB_CLIENT_OK) {

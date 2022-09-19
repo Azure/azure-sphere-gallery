@@ -17,7 +17,7 @@ The project also shows how to transmit device lifecycle events from the Azure Sp
 ## Prerequisites & Setup
 
 - An Azure Sphere-based device with development features (see [Get started with Azure Sphere](https://azure.microsoft.com/services/azure-sphere/get-started/) for more information).
-- Setup a development environment for Azure Sphere (see [Quickstarts to set up your Azure Sphere device](https://docs.microsoft.com/azure-sphere/install/overview) for more information).
+- Setup a development environment for Azure Sphere (see [Quickstarts to set up your Azure Sphere device](https://learn.microsoft.com/azure-sphere/install/overview) for more information).
 
 
 ## How to use
@@ -26,7 +26,7 @@ You will need the following:
 * Azure Sphere device claimed into a tenant
 * A copy of the [Azure Sphere Github samples repository](https://github.com/Azure/azure-sphere-samples) (specifically the [Azure IoT sample](https://github.com/Azure/azure-sphere-samples/tree/main/Samples/AzureIoT))
 
-Follow the Azure IoT sample instructions, you can choose the [IoT Hub](https://github.com/Azure/azure-sphere-samples/blob/main/Samples/AzureIoT/READMEStartWithIoTHub.md) or [IoT Hub with DPS](https://github.com/Azure/azure-sphere-samples/blob/main/Samples/AzureIoT/READMEAddDPS.md) instructions. 
+Follow the Azure IoT sample instructions, you can choose the [IoT Hub](https://github.com/Azure/azure-sphere-samples/blob/main/Samples/AzureIoT/READMEStartWithIoTHub.md) or [IoT Hub with DPS](https://github.com/Azure/azure-sphere-samples/blob/main/Samples/AzureIoT/READMEAddDPS.md) instructions.
 
 * An [Azure Key Vault](https://azure.microsoft.com/en-gb/services/key-vault/) - this will hold three secrets (Azure IoT Hub connection string, your Azure Sphere tenant Id [guid], and an APIKey used by the ASP.NET Core app service to validate a web session for initializing Active Directory Authentication)
 
@@ -91,9 +91,9 @@ The API Service exposes two REST APIs, these are:
 Note that you need to authorize the REST API project to have access to your key vault before the service will work (the service reads the key vault secrets when the /webhook endpoint is accessed).
 
 **Authorize your REST API service with Key Vault**
-When your REST API service is built and deployed to your Azure Portal Resource Group a 'Service Principal' is created, this can be used to authorize access to your key vault. 
+When your REST API service is built and deployed to your Azure Portal Resource Group a 'Service Principal' is created, this can be used to authorize access to your key vault.
 
-Follow [this guide](https://docs.microsoft.com/azure/key-vault/general/assign-access-policy-portal) for granting permissions to your secrets, note that the REST API service should be granted list and read permissions. The name of your Principal is going to be the name of your REST API service in the Azure Portal.
+Follow [this guide](https://learn.microsoft.com/azure/key-vault/general/assign-access-policy-portal) for granting permissions to your secrets, note that the REST API service should be granted list and read permissions. The name of your Principal is going to be the name of your REST API service in the Azure Portal.
 
 **Ensure that the REST API Service is configured for **Always on** (a restart will lose the authentication data)
 
@@ -201,7 +201,7 @@ The updated code should look like this:
 The AzureIoT sample should now be ready to run on your development board.
 
 ### Expected outcome from running the Device Simulator or Updated Azure IoT sample
-The device simulator and modified Azure IoT sample send 'NoUpdateAvailable' and 'AppRestart' telemetry messages to your Azure IoT Hub, these messages are then sent to your REST API service which uses the authenticated user to call [Azure Sphere Public APIs](https://docs.microsoft.com/rest/api/azure-sphere/) to obtain information about the device that's sending the telemetry - this information includes:
+The device simulator and modified Azure IoT sample send 'NoUpdateAvailable' and 'AppRestart' telemetry messages to your Azure IoT Hub, these messages are then sent to your REST API service which uses the authenticated user to call [Azure Sphere Public APIs](https://learn.microsoft.com/rest/api/azure-sphere/) to obtain information about the device that's sending the telemetry - this information includes:
 - Device OS version
 - Device Product
 - Device Group (including whether the Device Group is Retail Eval)

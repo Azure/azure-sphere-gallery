@@ -18,7 +18,7 @@ The simple file system is designed to:
 ## Prerequisites & Setup
 
 - An Azure Sphere-based device with development features (see [Get started with Azure Sphere](https://azure.microsoft.com/en-us/services/azure-sphere/get-started/) for more information).
-- Setup a development environment for Azure Sphere (see [Quickstarts to set up your Azure Sphere device](https://docs.microsoft.com/en-us/azure-sphere/install/overview) for more information).
+- Setup a development environment for Azure Sphere (see [Quickstarts to set up your Azure Sphere device](https://learn.microsoft.com/en-us/azure-sphere/install/overview) for more information).
 
 Note that the Azure Sphere High Level application is configured for the 21.01 SDK release.
 
@@ -121,12 +121,12 @@ struct fileEntry
 
 **FS_ReadFileForIndex** returns -1 if the file system isn't initialized, the directory doesn't exist, there aren't any files in the directory, the index number is greater than the number of files in the directory, the file size is larger than the supplied buffer, or reading the underlying media fails. Returns 0 on success. Call the FS_ReadFileForIndex API to get the file size before allocating memory to read the file.
 
-**Python Remote Storage app** 
+**Python Remote Storage app**
 The project contains a Python Flask application (PyDiskHost.py) that supports 4MB storage (matching the defined storage layout of the high-level Azure Sphere application) - The Python application supports HTTP Get (read), and HTTP Post (Write) functions - the 4MB storage is supported by an in-memory bytearray (but could be easily modified to use a file on disk). The Python app is configured to use port 5000.
 
 Start the Python application before running the Azure Sphere application.
 
-**Azure Sphere High Level Application** 
+**Azure Sphere High Level Application**
 
 The high level application sets up the storage size (line 64)
 

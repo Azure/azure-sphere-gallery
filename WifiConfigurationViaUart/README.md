@@ -13,14 +13,14 @@ The goal of this project is to show how to configure Wi-Fi settings for a device
 ## Prerequisites & Setup
 
 - An Azure Sphere-based device with development features enabled (see [Get started with Azure Sphere](https://azure.microsoft.com/en-us/services/azure-sphere/get-started/) for more information).
-- Setup a development environment for Azure Sphere (see [Quickstarts to set up your Azure Sphere device](https://docs.microsoft.com/en-us/azure-sphere/install/overview) for more information).
+- Setup a development environment for Azure Sphere (see [Quickstarts to set up your Azure Sphere device](https://learn.microsoft.com/en-us/azure-sphere/install/overview) for more information).
 - A USB/Serial adapter to connect the Azure Sphere board to your development PC ([here's an example device](https://www.amazon.com/gp/product/B07BBPX8B8/ref=ppx_yo_dt_b_asin_title_o00_s00?ie=UTF8&psc=1))
 - A terminal application that enables Serial connections (PuTTY or similar).
 
 Note that the Azure Sphere High Level application is configured for the 21.01 SDK release.
 
 ## How to use
-The application is configured to use ISU0, UART Tx, and Rx pins - the MT3620 pinout diagram can be found [here](https://docs.microsoft.com/en-us/azure-sphere/hardware/mt3620-user-guide). The UART is configured for 115200 baud.
+The application is configured to use ISU0, UART Tx, and Rx pins - the MT3620 pinout diagram can be found [here](https://learn.microsoft.com/en-us/azure-sphere/hardware/mt3620-user-guide). The UART is configured for 115200 baud.
 
 The high level application will display a menu in your development PC terminal application - the menu contains: device reboot, listing of the existing network configuration, and the ability to add a new network configuration (see below).
 

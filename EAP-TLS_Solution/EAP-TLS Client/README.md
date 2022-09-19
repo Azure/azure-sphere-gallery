@@ -32,7 +32,7 @@ The solution requires the following assets:
 
 - Azure Sphere-based device.
 
-    **Note:** by default, this solution targets [MT3620 reference development board (RDB)](https://docs.microsoft.com/azure-sphere/hardware/mt3620-reference-board-design) hardware, such as the MT3620 development kit from Seeed Studios. To build the sample for different Azure Sphere hardware, change the Target Hardware Definition Directory in the project properties. For detailed instructions, see [Use hardware definitions](https://docs.microsoft.com/en-us/azure-sphere/app-development/manage-hardware-dependencies).
+    **Note:** by default, this solution targets [MT3620 reference development board (RDB)](https://learn.microsoft.com/azure-sphere/hardware/mt3620-reference-board-design) hardware, such as the MT3620 development kit from Seeed Studios. To build the sample for different Azure Sphere hardware, change the Target Hardware Definition Directory in the project properties. For detailed instructions, see [Use hardware definitions](https://learn.microsoft.com/en-us/azure-sphere/app-development/manage-hardware-dependencies).
 - A **RADIUS Client**, a router capable of *"Enterprise/RADIUS"* Wi-Fi, which will act as the access gateway for all devices accessing the EAP-TLS network.
 - A **RADIUS Server**, a physical machine or VM which will be authenticating devices accessing the EAP-TLS Wi-Fi network through the RADIUS client.
 - Access to an open Wi-Fi WPA2 (Wi-Fi Protected Access II) network, here referred as "**bootstrap network**" and an EAP-TLS network, is required. It is possible to configure the *bootstrap network* to redirect over the Ethernet interface, if available. In this case, no Wi-Fi credentials would be required.
@@ -42,7 +42,7 @@ The solution requires the following assets:
     - The RADIUS Server's Root CA certificate.
     - A valid client certificate and its related private key.
     - A non-valid client certificate and its related private key.
-  
+
   **Note**: if you don't have certificates, follow the steps in [How to generate certificates for testing](https://github.com/Azure/azure-sphere-samples/tree/master/Samples/Certificates/Cert_HighLevelApp/get-certificates.md) to create the certificates.
 
 
@@ -56,7 +56,7 @@ Before its usage, the client solution needs a few configuration steps to be exec
     ```c
     /// <summary>
     ///     Client certificate's Private Key decryption method.
-    /// 
+    ///
     ///     Configure if the library will use a hard-coded password
     ///     (in the EapTlsConfig object) for decrypting the Client
     ///     certificate's private key, or if it should use the one that could
@@ -139,8 +139,8 @@ The solution also includes a number of network and CertStore helpers, to easily 
 ## Further references
 
 - [Secure enterprise Wi-Fi access: EAP-TLS on Azure Sphere](https://techcommunity.microsoft.com/t5/internet-of-things/secure-enterprise-wi-fi-access-eap-tls-on-azure-sphere/ba-p/1506375)
-- [Manage certificates in high-level applications](https://docs.microsoft.com/en-us/azure-sphere/app-development/certstore)
-- [Using EAP-TLS with Azure SPhere](https://docs.microsoft.com/en-us/azure-sphere/network/eap-tls-overview)
+- [Manage certificates in high-level applications](https://learn.microsoft.com/en-us/azure-sphere/app-development/certstore)
+- [Using EAP-TLS with Azure SPhere](https://learn.microsoft.com/en-us/azure-sphere/network/eap-tls-overview)
 
 
 ## Project expectations

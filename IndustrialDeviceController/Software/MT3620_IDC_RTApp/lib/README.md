@@ -16,7 +16,7 @@ are restricted to the register headers in the `mt3620/` directory. The implement
 in the `.c` files is obviously HW specific.
 
 For detail and documentation on the MT3620; consult
-[this Microsoft resource page](https://docs.microsoft.com/en-gb/azure-sphere/hardware/mt3620-product-status).
+[this Microsoft resource page](https://learn.microsoft.com/en-gb/azure-sphere/hardware/mt3620-product-status).
 
 # Usage
 

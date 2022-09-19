@@ -13,7 +13,7 @@ The goal of this project is to show how to configure Wi-Fi settings for an Azure
 ## Prerequisites & Setup
 
 - An Azure Sphere-based device with development features (see [Get started with Azure Sphere](https://azure.microsoft.com/services/azure-sphere/get-started/) for more information).
-- Setup a development environment for Azure Sphere (see [Quickstarts to set up your Azure Sphere device](https://docs.microsoft.com/azure-sphere/install/overview) for more information).
+- Setup a development environment for Azure Sphere (see [Quickstarts to set up your Azure Sphere device](https://learn.microsoft.com/azure-sphere/install/overview) for more information).
 
 ## How to use
 The project has been built for the [Avnet Azure Sphere Starter Kit](https://www.avnet.com/wps/portal/us/products/avnet-boards/avnet-board-families/ms-azure-sphere/) and [Mikroe Tag Click](https://www.mikroe.com/nfc-tag-click) board (based around the [ST M24SR NFC/RFID tag IC](https://www.st.com/en/nfc/m24sr64-y.html)) - the project can also work with other Azure Sphere boards, the Mikroe Click board will need to be wired up appropriately (refer to the [Mikro Tag Click User Manual](https://download.mikroe.com/documents/add-on-boards/click/nfc-tag/nfc-tag-click-manual-v100.pdf) for the wiring diagram).

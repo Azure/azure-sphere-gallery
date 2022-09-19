@@ -57,11 +57,11 @@ The solution includes two main components:
 
 ## Further references
 
-- [Tutorial: Host a RESTful API with CORS in Azure App Service](https://docs.microsoft.com/en-us/azure/app-service/app-service-web-tutorial-rest-api)
-- [Kestrel web server implementation in ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/servers/kestrel?view=aspnetcore-3.1).
+- [Tutorial: Host a RESTful API with CORS in Azure App Service](https://learn.microsoft.com/en-us/azure/app-service/app-service-web-tutorial-rest-api)
+- [Kestrel web server implementation in ASP.NET Core](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/servers/kestrel?view=aspnetcore-3.1).
 - [Secure enterprise Wi-Fi access: EAP-TLS on Azure Sphere](https://techcommunity.microsoft.com/t5/internet-of-things/secure-enterprise-wi-fi-access-eap-tls-on-azure-sphere/ba-p/1506375)
-- [Manage certificates in high-level applications](https://docs.microsoft.com/en-us/azure-sphere/app-development/certstore)
-- [Using EAP-TLS with Azure Sphere](https://docs.microsoft.com/en-us/azure-sphere/network/eap-tls-overview)
+- [Manage certificates in high-level applications](https://learn.microsoft.com/en-us/azure-sphere/app-development/certstore)
+- [Using EAP-TLS with Azure Sphere](https://learn.microsoft.com/en-us/azure-sphere/network/eap-tls-overview)
 
 ## Project expectations
 

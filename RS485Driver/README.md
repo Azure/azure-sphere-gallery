@@ -1,6 +1,6 @@
 # RS-485 real-time driver with HL-Core interfacing API
 
-This project implements a light weight RS-485 driver running one of the M4 cores in the MT3620, which leverages the low-level access to the UART's hardware registers for reliable communications. The RS-485 real-time driver then also leverages the [mailbox inter-core communication feature of the MT3620](https://docs.microsoft.com/azure-sphere/app-development/high-level-inter-app), for receiving/sending messages from/to the HL-Core App.
+This project implements a light weight RS-485 driver running one of the M4 cores in the MT3620, which leverages the low-level access to the UART's hardware registers for reliable communications. The RS-485 real-time driver then also leverages the [mailbox inter-core communication feature of the MT3620](https://learn.microsoft.com/azure-sphere/app-development/high-level-inter-app), for receiving/sending messages from/to the HL-Core App.
 
 Together with the RS-485 real-time driver, the project includes an high-level RS-485 driver API and a sample App (HLApp). The sample App shows how to initialize the HL-Core RS-485 driver, and send/receive data by leveraging its simple API interface.
 
@@ -8,9 +8,9 @@ Together with the RS-485 real-time driver, the project includes an high-level RS
 
 | Library | Purpose |
 |---------|---------|
-| [application](https://docs.microsoft.com/en-us/azure-sphere/reference/applibs-reference/api-overview) | Communicates with and controls the real-time capable application. |
-| [eventloop](https://docs.microsoft.com/azure-sphere/reference/applibs-reference/applibs-eventloop/eventloop-overview) | Invokes handlers for timer events. |
-| [log](https://docs.microsoft.com/azure-sphere/reference/applibs-reference/applibs-log/log-overview) | Displays messages in the Device Output window during debugging. |
+| [application](https://learn.microsoft.com/en-us/azure-sphere/reference/applibs-reference/api-overview) | Communicates with and controls the real-time capable application. |
+| [eventloop](https://learn.microsoft.com/azure-sphere/reference/applibs-reference/applibs-eventloop/eventloop-overview) | Invokes handlers for timer events. |
+| [log](https://learn.microsoft.com/azure-sphere/reference/applibs-reference/applibs-log/log-overview) | Displays messages in the Device Output window during debugging. |
 | [CodethinkLabs mt3620-m4-drivers](https://github.com/CodethinkLabs/mt3620-m4-drivers) | Open source libraries implementing peripheral drivers for MT3620's M4 real-time cores. |
 
 
@@ -31,7 +31,7 @@ Together with the RS-485 real-time driver, the project includes an high-level RS
 
 ## Prerequisites
 
-- [Seeed MT3620 Development Kit](https://aka.ms/azurespheredevkits) or other hardware that implements the [MT3620 Reference Development Board (RDB)](https://docs.microsoft.com/azure-sphere/hardware/mt3620-reference-board-design) design.
+- [Seeed MT3620 Development Kit](https://aka.ms/azurespheredevkits) or other hardware that implements the [MT3620 Reference Development Board (RDB)](https://learn.microsoft.com/azure-sphere/hardware/mt3620-reference-board-design) design.
 - (Optional) A USB-to-serial adapter (for example, [FTDI Friend](https://www.digikey.com/catalog/en/partgroup/ftdi-friend/60311)) to connect the real-time capable core UART to a USB port on your PC.
 - (Optional) A terminal emulator, such as Telnet or [PuTTY](https://www.chiark.greenend.org.uk/~sgtatham/putty/), to display the RTApp's output.
 - A voltage level-shifter, to interface the 3.3V UART of the MT3620 to a TTL RS-485 transceiver (for example, [3.3V-5V 4 Channels Logic Level Converter Bi-Directional Shifter Module](https://www.amazon.com/FTCBlock-3-3V-5V-Channels-Converter-Bi-Directional/dp/B07H2C6SJJ/ref=sr_1_1_sspa?dchild=1&keywords=level+shifter&qid=1628280388&s=electronics&sr=1-1-spons&psc=1&spLa=ZW5jcnlwdGVkUXVhbGlmaWVyPUEyU0ZUTVZLRzFFOU1CJmVuY3J5cHRlZElkPUEwMzcwMjA0MkxUTTdHRTFBRjRXVyZlbmNyeXB0ZWRBZElkPUExMDE2MDY4Mzc2STZHVzBPMDRXVCZ3aWRnZXROYW1lPXNwX2F0ZiZhY3Rpb249Y2xpY2tSZWRpcmVjdCZkb05vdExvZ0NsaWNrPXRydWU=)).
@@ -48,11 +48,11 @@ Together with the RS-485 real-time driver, the project includes an high-level RS
 
    **To prepare your device on Windows:**
 
-   1. Open the [Azure Sphere command-line tool](https://docs.microsoft.com/azure-sphere/reference/overview) with administrator privileges. 
+   1. Open the [Azure Sphere command-line tool](https://learn.microsoft.com/azure-sphere/reference/overview) with administrator privileges.
 
       Administrator privileges are required for enabling real-time core debugging because it installs USB drivers for the debugger.
 
-   1. Enter the [**azsphere device enable-development**](https://docs.microsoft.com/azure-sphere/reference/azsphere-device#enable-development) command as follows:  
+   1. Enter the [**azsphere device enable-development**](https://learn.microsoft.com/azure-sphere/reference/azsphere-device#enable-development) command as follows:
 
        Azure Sphere CLI:
 
@@ -70,7 +70,7 @@ Together with the RS-485 real-time driver, the project includes an high-level RS
 
    **To prepare your device on Linux:**
 
-   1. Enter the [**azsphere device enable-development**](https://docs.microsoft.com/azure-sphere/reference/azsphere-device#enable-development) command as follows:  
+   1. Enter the [**azsphere device enable-development**](https://learn.microsoft.com/azure-sphere/reference/azsphere-device#enable-development) command as follows:
 
        Azure Sphere CLI:
 
@@ -84,7 +84,7 @@ Together with the RS-485 real-time driver, the project includes an high-level RS
        azsphere device enable-development --enablertcoredebugging
        ```
 
-1. (Optional) Set up the hardware to display output from the RTApp. For instructions, see [Set up hardware to display output](https://docs.microsoft.com/azure-sphere/install/qs-real-time-application#set-up-hardware-to-display-output).
+1. (Optional) Set up the hardware to display output from the RTApp. For instructions, see [Set up hardware to display output](https://learn.microsoft.com/azure-sphere/install/qs-real-time-application#set-up-hardware-to-display-output).
 
 ## How to use
 
@@ -103,7 +103,7 @@ The following diagram shows how to connect all the devices listed in the [Prereq
     #define MAX_HLAPP_MESSAGE_SIZE	64
 
     // This is essentially the buffering time (in milliseconds),
-    // after which the real-time RS485 driver will send out 
+    // after which the real-time RS485 driver will send out
     // any received bytes to the HLApp.
     // Bytes are any ways sent in case the received amount
     // overflows DRIVER_MAX_RX_BUFFER_FILL_SIZE (defined in rs485_driver.h).
@@ -142,7 +142,7 @@ The following diagram shows how to connect all the devices listed in the [Prereq
       ...
     ```
     **Note**: the RS-485 real-time driver can receive a **special byte-command to change the UART's baudrate on-the-fly**. The format is very simple: four trailing `0xFF` bytes, followed by the four bytes (`uint32_t`) representing the desired baudrate value, in **big-endian** format.
-    
+
     .e. for setting the RS-485 UART to 9600 baud, the byte-command to be sent is:
 
     ```
@@ -154,7 +154,7 @@ The following diagram shows how to connect all the devices listed in the [Prereq
 
 ### Build and run the sample
 
-The applications in this sample run as partners. Make sure that they're designated as partners, as described in [Mark applications as partners](https://docs.microsoft.com/azure-sphere/app-development/sideload-app#mark-applications-as-partners), so that sideloading one doesn't delete the other.
+The applications in this sample run as partners. Make sure that they're designated as partners, as described in [Mark applications as partners](https://learn.microsoft.com/azure-sphere/app-development/sideload-app#mark-applications-as-partners), so that sideloading one doesn't delete the other.
 
 If you're using Visual Studio or Visual Studio Code, you will need to deploy and debug both apps simultaneously. See the following instructions for building and running
 the sample with Visual Studio or Visual Studio Code.
@@ -171,12 +171,12 @@ the sample with Visual Studio or Visual Studio Code.
 
 1. Use the [Visual Studio Code Multi-root Workspaces](https://code.visualstudio.com/docs/editor/multi-root-workspaces) feature to build and debug the RTApp and high-level app at the same time.
 1. On the **File** menu, **Select Open Workspace**.
-1. Navigate to the *RS485Driver* root directory and select the file `rs485.code-workspace`. 
+1. Navigate to the *RS485Driver* root directory and select the file `rs485.code-workspace`.
 1. Click **Open**.
 1. After the build files have been created, right-click on either of the two `CMakeLists.txt` files and select **Build All Projects**.
 1. Click the **Run** icon in the menu on the left side of the screen.
 1. On the pull-down menu, that appears at the top of the window on the left side of the screen, select **Launch for azure Sphere Applications (gdb)(workspace)**.
-1. On the **Run** menu, select **Start Debugging**. 
+1. On the **Run** menu, select **Start Debugging**.
 
 If you're running the sample from the command line you will need to build and run the RTApp before you build and run the high-level app. For more information about building real-time capable and high-level applications from the command line, go to [Build a sample application](../../BUILD_INSTRUCTIONS.md) and click on the links *Tutorial: Build a real-time capable application* and *Build and run a high-level sample with the CLI* respectively.
 
@@ -186,9 +186,9 @@ Once every second, the high-level application sends a message to the RS-485 driv
 
 - a baudrate change
 - a temperature reading
-- a humidity measurement 
+- a humidity measurement
 
-to an RS-485 sensor (the one used is a cheap temperature/humidity sensor based on the SHT20, easily sourceable online). 
+to an RS-485 sensor (the one used is a cheap temperature/humidity sensor based on the SHT20, easily sourceable online).
 
 The real-time RS-485 driver (RTApp) then takes care of sending the message over UART by driving the DE/!RE pins of a MAX485 transceiver. As soon as the RS-485 driver (RTApp) receives a (reply) message over UART, it immediately buffers it on an *RX ring-buffer* (for lossless receiving). The ring buffer is then used by a separate a GPT timer callback function, which in turn sends a message to the HLApp if any bytes are stored in the *RX ring buffer* (up to the maximum defined in `MAX_HLAPP_MESSAGE_SIZE`).
 
@@ -238,9 +238,9 @@ Several high-level protocols, such as Modbus/Profinet/etc. can be developed on t
 
 
 References:
-- For an overview of Azure Sphere, see [What is Azure Sphere](https://docs.microsoft.com/azure-sphere/product-overview/what-is-azure-sphere).
-- To learn about partner-application development, see [Create partner applications](https://docs.microsoft.com/azure-sphere/app-development/create-partner-apps).
-- To learn about how a high-level application communicates with an RTApp, see [Communicate with a real-time capable application](https://docs.microsoft.com/azure-sphere/app-development/high-level-inter-app).
+- For an overview of Azure Sphere, see [What is Azure Sphere](https://learn.microsoft.com/azure-sphere/product-overview/what-is-azure-sphere).
+- To learn about partner-application development, see [Create partner applications](https://learn.microsoft.com/azure-sphere/app-development/create-partner-apps).
+- To learn about how a high-level application communicates with an RTApp, see [Communicate with a real-time capable application](https://learn.microsoft.com/azure-sphere/app-development/high-level-inter-app).
 - To learn more about the open source libraries implementing drivers for MT3620's M4 real-time cores, see [CodethinkLabs mt3620-m4-drivers](https://github.com/CodethinkLabs/mt3620-m4-drivers).
 
 

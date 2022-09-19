@@ -13,7 +13,7 @@ The goal of this project is to show how to add custom properties to a telemetry 
 ## Prerequisites & Setup
 
 - An Azure Sphere-based device with development features (see [Get started with Azure Sphere](https://azure.microsoft.com/services/azure-sphere/get-started/) for more information).
-- Setup a development environment for Azure Sphere (see [Quickstarts to set up your Azure Sphere device](https://docs.microsoft.com/azure-sphere/install/overview) for more information).
+- Setup a development environment for Azure Sphere (see [Quickstarts to set up your Azure Sphere device](https://learn.microsoft.com/azure-sphere/install/overview) for more information).
 
 
 ## How to use
@@ -22,7 +22,7 @@ You will need the following:
 * Azure Sphere device claimed into a tenant
 * A copy of the [Azure Sphere Github samples repository](https://github.com/Azure/azure-sphere-samples) (specifically the [Azure IoT sample](https://github.com/Azure/azure-sphere-samples/tree/main/Samples/AzureIoT))
 
-Follow the Azure IoT sample instructions, you can choose the [IoT Hub](https://github.com/Azure/azure-sphere-samples/blob/main/Samples/AzureIoT/READMEStartWithIoTHub.md) or [IoT Hub with DPS](https://github.com/Azure/azure-sphere-samples/blob/main/Samples/AzureIoT/READMEAddDPS.md) instructions. 
+Follow the Azure IoT sample instructions, you can choose the [IoT Hub](https://github.com/Azure/azure-sphere-samples/blob/main/Samples/AzureIoT/READMEStartWithIoTHub.md) or [IoT Hub with DPS](https://github.com/Azure/azure-sphere-samples/blob/main/Samples/AzureIoT/READMEAddDPS.md) instructions.
 
 ### Using the Azure IoT sample
 
@@ -55,7 +55,7 @@ Here's what the call to send temperature telemetry including the custom properti
 There are two ways you can view the telemetry your device is sending to Azure IoT Hub.
 
 1. Use the [Azure IoT Hub Explorer](https://github.com/Azure/azure-iot-explorer) - this is a GitHub project (currently in preview)
-2. [Use the Azure CLI](https://docs.microsoft.com/en-us/cli/azure/iot/hub?view=azure-cli-latest#az_iot_hub_monitor_events)
+2. [Use the Azure CLI](https://learn.microsoft.com/en-us/cli/azure/iot/hub?view=azure-cli-latest#az_iot_hub_monitor_events)
 
 With the updated Azure IoT sample running you should see telemetry events for Temperature and Thermometer Moved
 
@@ -90,7 +90,7 @@ And here's the thermometerMoved telemetry, note that this does not contain custo
 
 Azure IoT Hub provides the ability to route messages based on the message contents - you might have several classes of device sending telemetry to the same Azure IoT Hub - each device class could have their telemetry send to different long-term storage, or routed to a device specific Event Hub.
 
-More information on routing of Azure IoT Hub messages can be found in in the [IoT Hub message routing query syntax documentation](https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-devguide-routing-query-syntax)
+More information on routing of Azure IoT Hub messages can be found in in the [IoT Hub message routing query syntax documentation](https://learn.microsoft.com/en-us/azure/iot-hub/iot-hub-devguide-routing-query-syntax)
 
 There's also a Microsoft Build 2021 session [Build Secured IoT Solutions for Azure Sphere with IoT Hub](https://www.youtube.com/watch?v=UTVPjZGZblo) that demonstrates message routing through IoT Hub.
 

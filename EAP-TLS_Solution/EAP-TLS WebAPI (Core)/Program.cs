@@ -54,12 +54,12 @@ namespace EapTlsWebAPICore
                            o.SslProtocols = System.Security.Authentication.SslProtocols.Tls12;
                            o.ClientCertificateValidation = (cert, certChain, sslPolicyErrors) =>
                            {
-                               // https://docs.microsoft.com/en-us/aspnet/core/security/authentication/certauth
+                               // https://learn.microsoft.com/en-us/aspnet/core/security/authentication/certauth
                                Console.WriteLine("Azure Sphere Device ID: " + cert?.GetNameInfo(X509NameType.SimpleName, false));
                                Console.WriteLine("Certificate Thumbprint: " + cert?.Thumbprint);
 
                                bool isValid = true;
-                               // [...] Your *additional* custom validation logic in here   
+                               // [...] Your *additional* custom validation logic in here
                                //isValid = MyCertificateValidation.ValidateCertificate(cert);
                                return isValid;
                            };

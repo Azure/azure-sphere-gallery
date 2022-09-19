@@ -1,6 +1,6 @@
 # Azure Sphere Classic CLI Scripts (disable/enable Azure Sphere Classic CLI)
 
-This project provides scripts for Windows and Linux that allow you to test the removal (and restore) of the Azure Sphere Classic CLI. Classic CLI has been superceded by CLIv2 and was marked as deprecated from February 2021, and will be removed from the Azure Sphere SDK, see [Azure Sphere CLI migration guidance](https://docs.microsoft.com/en-gb/azure-sphere/reference/classic-cli-migration?tabs=cliv2beta) for more information.
+This project provides scripts for Windows and Linux that allow you to test the removal (and restore) of the Azure Sphere Classic CLI. Classic CLI has been superceded by CLIv2 and was marked as deprecated from February 2021, and will be removed from the Azure Sphere SDK, see [Azure Sphere CLI migration guidance](https://learn.microsoft.com/en-gb/azure-sphere/reference/classic-cli-migration?tabs=cliv2beta) for more information.
 
 ## Contents
 
@@ -14,12 +14,12 @@ This project provides scripts for Windows and Linux that allow you to test the r
 ## Prerequisites & Setup
 
 - An Azure Sphere-based device with development features (see [Get started with Azure Sphere](https://azure.microsoft.com/en-us/services/azure-sphere/get-started/) for more information).
-- Setup a development environment for Azure Sphere (see [Quickstarts to set up your Azure Sphere device](https://docs.microsoft.com/en-us/azure-sphere/install/overview) for more information).
+- Setup a development environment for Azure Sphere (see [Quickstarts to set up your Azure Sphere device](https://learn.microsoft.com/en-us/azure-sphere/install/overview) for more information).
 
 ## How to use
 
 ### Windows
-Copy the ToggleClassicCLI PowerShell script from the `Windows` folder to your development PC. 
+Copy the ToggleClassicCLI PowerShell script from the `Windows` folder to your development PC.
 
 Note: The ToggleClassicCLI PowerShell script will need to run with elevated permissions (and will prompt if you are not running with the appropriate permissions).
 
@@ -30,11 +30,11 @@ Note: If you decide to uninstall the Azure Sphere SDK after disabling the Azure 
 
 ### Linux
 
-Copy the ToggleClassicCLI bash script from the `Linux` folder to your development PC, note that you will need to enable execute permissions on the script either through the shell, or through the terminal (`chmod 755 ToggleClassicCLI.sh`). 
+Copy the ToggleClassicCLI bash script from the `Linux` folder to your development PC, note that you will need to enable execute permissions on the script either through the shell, or through the terminal (`chmod 755 ToggleClassicCLI.sh`).
 
 Note: The ToggleClassicCLI bash script will need to run with elevated permissions (and will prompt if you are not running with the appropriate permissions).
 
-The script checks whether `/opt/azurespheresdk/Tools` exists (Classic CLI enabled), if the `Tools` folder exists the folder is renamed and hidden (the `azsphere_v1` link will not work). 
+The script checks whether `/opt/azurespheresdk/Tools` exists (Classic CLI enabled), if the `Tools` folder exists the folder is renamed and hidden (the `azsphere_v1` link will not work).
 
 If the hidden folder exists then this is renamed back to `Tools` - The script will also prompt to ask whether you want Azure Sphere CLIv2 or Classic CLI enabled as the default CLI.
 

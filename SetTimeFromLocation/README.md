@@ -31,7 +31,7 @@ Note that `main( )` will wait until your board has a network connection before g
 
 To obtain location data there is a function called `GetLocationData` (implemented in location_from_ip.h/.c), which returns a `location_info` structure containing the country code, latitude, and longitude, or NULL if the data couldn't be retrieved.
 
-To obtain current time for a latitude/longitude location there is a function called `SetLocalTime` (implemented in settime.h/.c) that requires latitude and longitude. 
+To obtain current time for a latitude/longitude location there is a function called `SetLocalTime` (implemented in settime.h/.c) that requires latitude and longitude.
 
 **Note**: You will need to obtain an API Key from https://timezonedb.com for this function to work.  In settime.c the URL template has a placeholder `<YOUR_API_KEY_HERE>` which will need to be replaced by your timezonedb.com API key.
 
@@ -65,14 +65,14 @@ void main(void)
     if (locInfo != NULL)
     {
         SetLocalTime(locInfo->lat, locInfo->lng);
-    }    
+    }
 }
 
 ```
 
 You may want to consider calling the APIs at an appropriate frequency to ensure that daylight savings changes are reflected correctly for the device.
 
-More information on managing system time and use of the Real Time Clock can be found in the [Azure Sphere documentation](https://docs.microsoft.com/en-us/azure-sphere/app-development/rtc).
+More information on managing system time and use of the Real Time Clock can be found in the [Azure Sphere documentation](https://learn.microsoft.com/en-us/azure-sphere/app-development/rtc).
 
 ## Project expectations
 

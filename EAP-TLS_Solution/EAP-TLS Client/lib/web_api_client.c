@@ -75,7 +75,7 @@ EapTlsResult EapTls_ParseMdmWebApiResponse(MemoryBlock *responseBlock, WebApiRes
 		}
 		else
 		{
-			// Copy the provided buffer to a null terminated buffer.	
+			// Copy the provided buffer to a null terminated buffer.
 			memcpy(nullTerminatedJsonString, responseBlock->data, responseBlock->size);
 			nullTerminatedJsonString[nullTerminatedJsonSize - 1] = 0; // Add the null terminator at the end.
 
@@ -211,8 +211,8 @@ EapTlsResult EapTls_CallWebApi(const char *url, const char *queryString, const c
 		{
 			CURLcode res;
 			// Set up for DAA mutual authentication
-			// Device: https://docs.microsoft.com/en-us/azure-sphere/app-development/curl
-			// WebAPI: https://docs.microsoft.com/en-us/azure/app-service/app-service-web-configure-tls-mutual-auth#special-considerations-for-certificate-validation
+			// Device: https://learn.microsoft.com/en-us/azure-sphere/app-development/curl
+			// WebAPI: https://learn.microsoft.com/en-us/azure/app-service/app-service-web-configure-tls-mutual-auth#special-considerations-for-certificate-validation
 
 			// Set up the WebAPI's URL with the proper GET query
 			char call_url[MAX_URL_LEN + 1];
@@ -237,7 +237,7 @@ EapTlsResult EapTls_CallWebApi(const char *url, const char *queryString, const c
 			}
 			else
 			{
-				// Set up the PUT fields, if any				
+				// Set up the PUT fields, if any
 				if (NULL != putString)
 				{
 					if ((res = curl_easy_setopt(curlHandle, CURLOPT_POST, 1L)) != CURLE_OK)
@@ -447,7 +447,7 @@ EapTlsResult EapTls_WebApiRegisterDevice(EapTlsConfig *eapTlsConfig)
 		}
 		else
 		{
-			// Copy the provided buffer to a null terminated buffer.	
+			// Copy the provided buffer to a null terminated buffer.
 			memcpy(nullTerminatedJsonString, responseBlock.data, responseBlock.size);
 			nullTerminatedJsonString[nullTerminatedJsonSize - 1] = 0; // Add the null terminator at the end.
 
@@ -461,7 +461,7 @@ EapTlsResult EapTls_WebApiRegisterDevice(EapTlsConfig *eapTlsConfig)
 			else
 			{
 				JSON_Object *rootObject = json_value_get_object(rootProperties);
-				
+
 				// Add further specific returned JSON parsing here.
 			}
 

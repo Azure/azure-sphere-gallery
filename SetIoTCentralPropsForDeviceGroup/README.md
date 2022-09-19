@@ -12,7 +12,7 @@ SetIoTCentralPropsForDeviceGroup is a utility that makes it easy to set an Azure
 
 ## Prerequisites & Setup
 
-You should have at least one [Azure Sphere tenant](https://docs.microsoft.com/en-us/azure-sphere/deployment/create-tenant), and one or more devices claimed into your tenant.
+You should have at least one [Azure Sphere tenant](https://learn.microsoft.com/en-us/azure-sphere/deployment/create-tenant), and one or more devices claimed into your tenant.
 
 You should clone the Azure IoT sample from the [Azure Sphere Samples](https://github.com/Azure/azure-sphere-samples) Github Repository.
 
@@ -20,12 +20,12 @@ Follow the instructions to [setup an Azure IoT Central application](https://gith
 
 ## How to use
 
-SetIoTCentralPropsForDeviceGroup is a console application, the application takes four command line arguments: 
+SetIoTCentralPropsForDeviceGroup is a console application, the application takes four command line arguments:
 
 | Command | Description |
 |-------------|-------------|
 | `Azure IoT Central App URL`       | example: https://myapp.azureiotcentral.com |
-| `Azure IoT Central API Token` | [Create an API token in the IoT Central App](https://docs.microsoft.com/en-us/azure/iot-central/core/overview-iot-central-tour#administration) |
+| `Azure IoT Central API Token` | [Create an API token in the IoT Central App](https://learn.microsoft.com/en-us/azure/iot-central/core/overview-iot-central-tour#administration) |
 | `Azure Sphere Device group guid`   | The guid of the Azure Sphere Device Group to update |
 | `JSON File containing settings to apply`       | example: `{"thermometerTelemetryUploadEnable": true}` |
 
@@ -56,11 +56,11 @@ You can now run the SetIoTCentralPropsForDeviceGroup utility:
 
 A sample command line could look like this:
 
-`SetIoTCentralPropsForDeviceGroup https://myapp.azureiotcentral.com "IoT Central Access Token" 168A1115-568D-4717-A445-CFC4BB1BB8C7 {\"StatusLED\":true}` 
+`SetIoTCentralPropsForDeviceGroup https://myapp.azureiotcentral.com "IoT Central Access Token" 168A1115-568D-4717-A445-CFC4BB1BB8C7 {\"StatusLED\":true}`
 
 ## Potential issues
 
-While working with the community we've documented a couple of potential issues that users may encounter using this sample 
+While working with the community we've documented a couple of potential issues that users may encounter using this sample
 
 ### Issue encountered: Application incorrectly parses JSON argument
 

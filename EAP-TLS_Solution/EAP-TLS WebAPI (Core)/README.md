@@ -1,6 +1,6 @@
 # EAP-TLS solution: WebAPI Server
 
-This is an EAP-TLS WebAPI Server solution, developed on top of the [ASP.NET Core Framework 3.1](https://docs.microsoft.com/en-us/aspnet/core/?view=aspnetcore-3.1), which is "acting-as" the publicly-exposed endpoint to which Clients (i.e. Azure Sphere devices) can connect for their first provisioning and/or certificate renewals. It substantially mimics an MdM Server, and it's internals showcase to developers how to extract Azure Sphere's DAA certificate directly from the TLS handshaking, without any pre-provisioning.
+This is an EAP-TLS WebAPI Server solution, developed on top of the [ASP.NET Core Framework 3.1](https://learn.microsoft.com/en-us/aspnet/core/?view=aspnetcore-3.1), which is "acting-as" the publicly-exposed endpoint to which Clients (i.e. Azure Sphere devices) can connect for their first provisioning and/or certificate renewals. It substantially mimics an MdM Server, and it's internals showcase to developers how to extract Azure Sphere's DAA certificate directly from the TLS handshaking, without any pre-provisioning.
 
 ## Prerequisites
 
@@ -28,7 +28,7 @@ Make sure to:
     azsphere tenant download-ca-certificate-chain --output CA-cert-chain.p7b
     ```
 
-    (*) See [Installing the trusted root certificate](https://docs.microsoft.com/en-us/skype-sdk/sdn/articles/installing-the-trusted-root-certificate) for full instructions on how to install the resulting *CA-cert-chain.p7b* in your machine's *Current User/Trusted Certificate Authorities*.
+    (*) See [Installing the trusted root certificate](https://learn.microsoft.com/en-us/skype-sdk/sdn/articles/installing-the-trusted-root-certificate) for full instructions on how to install the resulting *CA-cert-chain.p7b* in your machine's *Current User/Trusted Certificate Authorities*.
 
 - Configure all the certificate file names, WiFi SSID, WebAPI's certificate password and client identity within the [appsettings.json](./appsettings.json) configuration file:
 
@@ -55,7 +55,7 @@ Simply run the project from Visual Studio 2019.
 
 ## Further references
 
-- [Kestrel web server implementation in ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/servers/kestrel?view=aspnetcore-3.1).
+- [Kestrel web server implementation in ASP.NET Core](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/servers/kestrel?view=aspnetcore-3.1).
 
 
 ## Project expectations

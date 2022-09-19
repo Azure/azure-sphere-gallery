@@ -4,7 +4,7 @@ The goal of the socket UdpDebugLog library is to provide a mechanism to view deb
 
 Note that the socket Log_Debug library uses a UDP socket to send the Log_Debug information, the implementation could be easily modified to send the Log_Debug data to a UART or other interface. Since the library is broadcasting to the local subnet the PC that's running the Log Message viewer application needs to be on the same network.
 
-For more information on Log_Debug usage, see [Log_Debug function](https://docs.microsoft.com/en-us/azure-sphere/reference/applibs-reference/applibs-log/function-log-debug)
+For more information on Log_Debug usage, see [Log_Debug function](https://learn.microsoft.com/en-us/azure-sphere/reference/applibs-reference/applibs-log/function-log-debug)
 
 ## Contents
 
@@ -19,7 +19,7 @@ For more information on Log_Debug usage, see [Log_Debug function](https://docs.m
 ## Prerequisites & Setup
 
 - An Azure Sphere-based device with development features (see [Get started with Azure Sphere](https://azure.microsoft.com/en-us/services/azure-sphere/get-started/) for more information).
-- Setup a development environment for Azure Sphere (see [Quickstarts to set up your Azure Sphere device](https://docs.microsoft.com/en-us/azure-sphere/install/overview) for more information).
+- Setup a development environment for Azure Sphere (see [Quickstarts to set up your Azure Sphere device](https://learn.microsoft.com/en-us/azure-sphere/install/overview) for more information).
 
 Note that the Azure Sphere High Level application is configured for the 21.01 SDK release.
 
@@ -45,7 +45,7 @@ The PcUdpLogReceiver application defaults to showing Log_Debug data from any Azu
 
 `PcUdpLogReceiver 466f6f2e`
 
-Note that you will also need to modify lines 46-49 of udplog.c to set the client side 4 byte hex values - the value could be generated from part of the [device MAC address](https://docs.microsoft.com/en-us/azure-sphere/reference/applibs-reference/applibs-networking/function-networking-gethardwareaddress), or generated through some other mechanism and persisted in Mutable storage rather than being hard coded in the udplog.c file.
+Note that you will also need to modify lines 46-49 of udplog.c to set the client side 4 byte hex values - the value could be generated from part of the [device MAC address](https://learn.microsoft.com/en-us/azure-sphere/reference/applibs-reference/applibs-networking/function-networking-gethardwareaddress), or generated through some other mechanism and persisted in Mutable storage rather than being hard coded in the udplog.c file.
 
 ## Example
 

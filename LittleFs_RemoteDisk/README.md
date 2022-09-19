@@ -16,7 +16,7 @@ Here's a link to the [Littlefs project on Github](https://github.com/littlefs-pr
 ## Prerequisites & Setup
 
 - An Azure Sphere-based device with development features (see [Get started with Azure Sphere](https://azure.microsoft.com/en-us/services/azure-sphere/get-started/) for more information).
-- Setup a development environment for Azure Sphere (see [Quickstarts to set up your Azure Sphere device](https://docs.microsoft.com/en-us/azure-sphere/install/overview) for more information).
+- Setup a development environment for Azure Sphere (see [Quickstarts to set up your Azure Sphere device](https://learn.microsoft.com/en-us/azure-sphere/install/overview) for more information).
 
 Note that the Azure Sphere High Level application is configured for the 21.01 SDK release.
 
@@ -24,12 +24,12 @@ Note that the Azure Sphere High Level application is configured for the 21.01 SD
 
 Supporting Littlefs requires that you setup the storage layout (page, sector, block, and total size), and then support four functions, these are **read, write (called program in the Littlefs implementation), erase, and sync**
 
-**Python Remote Storage app** 
+**Python Remote Storage app**
 The project contains a Python Flask application (PyDiskHost.py) that supports 4MB storage (matching the defined storage layout of the high-level Azure Sphere application) - The Python application supports HTTP Get (read), and HTTP Post (Write) functions - the 4MB storage is supported by an in-memory bytearray (but could be easily modified to use a file on disk). The Python app is configured to use port 5000.
 
 Start the Python application before running the Azure Sphere application.
 
-**Azure Sphere High Level Application** 
+**Azure Sphere High Level Application**
 
 The high level application sets up the storage size (lines 24-27)
 

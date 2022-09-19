@@ -1,6 +1,6 @@
 # OSNetworkRequirementChecker-PC
 
-This PC command line utility enables you to test some aspects of the [Azure Sphere OS Networking Requirements](https://docs.microsoft.com/azure-sphere/network/ports-protocols-domains) using a PC attached to the network that you wish to attach an Azure Sphere device to. This makes it easier to determine if a given network environment does not meet Azure Sphere OS's networking requirements, which can cause issues such as lack of time synchronization, inability to receive OS or Application updates, and lack of short-lived device certificate which means that an application's Azure IoT connections may not work properly. 
+This PC command line utility enables you to test some aspects of the [Azure Sphere OS Networking Requirements](https://learn.microsoft.com/azure-sphere/network/ports-protocols-domains) using a PC attached to the network that you wish to attach an Azure Sphere device to. This makes it easier to determine if a given network environment does not meet Azure Sphere OS's networking requirements, which can cause issues such as lack of time synchronization, inability to receive OS or Application updates, and lack of short-lived device certificate which means that an application's Azure IoT connections may not work properly.
 
 This application tests the following:
 
@@ -57,7 +57,7 @@ sudo ./OSNetworkRequirementChecker-PC
 ```
 When running the application, it'll display the checks being executed and their related results, as they are performed.
 A successful output will look the following (errors will be displayed inline in case they occur):
-```     
+```
         Azure Sphere network-checkup utility.
 
         Querying required NTP servers...
@@ -68,7 +68,7 @@ A successful output will look the following (errors will be displayed inline in 
         - time from 20.43.94.199<20.43.94.199> --> Wed Aug 18 13:52:03 2021
         - time from 20.189.79.72<20.189.79.72> --> Wed Aug 18 13:52:03 2021
         - time from 40.81.94.65<40.81.94.65> --> Wed Aug 18 13:52:04 2021
-        - time from 40.81.188.85<40.81.188.85> --> recvfrom() failed with error 10060 
+        - time from 40.81.188.85<40.81.188.85> --> recvfrom() failed with error 10060
         - time from 40.119.6.228<40.119.6.228> --> Wed Aug 18 13:52:14 2021
         - time from 40.119.148.38<40.119.148.38> --> Wed Aug 18 13:52:14 2021
         - time from 20.101.57.9<20.101.57.9> --> Wed Aug 18 13:52:14 2021
@@ -111,7 +111,7 @@ In case this happens, it does not represent a problem as far as at least one NTP
 
 ### Project expectations
 
-For the latest information regarding the network connectivity requirements for Azure Sphere-based devices, please refer to the official [Azure Sphere OS networking requirements](https://docs.microsoft.com/en-us/azure-sphere/network/ports-protocols-domains) documentation.
+For the latest information regarding the network connectivity requirements for Azure Sphere-based devices, please refer to the official [Azure Sphere OS networking requirements](https://learn.microsoft.com/en-us/azure-sphere/network/ports-protocols-domains) documentation.
 
 ### Expected support for the code
 

@@ -13,7 +13,7 @@ namespace DevicePropertiesWebHook
     {
         // For more information on using the Azure Sphere Public API
         // including the definitions below, go here:
-        // https://docs.microsoft.com/en-us/rest/api/azure-sphere/
+        // https://learn.microsoft.com/en-us/rest/api/azure-sphere/
 
         /// <summary>
         /// Azure Sphere Public API resource URI
@@ -99,11 +99,11 @@ namespace DevicePropertiesWebHook
             {
                 var result = await pca.AcquireTokenWithDeviceCode(Scopes, deviceCodeResult =>
                 {
-                    // This will print the message on the console which tells the user where to go sign-in using 
+                    // This will print the message on the console which tells the user where to go sign-in using
                     // a separate browser and the code to enter once they sign in.
                     // The AcquireTokenWithDeviceCode() method will poll the server after firing this
                     // device code callback to look for the successful login of the user via that browser.
-                    // This background polling (whose interval and timeout data is also provided as fields in the 
+                    // This background polling (whose interval and timeout data is also provided as fields in the
                     // deviceCodeCallback class) will occur until:
                     // * The user has successfully logged in via browser and entered the proper code
                     // * The timeout specified by the server for the lifetime of this code (typically ~15 minutes) has been reached
@@ -133,16 +133,16 @@ namespace DevicePropertiesWebHook
                 // AADSTS90133: Device Code flow is not supported under /common or /consumers endpoint.
                 // Mitigation: as explained in the message from Azure AD, the authority needs to be tenanted
 
-                // AADSTS90002: Tenant <tenantId or domain you used in the authority> not found. This may happen if there are 
+                // AADSTS90002: Tenant <tenantId or domain you used in the authority> not found. This may happen if there are
                 // no active subscriptions for the tenant. Check with your subscription administrator.
-                // Mitigation: if you have an active subscription for the tenant this might be that you have a typo in the 
+                // Mitigation: if you have an active subscription for the tenant this might be that you have a typo in the
                 // tenantId (GUID) or tenant domain name.
             }
             catch (OperationCanceledException ex)
             {
                 // If you use a CancellationToken, and call the Cancel() method on it, then this *may* be triggered
-                // to indicate that the operation was cancelled. 
-                // See https://docs.microsoft.com/en-us/dotnet/standard/threading/cancellation-in-managed-threads 
+                // to indicate that the operation was cancelled.
+                // See https://learn.microsoft.com/en-us/dotnet/standard/threading/cancellation-in-managed-threads
                 // for more detailed information on how C# supports cancellation in managed threads.
             }
             catch (MsalClientException ex)
@@ -191,7 +191,7 @@ namespace DevicePropertiesWebHook
             catch (MsalUiRequiredException ex)
             {
                 // No token found in the cache or AAD insists that a form interactive auth is required (e.g. the tenant admin turned on MFA)
-                // If you want to provide a more complex user experience, check out ex.Classification 
+                // If you want to provide a more complex user experience, check out ex.Classification
 
                 // we don't want to kick off a Device Auth Flow here
                 // we don't have a listening client to return the flow instructions.

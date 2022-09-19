@@ -23,7 +23,7 @@
 #include <applibs/log.h>
 #include <applibs/powermanagement.h>
 
-// https://docs.microsoft.com/en-us/azure/iot-pnp/overview-iot-plug-and-play
+// https://learn.microsoft.com/en-us/azure/iot-pnp/overview-iot-plug-and-play
 #define IOT_PLUG_AND_PLAY_MODEL_ID "dtmi:com:example:azuresphere:co2monitor;2"
 #define NETWORK_INTERFACE "wlan0"
 #define CO2_MONITOR_FIRMWARE_VERSION "3.02"
@@ -76,7 +76,7 @@ static timer_t watchdogTimer;
 
 /// <summary>
 /// Publish sensor telemetry using the following properties for efficient IoT Hub routing
-/// https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-devguide-messages-d2c
+/// https://learn.microsoft.com/en-us/azure/iot-hub/iot-hub-devguide-messages-d2c
 /// </summary>
 static DX_MESSAGE_PROPERTY *messageProperties[] = {&(DX_MESSAGE_PROPERTY){.key = "appid", .value = "co2monitor"},
                                                    &(DX_MESSAGE_PROPERTY){.key = "type", .value = "telemetry"},

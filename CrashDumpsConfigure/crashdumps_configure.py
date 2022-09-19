@@ -157,7 +157,7 @@ class AzureSphereAPIClient:
         logging.debug("Response: " + response.text)
 
     # makes request to Azure Sphere API Device Group - Patch endpoint to update AllowCrashDumpsCollection value to should_set_on. Returns response as json string if true, else None
-    # See https://docs.microsoft.com/en-us/rest/api/azure-sphere/devicegroup/patch.
+    # See https://learn.microsoft.com/en-us/rest/api/azure-sphere/devicegroup/patch.
     def patch_devicegroup_allowcrashdumpscollection(self, tenant_id:str, devicegroup_id:str, should_set_on:bool) -> str:
         logging.debug("Patching device group. tenant_id: {0}, devicegroup_id: {1}, should_set_on: {2} ".format(tenant_id, devicegroup_id, should_set_on))
         endpoint="/tenants/"+tenant_id+"/devicegroups/"+devicegroup_id
@@ -186,7 +186,7 @@ class AzureSphereAPIClient:
         return response.text if response.status_code == 200 else None
 
     # Make call to Azure Sphere API Device Group - List endpoint. Returns response as json string if true, else None
-    # See https://docs.microsoft.com/en-us/rest/api/azure-sphere/devicegroup/list
+    # See https://learn.microsoft.com/en-us/rest/api/azure-sphere/devicegroup/list
     def list_devicegroups(self, tenant_id:str) -> str:
         logging.debug("Listing device groups. tenant_id: {0}".format(tenant_id))
         endpoint = "/tenants/" + tenant_id + "/devicegroups"
@@ -199,7 +199,7 @@ class AzureSphereAPIClient:
         return response.text if response.status_code == 200 else None
 
     # Make call to Azure Sphere API Device Group - Get endpoint. Returns response as json string if true, else None
-    # See https://docs.microsoft.com/en-us/rest/api/azure-sphere/devicegroup/get
+    # See https://learn.microsoft.com/en-us/rest/api/azure-sphere/devicegroup/get
     def get_devicegroup(self, tenant_id:str, devicegroup_id:str) -> str:
         logging.debug("Getting device group. tenant_id: {0}, devicegroup_id: {1}".format(tenant_id, devicegroup_id))
         endpoint = "/tenants/" + tenant_id + "/devicegroups/" + devicegroup_id

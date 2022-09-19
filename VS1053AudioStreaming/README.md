@@ -15,7 +15,7 @@ The goal of this project is to show how to interface with a VS1053 Audio Codec c
 ## Prerequisites & Setup
 
 - An Azure Sphere-based device with development features (see [Get started with Azure Sphere](https://azure.microsoft.com/en-us/services/azure-sphere/get-started/) for more information).
-- Setup a development environment for Azure Sphere (see [Quickstarts to set up your Azure Sphere device](https://docs.microsoft.com/en-us/azure-sphere/install/overview) for more information).
+- Setup a development environment for Azure Sphere (see [Quickstarts to set up your Azure Sphere device](https://learn.microsoft.com/en-us/azure-sphere/install/overview) for more information).
 
 Note that the Azure Sphere High Level application is configured for the 21.04 SDK release.
 
@@ -23,7 +23,7 @@ Note that the Azure Sphere High Level application is configured for the 21.04 SD
 
 The project supports the Seeed RDB with an [Adafruit VS1053](https://www.adafruit.com/product/1381) board.
 
-Here's the pinout used in the project the Seeed RDB pinout diagram is [here](https://docs.microsoft.com/en-us/azure-sphere/hardware/mt3620-user-guide))
+Here's the pinout used in the project the Seeed RDB pinout diagram is [here](https://learn.microsoft.com/en-us/azure-sphere/hardware/mt3620-user-guide))
 
 | Adafruit VS1053 Pin | Seeed MT3620 RDB Pin | Hardware Definition Mapping |
 |-------------|-------------|-------------|

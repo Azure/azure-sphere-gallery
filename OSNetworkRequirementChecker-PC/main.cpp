@@ -88,7 +88,7 @@ typedef struct
 			uint8_t vn : 3;		// vn	- Version number of the protocol.
 			uint8_t li : 2;		// li	- Leap indicator
 		};
-		uint8_t li_vn_mode;		// 8 bits. li, vn, and mode.							 
+		uint8_t li_vn_mode;		// 8 bits. li, vn, and mode.
 	};
 
 	uint8_t stratum;         //  8 bits. Stratum level of the local clock.
@@ -120,7 +120,7 @@ int resolve_hostname(const char *hostname, int port);
 int getSocketErrorCode(void)
 {
 #if defined(_WIN32) || defined(__WIN32__) || defined(_MSC_VER)
-	// https://docs.microsoft.com/en-us/windows/win32/winsock/windows-sockets-error-codes-2
+	// https://learn.microsoft.com/en-us/windows/win32/winsock/windows-sockets-error-codes-2
 	return WSAGetLastError();
 #else
 	return errno;
