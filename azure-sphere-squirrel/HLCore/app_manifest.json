@@ -1,0 +1,13 @@
+{
+  "SchemaVersion": 1,
+  "Name": "HLCore",
+  "ComponentId": "b9f62729-837f-4114-88de-56cfa9cc31d9",
+  "EntryPoint": "/bin/app",
+  "CmdArgs": ["main.nut"],
+  "Capabilities": {
+    "AllowedConnections": [ "eoz525w4wyveqd6.m.pipedream.net", "eo5p7ama7juiwyp.m.pipedream.net" ],
+    "Gpio": [ "$AVNET_MT3620_SK_USER_LED_RED", "$AVNET_MT3620_SK_USER_BUTTON_A" ],
+    "SystemTime": true
+  },
+  "ApplicationType": "Default"
+}
