@@ -1,0 +1,3 @@
+category_id: 21
+name: CurlError
+include: <curl/curl.h>

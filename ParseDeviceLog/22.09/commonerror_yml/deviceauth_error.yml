@@ -1,0 +1,63 @@
+category_id: 23
+name: DeviceAuthError 
+codes: 
+  - 
+    id: 1 
+    name: ProtobufDecodeError 
+    msg: Protobuf decoding error
+  - 
+    id: 2
+    name: ProtobufEncodeError 
+    msg: Protobug encoding error
+  - 
+    id: 3
+    name: ServicesRequestError 
+    msg: Services request error
+  - 
+    id: 4
+    name: ServicesRespondedWithError
+    msg: Services responded with an error
+  - 
+    id: 5
+    name: ServicesResponseInvalidError
+    msg: Services response has an invalid error
+  - 
+    id: 6
+    name: AttestationRuntimeError
+    msg: Attestation runtime error
+  - 
+    id: 7
+    name: DeviceauthInternalStateError
+    msg: Device auth internal state error
+  - 
+    id: 8
+    name: InvalidTenantId
+    msg: Invalid tenant id
+  - 
+    id: 9
+    name: StoreCertificateError
+    msg: Store certificate error
+  - 
+    id: 10
+    name: ErrorFromSecureKernel
+    msg: Error from secure kernel
+  -
+    id: 11
+    name: CertificateVerificationFailed
+    msg: Certificate Verification Failed
+  -
+    id: 12
+    name: CachedCertificatePersistenceError
+    msg: Cached certificate persistence failed
+  -
+    id: 13
+    name: CachedClientAuthKeyPersistenceError
+    msg: Cached client auth private key seed persistence failed
+  -
+    id: 14
+    name: CachedCertificateRestorationError
+    msg: Cached certificate restoration failed
+  -
+    id: 15
+    name: PublicKeyVerificationFailed
+    msg: The public key generated from Pluton did not match the ones stored in the cached certificates

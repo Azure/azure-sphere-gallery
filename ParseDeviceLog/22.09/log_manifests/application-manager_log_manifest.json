@@ -1,0 +1,1314 @@
+{
+    "version": "1.0",
+    "categoryId": 7,
+    "categoryName": "appman",
+    "msgIds": [
+        {
+            "msgName": "GetAddrInfoError",
+            "msgId": 1,
+            "msgString": "Error getting IP address ",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "error",
+                    "paramType": "string"
+                }
+            ],
+            "obsolete": true
+        },
+        {
+            "msgName": "NoRulesToSet",
+            "msgId": 2,
+            "msgString": "No rule to set. Exiting",
+            "msgPriority": "Info",
+            "obsolete": true
+        },
+        {
+            "msgName": "UnexpectedApp",
+            "msgId": 3,
+            "msgString": "Unexpected app parameters during initialize. App should be either a Customer app or Normal world service type",
+            "msgPriority": "Error",
+            "obsolete": true
+        },
+        {
+            "msgName": "AlreadyManagedApp",
+            "msgId": 4,
+            "msgString": "The app is already being managed",
+            "msgPriority": "Error",
+            "obsolete": true
+        },
+        {
+            "msgName": "FailedToInitializeApp",
+            "msgId": 5,
+            "msgString": "Failed to initialize app",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "error",
+                    "paramType": "integer"
+                }
+            ],
+            "obsolete": true
+        },
+        {
+            "msgName": "AppIsRunning",
+            "msgId": 6,
+            "msgString": "App is running. App needs to be stopped before remove",
+            "msgPriority": "Error"
+        },
+        {
+            "msgName": "AppStatus",
+            "msgId": 7,
+            "msgString": "App status",
+            "msgPriority": "Info",
+            "params": [
+                {
+                    "paramName": "name",
+                    "paramType": "string"
+                },
+                {
+                    "paramName": "state",
+                    "paramType": "integer"
+                }
+            ]
+        },
+        {
+            "msgName": "NonExistentApp",
+            "msgId": 8,
+            "msgString": "No such app or app already removed",
+            "msgPriority": "Info"
+        },
+        {
+            "msgName": "FailedToInvokeGdb",
+            "msgId": 9,
+            "msgString": "Failed to invoke gdbserver.",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "error",
+                    "paramType": "string"
+                }
+            ]
+        },
+        {
+            "msgName": "AppState",
+            "msgId": 10,
+            "msgString": "App state",
+            "msgPriority": "Info",
+            "params": [
+                {
+                    "paramName": "state",
+                    "paramType": "integer"
+                }
+            ]
+        },
+        {
+            "msgName": "DebuggingNotSupported",
+            "msgId": 11,
+            "msgString": "App debugging is supported only for customer apps",
+            "msgPriority": "Error"
+        },
+        {
+            "msgName": "KillingPid",
+            "msgId": 12,
+            "msgString": "Killing PID",
+            "msgPriority": "Info",
+            "params": [
+                {
+                    "paramName": "Pid",
+                    "paramType": "integer"
+                }
+            ],
+            "obsolete": true
+        },
+        {
+            "msgName": "GetApplicationImageCountFailed",
+            "msgId": 13,
+            "msgString": "Skuser_GetApplicationImageCount failed.",
+            "msgPriority": "Error"
+        },
+        {
+            "msgName": "ListAllApplicationImagesFailed",
+            "msgId": 14,
+            "msgString": "Skuser_ListAllApplicationImages failed.",
+            "msgPriority": "Error"
+        },
+        {
+            "msgName": "FoundImages",
+            "msgId": 15,
+            "msgString": "Found:",
+            "msgPriority": "Info",
+            "params": [
+                {
+                    "paramName": "NumberOfImages",
+                    "paramType": "integer"
+                }
+            ],
+            "obsolete": true
+        },
+        {
+            "msgName": "AppParameters",
+            "msgId": 16,
+            "msgString": "Application:",
+            "msgPriority": "Info",
+            "params": [
+                {
+                    "paramName": "ImageType",
+                    "paramType": "integer"
+                },
+                {
+                    "paramName": "ComponentUID",
+                    "paramType": "string"
+                },
+                {
+                    "paramName": "AppName",
+                    "paramType": "string"
+                }
+            ]
+        },
+        {
+            "msgName": "NoSuchDirectory",
+            "msgId": 17,
+            "msgString": "Failed to add app. No such directory:",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "directory",
+                    "paramType": "string"
+                }
+            ]
+        },
+        {
+            "msgName": "AddingApp",
+            "msgId": 18,
+            "msgString": "Adding app:",
+            "msgPriority": "Debug",
+            "params": [
+                {
+                    "paramName": "name",
+                    "paramType": "string"
+                },
+                {
+                    "paramName": "ImageType",
+                    "paramType": "integer"
+                },
+                {
+                    "paramName": "path",
+                    "paramType": "string"
+                }
+            ],
+            "obsolete": true
+        },
+        {
+            "msgName": "FailedToInitializeNetworking",
+            "msgId": 19,
+            "msgString": "Could not initialize networking. Failed to add networkd.",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "Error",
+                    "paramType": "commonError"
+                }
+            ]
+        },
+        {
+            "msgName": "FailedToInitializeAzured",
+            "msgId": 20,
+            "msgString": "Could not initialize azured. Failed to add azured.",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "Error",
+                    "paramType": "string"
+                }
+            ],
+            "obsolete": true
+        },
+        {
+            "msgName": "FailedToInitializeRngd",
+            "msgId": 21,
+            "msgString": "Could not initialize rngd. Failed to add rngd.",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "Error",
+                    "paramType": "commonError"
+                }
+            ]
+        },
+        {
+            "msgName": "SetLinuxCapabilities",
+            "msgId": 22,
+            "msgString": "Setting linux capabilities",
+            "msgPriority": "Info",
+            "obsolete": true
+        },
+        {
+            "msgName": "ErrorOnSetLinuxCapabilities",
+            "msgId": 23,
+            "msgString": "Error when setting linux capabilities",
+            "msgPriority": "Error",
+            "obsolete": true
+        },
+        {
+            "msgName": "FailedToAddApp",
+            "msgId": 24,
+            "msgString": "App manager could not add app",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "appId",
+                    "paramType": "uniqueId"
+                }
+            ]
+        },
+        {
+            "msgName": "FailedSkuserInitializeImageApis",
+            "msgId": 25,
+            "msgString": "Skuser_InitializeImageApis failed.",
+            "msgPriority": "Error",
+            "obsolete": true
+        },
+        {
+            "msgName": "MountingOneImage",
+            "msgId": 26,
+            "msgString": "Mounting images for app",
+            "msgPriority": "Info",
+            "params": [
+                {
+                    "paramName": "appId",
+                    "paramType": "uniqueId"
+                }
+            ],
+            "obsolete": true
+        },
+        {
+            "msgName": "AlreadyMounted",
+            "msgId": 27,
+            "msgString": "Item is already mounted.",
+            "msgPriority": "Info"
+        },
+        {
+            "msgName": "MountPointFail",
+            "msgId": 28,
+            "msgString": "Failed to create mount point",
+            "msgPriority": "Error"
+        },
+        {
+            "msgName": "MountSysCallFail",
+            "msgId": 29,
+            "msgString": "Mount system call failed",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "error",
+                    "paramType": "integer"
+                }
+            ]
+        },
+        {
+            "msgName": "NothingToUnmount",
+            "msgId": 30,
+            "msgString": "No target found to unmount",
+            "msgPriority": "Info"
+        },
+        {
+            "msgName": "FailedUmountSysCall",
+            "msgId": 31,
+            "msgString": "umount system call failed.",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "error",
+                    "paramType": "integer"
+                }
+            ]
+        },
+        {
+            "msgName": "CouldNotLoadMountPoint",
+            "msgId": 32,
+            "msgString": "Could not load mount points",
+            "msgPriority": "Error"
+        },
+        {
+            "msgName": "Mounting",
+            "msgId": 33,
+            "msgString": "Mounting",
+            "msgPriority": "Info",
+            "params": [
+                {
+                    "paramName": "name",
+                    "paramType": "string"
+                }
+            ],
+            "obsolete": true
+        },
+        {
+            "msgName": "CouldNotFindImage",
+            "msgId": 34,
+            "msgString": "No image found with matching component id",
+            "msgPriority": "Error",
+            "obsolete": true
+        },
+        {
+            "msgName": "FailedRmdir",
+            "msgId": 35,
+            "msgString": "Failed to remove directory",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "error",
+                    "paramType": "integer"
+                }
+            ]
+        },
+        {
+            "msgName": "FailedToUnmountConfigDirectory",
+            "msgId": 36,
+            "msgString": "Failed to unmount '/mnt/config' directory",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "error",
+                    "paramType": "integer"
+                }
+            ]
+        },
+        {
+            "msgName": "RebootOrShutdownReturnedUnexpectedly",
+            "msgId": 37,
+            "msgString": "Reboot or shutdown has returned unexpectedly.",
+            "msgPriority": "Error"
+        },
+        {
+            "msgName": "FailedToParseAppManifest",
+            "msgId": 38,
+            "msgString": "Failed to parse application manifest",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "error",
+                    "paramType": "commonError"
+                }
+            ]
+        },
+        {
+            "msgName": "FailedToInitializeDebugShell",
+            "msgId": 40,
+            "msgString": "Failed to initialize debug shell.",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "error",
+                    "paramType": "commonError"
+                }
+            ]
+        },
+        {
+            "msgName": "FailedToAcquireCapabilities",
+            "msgId": 41,
+            "msgString": "Failed to acquire all capabilities for application.",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "app_id",
+                    "paramType": "uniqueId"
+                }
+            ]
+        },
+        {
+            "msgName": "CustomerManifestSpecifiedPolicy",
+            "msgId": 42,
+            "msgString": "Customer manifest illegally includes policy information.",
+            "msgPriority": "Error"
+        },
+        {
+            "msgName": "MountNonApplication",
+            "msgId": 43,
+            "msgString": "Skipping non-application in application partition",
+            "msgPriority": "Warning",
+            "params": [
+                {
+                    "paramName": "name",
+                    "paramType": "string"
+                }
+            ],
+            "obsolete": true
+        },
+        {
+            "msgName": "StoppingAllManagedApplications",
+            "msgId": 44,
+            "msgString": "Stopping all managed applications.",
+            "msgPriority": "Info"
+        },
+        {
+            "msgName": "SystemHasStartedRebooting",
+            "msgId": 45,
+            "msgString": "System has started rebooting.",
+            "msgPriority": "Info"
+        },
+        {
+            "msgName": "FailedToSetFirewallRules",
+            "msgId": 46,
+            "msgString": "Failed to set default firewall rules.",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "error",
+                    "paramType": "commonError"
+                }
+            ]
+        },
+        {
+            "msgName": "FailedToOpenGpioChipFd",
+            "msgId": 47,
+            "msgString": "Failed to open gpio chip file descriptor.",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "error",
+                    "paramType": "integer"
+                }
+            ],
+            "obsolete": true
+        },
+        {
+            "msgName": "FailedToEnableGpioPinAccess",
+            "msgId": 48,
+            "msgString": "Failed to enable gpio pin access.",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "error",
+                    "paramType": "integer"
+                }
+            ],
+            "obsolete": true
+        },
+        {
+            "msgName": "FailedToGetGpioChipInfo",
+            "msgId": 49,
+            "msgString": "Failed to gpio information for device.",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "error",
+                    "paramType": "integer"
+                }
+            ],
+            "obsolete": true
+        },
+        {
+            "msgName": "FailedToInitializeGpioAccess",
+            "msgId": 50,
+            "msgString": "Failed to initialize gpio access.",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "error",
+                    "paramType": "integer"
+                }
+            ],
+            "obsolete": true
+        },
+        {
+            "msgName": "SafeModeActive",
+            "msgId": 51,
+            "msgString": "SAFE MODE active; not launching third-party apps.",
+            "msgPriority": "Info"
+        },
+        {
+            "msgName": "CriticalUptimeReached",
+            "msgId": 52,
+            "msgString": "Reached critical uptime.",
+            "msgPriority": "Info"
+        },
+        {
+            "msgName": "AppsFailedToStart",
+            "msgId": 53,
+            "msgString": "One or more apps failed to start",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "error",
+                    "paramType": "commonError"
+                }
+            ]
+        },
+        {
+            "msgName": "SignalfdFailedCreate",
+            "msgId": 54,
+            "msgString": "Failed to create signalfd",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "_errno",
+                    "paramType": "integer"
+                }
+            ]
+        },
+        {
+            "msgName": "SignalfdFailedPoll",
+            "msgId": 55,
+            "msgString": "Failed to poll signalfd",
+            "msgPriority": "Error",
+            "obsolete": true,
+            "params": [
+                {
+                    "paramName": "_errno",
+                    "paramType": "integer"
+                }
+            ]
+        },
+        {
+            "msgName": "SignalfdFailedRead",
+            "msgId": 56,
+            "msgString": "Failed to read signalfd",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "_errno",
+                    "paramType": "integer"
+                }
+            ]
+        },
+        {
+            "msgName": "FailedWaitChildProcesses",
+            "msgId": 57,
+            "msgString": "failed to wait for child processes",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "_errno",
+                    "paramType": "integer"
+                }
+            ]
+        },
+        {
+            "msgName": "CreateImageManagerFailed",
+            "msgId": 58,
+            "msgString": "Error getting image manager.  Could not mount apps.",
+            "msgPriority": "Error"
+        },
+        {
+            "msgName": "InitializeAppFailed",
+            "msgId": 59,
+            "msgString": "failed to initialize application",
+            "params": [
+                {
+                    "paramName": "imageName",
+                    "paramType": "string"
+                },
+                {
+                    "paramName": "errvalue",
+                    "paramType": "commonError"
+                }
+            ],
+            "msgPriority": "Error"
+        },
+        {
+            "msgName": "InitializeAllAppsFailed",
+            "msgId": 60,
+            "msgString": "Failed to mount one or more applications.",
+            "msgPriority": "Error"
+        },
+        {
+            "msgName": "MountedImageNotADirectory",
+            "msgId": 61,
+            "msgString": "Mounted image is not a directory.",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "app_id",
+                    "paramType": "uniqueId"
+                }
+            ]
+        },
+        {
+            "msgName": "FailedToGetComponentId",
+            "msgId": 62,
+            "msgString": "Failed to find component id associated with uid",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "uid",
+                    "paramType": "integer"
+                }
+            ]
+        },
+        {
+            "msgName": "FailedSkuserCreateImageManager",
+            "msgId": 63,
+            "msgString": "Skuser_CreateImageManager failed.",
+            "msgPriority": "Error"
+        },
+        {
+            "msgName": "SideloadRequiresReboot",
+            "msgId": 64,
+            "msgString": "One or more images requires a system reboot.",
+            "msgPriority": "Info"
+        },
+        {
+            "msgName": "ErrorGettingImagesFromSkuser",
+            "msgId": 65,
+            "msgString": "An error occurred while getting images from skuser.",
+            "msgPriority": "Error"
+        },
+        {
+            "msgName": "ErrorInstallingImages",
+            "msgId": 66,
+            "msgString": "A skuser error occurred while installing staged images.",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "error",
+                    "paramType": "commonError"
+                }
+            ]
+        },
+        {
+            "msgName": "InvalidatingImage",
+            "msgId": 67,
+            "msgString": "App initialization failed, invalidating image.",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "app_id",
+                    "paramType": "uniqueId"
+                }
+            ]
+        },
+        {
+            "msgName": "AppmanInitStart",
+            "msgId": 68,
+            "msgString": "--------------APP INIT START---------------------",
+            "msgPriority": "Debug"
+        },
+        {
+            "msgName": "ErrorOnScan",
+            "msgId": 69,
+            "msgString": "Error occurred when querying a scan in lifetime manager.",
+            "msgPriority": "Error"
+        },
+        {
+            "msgName": "FailedToSetPeripheralPermissions",
+            "msgId": 71,
+            "msgString": "Failure to set peripheral permissions. Exiting.",
+            "msgPriority": "Error",
+            "obsolete": true
+        },
+        {
+            "msgName": "FailedToInitGpioAccess",
+            "msgId": 72,
+            "msgString": "Failure enabling gpio pin access. Exiting.",
+            "msgPriority": "Error"
+        },
+        {
+            "msgName": "NotEnoughArgs",
+            "msgId": 73,
+            "msgString": "Not enough arguments. Exiting.",
+            "msgPriority": "Error"
+        },
+        {
+            "msgName": "FailedToSetDefaultFirewall",
+            "msgId": 74,
+            "msgString": "Failed to set default firewall rules. Exiting.",
+            "msgPriority": "Error",
+            "obsolete": true
+        },
+        {
+            "msgName": "AppmanInitEnd",
+            "msgId": 75,
+            "msgString": "--------------APP INIT END---------------------",
+            "msgPriority": "Debug"
+        },
+        {
+            "msgName": "ChildExited",
+            "msgId": 76,
+            "msgString": "Child exited! PID = ",
+            "msgPriority": "Info",
+            "obsolete": true,
+            "params": [
+                {
+                    "paramName": "pid",
+                    "paramType": "integer"
+                }
+            ]
+        },
+        {
+            "msgName": "RetryingUnmount",
+            "msgId": 77,
+            "msgString": "Retrying umount after failure.  Wait and see if a child process exits.",
+            "msgPriority": "Info"
+        },
+        {
+            "msgName": "CouldNotFindApplication",
+            "msgId": 78,
+            "msgString": "No managed app with the specified uid.",
+            "msgPriority": "Info",
+            "obsolete": true,
+            "params": [
+                {
+                    "paramName": "appId",
+                    "paramType": "uniqueId"
+                }
+            ]
+        },
+        {
+            "msgName": "FailedToUpdateFirewallRules",
+            "msgId": 79,
+            "msgString": "Failed to update firewall rules.",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "error",
+                    "paramType": "commonError"
+                }
+            ]
+        },
+        {
+            "msgName": "FailedToUpdateTenantList",
+            "msgId": 80,
+            "msgString": "Failed to update tenant id list.",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "error",
+                    "paramType": "commonError"
+                }
+            ]
+        },
+        {
+            "msgName": "ErrorInvalidatingImageAfterInitializeFailure",
+            "msgId": 81,
+            "msgString": "Invalidating image failed after installation failure.",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "app_id",
+                    "paramType": "uniqueId"
+                },
+                {
+                    "paramName": "image_update_return_code",
+                    "paramType": "commonError"
+                }
+            ]
+        },
+        {
+            "msgName": "DevLockPreventedSideloadManualStart",
+            "msgId": 82,
+            "msgString": "Sideload with manual start operation prevented by lack of development capability.",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "app_id",
+                    "paramType": "uniqueId"
+                },
+                {
+                    "paramName": "image_type",
+                    "paramType": "integer"
+                }
+            ]
+        },
+        {
+            "msgName": "ProcessExitError",
+            "msgId": 83,
+            "msgString": "Process exited with error code.",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "pid",
+                    "paramType": "integer"
+                },
+                {
+                    "paramName": "error",
+                    "paramType": "commonError"
+                }
+            ]
+        },
+        {
+            "msgName": "DebuggerAlreadyLoaded",
+            "msgId": 84,
+            "msgString": "Attempting to install a second debugger.",
+            "msgPriority": "Error"
+        },
+        {
+            "msgName": "FailedToUnmountDebugger",
+            "msgId": 85,
+            "msgString": "Failed to unmount debugger.",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "error",
+                    "paramType": "commonError"
+                }
+            ]
+        },
+        {
+            "msgName": "FailedToRemountDebugger",
+            "msgId": 86,
+            "msgString": "Failed to mount debugger as application.",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "error",
+                    "paramType": "commonError"
+                }
+            ]
+        },
+        {
+            "msgName": "FailedToGetStatusOfDebugger",
+            "msgId": 87,
+            "msgString": "Failed to get status of debugger executable.",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "error",
+                    "paramType": "integer"
+                }
+            ]
+        },
+        {
+            "msgName": "FailedToDeleteDeviceTenant",
+            "msgId": 88,
+            "msgString": "Failed to delete device tenant entry for user.",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "error",
+                    "paramType": "commonError"
+                },
+                {
+                    "paramName": "uid",
+                    "paramType": "integer"
+                }
+            ]
+        },
+        {
+            "msgName": "FailedToDeleteFirewallRules",
+            "msgId": 89,
+            "msgString": "Failed to delete firewall entries for user.",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "error",
+                    "paramType": "commonError"
+                },
+                {
+                    "paramName": "uid",
+                    "paramType": "integer"
+                }
+            ]
+        },
+        {
+            "msgName": "CouldNotInitializePinList",
+            "msgId": 90,
+            "msgString": "Failed to initialize pin map from device tree.",
+            "msgPriority": "Error",
+            "obsolete": true
+        },
+        {
+            "msgName": "FailedGarbageCollection",
+            "msgId": 91,
+            "msgString": "Failed application garbage collection",
+            "msgPriority": "Warning"
+        },
+        {
+            "msgName": "GetUpdateCertStoreImageInfoFailed",
+            "msgId": 92,
+            "msgString": "Skuser_GetUpdateCertStoreImageInfo failed.",
+            "msgPriority": "Error"
+        },
+        {
+            "msgName": "InitializeUpdateCertStoreFailed",
+            "msgId": 93,
+            "msgString": "Failed to mount the update certificate store.",
+            "msgPriority": "Error"
+        },
+        {
+            "msgName": "DuplicateTcpUdpPortFound",
+            "msgId": 94,
+            "msgString": "Tried to add a TCP or UDP port that a previous application added.",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "Port",
+                    "paramType": "integer"
+                }
+            ]
+        },
+        {
+            "msgName": "RelaunchedApp",
+            "msgId": 95,
+            "msgString": "Successfully relaunched an appliation.",
+            "msgPriority": "Trace",
+            "params": [
+                {
+                    "paramName": "appId",
+                    "paramType": "uniqueId"
+                }
+            ]
+        },
+        {
+            "msgName": "AppRelaunchError",
+            "msgId": 96,
+            "msgString": "Could not relaunch an application.",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "appId",
+                    "paramType": "uniqueId"
+                },
+                {
+                    "paramName": "error",
+                    "paramType": "commonError"
+                }
+            ]
+        },
+        {
+            "msgName": "AppmanPollError",
+            "msgId": 97,
+            "msgString": "Failed to poll the signal or app relaunch fds",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "error",
+                    "paramType": "commonError"
+                }
+            ]
+        },
+        {
+            "msgName": "AppRelaunchFdFailedRead",
+            "msgId": 98,
+            "msgString": "Failed to read the app relaunch fd",
+            "msgPriority": "Warning",
+            "params": [
+                {
+                    "paramName": "error",
+                    "paramType": "commonError"
+                }
+            ]
+        },
+        {
+            "msgName": "AppRelaunchFdFailedCreate",
+            "msgId": 99,
+            "msgString": "Failed to create the app relaunch fd",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "error",
+                    "paramType": "commonError"
+                }
+            ]
+        },
+        {
+            "msgName": "CouldNotCreateAppLifetimeManager",
+            "msgId": 100,
+            "msgString": "Could not create App Lifetime Manager, exiting",
+            "msgPriority": "Error"
+        },
+        {
+            "msgName": "AppRelaunchTimerFdGetTimeError",
+            "msgId": 101,
+            "msgString": "Failed to get the time remaining till next timer expiration from app relaunch timer fd",
+            "msgPriority": "Warning",
+            "params": [
+                {
+                    "paramName": "error",
+                    "paramType": "commonError"
+                }
+            ]
+        },
+        {
+            "msgName": "AppRelaunchTimerFdSetTimeError",
+            "msgId": 102,
+            "msgString": "Failed to set the app relaunch timer",
+            "msgPriority": "Warning",
+            "params": [
+                {
+                    "paramName": "error",
+                    "paramType": "commonError"
+                }
+            ]
+        },
+        {
+            "msgName": "FailedToSetI2cMasterPermissions",
+            "msgId": 103,
+            "msgString": "Failure to set I2cMaster permissions. Exiting.",
+            "msgPriority": "Error",
+            "obsolete": true
+        },
+        {
+            "msgName": "FailedToSetSpiMasterPermissions",
+            "msgId": 104,
+            "msgString": "Failure to set SpiMaster permissions. Exiting.",
+            "msgPriority": "Error",
+            "obsolete": true
+        },
+        {
+            "msgName": "ChildExitedWithStatus",
+            "msgId": 105,
+            "msgString": "Child exited!",
+            "msgPriority": "Info",
+            "params": [
+                {
+                    "paramName": "pid",
+                    "paramType": "integer"
+                },
+                {
+                    "paramName": "status",
+                    "paramType": "integer"
+                }
+            ]
+        },
+        {
+            "msgName": "ChildTerminatedBySignal",
+            "msgId": 106,
+            "msgString": "Child terminated by signal!",
+            "msgPriority": "Info",
+            "params": [
+                {
+                    "paramName": "pid",
+                    "paramType": "integer"
+                },
+                {
+                    "paramName": "signal",
+                    "paramType": "integer"
+                }
+            ]
+        },
+        {
+            "msgName": "ChildStopped",
+            "msgId": 107,
+            "msgString": "Child stopped!",
+            "msgPriority": "Info",
+            "params": [
+                {
+                    "paramName": "pid",
+                    "paramType": "integer"
+                },
+                {
+                    "paramName": "signal",
+                    "paramType": "integer"
+                }
+            ]
+        },
+        {
+            "msgName": "FailedInvalidateDuringDelete",
+            "msgId": 108,
+            "msgString": "Could not invalidate image for unmanaged application.",
+            "msgPriority": "Error",
+            "obsolete": true,
+            "params": [
+                {
+                    "paramName": "component_uid",
+                    "paramType": "uniqueId"
+                }
+            ]
+        },
+        {
+            "msgName": "NoDevUnlockCapabilityOnDelete",
+            "msgId": 109,
+            "msgString": "Illegal attempt to delete app without dev unlock capability.",
+            "msgPriority": "Error",
+            "obsolete": true,
+            "params": [
+                {
+                    "paramName": "component_uid",
+                    "paramType": "uniqueId"
+                }
+            ]
+        },
+        {
+            "msgName": "NoMatchingImage",
+            "msgId": 110,
+            "msgString": "No image found with matching component id.",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "component_uid",
+                    "paramType": "uniqueId"
+                }
+            ]
+        },
+        {
+            "msgName": "ProcessSignaled",
+            "msgId": 111,
+            "msgString": "A process has been signaled.",
+            "msgPriority": "Warning",
+            "params": [
+                {
+                    "paramName": "app_id",
+                    "paramType": "uniqueId"
+                },
+                {
+                    "paramName": "signal_number",
+                    "paramType": "integer"
+                },
+                {
+                    "paramName": "signal_code",
+                    "paramType": "integer"
+                }
+            ]
+        },
+        {
+            "msgName": "AzSpioFirewallError",
+            "msgId": 112,
+            "msgString": "Error modifying the AZ SPIO Firewall State.",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "dst",
+                    "paramType": "uniqueId"
+                },
+                {
+                    "paramName": "error",
+                    "paramType": "commonError"
+                }
+            ]
+        },
+        {
+            "msgName": "FailedToAcquireAllConnections",
+            "msgId": 113,
+            "msgString": "Error creating all connections for app.",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "component",
+                    "paramType": "uniqueId"
+                },
+                {
+                    "paramName": "error",
+                    "paramType": "commonError"
+                }
+            ]
+        },
+        {
+            "msgName": "SystemHasStartedPoweringDown",
+            "msgId": 114,
+            "msgString": "System has started powering down.",
+            "msgPriority": "Info"
+        },
+        {
+            "msgName": "FailedToSetRealTimeClockAlarm",
+            "msgId": 115,
+            "msgString": "Failed to set the real-time clock wakeup alarm.",
+            "msgPriority": "Error"
+        },
+        {
+            "msgName": "FailedToPowerDown",
+            "msgId": 116,
+            "msgString": "Failed to power-down the system.",
+            "msgPriority": "Error"
+        },
+        {
+            "msgName": "CouldNotFindImage",
+            "msgId": 117,
+            "msgString": "Could not find image associated with component uid.",
+            "msgPriority": "Error",
+            "obsolete": true,
+            "params": [
+                {
+                    "paramName": "appId",
+                    "paramType": "uniqueId"
+                }
+            ]
+        },
+        {
+            "msgName": "FailedToGetImageList",
+            "msgId": 118,
+            "msgString": "Failed to retrieve list of ASXIPFS-compatible images.",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "error",
+                    "paramType": "commonError"
+                }
+            ]
+        },
+        {
+            "msgName": "FailedToUnmapApplication",
+            "msgId": 119,
+            "msgString": "Failed to unmap an application's MTD/block device.",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "app_name",
+                    "paramType": "string"
+                },
+                {
+                    "paramName": "error_code",
+                    "paramType": "integer"
+                }
+            ]
+        },
+        {
+            "msgName": "FailedToMapAppToMTD",
+            "msgId": 120,
+            "msgString": "Failed to set up an application MTD/block device.",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "app_name",
+                    "paramType": "string"
+                },
+                {
+                    "paramName": "error_code",
+                    "paramType": "integer"
+                }
+            ]
+        },
+        {
+            "msgName": "FailedToMountCertStore",
+            "msgId": 121,
+            "msgString": "Failed to mount cert store.",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "app_name",
+                    "paramType": "string"
+                },
+                {
+                    "paramName": "error_code",
+                    "paramType": "integer"
+                }
+            ]
+        },
+        {
+            "msgName": "CouldNotFindSystemUserInfo",
+            "msgId": 122,
+            "msgString": "Couldn't find system uid or appman gid",
+            "msgPriority": "Error"
+        },
+        {
+            "msgName": "PeripheralConfigRequiresReboot",
+            "msgId": 123,
+            "msgString": "Peripheral config changed, and requires reboot",
+            "msgPriority": "Info",
+            "params": [
+                {
+                    "paramName": "app_uid",
+                    "paramType": "uniqueId"
+                }
+            ]
+        },
+        {
+            "msgName": "PeripheralConfigHasExtraApps",
+            "msgId": 124,
+            "msgString": "On install, applications requiring peripherals were removed",
+            "msgPriority": "Info"
+        },
+        {
+            "msgName": "FailedToLockPeripheralConfig",
+            "msgId": 125,
+            "msgString": "Failed to lock peripheral configuration",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "error",
+                    "paramType": "commonError"
+                }
+            ]
+        }
+    ]
+}

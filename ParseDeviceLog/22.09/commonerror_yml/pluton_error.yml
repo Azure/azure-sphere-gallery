@@ -1,0 +1,20 @@
+#Pluton runtime error codes
+category_id: 46
+name: PlutonRtError
+namespace: azure_sphere::pluton_runtime
+codes:
+  - id: 1
+    name: LocatorNotFound
+    msg: Could not find partition locator table
+  - id: 2
+    name: BadFirmwarePartition
+    msg: Bad firmware partition
+
+  # Board config errors
+  - id: 100
+    name: BoardConfigImageTooBig
+    msg: Board Config image in fw partition of flash is too big
+  - id: 101
+    name: BoardConfigImageBadMetadataOrSignature
+    msg: Digital signature of Board Config image does not check or
+         metadata is invalid

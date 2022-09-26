@@ -1,0 +1,96 @@
+# Gatewayd error codes
+category_id: 10
+name: RestError
+codes:
+  - id: 1
+    name: InvalidJsonRequest
+    msg: Invalid JSON Request.
+    openapi: true
+  - id: 2
+    name: InvalidJsonData
+    msg: Invalid JSON data field.
+  - id: 3
+    name: RequestDataExpected
+    msg: Request data is expected.
+  - id: 4
+    name: ContentLengthExpected
+    msg: Content length is expected.
+  - id: 5
+    name: InterfaceIsBusy
+    msg: Interface is busy.
+    openapi: true
+  - id: 6
+    name: InternalError
+    msg: Internal error.
+    openapi: true
+  - id: 7
+    name: InvalidQueryString
+    msg: Invalid query string.
+  - id: 8
+    name: OutOfMemory
+    msg: Out of memory.
+  - id: 9
+    name: TargetedScanNotABoolean
+    msg: The targetedScan variable must be a boolean.
+  - id: 10
+    name: ReloadConfigNotABoolean
+    msg: The reload variable must be a boolean.
+  - id: 11
+    name: CaCertStoreIdentifierTooLong
+    msg: The given caCertStoreIdentifier is too long.
+  - id: 12
+    name: ClientCertStoreIdentifierTooLong
+    msg: The given clientCertStoreIdentifier is too long.
+    openapi: true
+  - id: 13
+    name: ClientIdentityTooLong
+    msg: The given clientIdentity is too long.
+  - id: 14
+    name: ClientPrivateKeyCertStoreIdentifierTooLong
+    msg: The given clientPrivateKeyCertStoreIdentifier is too long.
+  - id: 15
+    name: ClientPrivateKeyPasswordTooLong
+    msg: The given clientPrivateKeyPassword is too long.
+  - id: 16
+    name: ConfigNameTooLong
+    msg: The given config name is too long.
+    openapi: true
+  - id: 17
+    name: RequestEntityTooLarge
+    msg: The request entity is too large.
+  - id: 18
+    name: CommandAuthorizationFailed
+    msg: Requested command is not authorized.
+  - id: 19
+    name: EnabledNotABoolean
+    msg: The 'enabled' variable must be a boolean.
+  - id: 20
+    name: InvalidNetworkPort
+    msg: Invalid network port.
+  - id: 21
+    name: InvalidProxyAddress
+    msg: Invalid proxy address.
+  - id: 22
+    name: InvalidNoProxyAddresses
+    msg: Invalid noProxyAddresses.
+  - id: 23
+    name: InvalidUsername
+    msg: Invalid username.
+  - id: 24
+    name: InvalidPassword
+    msg: Invalid password.
+  - id: 25
+    name: InvalidAuthenticationType
+    msg: Invalid authentication type.
+  - id: 26
+    name: InvalidProxyType
+    msg: Invalid proxy type.
+  - id: 27
+    name: RequiredNetworkPort
+    msg: Network port is required.
+  - id: 28
+    name: RequiredProxyAddress
+    msg: Proxy address is required.
+  - id: 29
+    name: RequiredAuthenticationType
+    msg: Authentication type is required

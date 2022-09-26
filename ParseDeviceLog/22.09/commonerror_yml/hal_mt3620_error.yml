@@ -1,0 +1,26 @@
+category_id: 40
+name: HalMt3620Error
+enumPrefix: HalMt3620Error
+namespace: azure_sphere
+codes:
+  - id: 1
+    name: UnsupportedDomain
+    msg: Supplied Domain ID not supported for this operation
+  - id: 2
+    name: FlashRangeOutOfBounds
+    msg: Supplied flash range lies outside the valid bounds of flash
+  - id: 3
+    name: FirewallFlashRegionsFull
+    msg: Attempted to program more flash regions into the firewall than the supported 8
+  - id: 4
+    name: MemoryRangeOutOfBounds
+    msg: Supplied memory range lies outside the valid bounds of SYSRAM
+  - id: 5
+    name: FirewallIoCoreRangeFull
+    msg: Attempted to allow region that, due to size and alignment, did not fit in its range
+  - id: 6
+    name: UnsupportedFirewallIoCoreRange
+    msg: Supplied IO core firewall range identifier not supported
+  - id: 7
+    name: RtcDisabled
+    msg: RTC is disabled

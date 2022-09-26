@@ -1,0 +1,12 @@
+category_id: 49
+name: SecurityMonitorSyscallErrors
+namespace: azure_sphere
+#  The errors that are part of the syscall contract are defined here so that the error tooling (specifically
+#  error_codes.py in exp23-yocto) will work as expected.  Development practice expects the errors to be found in a YML
+#  file and the tooling helps ensure that we don't have overlapping errors. However, the errors that are part of the
+#  contract should be defined and used by code in security_monitor.h.  So this file covers the tooling, and code should
+#  use security_monitor.h to get the error definitions. 
+codes:
+  - id: 1
+    name: PeripheralConfigurationLocked
+    msg: Unable to change the configuration due to it being locked

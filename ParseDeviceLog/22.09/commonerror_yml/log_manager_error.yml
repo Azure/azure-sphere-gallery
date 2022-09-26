@@ -1,0 +1,44 @@
+# Http error codes
+category_id: 17
+name: LogManagerError
+codes: 
+  - 
+    id: 1 
+    name: CannotCreateMessage
+    msg: Cannot create message.
+  - 
+    id: 2 
+    name: CannotCreateBinaryAttribute
+    msg: Cannot create binary attribute.
+  - 
+    id: 3 
+    name: RpcCallFailed
+    msg: RPC call failed.
+  - 
+    id: 4 
+    name: LogDataIsTooBig
+    msg: Log data is too big.
+  - 
+    id: 5 
+    name: InvalidData
+    msg: Invalid data.
+  - 
+    id: 6 
+    name: RpcNotInitialized
+    msg: RPC not initialized.
+  - 
+    id: 7 
+    name: RequestedSizeIsTooBig
+    msg: Response size is too big.
+  - 
+    id: 8 
+    name: UnexpectedError
+    msg: Unexpected error.
+  - 
+    id: 9 
+    name: OutOfMemory
+    msg: Out of memory.
+  - 
+    id: 10 
+    name: PermissionDenied
+    msg: Permission denied.

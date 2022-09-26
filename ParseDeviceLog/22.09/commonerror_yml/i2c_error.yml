@@ -1,0 +1,39 @@
+category_id: 34
+name: I2cError
+codes: 
+  - 
+    id: 1
+    name: NoSuchDevice 
+    msg: Specified I2C device does not exist
+  - 
+    id: 2
+    name: DeviceInaccessible
+    msg: I2C device is inaccessible to the caller
+  -
+    id: 3
+    name: InvalidTransferLength
+    msg: I2C data transfer length is not supported
+  -
+    id: 4
+    name: InvalidFileDescriptor
+    msg: I2C device file descriptor is not valid
+  -
+    id: 5
+    name: DeviceBusy
+    msg: I2C device is busy
+  -
+    id: 6
+    name: OperationTimedOut
+    msg: I2C operation timed out before completing
+  -
+    id: 7
+    name: TransferNack
+    msg: I2C operation was NAKd
+  -
+    id: 8
+    name: InvalidAddress
+    msg: I2C device address is invalid
+  -
+    id: 9
+    name: InvalidBuffer
+    msg: I2C operation used invalid buffer

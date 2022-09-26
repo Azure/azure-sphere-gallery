@@ -1,0 +1,37 @@
+{
+    "version": "1.0",
+    "categoryId": 26,
+    "categoryName": "firewall_rules",
+    "msgIds": [
+        {
+            "msgName": "FirewallConfigParseError",
+            "msgId": 1,
+            "msgString": "Failed to parse the firewall configuration file",
+            "msgPriority": "Error"
+        },
+        {
+            "msgName": "FirewallParseUnrecognizedTag",
+            "msgId": 2,
+            "msgString": "Unrecognized tag in firewall rules files",
+            "msgPriority": "Error"
+        },
+        {
+            "msgName": "UnknownUid",
+            "msgId": 3,
+            "msgString": "Unrecognized uid in firewall rules file",
+            "msgPriority": "Error"
+        },
+        {
+            "msgName": "FirewallRulesHasBadData",
+            "msgId": 4,
+            "msgString": "Firewall rules file specifies an inconsistent length",
+            "msgPriority": "Error"
+        },
+        {
+            "msgName": "DnsNameTooLong",
+            "msgId": 5,
+            "msgString": "Firewall rules file contains a DNS path that is longer than allowed",
+            "msgPriority": "Error"
+        }
+    ]
+}

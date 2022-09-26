@@ -1,0 +1,9 @@
+{
+    "comment": "APP LAUNCH LOGS ARE DEPRECATED, BUT THIS IS HERE TO RESERVE THE CATEGORY ID.",
+    "version": "1.0",
+    "categoryId": 11,
+    "categoryName": "applaunch",
+    "msgIds": [
+        {}
+    ]
+}
