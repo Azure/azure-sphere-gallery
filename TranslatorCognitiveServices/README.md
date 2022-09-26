@@ -13,7 +13,7 @@ The goal of this project is to show how to use an Azure Cognitive Service from A
 ## Prerequisites & Setup
 
 - An Azure Sphere-based device with development features (see [Get started with Azure Sphere](https://azure.microsoft.com/en-us/services/azure-sphere/get-started/) for more information).
-- Setup a development environment for Azure Sphere (see [Quickstarts to set up your Azure Sphere device](https://docs.microsoft.com/en-us/azure-sphere/install/overview) for more information).
+- Setup a development environment for Azure Sphere (see [Quickstarts to set up your Azure Sphere device](https://learn.microsoft.com/en-us/azure-sphere/install/overview) for more information).
 
 Note that the Azure Sphere High Level application is configured for the 21.04 SDK release.
 
@@ -23,11 +23,11 @@ The project demonstrates how to detect text language, and then translate the tex
 
 To use the project you will need an Azure account, and have the ability to create an Azure Resource within your Azure Subscription.
 
-You will need to create a `translator` resource within your Azure Subscription - Follow the instructions [here](https://docs.microsoft.com/azure/cognitive-services/Translator/translator-how-to-signup)
+You will need to create a `translator` resource within your Azure Subscription - Follow the instructions [here](https://learn.microsoft.com/azure/cognitive-services/Translator/translator-how-to-signup)
 
-Once the `translator` resource is created you will need to get the API Key, this can be obtained from the Azure Portal translator resource page: 
+Once the `translator` resource is created you will need to get the API Key, this can be obtained from the Azure Portal translator resource page:
 
-* Click on `Keys and Endpoint` and then copy  `KEY 1` to the clipboard. 
+* Click on `Keys and Endpoint` and then copy  `KEY 1` to the clipboard.
 * Open the Azure Sphere application then open `translator.c` - paste the API Key into the `translatorAPIKey` variable.
 * Build and Deploy the application (note that the Azure Sphere device needs a network connection for the application to work).
 

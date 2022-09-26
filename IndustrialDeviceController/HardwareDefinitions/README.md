@@ -7,7 +7,7 @@ This file maps the "peripherals" used by the sample appliance to the correspondi
 
 To run any of the samples in the [Azure Sphere samples repository](https://github.com/Azure/azure-sphere-samples) on supported Azure Sphere hardware, you specify the directory that contains the sample_appliance.json file for the target hardware.
 
-This README file describes how to [set the target hardware for a sample](#set-the-target-hardware-for-a-sample-application). For additional information, see [Manage hardware dependencies](https://docs.microsoft.com/azure-sphere/app-development/manage-hardware-dependencies) and [Hardware abstraction files](https://review.docs.microsoft.com/azure-sphere/hardware/hardware-abstraction) in the online documentation. 
+This README file describes how to [set the target hardware for a sample](#set-the-target-hardware-for-a-sample-application). For additional information, see [Manage hardware dependencies](https://learn.microsoft.com/azure-sphere/app-development/manage-hardware-dependencies) and [Hardware abstraction files](https://review.learn.microsoft.com/azure-sphere/hardware/hardware-abstraction) in the online documentation.
 
 ## Hardware
 
@@ -40,13 +40,13 @@ To set or change the target hardware for a sample application, use CMake functio
 
 1. Open the CMakeLists.txt file, which is located in the sample source directory, and search for `azsphere_target_hardware_definition`.
 
-1. Change the value of the parameter `TARGET_DIRECTORY` to the target hardware definition directory. For example, to run the sample on the AI-Link WF-M620-RSC1: 
+1. Change the value of the parameter `TARGET_DIRECTORY` to the target hardware definition directory. For example, to run the sample on the AI-Link WF-M620-RSC1:
 
-   change 
-   
+   change
+
    `azsphere_target_hardware_definition(${PROJECT_NAME} TARGET_DIRECTORY "../HardwareDefinitions/mt3620_rdb" TARGET_DEFINITION "board_config.json")`
 
-   to 
-   
+   to
+
    `azsphere_target_hardware_definition(${PROJECT_NAME} TARGET_DIRECTORY "../HardwareDefinitions/ailink_wfm620rsc1" TARGET_DEFINITION "board_config.json")`
-  
+

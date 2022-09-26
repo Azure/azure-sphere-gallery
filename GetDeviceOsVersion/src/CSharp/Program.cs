@@ -66,7 +66,7 @@ namespace GetDeviceOsVersion
             Dictionary<string, string> images = new();
             foreach (Component component in components)
             {
-                // Image types https://docs.microsoft.com/rest/api/azure-sphere/image/get-metadata
+                // Image types https://learn.microsoft.com/rest/api/azure-sphere/image/get-metadata
                 if (component.image_type != 10)
                 {
                     // Not an app.

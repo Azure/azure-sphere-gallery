@@ -13,13 +13,13 @@ Azure account, [Azure Sphere MT3620 Development Kit](https://www.seeedstudio.com
 
 ## Hardware Setup
 
-Refer to [MT3620 reference development board (RDB) user guide](https://docs.microsoft.com/en-us/azure-sphere/hardware/mt3620-user-guide).
+Refer to [MT3620 reference development board (RDB) user guide](https://learn.microsoft.com/en-us/azure-sphere/hardware/mt3620-user-guide).
 
 ## Software Setup
 
-Install the [Azure Sphere SDK](https://docs.microsoft.com/en-us/azure-sphere/install/install-sdk?pivots=visual-studio) on PC.
-Install and use [Azure IoT explorer](https://docs.microsoft.com/en-us/azure/iot-pnp/howto-use-iot-explorer) to communicate with mt3620 board through IoT hub.
-Set up the [IoT Hub Device Provisioning Service](https://docs.microsoft.com/en-us/azure/iot-dps/quick-setup-auto-provision) with the Azure portal.
+Install the [Azure Sphere SDK](https://learn.microsoft.com/en-us/azure-sphere/install/install-sdk?pivots=visual-studio) on PC.
+Install and use [Azure IoT explorer](https://learn.microsoft.com/en-us/azure/iot-pnp/howto-use-iot-explorer) to communicate with mt3620 board through IoT hub.
+Set up the [IoT Hub Device Provisioning Service](https://learn.microsoft.com/en-us/azure/iot-dps/quick-setup-auto-provision) with the Azure portal.
 Record the hostname of IoT Hub and the ID Scope of Device Provisioning Service.
 
 ## Build

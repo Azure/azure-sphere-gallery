@@ -246,7 +246,7 @@ static WOLFSSL* open_nb_socket(const char* addr, const char* port) {
 
 	if (sockfd != -1) fcntl(sockfd, F_SETFL, fcntl(sockfd, F_GETFL) | O_NONBLOCK);
 
-	// https://docs.microsoft.com/en-us/azure-sphere/reference/applibs-reference/applibs-eventloop/function-eventloop-registerio
+	// https://learn.microsoft.com/en-us/azure-sphere/reference/applibs-reference/applibs-eventloop/function-eventloop-registerio
 	mqtt_socket_registration = EventLoop_RegisterIo(dx_timerGetEventLoop(), sockfd, EventLoop_Input, msg_handler, NULL);
 
 	return ssl;

@@ -6,11 +6,11 @@ This real-time app runs on the MT3620 real-time cores to read and write the modb
 * When there are bytes available on UART, RTApp will send bytes back to HLApp.
 * Handle IPC_CLOSE_UART command from the high-level application (HLApp) and close UART.
 
-**Note:** Before you run this sample, see [Communicate with a high-level application](https://docs.microsoft.com/azure-sphere/app-development/inter-app-communication). It describes how real-time capable applications communicate with high-level applications on the MT3620.
+**Note:** Before you run this sample, see [Communicate with a high-level application](https://learn.microsoft.com/azure-sphere/app-development/inter-app-communication). It describes how real-time capable applications communicate with high-level applications on the MT3620.
 
 ## Prerequisites
 
-1. [Seeed MT3620 Development Kit](https://aka.ms/azurespheredevkits) or other hardware that implements the [MT3620 Reference Development Board (RDB)](https://docs.microsoft.com/azure-sphere/hardware/mt3620-reference-board-design) design.
+1. [Seeed MT3620 Development Kit](https://aka.ms/azurespheredevkits) or other hardware that implements the [MT3620 Reference Development Board (RDB)](https://learn.microsoft.com/azure-sphere/hardware/mt3620-reference-board-design) design.
 1. A TTL-to-RS485 converter which connect ISU0 UART RX/TX on MT3620 to the industrial device through RS485.
 1. An optional USB-to-serial adapter (for example, [FTDI Friend](https://www.digikey.com/catalog/en/partgroup/ftdi-friend/60311)) to connect the real-time capable core UART to a USB port on your PC.
 1. An optional terminal emulator (such as Telnet or [PuTTY](https://www.chiark.greenend.org.uk/~sgtatham/putty/.)) to display the output.
@@ -19,7 +19,7 @@ This real-time app runs on the MT3620 real-time cores to read and write the modb
 
 To prep your device on Windows:
 
-1. Right-click the Azure Sphere Developer Command Prompt shortcut and select **More>Run as administrator**. 
+1. Right-click the Azure Sphere Developer Command Prompt shortcut and select **More>Run as administrator**.
 
    The `--enablertcoredebugging` parameter requires administrator privilege because it installs USB drivers for the debugger.
 
@@ -37,11 +37,11 @@ To prep your device on Linux:
 
 ## Set up hardware to display output
 
-To prepare your hardware to display output from the real-time app, see [Set up hardware to display output](https://docs.microsoft.com/azure-sphere/install/development-environment-windows#set-up-hardware-to-display-output) for Windows or [Set up hardware to display output](https://docs.microsoft.com/azure-sphere/install/development-environment-linux#set-up-hardware-to-display-output) for Linux.
+To prepare your hardware to display output from the real-time app, see [Set up hardware to display output](https://learn.microsoft.com/azure-sphere/install/development-environment-windows#set-up-hardware-to-display-output) for Windows or [Set up hardware to display output](https://learn.microsoft.com/azure-sphere/install/development-environment-linux#set-up-hardware-to-display-output) for Linux.
 
 ## Build and run the real-time app
 
-The real-time app run as partners. Make sure that they're designated as partners, as described in [Mark applications as partners](https://docs.microsoft.com/azure-sphere/app-development/sideload-app#mark-applications-as-partners), so that sideloading one doesn't delete the other.
+The real-time app run as partners. Make sure that they're designated as partners, as described in [Mark applications as partners](https://learn.microsoft.com/azure-sphere/app-development/sideload-app#mark-applications-as-partners), so that sideloading one doesn't delete the other.
 
 If you're using Visual Studio, you will need to deploy and debug both apps simutaneously. See the following instructions for building and running
 the real-time app with Visual Studio:

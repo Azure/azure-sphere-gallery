@@ -15,7 +15,7 @@ def done(device, ok):
         print("WARNING: per device action returned 'None' - assuming success")
         ok = True
 
-    if device['removed']: 
+    if device['removed']:
         return
 
     device['done'] = True
@@ -29,7 +29,7 @@ def done(device, ok):
     while True:
         starttime = time.time()
         while time.time() - starttime < delay:
-            if device['removed']: 
+            if device['removed']:
                 return
             sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) # UDP
             sock.sendto(bytes("123456789012345678901234567890123456789012345678901234567890", "utf-8"), (device['IpAddress'], 12345))
@@ -72,17 +72,17 @@ def perdevice(per_device_action):
             if not found:
                 print("Processing new device (with 5s wait) at connection path " + curListItem['DeviceConnectionPath'])
                 item = {
-                    'DeviceConnectionPath' : curListItem['DeviceConnectionPath'], 
-                    'IpAddress' : curListItem['IpAddress'], 
-                    'seen': True, 
-                    'done': False, 
+                    'DeviceConnectionPath' : curListItem['DeviceConnectionPath'],
+                    'IpAddress' : curListItem['IpAddress'],
+                    'seen': True,
+                    'done': False,
                     'removed': False
                 }
                 deviceList.append(item)
                 t=Thread(target=doaction, args=[per_device_action, item])
                 t.daemon=True
                 t.start()
-        
+
         for deviceListItem in deviceList:
             if not deviceListItem['seen']:
 #                print("removed device " + deviceListItem['DeviceConnectionPath'])
@@ -106,11 +106,11 @@ def azspherecommand(args, device = None):
     if args is None:
         print("azspherecommand requires a string arg list and an optional device")
         return None
-    
+
     path=shutil.which('azsphere')
 
     if (path is None):
-        print("install the Azure Sphere SDK from: https://docs.microsoft.com/azure-sphere/install/overview")
+        print("install the Azure Sphere SDK from: https://learn.microsoft.com/azure-sphere/install/overview")
         return None
 
     azspherepath=path
@@ -118,7 +118,7 @@ def azspherecommand(args, device = None):
     if device is not None:
         args = args + ["--device", device['DeviceConnectionPath']]
 
-    result = subprocess.run(args, stderr=subprocess.STDOUT, stdout=subprocess.PIPE) 
+    result = subprocess.run(args, stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
     if result.returncode != 0:
         if device is not None:
             print("Azsphere command " + ' '.join(args) + " on device at " + device['DeviceConnectionPath'] + " failed with output:")

@@ -16,11 +16,11 @@ Here's a link to the [Littlefs project on Github](https://github.com/littlefs-pr
 ## Prerequisites & Setup
 
 - An Azure Sphere-based device with development features (see [Get started with Azure Sphere](https://azure.microsoft.com/en-us/services/azure-sphere/get-started/) for more information).
-- Setup a development environment for Azure Sphere (see [Quickstarts to set up your Azure Sphere device](https://docs.microsoft.com/en-us/azure-sphere/install/overview) for more information).
+- Setup a development environment for Azure Sphere (see [Quickstarts to set up your Azure Sphere device](https://learn.microsoft.com/en-us/azure-sphere/install/overview) for more information).
 
 ## How to use
 
-### Azure Sphere applications 
+### Azure Sphere applications
 
 The LittleFs/SD Card implementation uses two applications:
 **High Level Application** (running on the A7 Core) which implements LittleFs (read, write, erase, and sync functions) and an inter-core messaging system used to talk to one of the Real-Time capable (M4) cores.
@@ -28,7 +28,7 @@ The LittleFs/SD Card implementation uses two applications:
 
 The SPI driver and SD Card implementation is based on the [Codethink Labs SPI_SDCard_RTApp_MT3620_BareMetal project](https://github.com/CodethinkLabs/mt3620-m4-samples/tree/master/SPI_SDCard_RTApp_MT3620_BareMetal)
 
-Supporting Littlefs requires that you setup the storage layout for the SD Card you are using, this is configured in the High Level application. 
+Supporting Littlefs requires that you setup the storage layout for the SD Card you are using, this is configured in the High Level application.
 
 Modify the TOTAL_BLOCKS definition to match the size of your SD Card - the default configuration is setup to use 4MB (8192 blocks), this is useful to demonstrate that LittleFs/SD Card is working correctly (reading 4MB SD Card to the desktop, and extracting files from the image will be much faster than a 16GB card!).
 
@@ -36,7 +36,7 @@ Modify the TOTAL_BLOCKS definition to match the size of your SD Card - the defau
 // SD Card uses 512 Byte blocks
 // 4MB Card size = 4,194,304 bytes - 8192 blocks
 // 2GB Card size = 2,147,483,648 bytes = 4194304 total blocks
-// 
+//
 // The Project is configured for 4MB Storage (8192 blocks)
 #define BLOCK_SIZE     512
 #define TOTAL_BLOCKS   8192     // TODO: Modify TOTAL_BLOCKS to match your SD Card configuration (total bytes/512)
@@ -77,7 +77,7 @@ USB Reader USB Device                 \\.\PHYSICALDRIVE3  USB Reader USB Device 
 
 The Physical Drive name is the `DeviceID`, which in this case is `\\.\PHYSICALDRIVE3`
 
-The number of blocks you need to read is based on the LittleFs drive layout you have defined in the Azure Sphere application, let's assume you have defined 4MB for LittleFs on an SD Card, this would require 8192 blocks (512 bytes per block). 
+The number of blocks you need to read is based on the LittleFs drive layout you have defined in the Azure Sphere application, let's assume you have defined 4MB for LittleFs on an SD Card, this would require 8192 blocks (512 bytes per block).
 
 The command line for ReadRawSDCard would be:
 ```dos

@@ -15,7 +15,7 @@ The goal of this project is to show how to add store and forward capability to t
 ## Prerequisites & Setup
 
 - An Azure Sphere-based device with development features (see [Get started with Azure Sphere](https://azure.microsoft.com/en-us/services/azure-sphere/get-started/) for more information).
-- Setup a development environment for Azure Sphere (see [Quickstarts to set up your Azure Sphere device](https://docs.microsoft.com/en-us/azure-sphere/install/overview) for more information).
+- Setup a development environment for Azure Sphere (see [Quickstarts to set up your Azure Sphere device](https://learn.microsoft.com/en-us/azure-sphere/install/overview) for more information).
 
 Note that the Azure Sphere High Level application is configured for the 21.07 SDK release.
 
@@ -30,7 +30,7 @@ Copy the files from this project `src` to your copy of the root of the Azure Sph
 
 You will need to copy files from the Azure Sphere Gallery `SimpleFileSystem_RemoteDisk` project:
 * On **Windows**, open a command prompt to this project folder and run `copy_required_files.cmd`
-* On **Linux**, open a terminal and run `copy_required_files.sh` 
+* On **Linux**, open a terminal and run `copy_required_files.sh`
 
 The store and forward gallery project modifies several files:
 
@@ -44,13 +44,13 @@ add_compile_definitions(PC_HOST_IP="YOUR_PC_IP_ADDRESS")
 
 `AzureIoT/common/exitcodes.h` - a new exit code `Exit_Code_Init_FileSystem` has been added.
 
-`AzureIoT/common/main.c` - The AzureIoT sample uses the `telemetryUploadEnabled` boolean to define whether telemetry will be uploaded or not, the sample has been extended to store telemetry in the simple file system when telemetryUploadEnabled == false. 
+`AzureIoT/common/main.c` - The AzureIoT sample uses the `telemetryUploadEnabled` boolean to define whether telemetry will be uploaded or not, the sample has been extended to store telemetry in the simple file system when telemetryUploadEnabled == false.
 
-The original AzureIoT sample uses a 5 second tick to generate telemetry, the tick has been modified to be 1 second. Every five seconds new telemetry will be generated - if there are no stored telemetry items and telemetryUploadEnabled is true the new telemetry will be uploaded, if there are existing stored telemetry items the new telemetry will be written to the simple file system (this preserves date/time order of uploaded telemetry). For the other four seconds stored telemetry will be uploaded if telemetryUploadEnabled is true. 
+The original AzureIoT sample uses a 5 second tick to generate telemetry, the tick has been modified to be 1 second. Every five seconds new telemetry will be generated - if there are no stored telemetry items and telemetryUploadEnabled is true the new telemetry will be uploaded, if there are existing stored telemetry items the new telemetry will be written to the simple file system (this preserves date/time order of uploaded telemetry). For the other four seconds stored telemetry will be uploaded if telemetryUploadEnabled is true.
 
 The project uploads stored telemetry over time rather than uploading all stored data when telemetryUploadEnabled is true. This approach may not be suitable for your specific application, you should adapt the upload model to suit your needs.
 
-Follow the Azure IoT sample instructions, you can choose the [IoT Hub](https://github.com/Azure/azure-sphere-samples/blob/main/Samples/AzureIoT/READMEStartWithIoTHub.md) or [IoT Hub with DPS](https://github.com/Azure/azure-sphere-samples/blob/main/Samples/AzureIoT/READMEAddDPS.md) instructions. 
+Follow the Azure IoT sample instructions, you can choose the [IoT Hub](https://github.com/Azure/azure-sphere-samples/blob/main/Samples/AzureIoT/READMEStartWithIoTHub.md) or [IoT Hub with DPS](https://github.com/Azure/azure-sphere-samples/blob/main/Samples/AzureIoT/READMEAddDPS.md) instructions.
 
 To enable remote storage you will need to run the [Python remote disk host application](../SimpleFileSystem_RemoteDisk/src/PyDiskHost/PyDiskHost.py).
 
@@ -81,7 +81,7 @@ Sending Azure IoT Hub telemetry: {"temperature":50.400001525878906}.
 INFO: IoTHubClient accepted the telemetry event for delivery.
 ```
 
-The date/time displayed in the Log_Debug message is the time that the telemetry item was stored (not the time the telemetry message was uploaded), this date/time will become the telemetry creation time in the IoT Hub message property, see [iothub-creation-time-utc](https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-messages-construct#application-properties-of-d2c-iot-hub-messages), this ensures that the timeline for uploading stored data is maintained.
+The date/time displayed in the Log_Debug message is the time that the telemetry item was stored (not the time the telemetry message was uploaded), this date/time will become the telemetry creation time in the IoT Hub message property, see [iothub-creation-time-utc](https://learn.microsoft.com/azure/iot-hub/iot-hub-devguide-messages-construct#application-properties-of-d2c-iot-hub-messages), this ensures that the timeline for uploading stored data is maintained.
 
 The project is configured to store a maximum of 4,000 telemetry items before old data is overwritten, look at the  `InitializeFileSystem` function in `main.c` (the AzureIoT sample creates a new telemetry item every 5 seconds - with this configuration the app would store about 5 hours of data) - The Python disk host is configured to store 4MB of data.
 

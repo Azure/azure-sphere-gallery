@@ -13,7 +13,7 @@ The goal of this project is to show how to use the Azure Sphere Public API with 
 ## Prerequisites & Setup
 
 - An Azure Sphere-based device with development features (see [Get started with Azure Sphere](https://azure.microsoft.com/services/azure-sphere/get-started/) for more information).
-- Setup a development environment for Azure Sphere (see [Quickstarts to set up your Azure Sphere device](https://docs.microsoft.com/azure-sphere/install/overview) for more information).
+- Setup a development environment for Azure Sphere (see [Quickstarts to set up your Azure Sphere device](https://learn.microsoft.com/azure-sphere/install/overview) for more information).
 
 
 ## How to use
@@ -23,7 +23,7 @@ The project is written in C#, it's an ASP.NET Core 3.1 App Service project that 
 * `root` (HTTP/GET) which will display a message showing that the App Service is running
 * `webhook` (HTTP/GET) which uses the Azure Sphere Public API to get information for a device in a specific Azure Sphere tenant, the Device Id is supplied as a query parameter on the Webhook URL.
 
-The [Azure Sphere Public API](https://docs.microsoft.com/rest/api/azure-sphere) requires an authentication token, this is obtained through a Service Principal which is linked to a user in your Azure Sphere tenant (details on creating the user are below).
+The [Azure Sphere Public API](https://learn.microsoft.com/rest/api/azure-sphere) requires an authentication token, this is obtained through a Service Principal which is linked to a user in your Azure Sphere tenant (details on creating the user are below).
 
 You will need the following:
 * Azure Sphere device claimed into a tenant (to test App Service)
@@ -63,7 +63,7 @@ private static string AzureSphereTenantId = "";     // TODO: add your Azure Sphe
 
 Open the [WebHookPublicAPIServicePrincipal project](./WebHookPublicAPIServicePrincipal/WebHookPublicAPIServicePrincipal.sln)
 
-Use the Visual Studio Publish Wizard (Build | Publish) to publish the WebHookPublicAPIServicePrincipal project to Azure. 
+Use the Visual Studio Publish Wizard (Build | Publish) to publish the WebHookPublicAPIServicePrincipal project to Azure.
 
 Once the WebHookPublicAPIServicePrincipal project is deployed to Azure copy the project endpoint URL to the clipboard (this will be displayed in the build output window, and also in your browser once the project is deployed) - you will use this to test the service.
 

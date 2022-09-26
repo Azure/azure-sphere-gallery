@@ -15,7 +15,7 @@ The goal of this project is to show how to add MQTT support to an Azure Sphere p
 ## Prerequisites & Setup
 
 - An Azure Sphere-based device with development features (see [Get started with Azure Sphere](https://azure.microsoft.com/en-us/services/azure-sphere/get-started/) for more information).
-- Setup a development environment for Azure Sphere (see [Quickstarts to set up your Azure Sphere device](https://docs.microsoft.com/en-us/azure-sphere/install/overview) for more information).
+- Setup a development environment for Azure Sphere (see [Quickstarts to set up your Azure Sphere device](https://learn.microsoft.com/en-us/azure-sphere/install/overview) for more information).
 - Install Python 3 from [Python.org](www.python.org).
 - Install the ```paho-mqtt``` library using ```pip3 install -r requirements.txt```.
 
@@ -34,7 +34,7 @@ This sample is made up of two applications, an Azure Sphere MQTT Client applicat
 
 This MQTT sample is going to connect to the [mosquitto.org](https://mosquitto.org) public test MQTT broker. For the Azure Sphere MQTT and Python host MQTT apps to securely connect to the mosquitto.org broker you need to download and copy the ```mosquitto.org``` CA certificate and generated client certificates into the Azure Sphere application **MQTT-C_Client\src\HighLevelApp\Certs** folder.
 
-When you have completed the certificate step you should have **three** certificate files in the **MQTT-C_Client\src\HighLevelApp\Certs** folder. 
+When you have completed the certificate step you should have **three** certificate files in the **MQTT-C_Client\src\HighLevelApp\Certs** folder.
 
 They will be named:
 
@@ -46,7 +46,7 @@ They will be named:
 
 For Linux users, you may need to install **openssl** if it is not installed by default. You can install openssl using your Linux distribution's package manager. For example, on Ubuntu ```sudo apt-get install openssl```.
 
-For Windows users either download ```openssl``` from [openssl.org](https://wiki.openssl.org/index.php/Binaries), or use [WSL](https://docs.microsoft.com/en-us/windows/wsl/install-win10) (Windows Subsystem for Linux). Depending on the WSL Linux distribution you installed you may need to install **openssl**. You can install openssl using your Linux distribution's package manager. For example, on Ubuntu ```sudo apt-get install openssl```.
+For Windows users either download ```openssl``` from [openssl.org](https://wiki.openssl.org/index.php/Binaries), or use [WSL](https://learn.microsoft.com/en-us/windows/wsl/install-win10) (Windows Subsystem for Linux). Depending on the WSL Linux distribution you installed you may need to install **openssl**. You can install openssl using your Linux distribution's package manager. For example, on Ubuntu ```sudo apt-get install openssl```.
 
 ### Download the Mosquitto Certificate Authority certificate
 

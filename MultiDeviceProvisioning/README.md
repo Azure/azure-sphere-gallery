@@ -21,7 +21,7 @@ The provisioning script:
 
 ## Prerequisites
 
-- The scripts run on Windows, and depend on the [Azure Sphere SDK](https://docs.microsoft.com/azure-sphere/install/install-sdk) and [Azure Sphere Command Line Interface (CLIv2)](https://docs.microsoft.com/azure-sphere/reference/azsphere-cli).
+- The scripts run on Windows, and depend on the [Azure Sphere SDK](https://learn.microsoft.com/azure-sphere/install/install-sdk) and [Azure Sphere Command Line Interface (CLIv2)](https://learn.microsoft.com/azure-sphere/reference/azsphere-cli).
 - [`python`](https://www.python.org/downloads/) (3.x)
 
 ## How to use
@@ -45,11 +45,11 @@ If the devices include a USB-serial activity LED (like the Reference Development
 
 ## Key concepts
 
-The sample scripts are executing commands supported by the Azure Sphere CLIv2 and parsing the results from the CLI command. 
+The sample scripts are executing commands supported by the Azure Sphere CLIv2 and parsing the results from the CLI command.
 
 Let's look at part of the provision_wifi.py script. The script takes two command line parameters, these are the network SSID and Network Key.
 
-In the snippet below the script executes the `azsphere device wifi list` command to obtain the current Wi-Fi configuration for a device, and then checks to see whether the user provided SSID is in the stdout results. If the SSID is not found, then the command `azsphere device wifi add -s <ssid> -p <network key>` is executed. 
+In the snippet below the script executes the `azsphere device wifi list` command to obtain the current Wi-Fi configuration for a device, and then checks to see whether the user provided SSID is in the stdout results. If the SSID is not found, then the command `azsphere device wifi add -s <ssid> -p <network key>` is executed.
 
 ```python
 # add wifi if missing
@@ -59,17 +59,17 @@ if result.returncode != 0:
 
 if bytes(wifi_ssid, 'utf-8') not in result.stdout:
     result = provision.azspherecommand(["device", "wifi", "add", "-s", wifi_ssid, "-p", wifi_network_key], device)
-    
+
 ```
 With this information it should be relatively simple to modify one of the sample scripts, or create your own scripts.
 
 ## Next steps
 
-- For more information on Azure Sphere command line interface commands, see [Azure Sphere Command Line Interface (CLIv2)](https://docs.microsoft.com/azure-sphere/reference/azsphere-cli)
+- For more information on Azure Sphere command line interface commands, see [Azure Sphere Command Line Interface (CLIv2)](https://learn.microsoft.com/azure-sphere/reference/azsphere-cli)
 
 ## Sample expectations
 
-- The scripts are designed for developer or test usage only. For manufacturing production devices, please refer to the official [Manufacturing Tools](https://docs.microsoft.com/azure-sphere/hardware/factory-floor-tasks).
+- The scripts are designed for developer or test usage only. For manufacturing production devices, please refer to the official [Manufacturing Tools](https://learn.microsoft.com/azure-sphere/hardware/factory-floor-tasks).
 
 ### Expected support for the code
 

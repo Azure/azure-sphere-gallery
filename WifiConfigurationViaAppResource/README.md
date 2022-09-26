@@ -14,7 +14,7 @@ The goal of this project is to show how to configure Wi-Fi settings for a device
 ## Prerequisites & Setup
 
 - An Azure Sphere-based device with development features enabled (see [Get started with Azure Sphere](https://azure.microsoft.com/en-us/services/azure-sphere/get-started/) for more information).
-- Setup a development environment for Azure Sphere (see [Quickstarts to set up your Azure Sphere device](https://docs.microsoft.com/en-us/azure-sphere/install/overview) for more information).
+- Setup a development environment for Azure Sphere (see [Quickstarts to set up your Azure Sphere device](https://learn.microsoft.com/en-us/azure-sphere/install/overview) for more information).
 
 Note that the Azure Sphere High Level application is configured for the 21.01 SDK release.
 
@@ -28,7 +28,7 @@ The application uses an embedded application resource file (WiFiConfig.json), th
 }
 ```
 
-To read the JSON the application uses the [Storage_OpenFileInImagePackage](https://docs.microsoft.com/en-us/azure-sphere/reference/applibs-reference/applibs-storage/function-storage-openfileinimagepackage) API, and then  [lseek](https://man7.org/linux/man-pages/man2/lseek.2.html), and [read](https://linux.die.net/man/2/read) APIs to read the JSON file - [parson](https://github.com/kgabis/parson) is used as a JSON parser to read the SSID and Network Key.
+To read the JSON the application uses the [Storage_OpenFileInImagePackage](https://learn.microsoft.com/en-us/azure-sphere/reference/applibs-reference/applibs-storage/function-storage-openfileinimagepackage) API, and then  [lseek](https://man7.org/linux/man-pages/man2/lseek.2.html), and [read](https://linux.die.net/man/2/read) APIs to read the JSON file - [parson](https://github.com/kgabis/parson) is used as a JSON parser to read the SSID and Network Key.
 
 The sample JSON contains 'mySSID' and 'myNetworkKey', replace these with the SSID and network key that you want to provision on your device.
 

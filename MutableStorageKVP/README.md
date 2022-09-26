@@ -1,6 +1,6 @@
 # MutableStorageKVP
 
-MutableStorageKVP provides a set of functions that expose Key/Value pair functions (write, read, delete) over Azure Sphere [Mutable Storage](https://docs.microsoft.com/en-us/azure-sphere/app-development/storage#using-mutable-storage).
+MutableStorageKVP provides a set of functions that expose Key/Value pair functions (write, read, delete) over Azure Sphere [Mutable Storage](https://learn.microsoft.com/en-us/azure-sphere/app-development/storage#using-mutable-storage).
 
 ## Contents
 

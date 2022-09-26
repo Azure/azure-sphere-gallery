@@ -25,12 +25,12 @@ The library uses the following Azure Sphere libraries.
 
 | Library | Purpose |
 |---------|---------|
-| [log.h](https://docs.microsoft.com/azure-sphere/reference/applibs-reference/applibs-log/log-overview) | Contains functions that log debug messages. |
+| [log.h](https://learn.microsoft.com/azure-sphere/reference/applibs-reference/applibs-log/log-overview) | Contains functions that log debug messages. |
 
 ## Prerequisites & Setup
 
 - An Azure Sphere-based device with development features (see [Get started with Azure Sphere](https://azure.microsoft.com/en-us/services/azure-sphere/get-started/) for more information).
-- Setup a development environment for Azure Sphere (see [Quick-starts to set up your Azure Sphere device](https://docs.microsoft.com/en-us/azure-sphere/install/overview) for more information).
+- Setup a development environment for Azure Sphere (see [Quick-starts to set up your Azure Sphere device](https://learn.microsoft.com/en-us/azure-sphere/install/overview) for more information).
 
 ## How to use
 
@@ -56,13 +56,13 @@ The library uses the following Azure Sphere libraries.
     #define ENABLE_DEBUG_VERBOSE_LOGS				1	// Enables(1)/Disables(0) verbose logging.
     #define ENABLE_THREAD_SAFETY					1	// Enables(1)/Disables(0) thread safety.
     #define ENABLE_POINTER_TRACKING	                1	// Enables(1)/Disables(0) pointer tracking.
-    #define POINTER_TRACK_INC						50	// Defines the growth size (in # of elements) for the internal pointer tracking array, 
+    #define POINTER_TRACK_INC						50	// Defines the growth size (in # of elements) for the internal pointer tracking array,
                                                         // once the number of allocated pointers overflows the current array size.
     extern const size_t		heap_threshold;				// Sets a reference allocation threshold (in bytes) after which the library will log warnings.
     extern volatile ssize_t	heap_allocated;				// Currently allocated heap (in bytes).
     ```
 
-3. In the library's implementation file `heap_tracker_lib.c`, define an initial value for the `heap_threshold` constant. Please refer to [Memory available on Azure Sphere](https://docs.microsoft.com/en-us/azure-sphere/app-development/mt3620-memory-available) for more information on memory availability for High-level applications.
+3. In the library's implementation file `heap_tracker_lib.c`, define an initial value for the `heap_threshold` constant. Please refer to [Memory available on Azure Sphere](https://learn.microsoft.com/en-us/azure-sphere/app-development/mt3620-memory-available) for more information on memory availability for High-level applications.
 
 4. Use the `malloc()`, `calloc()` and `alloc_aligned()` functions as usual in your App, **with the exception of `free()` and `realloc()`*, which depending on if:
     - `ENABLE_POINTER_TRACKING` is **disabled** (0), the `_free()` and `_realloc()` helpers **must** be used, in order to keep correct tracking within the `heap_allocated` variable. If the App uses the native `free()` and `realloc()` functions, the `heap_allocated` variable cannot be considered reliable anymore.
@@ -109,7 +109,7 @@ The sample code in `main.c` will cyclically grow in heap memory allocation by ca
     ...
     Heap-Tracker: realloc(0xbedbc010, 235520)=0xbedbc010... SUCCESS: heap_allocated (235520 bytes) - delta with heap_threshold(20480 bytes)
     Heap-Tracker: realloc(0xbedbc010, 236544)=0xbedbc010... SUCCESS: heap_allocated (236544 bytes) - delta with heap_threshold(19456 bytes)
-    Heap-Tracker: realloc(0xbedbc010, 237568)=0xbedbc010... 
+    Heap-Tracker: realloc(0xbedbc010, 237568)=0xbedbc010...
     Child terminated with signal = 0x9 (SIGKILL)
     ```
 
@@ -122,7 +122,7 @@ During development phases, if possible, it's recommended enabling the `ENABLE_PO
 **Note** since the GNU function wrapping (used by HeapTracker) only applies to the user code and linked static libraries, HeapTracker cannot track memory allocations within libraries that are i.e. embedded in the OS image or, more in general, not compiled with the HL App.
 
 ## Next steps
-For more information and recommendations on Azure Sphere memory usage and debugging, see [Memory use in high-level applications](https://docs.microsoft.com/en-us/azure-sphere/app-development/application-memory-usage).
+For more information and recommendations on Azure Sphere memory usage and debugging, see [Memory use in high-level applications](https://learn.microsoft.com/en-us/azure-sphere/app-development/application-memory-usage).
 
 ## Project expectations
 

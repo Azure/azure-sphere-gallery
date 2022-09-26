@@ -39,9 +39,9 @@ For more information see the [Code of Conduct FAQ](https://opensource.microsoft.
 
 ## Learning resources
 
-1. [Azure Sphere Documentation](https://docs.microsoft.com/azure-sphere/)
-1. [Develop secure IoT Solutions for Azure Sphere with IoT Hub](https://docs.microsoft.com/learn/modules/develop-secure-iot-solutions-azure-sphere-iot-hub/)
-1. [Develop secure IoT solutions for Azure Sphere, Azure RTOS, and Azure IoT Central](https://docs.microsoft.com/learn/modules/develop-secure-iot-solutions-azure-sphere-iot-central/)
+1. [Azure Sphere Documentation](https://learn.microsoft.com/azure-sphere/)
+1. [Develop secure IoT Solutions for Azure Sphere with IoT Hub](https://learn.microsoft.com/learn/modules/develop-secure-iot-solutions-azure-sphere-iot-hub/)
+1. [Develop secure IoT solutions for Azure Sphere, Azure RTOS, and Azure IoT Central](https://learn.microsoft.com/learn/modules/develop-secure-iot-solutions-azure-sphere-iot-central/)
 
 ---
 
@@ -91,7 +91,7 @@ The goal of the solution is also to demonstrate best practices for Azure Sphere 
     1. Implement deferred updates for application and system updates.
     1. Watchdog support. Auto-restart the CO2 monitor if the application fails.
     1. Report device start date and time, plus software version information.
-    1. [Download device error reports](https://docs.microsoft.com/azure-sphere/deployment/interpret-error-data).
+    1. [Download device error reports](https://learn.microsoft.com/azure-sphere/deployment/interpret-error-data).
 1. Enable IoT Plug and Play.
 
 > IoT Central is a cloud-based IoT solution built on Azure IoT Hub. IoT Central properties use IoT Hub Device Twins. IoT Central commands use IoT Hub direct methods.
@@ -265,7 +265,7 @@ Perform the following steps to set up the developer tools and your Azure Sphere.
 1. Update the Azure Sphere OS.
 1. Enable app development for your device.
 
-Follow the [Quickstarts to set up your Azure Sphere device](https://docs.microsoft.com/azure-sphere/install/overview).
+Follow the [Quickstarts to set up your Azure Sphere device](https://learn.microsoft.com/azure-sphere/install/overview).
 
 ---
 
@@ -281,7 +281,7 @@ Your Azure Sphere device can securely connect and communicate with cloud service
 
 ## IoT Plug and Play
 
-This solution uses IoT Plug and Play with IoT Central. IoT Plug and Play (PnP) defines a model that a device uses to advertise its capabilities to a PnP-enabled application like IoT Central. PnP is an open specification, to learn more, refer to [What is IoT Plug and Play](https://docs.microsoft.com/azure/iot-pnp/overview-iot-plug-and-play).
+This solution uses IoT Plug and Play with IoT Central. IoT Plug and Play (PnP) defines a model that a device uses to advertise its capabilities to a PnP-enabled application like IoT Central. PnP is an open specification, to learn more, refer to [What is IoT Plug and Play](https://learn.microsoft.com/azure/iot-pnp/overview-iot-plug-and-play).
 
 An IoT Plug and Play CO2 monitor model has been published to the [public repository of IoT Plug and Play](https://github.com/Azure/iot-plugandplay-models) models. A local copy of the IoT Plug and Play model is located in the *iot_plug_and_play* directory.
 
@@ -630,7 +630,7 @@ Navigate back to the IoT Central device view.
 
 ## Extend and integrate Azure IoT Central applications with other cloud services
 
-Azure IoT Central is extensible using rules and workflows. For more information, review [Use workflows to integrate your Azure IoT Central application with other cloud services](https://docs.microsoft.com/en-us/azure/iot-central/core/howto-configure-rules-advanced?WT.mc_id=julyot-co2-dglover)
+Azure IoT Central is extensible using rules and workflows. For more information, review [Use workflows to integrate your Azure IoT Central application with other cloud services](https://learn.microsoft.com/en-us/azure/iot-central/core/howto-configure-rules-advanced?WT.mc_id=julyot-co2-dglover)
 
 ---
 
@@ -646,7 +646,7 @@ The deferred update example included in the CO2 monitor project is a simple time
 
 The CO2 monitor calculates the local time using UTC (Universal Time Coordinate) plus the local time zone offset. If the calculated local time is between 1 am and 5 am then a zero-minute deferral is requested, and updates are applied. Failing that, a 15-minute deferral extension is requested.
 
-You can't defer updates forever. For an OS update, the maximum deferral is 1440 minutes (24 hours). For an application update, the maximum deferral period is 10,020 minutes (167 hours). To learn more about deferred updates, refer to [Defer device updates](https://docs.microsoft.com/azure-sphere/app-development/device-update-deferral).
+You can't defer updates forever. For an OS update, the maximum deferral is 1440 minutes (24 hours). For an application update, the maximum deferral period is 10,020 minutes (167 hours). To learn more about deferred updates, refer to [Defer device updates](https://learn.microsoft.com/azure-sphere/app-development/device-update-deferral).
 
 The following deferred update code is located in main.c of the CO2 monitor project.
 
@@ -893,7 +893,7 @@ if (EXISTS "${CMAKE_SOURCE_DIR}/Tools/cmake/azsphere_config.cmake")
 else()
 
     # For information on setting tools revision and target API set see
-    # https://docs.microsoft.com/en-us/azure-sphere/app-development/using-cmake-functions
+    # https://learn.microsoft.com/en-us/azure-sphere/app-development/using-cmake-functions
 
     azsphere_configure_tools(TOOLS_REVISION "21.07")
     azsphere_configure_api(TARGET_API_SET "10")
@@ -932,7 +932,7 @@ The Azure Sphere platform supports several common POSIX and Linux mechanisms to 
 
 ### Asynchronous events and concurrency
 
-[Asynchronous events and concurrency](https://docs.microsoft.com/azure-sphere/app-development/threads-concurrency)
+[Asynchronous events and concurrency](https://learn.microsoft.com/azure-sphere/app-development/threads-concurrency)
 
 The Azure Sphere platform supports several common POSIX and Linux mechanisms to handle asynchronous events and concurrency, including event loops and POSIX pthreads.
 

@@ -12,7 +12,7 @@ DeviceTenantFinder is a utility that makes it easy to find the Azure Sphere tena
 
 ## Prerequisites & Setup
 
-You should have at least one [Azure Sphere tenant](https://docs.microsoft.com/en-us/azure-sphere/deployment/create-tenant), and one or more devices claimed into your tenants.
+You should have at least one [Azure Sphere tenant](https://learn.microsoft.com/en-us/azure-sphere/deployment/create-tenant), and one or more devices claimed into your tenants.
 
 ## How to use
 

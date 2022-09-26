@@ -2,8 +2,8 @@
    Licensed under the MIT License. */
 
 // This sample C application tests:
-//  1. DNS resolver against known prod endpoints 
-//  (https://docs.microsoft.com/en-us/azure-sphere/network/ports-protocols-domains).
+//  1. DNS resolver against known prod endpoints
+//  (https://learn.microsoft.com/en-us/azure-sphere/network/ports-protocols-domains).
 //  2. NTP time sync with known time servers
 //
 // It uses the APIs in the following Azure Sphere application libraries:

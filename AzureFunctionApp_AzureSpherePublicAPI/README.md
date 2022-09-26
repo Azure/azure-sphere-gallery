@@ -13,13 +13,13 @@ The goal of this project is to show how to use the Azure Sphere Public API in a 
 
 ## Prerequisites & Setup
 
-- Setup a development environment for Azure Sphere (see [Quickstarts to set up your Azure Sphere device](https://docs.microsoft.com/azure-sphere/install/overview) for more information).
+- Setup a development environment for Azure Sphere (see [Quickstarts to set up your Azure Sphere device](https://learn.microsoft.com/azure-sphere/install/overview) for more information).
 - An Azure Sphere-based device with development features (see [Get started with Azure Sphere](https://azure.microsoft.com/services/azure-sphere/get-started/) for more information).
-- One or more Azure Sphere tenants (see [About tenants](https://docs.microsoft.com/azure-sphere/deployment/about-tenants) for more information).
+- One or more Azure Sphere tenants (see [About tenants](https://learn.microsoft.com/azure-sphere/deployment/about-tenants) for more information).
 
 ## How to use
 
-Get started by creating an Azure Function App that supports Python development (see [Quickstart: Create a function in Azure with Python using Visual Studio Code](https://docs.microsoft.com/azure/azure-functions/create-first-function-vs-code-python) for more information).
+Get started by creating an Azure Function App that supports Python development (see [Quickstart: Create a function in Azure with Python using Visual Studio Code](https://learn.microsoft.com/azure/azure-functions/create-first-function-vs-code-python) for more information).
 
 Deploy the Python Function App to Azure and test the HttpTrigger is working.
 
@@ -29,7 +29,7 @@ Enable `System Assigned Managed Service Identity` for the Function App by locati
 
 Copy the `Object (principal) ID`, you will need this later.
 
-The [Azure Sphere Public API](https://docs.microsoft.com/rest/api/azure-sphere) requires an authentication token in REST API calls, the token is obtained through the Function App `Service Principal` which is linked to a user in your Azure Sphere tenant (details on creating the user are below).
+The [Azure Sphere Public API](https://learn.microsoft.com/rest/api/azure-sphere) requires an authentication token in REST API calls, the token is obtained through the Function App `Service Principal` which is linked to a user in your Azure Sphere tenant (details on creating the user are below).
 
 You will need the following:
 * Azure Sphere device claimed into a tenant
@@ -41,7 +41,7 @@ You will need the following:
 * Open Powershell (in Administrative mode) - and install the Azure AD module (you may need to install the NuGet provider, confirm the warning for *"Untrusted repository"*)
 
 ```cmd
-Install-Module AzureAD 
+Install-Module AzureAD
 ```
 
 * Run the following commands (you'll be asked to sign-in):
