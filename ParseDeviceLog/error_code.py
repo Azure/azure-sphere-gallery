@@ -6,15 +6,15 @@ Utilities to parse and understand error codes.
 
 The main entry points are 'parse_error_code' and 'error_code_map'.
 
-Prior to using this module, the path to the exp23 error code YAML
-metadata can be set using the set_error_yml_path function.
+Prior to using this module, the path to the error code YAML
+metadata should be set using the set_error_yml_path function.
 """
 
 import os
 import yaml
 
 
-def set_error_yml_path(yml_path=None):
+def set_error_yml_path(yml_path):
     """
     Set the path containing common error code yml files.
     :param yml_path: The path containing common error codes.
@@ -22,22 +22,11 @@ def set_error_yml_path(yml_path=None):
     """
     
     global error_code_map
-    error_code_map = ErrorCodeMap(yml_path=os.path.join(os.path.split(__file__)[0], yml_path)) 
-
-
-def _get_error_yml_path(user_supplied_path):
-    """ Change this function to adjust how error code yml files are found by default.
-    
-    :param return: The path containing .yml files with common error code declarations.
-    """
-
-    if user_supplied_path:
-        return user_supplied_path
- 
-
-    drop = os.path.join(os.path.split(__file__)[0], "commonerror_yml")
-
-    return  drop 
+    yml_path=os.path.join(os.path.split(__file__)[0], yml_path)
+    if not os.path.isdir(yml_path):
+        print("commonerror_yml path doesn't exist")
+        exit(1)        
+    error_code_map = ErrorCodeMap(yml_path) 
 
 
 ERROR_CATEGORY_SHIFT = 20
@@ -120,7 +109,7 @@ class ErrorCodeMap:
         if not self.__error_codes or not self.__categories:
             self.__error_codes = {}
             self.__categories = {}
-            yml_path = os.path.join(os.path.split(__file__)[0], "commonerror_yml")
+            yml_path = self.__error_yml_path
             for yml in os.listdir(yml_path):
                 if not yml.endswith('.yml'):
                     continue

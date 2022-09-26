@@ -1,0 +1,331 @@
+{
+    "version": "1.0",
+    "categoryId": 18,
+    "categoryName": "appman_permissions",
+    "msgIds": [
+        {
+            "msgName": "FailedToSetUser",
+            "msgId": 1,
+            "msgString": "Failed to set user id: ",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "uid",
+                    "paramType": "integer"
+                },
+                {
+                    "paramName": "error",
+                    "paramType": "integer"
+                }
+            ]
+        },
+        {
+            "msgName": "FailedToSetGroup",
+            "msgId": 2,
+            "msgString": "Failed to set group id: ",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "gid",
+                    "paramType": "integer"
+                },
+                {
+                    "paramName": "error",
+                    "paramType": "integer"
+                }
+            ]
+        },
+        {
+            "msgName": "FailedGroupLookup",
+            "msgId": 3,
+            "msgString": "Failed to look up group: ",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "name",
+                    "paramType": "string"
+                },
+                {
+                    "paramName": "error",
+                    "paramType": "integer"
+                }
+            ]
+        },
+        {
+            "msgName": "FailedUserLookup",
+            "msgId": 4,
+            "msgString": "Failed to look up user: ",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "name",
+                    "paramType": "string"
+                },
+                {
+                    "paramName": "error",
+                    "paramType": "integer"
+                }
+            ]
+        },
+        {
+            "msgName": "InitializingUartPermissions",
+            "msgId": 6,
+            "msgString": "Initializing permissions for UARTs",
+            "msgPriority": "Info",
+            "obsolete": true
+        },
+        {
+            "msgName": "FailedChmod",
+            "msgId": 7,
+            "msgString": "Failed to chmod: ",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "error",
+                    "paramType": "integer"
+                }
+            ]
+        },
+        {
+            "msgName": "FailedChown",
+            "msgId": 8,
+            "msgString": "Failed to chown file",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "error",
+                    "paramType": "integer"
+                }
+            ]
+        },
+        {
+            "msgName": "FailedToOpenGpioChipFd",
+            "msgId": 9,
+            "msgString": "Failed to open gpio chip file descriptor.",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "error",
+                    "paramType": "integer"
+                }
+            ],
+            "obsolete": true
+        },
+        {
+            "msgName": "FailedToEnableGpioPinAccess",
+            "msgId": 10,
+            "msgString": "Failed to enable gpio pin access.",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "error",
+                    "paramType": "integer"
+                }
+            ],
+            "obsolete": true
+        },
+        {
+            "msgName": "FailedToGetGpioChipInfo",
+            "msgId": 11,
+            "msgString": "Failed to get gpio information for device.",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "error",
+                    "paramType": "integer"
+                }
+            ],
+            "obsolete": true
+        },
+        {
+            "msgName": "FailedToInitializeGpioAccess",
+            "msgId": 12,
+            "msgString": "Failed to initialize gpio access.",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "error",
+                    "paramType": "integer"
+                }
+            ],
+            "obsolete": true
+        },
+        {
+            "msgName": "ErrorValidatingDirectory",
+            "msgId": 13,
+            "msgString": "Expected a directory",
+            "msgPriority": "Error"
+        },
+        {
+            "msgName": "FailedStat",
+            "msgId": 14,
+            "msgString": "Failed to stat: ",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "error",
+                    "paramType": "integer"
+                }
+            ]
+        },
+        {
+            "msgName": "FailedMkdir",
+            "msgId": 15,
+            "msgString": "Failed to mkdir: ",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "error",
+                    "paramType": "integer"
+                }
+            ]
+        },
+        {
+            "msgName": "UpdatingDirectoryOwner",
+            "msgId": 16,
+            "msgString": "User id has changed, updating file permissions",
+            "msgPriority": "Info"
+        },
+        {
+            "msgName": "ErrorQueryingDiskSpace",
+            "msgId": 17,
+            "msgString": "Failed to query mutable disk size",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "error",
+                    "paramType": "integer"
+                }
+            ]
+        },
+        {
+            "msgName": "RequestedMoreSpaceThanMax",
+            "msgId": 18,
+            "msgString": "Application requested more space than allowed",
+            "msgPriority": "Error"
+        },
+        {
+            "msgName": "NotEnoughSpace",
+            "msgId": 20,
+            "msgString": "Disk does not have enough remaining space to allocate storage",
+            "msgPriority": "Error"
+        },
+        {
+            "msgName": "ErrorGettingCurrentQuota",
+            "msgId": 21,
+            "msgString": "Could not query current system quotas",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "error",
+                    "paramType": "integer"
+                }
+            ]
+        },
+        {
+            "msgName": "ErrorSettingQuota",
+            "msgId": 22,
+            "msgString": "Could not set quota for user",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "user_id",
+                    "paramType": "integer"
+                },
+                {
+                    "paramName": "error",
+                    "paramType": "integer"
+                }
+            ]
+        },
+        {
+            "msgName": "ErrorReleasingQuota",
+            "msgId": 23,
+            "msgString": "Could not set quota for user to zero",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "user_id",
+                    "paramType": "integer"
+                },
+                {
+                    "paramName": "error",
+                    "paramType": "commonError"
+                }
+            ]
+        },
+        {
+            "msgName": "OverflowDuringQuotaCalc",
+            "msgId": 24,
+            "msgString": "Overflow occurred during quota calculations",
+            "msgPriority": "Error"
+        },
+        {
+            "msgName": "FailedToDeleteDirectoryAndItsContents",
+            "msgId": 25,
+            "msgString": "Could not delete a directory and its contents",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "error",
+                    "paramType": "commonError"
+                }
+            ]
+        },
+        {
+            "msgName": "ReachedMaxPathnameLengthWhileRecursivelyDeletingDirectory",
+            "msgId": 26,
+            "msgString": "Reach the max pathname length while trying to recursively delete a directory its contents",
+            "msgPriority": "Error"
+        },
+        {
+            "msgName": "FailedChmodPeripheralFiles",
+            "msgId": 27,
+            "msgString": "Failed to chmod peripheral files",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "error",
+                    "paramType": "commonError"
+                },
+                {
+                    "paramName": "type",
+                    "paramType": "unsignedInteger"
+                }
+            ]
+        },
+        {
+            "msgName": "InitializingI2cMasterPermissions",
+            "msgId": 28,
+            "msgString": "Initializing permissions for I2C-master devices",
+            "msgPriority": "Info",
+            "obsolete": true
+        },
+        {
+            "msgName": "InitializingSpiMasterPermissions",
+            "msgId": 29,
+            "msgString": "Initializing permissions for SPI-master devices",
+            "msgPriority": "Info",
+            "obsolete": true
+        },
+        {
+            "msgName": "InitializingPeripheralPermissions",
+            "msgId": 30,
+            "msgString": "Initializing permissions for peripheral type",
+            "msgPriority": "Info",
+            "params": [
+                {
+                    "paramName": "type",
+                    "paramType": "unsignedInteger"
+                }
+            ]
+        },
+        {
+            "msgName": "InitializingAdcPermissions",
+            "msgId": 31,
+            "msgString": "Initializing permissions for ADC devices",
+            "msgPriority": "Info",
+            "obsolete": true
+        }
+    ]
+}

@@ -1,0 +1,27 @@
+{
+    "version": "1.0",
+    "categoryId": 24,
+    "categoryName": "spi",
+    "msgIds": [
+        {
+            "msgName": "OpenFailure",
+            "msgId": 1,
+            "msgString": "Failed opening SPI device",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "interfaceId",
+                    "paramType": "integer"
+                },
+                {
+                    "paramName": "chipSelectId",
+                    "paramType": "integer"
+                },
+                {
+                    "paramName": "error",
+                    "paramType": "commonError"
+                }
+            ]
+        }
+    ]
+}
