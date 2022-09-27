@@ -47,13 +47,12 @@
 	path = IndustrialDeviceController/Software/MT3620_IDC_RTApp/lib
 	url = https://github.com/CodethinkLabs/mt3620-m4-drivers
 
-[submodule "azure-sphere-squirrel/HLCore/jsmn"]
-	path = azure-sphere-squirrel/HLCore/jsmn
+[submodule "AzureSphereSquirrel/HLCore/jsmn"]
+	path = AzureSphereSquirrel/HLCore/jsmn
 	url = https://github.com/zserge/jsmn
-[submodule "azure-sphere-squirrel/HLCore/nutkin"]
-	path = azure-sphere-squirrel/HLCore/nutkin
+[submodule "AzureSphereSquirrel/HLCore/nutkin"]
+	path = AzureSphereSquirrel/HLCore/nutkin
 	url = https://github.com/kiwipower/nutkin.git
-[submodule "azure-sphere-squirrel/HLCore/squirrel"]
-	path = azure-sphere-squirrel/HLCore/squirrel
+[submodule "AzureSphereSquirrel/HLCore/squirrel"]
+	path = AzureSphereSquirrel/HLCore/squirrel
 	url = https://github.com/CoderScribe/squirrel.git
-
