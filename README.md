@@ -21,7 +21,7 @@ Each folder within this repository contains a README.md file that describes the 
 | ----------- | ----------- |
 | [AzureFunctionApp_AzureSpherePublicAPI](AzureFunctionApp_AzureSpherePublicAPI) | This project shows how to create a Python Azure Function app that uses Managed Service Identity to call the Azure Sphere Public API |
 | [AzureIoT_StoreAndForward](AzureIoT_StoreAndForward) | This project shows how to add telemetry store and forward capability to the AzureIoT sample |
-| [azure-sphere-squirrel](azure-sphere-squirrel) | This project shows how to run a high-level scripting langauge (Squirrel Lang) on MT3620 for powerful high-level API use, code hot-reload and unit testing. |
+| [AzureSphereSquirrel](azure-sphere-squirrel) | This project shows how to run a high-level scripting langauge (Squirrel Lang) on MT3620 for powerful high-level API use, code hot-reload and unit testing. |
 | [BalancingRobot](BalancingRobot) | This project contains the hardware, enclosure, and software files needed to build an Azure Sphere and Azure RTOS self-balancing robot. |
 | [CO2 Monitor healthy spaces](CO2_MonitorHealthySpaces) | This project integrates a CO2 monitor with IoT Central. It covers security, driver development, IoT Plug and Play, deferred updates, and watchdogs. |
 | [CrashDumpsConfigure](CrashDumpsConfigure) | Script that can be used to get or set crash dump policy for your device groups in the Azure Sphere Security Service |
