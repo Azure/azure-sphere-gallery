@@ -1,0 +1,68 @@
+# Appman error codes
+category_id: 5
+name: PeripheralError
+namespace: azure_sphere
+codes:
+  - id: 1
+    name: FailedToOpenGpioChipFd
+    msg: An error occurred while opening the gpio chip file descriptor
+  - id: 2
+    name: FailedToGetGpioChipInfo
+    msg: An error occurred while getting information about the gpio chip
+  - id: 3
+    name: UndefinedGpioInManifest
+    msg: Application manifest contains a gpio that is not defined on this device
+    openapi: true
+  - id: 4
+    name: RequestedGpioAlreadyInUse
+    msg: Application manifest is requesting a gpio that is already in use by another application
+    openapi: true
+  - id: 5
+    name: FailedToSetGpioPinAccess
+    msg: An error occurred while setting gpio permissions
+  - id: 6
+    name: FailedToGetSysUserId
+    msg: Could not get the user id for 'sys'
+  - id: 7
+    name: UndefinedPeripheralInManifest
+    msg: Application manifest contains a peripheral that is not defined on this device
+    openapi: true
+  - id: 8
+    name: RequestedPeripheralAlreadyInUse
+    msg: Application manifest requests a peripheral that is already in use by another application
+    openapi: true
+  - id: 9
+    name: FailedToChangePeripheralOwnership
+    msg: An error occurred when setting peripheral ownership
+  - id: 10
+    name: FailedToEnablePeripheral
+    msg: An error occurred when enabling peripheral
+  - id: 11
+    name: FailedToDisablePeripheral
+    msg: An error occurred when disabling peripheral
+  - id: 12
+    name: FailedToEnablePeripheralDriver
+    msg: An error occurred when enabling peripheral driver
+  - id: 13
+    name: FailedToDisablePeripheralDriver
+    msg: An error occurred when disabling peripheral driver
+  - id: 14
+    name: UnsupportedPeripheralType
+    msg: An operation encountered an unsupported peripheral type
+  - id: 15
+    name: GpioBlockConflict
+    msg: A GPIO block could not allocated, because it could not be shared with another application that already uses this GPIO block
+    openapi: true
+  - id: 16
+    name: PwmOpenFailed
+    msg: A PWM group could not be opened, possibly because another application already uses it
+    openapi: true
+  - id: 17
+    name: PwmReadFailed
+    msg: A PWM group could not be read
+  - id: 18
+    name: PwmIoctlFailed
+    msg: A PWM ioctl operation failed
+  - id: 19
+    name: CouldNotGetDeviceInfo
+    msg: Failed to get device status information while trying to lock peripheral config

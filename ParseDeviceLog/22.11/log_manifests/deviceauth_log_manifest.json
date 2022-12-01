@@ -1,0 +1,220 @@
+{
+    "version": "1.0",
+    "categoryId": 12,
+    "categoryName": "deviceauth",
+    "msgIds": [
+        {
+            "msgName": "MakeAttestationRequestError",
+            "msgId": 1,
+            "msgString": "Error occurred while attempting to send request to attestation runtime.",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "c_errno",
+                    "paramType": "integer"
+                }
+            ],
+            "obsolete": true
+        },
+        {
+            "msgName": "MakeAttestationRuntimeError",
+            "msgId": 2,
+            "msgString": "Error occurred in attestation runtime while processing attestation.",
+            "msgPriority": "Error",
+            "obsolete": true
+        },
+        {
+            "msgName": "StoreCertificateError",
+            "msgId": 3,
+            "msgString": "Error while attempting to store certificate on filesystem.",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "c_errno",
+                    "paramType": "commonError"
+                },
+                {
+                    "paramName": "c_path",
+                    "paramType": "string"
+                }
+            ]
+        },
+        {
+            "msgName": "GetDeviceIdError",
+            "msgId": 4,
+            "msgString": "Error while attempting to get device id.",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "c_errno",
+                    "paramType": "commonError"
+                }
+            ]
+        },
+        {
+            "msgName": "ServicesRequestContentLengthError",
+            "msgId": 5,
+            "msgString": "Invalid content length received from services request.",
+            "msgPriority": "Error",
+            "obsolete": true
+        },
+        {
+            "msgName": "ServicesRequestNoSslError",
+            "msgId": 6,
+            "msgString": "Cannot handle SSL connection without specified certificate path.",
+            "msgPriority": "Error",
+            "obsolete": true
+        },
+        {
+            "msgName": "ServicesRequestInvalidSslError",
+            "msgId": 7,
+            "msgString": "ServicesRequest wolfSSL error loading certificates from path.",
+            "msgPriority": "Error",
+            "obsolete": true
+        },
+        {
+            "msgName": "ServicesRespondedWithError",
+            "msgId": 8,
+            "msgString": "ServicesRequest returned device attestation error.",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "DeviceAttestationErrorCode",
+                    "paramType": "integer"
+                }
+            ]
+        },
+        {
+            "msgName": "ServicesResponseInvalidError",
+            "msgId": 9,
+            "msgString": "ServicesRequest returned bad data.",
+            "msgPriority": "Error"
+        },
+        {
+            "msgName": "GenerateClientAuthKeyRequestError",
+            "msgId": 10,
+            "msgString": "Key pair generation failed for DAA.",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "c_errno",
+                    "paramType": "commonError"
+                }
+            ]
+        },
+        {
+            "msgName": "Pkcs7DecodeError",
+            "msgId": 11,
+            "msgString": "Unable to decode pkcs7 to PEM with wolfSSL.",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "c_error",
+                    "paramType": "commonError"
+                }
+            ]
+        },
+        {
+            "msgName": "CurlInternalStateError",
+            "msgId": 12,
+            "msgString": "Unexpected output from curl, illegal internal state observed.",
+            "msgPriority": "Error",
+            "obsolete": true
+        },
+        {
+            "msgName": "ServicesRequestStateViolation",
+            "msgId": 13,
+            "msgString": "ServicesRequest encountered unexpected state.",
+            "msgPriority": "Error",
+            "obsolete": true
+        },
+        {
+            "msgName": "DeviceAuthStateViolation",
+            "msgId": 14,
+            "msgString": "DeviceAuth encountered unexpected state.",
+            "msgPriority": "Error"
+        },
+        {
+            "msgName": "LongRetryAfterTime",
+            "msgId": 15,
+            "msgString": "DeviceAuth encountered an unexpectedly long retry-after time and capped it.",
+            "msgPriority": "Warning"
+        },
+        {
+            "msgName": "CertificateRequestDeviceIdTrace",
+            "msgId": 16,
+            "msgString": "Deviceauth using device_id for certificate request.",
+            "msgPriority": "Trace",
+            "params": [
+                {
+                    "paramName": "device_id",
+                    "paramType": "string"
+                }
+            ]
+        },
+        {
+            "msgName": "ServicesRequestError",
+            "msgId": 17,
+            "msgString": "Services request encountered error.",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "common_error",
+                    "paramType": "commonError"
+                }
+            ]
+        },
+        {
+            "msgName": "ServicesHttpErrorCode",
+            "msgId": 18,
+            "msgString": "Services responded with http error code.",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "http_code",
+                    "paramType": "unsignedInteger"
+                }
+            ]
+        },
+        {
+            "msgName": "DerDecodeError",
+            "msgId": 19,
+            "msgString": "Unable to decode a DER certificate to WOLFSSL_X509.",
+            "msgPriority": "Error"
+        },
+        {
+            "msgName": "TrustedMeasurementsDecodeError",
+            "msgId": 20,
+            "msgString": "Unable to decode a TrustedMeasurements extension from a tenant certificate.",
+            "msgPriority": "Error"
+        },
+        {
+            "msgName": "PersistClientAuthKeyRequestError",
+            "msgId": 21,
+            "msgString": "Persisting client auth key seed for caching failed.",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "c_errno",
+                    "paramType": "commonError"
+                }
+            ]
+        },
+        {
+            "msgName": "CachedCertificateRestorationError",
+            "msgId": 22,
+            "msgString": "An error was encountered while restoring certificates from cache.",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "state",
+                    "paramType": "integer"
+                },
+                {
+                    "paramName": "common_error",
+                    "paramType": "commonError"
+                }
+            ]
+        }
+    ]
+}

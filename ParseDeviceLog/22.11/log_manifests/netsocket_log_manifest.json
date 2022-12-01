@@ -1,0 +1,133 @@
+{
+    "version": "1.0",
+    "categoryId": 4,
+    "categoryName": "netsocket",
+    "msgIds": [
+        {
+            "msgName": "WolfSSLAlreadyInitializedError",
+            "msgId": 1,
+            "msgString": "WolfSSL already initialized",
+            "msgPriority": "Error"
+        },
+        {
+            "msgName": "InitializeWolfSSLError",
+            "msgId": 2,
+            "msgString": "Unable to initializing WolfSSL.",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "c_errno",
+                    "paramType": "integer"
+                }
+            ]
+        },
+        {
+            "msgName": "TLSMethodInitError",
+            "msgId": 3,
+            "msgString": "Unable to get TLS v.1.2 init method.",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "c_errno",
+                    "paramType": "integer"
+                }
+            ]
+        },
+        {
+            "msgName": "TLSContextError",
+            "msgId": 4,
+            "msgString": "Unable to create TLS context.",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "c_errno",
+                    "paramType": "integer"
+                }
+            ]
+        },
+        {
+            "msgName": "ServerCertLoadError",
+            "msgId": 5,
+            "msgString": "Error loading the server certificate.",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "c_errno",
+                    "paramType": "integer"
+                },
+                {
+                    "paramName": "path",
+                    "paramType": "string"
+                }
+            ]
+        },
+        {
+            "msgName": "ServerKeyLoadError",
+            "msgId": 6,
+            "msgString": "Error loading the server key.",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "c_errno",
+                    "paramType": "integer"
+                },
+                {
+                    "paramName": "path",
+                    "paramType": "string"
+                }
+            ]
+        },
+        {
+            "msgName": "SSLNotInitializedError",
+            "msgId": 7,
+            "msgString": "WolfSSL is not initialized.",
+            "msgPriority": "Error"
+        },
+        {
+            "msgName": "TLSAlreadyInitializedError",
+            "msgId": 8,
+            "msgString": "Transport level security already initialized for the socket.",
+            "msgPriority": "Error"
+        },
+        {
+            "msgName": "SSLCreateError",
+            "msgId": 9,
+            "msgString": "Error creating SSL object.",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "c_errno",
+                    "paramType": "integer"
+                }
+            ]
+        },
+        {
+            "msgName": "SSLEnableError",
+            "msgId": 10,
+            "msgString": "Error enabling SSL for the socket.",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "c_errno",
+                    "paramType": "integer"
+                }
+            ]
+        },
+        {
+            "msgName": "SocketIOError",
+            "msgId": 11,
+            "msgString": "Error on socket IO.",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "error",
+                    "paramType": "commonError"
+                },
+                {
+                    "paramName": "direction",
+                    "paramType": "integer"
+                }
+            ]
+        }
+    ]
+}

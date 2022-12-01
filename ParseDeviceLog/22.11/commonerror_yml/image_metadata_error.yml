@@ -1,0 +1,20 @@
+category_id: 42
+name: ImageMetadataError
+namespace: azure_sphere
+codes:
+  - id: 1
+    name: InvalidMetadata
+    msg: The associated metadata is invalid.
+  - id: 2
+    name: SectionOverflowsMetadata
+    msg: The section overflows the image's metadata
+  - id: 3
+    name: EmptySection
+    msg: An empty metadata section was encountered
+  - id: 4
+    name: SectionTooLarge
+    msg: The section is larger than the maximum size
+  - id: 5
+    name: SectionNotFound
+    msg: The requested section was not found
+

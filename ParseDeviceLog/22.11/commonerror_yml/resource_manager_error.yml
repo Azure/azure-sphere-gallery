@@ -1,0 +1,18 @@
+# Resource Manager error codes
+category_id: 35
+name: ResourceManagerError
+namespace: azure_sphere
+codes:
+  -
+    id: 1
+    name: ResourceAlreadyAdded
+    msg: The same resource was already added
+  -
+    id: 2
+    name: ResourceNotAvailable
+    msg: The resource is not available.
+  -
+    id: 3
+    name: ResourceAlreadyAllocated
+    msg: The resource was already allocated, and reference counting is not enabled for this resource type.
+

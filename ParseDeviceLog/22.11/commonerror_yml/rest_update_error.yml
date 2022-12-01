@@ -1,0 +1,28 @@
+# Gatewayd error codes
+category_id: 16
+name: RestUpdateError
+codes: 
+  - 
+    id: 1 
+    name: NotImplemented
+    msg: Not implemented.
+  - 
+    id: 2 
+    name: UnsupportedImageType
+    msg: Unsupported image type.
+  - 
+    id: 3 
+    name: InvalidImage
+    msg: Invalid image.
+  - 
+    id: 4 
+    name: ComponentIdExpected
+    msg: Component ID expected.
+  - 
+    id: 5 
+    name: InconsistentComponentImageData
+    msg: Inconsistent component image data.
+  - 
+    id: 6 
+    name: ImageManagerCommandFailed
+    msg: Image Manager command failed.

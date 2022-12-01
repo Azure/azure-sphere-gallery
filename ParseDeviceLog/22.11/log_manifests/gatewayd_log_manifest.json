@@ -1,0 +1,520 @@
+{
+    "version": "1.0",
+    "categoryId": 6,
+    "categoryName": "gatewayd",
+    "msgIds": [
+        {
+            "msgName": "StartingSideload",
+            "msgId": 1,
+            "msgString": "Starting component sideload",
+            "msgPriority": "Info"
+        },
+        {
+            "msgName": "BadImageManager",
+            "msgId": 6,
+            "msgString": "Unknown error creating image manager",
+            "msgPriority": "Error"
+        },
+        {
+            "msgName": "SuccessfulSideloadNoop",
+            "msgId": 11,
+            "msgString": "Image sideload skipped because exact image already exists",
+            "msgPriority": "Info"
+        },
+        {
+            "msgName": "CommonError",
+            "msgId": 16,
+            "msgString": "CommonError",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "error",
+                    "paramType": "commonError"
+                }
+            ]
+        },
+        {
+            "msgName": "ReceivedBytes",
+            "msgId": 17,
+            "msgString": "ReceivedBytes",
+            "msgPriority": "Trace",
+            "params": [
+                {
+                    "paramName": "Offset",
+                    "paramType": "unsignedInteger"
+                },
+                {
+                    "paramName": "Increment",
+                    "paramType": "unsignedInteger"
+                },
+                {
+                    "paramName": "MaxSize",
+                    "paramType": "unsignedInteger"
+                }
+            ]
+        },
+        {
+            "msgName": "CommittingImage",
+            "msgId": 18,
+            "msgString": "Committing Image",
+            "msgPriority": "Info"
+        },
+        {
+            "msgName": "GetComponentCountFailed",
+            "msgId": 20,
+            "msgString": "Calling GetComponentCount failed",
+            "msgPriority": "Error"
+        },
+        {
+            "msgName": "GetComponentSummaryFailed",
+            "msgId": 21,
+            "msgString": "Calling GetComponentSummary failed",
+            "msgPriority": "Error"
+        },
+        {
+            "msgName": "GetComponentImagesFailed",
+            "msgId": 22,
+            "msgString": "Calling GetComponentImages failed",
+            "msgPriority": "Error"
+        },
+        {
+            "msgName": "GetComponentImagesReturnedMismatchedData",
+            "msgId": 23,
+            "msgString": "GetComponentImages returned inconsistent data",
+            "msgPriority": "Error"
+        },
+        {
+            "msgName": "CannotRestart",
+            "msgId": 25,
+            "msgString": "Cannot restart the system",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "errorValue",
+                    "paramType": "integer"
+                }
+            ]
+        },
+        {
+            "msgName": "DeleteApp",
+            "msgId": 32,
+            "msgString": "Deleting application",
+            "msgPriority": "Info",
+            "params": [
+                {
+                    "paramName": "Component ID",
+                    "paramType": "uniqueId"
+                }
+            ]
+        },
+        {
+            "msgName": "CouldNotEnableTLSForSocket",
+            "msgId": 134,
+            "msgString": "Error enabling TLS for socket",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "error",
+                    "paramType": "commonError"
+                }
+            ]
+        },
+        {
+            "msgName": "CouldNotProcessRequest",
+            "msgId": 135,
+            "msgString": "Error processing request",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "error",
+                    "paramType": "commonError"
+                }
+            ]
+        },
+        {
+            "msgName": "CouldNotParseIpv4AddressAndPortNumber",
+            "msgId": 136,
+            "msgString": "could not parse ipv4 address and port number",
+            "msgPriority": "Error"
+        },
+        {
+            "msgName": "CouldNotStartThreadPool",
+            "msgId": 137,
+            "msgString": "Error starting thread pool",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "error",
+                    "paramType": "commonError"
+                }
+            ]
+        },
+        {
+            "msgName": "CouldNotFindCertificateFiles",
+            "msgId": 138,
+            "msgString": "Error locating gatewayd certificate files",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "error",
+                    "paramType": "commonError"
+                }
+            ]
+        },
+        {
+            "msgName": "ErrorInitializingSSL",
+            "msgId": 139,
+            "msgString": "Error initializing SSL",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "error",
+                    "paramType": "commonError"
+                }
+            ]
+        },
+        {
+            "msgName": "ErrorGettingInternetAddrOfAzspheresvc",
+            "msgId": 140,
+            "msgString": "Error searching the 'azspheresvc' interface",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "error",
+                    "paramType": "commonError"
+                }
+            ]
+        },
+        {
+            "msgName": "ErrorBindingServerSocket",
+            "msgId": 141,
+            "msgString": "Binding server socket",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "error",
+                    "paramType": "commonError"
+                }
+            ]
+        },
+        {
+            "msgName": "ErrorListeningToServerSocket",
+            "msgId": 142,
+            "msgString": "Error listening to server socket",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "error",
+                    "paramType": "commonError"
+                }
+            ]
+        },
+        {
+            "msgName": "ErrorAcceptingSocketConnection",
+            "msgId": 143,
+            "msgString": "Error accepting connection",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "error",
+                    "paramType": "commonError"
+                }
+            ]
+        },
+        {
+            "msgName": "ErrorQueuingToThreadPool",
+            "msgId": 144,
+            "msgString": "Error queuing to thread pool",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "error",
+                    "paramType": "commonError"
+                }
+            ]
+        },
+        {
+            "msgName": "IncomingConnection",
+            "msgId": 145,
+            "msgString": "---------",
+            "msgPriority": "Trace"
+        },
+        {
+            "msgName": "ErrorCallingSysInfo",
+            "msgId": 146,
+            "msgString": "Error calling sysinfo",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "error",
+                    "paramType": "commonError"
+                }
+            ]
+        },
+        {
+            "msgName": "StageImageSuccess",
+            "msgId": 148,
+            "msgString": "Successfully staged an image for update",
+            "msgPriority": "Info",
+            "params": [
+                {
+                    "paramName": "Component ID",
+                    "paramType": "uniqueId"
+                },
+                {
+                    "paramName": "Image ID",
+                    "paramType": "uniqueId"
+                },
+                {
+                    "paramName": "Image Type",
+                    "paramType": "integer"
+                }
+            ]
+        },
+        {
+            "msgName": "ErrorGettingCountOfABITypes",
+            "msgId": 149,
+            "msgString": "Error getting count of ABI types",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "error",
+                    "paramType": "commonError"
+                }
+            ],
+            "obsolete": true
+        },
+        {
+            "msgName": "ErrorGettingABIVersions",
+            "msgId": 150,
+            "msgString": "Error getting ABI identities",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "error",
+                    "paramType": "commonError"
+                }
+            ]
+        },
+        {
+            "msgName": "InvalidABITypeFound",
+            "msgId": 151,
+            "msgString": "The type of the current ABI identity is invalid",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "abi_type",
+                    "paramType": "unsignedInteger"
+                }
+            ]
+        },
+        {
+            "msgName": "UnknownABITypeFound",
+            "msgId": 152,
+            "msgString": "The type of the current ABI identity is invalid",
+            "msgPriority": "Trace",
+            "params": [
+                {
+                    "paramName": "abi_type",
+                    "paramType": "unsignedInteger"
+                }
+            ]
+        },
+        {
+            "msgName": "Request",
+            "msgId": 153,
+            "msgString": "Request",
+            "msgPriority": "Trace",
+            "params": [
+                {
+                    "paramName": "method",
+                    "paramType": "integer"
+                },
+                {
+                    "paramName": "requestPath",
+                    "paramType": "string"
+                }
+            ]
+        },
+        {
+            "msgName": "DeleteAppFailed",
+            "msgId": 154,
+            "msgString": "Error deleting application",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "Component ID",
+                    "paramType": "uniqueId"
+                },
+                {
+                    "paramName": "error",
+                    "paramType": "commonError"
+                }
+            ]
+        },
+        {
+            "msgName": "NetworkingSocketUnavailable",
+            "msgId": 155,
+            "msgString": "Networking not ready, retrying...",
+            "msgPriority": "Warning"
+        },
+        {
+            "msgName": "SuccessfulDelete",
+            "msgId": 156,
+            "msgString": "Image successfully deleted",
+            "msgPriority": "Info",
+            "params": [
+                {
+                    "paramName": "Component ID",
+                    "paramType": "uniqueId"
+                }
+            ]
+        },
+        {
+            "msgName": "HeapCorruptionDetected",
+            "msgId": 157,
+            "msgString": "Heap Corruption Detected",
+            "msgPriority": "Error"
+        },
+        {
+            "msgName": "InvalidJsonField",
+            "msgId": 158,
+            "msgString": "JSON field is invalid",
+            "msgPriority": "Trace",
+            "params": [
+                {
+                    "paramName": "json",
+                    "paramType": "string"
+                }
+            ]
+        },
+        {
+            "msgName": "ErrorSettingNetworkAttribute",
+            "msgId": 159,
+            "msgString": "Could not set network attribute",
+            "msgPriority": "Trace",
+            "params": [
+                {
+                    "paramName": "error",
+                    "paramType": "commonError"
+                },
+                {
+                    "paramName": "attribute",
+                    "paramType": "unsignedInteger"
+                }
+            ]
+        },
+        {
+            "msgName": "ErrorPersistingConfig",
+            "msgId": 160,
+            "msgString": "Could not persist network configuration",
+            "msgPriority": "Trace",
+            "params": [
+                {
+                    "paramName": "error",
+                    "paramType": "commonError"
+                }
+            ]
+        },
+        {
+            "msgName": "ErrorReloadingConfig",
+            "msgId": 161,
+            "msgString": "Could not reload network configuration",
+            "msgPriority": "Trace",
+            "params": [
+                {
+                    "paramName": "error",
+                    "paramType": "commonError"
+                }
+            ]
+        },
+        {
+            "msgName": "ErrorInstallingBase64Certificate",
+            "msgId": 162,
+            "msgString": "Could not add certificate to cert store",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "error",
+                    "paramType": "commonError"
+                }
+            ]
+        },
+        {
+            "msgName": "ErrorGettingCertificateInfo",
+            "msgId": 163,
+            "msgString": "Could not get certificate info from cert store",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "error",
+                    "paramType": "commonError"
+                }
+            ]
+        },
+        {
+            "msgName": "ErrorInstallingCertificate",
+            "msgId": 164,
+            "msgString": "Could not add certificate(s) to cert store",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "error",
+                    "paramType": "commonError"
+                }
+            ]
+        },
+        {
+            "msgName": "ErrorRetrievingNetworkInterfaceAttribute",
+            "msgId": 165,
+            "msgString": "Could not retrieve network interface attribute",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "error",
+                    "paramType": "commonError"
+                },
+                {
+                    "paramName": "attribute",
+                    "paramType": "integer"
+                }
+            ]
+        },
+        {
+            "msgName": "ErrorSettingSocketBufferSize",
+            "msgId": 166,
+            "msgString": "Could not set socket buffer size",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "error",
+                    "paramType": "commonError"
+                }
+            ]
+        },
+        {
+            "msgName": "DidNotReadUpToFullSize",
+            "msgId": 167,
+            "msgString": "Chunk size is zero even though more to write",
+            "msgPriority": "Trace",
+            "params": [
+                {
+                    "paramName": "remainingBytes",
+                    "paramType": "integer"
+                }
+            ]
+        },
+        {
+            "msgName": "ErrorSettingPowerSavingsAttribute",
+            "msgId": 168,
+            "msgString": "Could not set power savings attribute",
+            "msgPriority": "Trace",
+            "params": [
+                {
+                    "paramName": "error",
+                    "paramType": "commonError"
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,149 @@
+{
+    "version": "1.0",
+    "categoryId": 8,
+    "categoryName": "appmanifest",
+    "msgIds": [
+        {
+            "msgName": "InvalidJson",
+            "msgId": 1,
+            "msgString": "Invalid JSON in app_manifest.json",
+            "msgPriority": "Error"
+        },
+        {
+            "msgName": "MissingMandatoryField",
+            "msgId": 2,
+            "msgString": "app_manifest.json missing mandatory field: ",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "fieldName",
+                    "paramType": "string"
+                }
+            ]
+        },
+        {
+            "msgName": "BadFieldValue",
+            "msgId": 3,
+            "msgString": "app_manifest.json has a bad value for field: ",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "fieldName",
+                    "paramType": "string"
+                }
+            ]
+        },
+        {
+            "msgName": "IncompatibleSchemaVersion",
+            "msgId": 4,
+            "msgString": "app_manifest.json has incompatible schema version",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "versionOnDevice",
+                    "paramType": "integer"
+                },
+                {
+                    "paramName": "versionInManifest",
+                    "paramType": "integer"
+                }
+            ]
+        },
+        {
+            "msgName": "ErrorReadingManifest",
+            "msgId": 6,
+            "msgString": "Could not read application manifest",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "error",
+                    "paramType": "commonError"
+                }
+            ]
+        },
+        {
+            "msgName": "AppManifestNotFound",
+            "msgId": 7,
+            "msgString": "No application manifest file found",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "error",
+                    "paramType": "integer"
+                }
+            ]
+        },
+        {
+            "msgName": "DeviceAuthTenantIdTooLong",
+            "msgId": 8,
+            "msgString": "DeviceAuth tenant id is too long",
+            "msgPriority": "Error"
+        },
+        {
+            "msgName": "DeviceAuthTenantIdParseError",
+            "msgId": 9,
+            "msgString": "DeviceAuth tenant id failed to parse.",
+            "msgPriority": "Error"
+        },
+        {
+            "msgName": "AllowedConnectionsParseError",
+            "msgId": 10,
+            "msgString": "Parse error for AllowedConnections entry: ",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "value",
+                    "paramType": "string"
+                }
+            ]
+        },
+        {
+            "msgName": "AllowedTcpPortsIllegalValue",
+            "msgId": 11,
+            "msgString": "Illegal value for AllowedTcpServerPorts entry: ",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "value",
+                    "paramType": "integer"
+                }
+            ]
+        },
+        {
+            "msgName": "AllowedUdpPortsIllegalValue",
+            "msgId": 12,
+            "msgString": "Illegal value for AllowedUdpServerPorts entry: ",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "value",
+                    "paramType": "integer"
+                }
+            ]
+        },
+        {
+            "msgName": "PowerControlIllegalValue",
+            "msgId": 13,
+            "msgString": "Illegal value for PowerControl entry: ",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "value",
+                    "paramType": "string"
+                }
+            ]
+        },
+        {
+            "msgName": "EmptyContainerValue",
+            "msgId": 14,
+            "msgString": "The value is either not an array, or is empty: ",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "value",
+                    "paramType": "string"
+                }
+            ]
+        }
+    ]
+}
