@@ -56,3 +56,6 @@
 [submodule "AzureSphereSquirrel/HLCore/squirrel"]
 	path = AzureSphereSquirrel/HLCore/squirrel
 	url = https://github.com/CoderScribe/squirrel.git
+[submodule "PWMAudio/lib"]
+	path = PWMAudio/lib
+	url = https://github.com/CodethinkLabs/mt3620-m4-drivers.git
