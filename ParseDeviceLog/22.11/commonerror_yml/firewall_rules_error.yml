@@ -1,0 +1,19 @@
+category_id: 44
+name: FirewallRulesError
+codes:
+  -
+    id: 1
+    name: ErrorReadingRulesFile
+    msg: An error occurred while trying to read the firewall rules file
+  -
+    id: 2
+    name: UnknownUserId
+    msg: Encountered an unknown user id while parsing firewall rules
+  -
+    id: 3
+    name: InvalidFirewallRulesCount
+    msg: The number of firewall rules specified by the count is larger than the firewall rules file
+  -
+    id: 4
+    name: InvalidFirewallRulesTag
+    msg: Encountered an invalid tag while parsing firewall rules

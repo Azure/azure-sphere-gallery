@@ -1,0 +1,104 @@
+# Gatewayd error codes
+category_id: 45
+name: AzcoreError
+codes:
+  -
+    id: 1
+    name: MissingResponseToken
+    msg: FirstLevelRequest - ResponseToken missing.
+  -
+    id: 2
+    name: MissingSession
+    msg: FirstLevelRequest - Session missing.
+  -
+    id: 3
+    name: MissingCrashId
+    msg: FirstLevelRequest - CrashId missing.
+  -
+    id: 4
+    name: MissingiData
+    msg: FirstLevelRequest - iData missing.
+  -
+    id: 5
+    name: NoDumpRequested
+    msg: FirstLevelRequest - No dump requested.
+  -
+    id: 6
+    name: DumpTokenParse
+    msg: Failed to parse DumpToken.
+  -
+    id: 7
+    name: GetRandomFailed
+    msg: getrandom failed.
+  -
+    id: 8
+    name: CurlEasyInitFailed
+    msg: curl_easy_init failed.
+  -
+    id: 9
+    name: WolfSSLCTXNewFailed
+    msg: wolfSSL_CTX_new failed.
+  -
+    id: 10
+    name: Base64CertDecodingFailed
+    msg: Base64-encoded certificate failed to decode
+  -
+    id: 11
+    name: WcInitShaFailed
+    msg: wc_InitSha failed
+  -
+    id: 12
+    name: WcShaUpdateFailed
+    msg: wc_ShaUpdate failed
+  -
+    id: 13
+    name: WcShaFinalFailed
+    msg: wc_ShaFinal failed
+  -
+    id: 14
+    name: WolfSSLX509d2iFailed
+    msg: wolfSSL_X509_d2i failed
+  -
+    id: 15
+    name: WolfSSLX509getpubkey
+    msg: wolfSSL_X509_get_pubkey failed
+  -
+    id: 16
+    name: WcInitRsaKey
+    msg: wc_InitRsaKey failed
+  -
+    id: 17
+    name: WcRsaPublicKeyDecode
+    msg: wc_RsaPublicKeyDecode failed
+  -
+    id: 18
+    name: WcInitRng
+    msg: wc_InitRng failed
+  -
+    id: 19
+    name: WcRNG_GenerateBlock
+    msg: wc_RNG_GenerateBlock failed
+  -
+    id: 20
+    name: WcRsaPublicEncrypt
+    msg: wc_RsaPublicEncrypt failed
+  -
+    id: 21
+    name: WcAesInit
+    msg: wc_AesInit failed
+  -
+    id: 22
+    name: WcAesSetKey
+    msg: wc_AesSetKey failed
+  -
+    id: 23
+    name: WcAesCbcEncrypt
+    msg: wc_AesCbcEncrypt failed
+  -
+    id: 24
+    name: InsufficientBuffer
+    msg: Insufficient buffer to add PKCS padding
+  -
+    id: 25
+    name: CertificateTooLarge
+    msg: Encryption certificate is too large

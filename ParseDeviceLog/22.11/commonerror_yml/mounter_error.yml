@@ -1,0 +1,51 @@
+# Appman error codes
+category_id: 4
+name: MounterError
+namespace: azure_sphere
+codes:
+  - id: 1
+    name: MntSysCallFailure
+    msg: Mount system call has failed
+  - id: 2
+    name: AlreadyMounted
+    msg: Image is already mounted
+    openapi: true
+  - id: 3
+    name: UnmountFailed
+    msg: Unmount failed
+  - id: 4
+    name: CouldNotRemoveMountPoint
+    msg: Failed to remove mount point
+  - id: 5
+    name: BadImageType
+    msg: Invalid image type for mount operations
+  - id: 6
+    name: CreateMountPointFailed
+    msg: Failed to create mount point
+  - id: 7
+    name: MountFailed
+    msg: Mount failed
+  - id: 8
+    name: FindUserIdFailed
+    msg: Failure to find user id
+  - id: 9
+    name: NoImageFoundWithMatchingComponentId
+    msg: No image found with matching component id
+  - id: 10
+    name: MountFailedWithEbusy
+    msg: Mount failed with EBUSY system error
+  - id: 11
+    name: UnmountFailedWithEbusy
+    msg: Unmount failed with EBUSY system error
+  - id: 12
+    name: FailedToGetSysUserId
+    msg: Could not get the user id for 'sys'
+  - id: 13
+    name: MountCertStoreFailed
+    msg: Could not mount the cert store
+  - id: 14
+    name: CreateAppMTDDeviceFailed
+    msg: Failed to map application to MTD
+  - id: 15
+    name: RemoveAppMTDDeviceFailed
+    msg: Failed to remove application MTD

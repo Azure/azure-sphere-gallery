@@ -1,0 +1,3 @@
+category_id: 29
+name: ProvServicesClientError
+include: <azure_prov_client/prov_device_ll_client.h>

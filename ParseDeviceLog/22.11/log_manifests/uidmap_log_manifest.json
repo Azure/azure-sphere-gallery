@@ -1,0 +1,115 @@
+{
+    "version": "1.0",
+    "categoryId": 14,
+    "categoryName": "uidmap",
+    "msgIds": [
+        {
+            "msgName": "FailedToReadUidMap",
+            "msgId": 1,
+            "msgString": "Failed to read uid_map, resetting file.",
+            "msgPriority": "Info"
+        },
+        {
+            "msgName": "CouldNotFindUidMap",
+            "msgId": 2,
+            "msgString": "Could not find uid_map",
+            "msgPriority": "Error"
+        },
+        {
+            "msgName": "FailedToAddNewUser",
+            "msgId": 3,
+            "msgString": "Failed to add new user",
+            "msgPriority": "Error"
+        },
+        {
+            "msgName": "BadFilePointer",
+            "msgId": 4,
+            "msgString": "Bad file pointer to uid_map",
+            "msgPriority": "Error"
+        },
+        {
+            "msgName": "WriteUnsuccessful",
+            "msgId": 5,
+            "msgString": "Write to uid_map failed",
+            "msgPriority": "Error",
+            "obsolete": true
+        },
+        {
+            "msgName": "BadFileFormat",
+            "msgId": 6,
+            "msgString": "uid_map has incorrect data format",
+            "msgPriority": "Error",
+            "obsolete": true
+        },
+        {
+            "msgName": "InvalidUid",
+            "msgId": 7,
+            "msgString": "uid_map contains an invalid uid",
+            "msgPriority": "Info"
+        },
+        {
+            "msgName": "ResettingFile",
+            "msgId": 8,
+            "msgString": "uid_map corruption detected, resetting file",
+            "msgPriority": "Info"
+        },
+        {
+            "msgName": "ErrorSettingInstance",
+            "msgId": 9,
+            "msgString": "Failed to create UidMapParser instance",
+            "msgPriority": "Error"
+        },
+        {
+            "msgName": "ErrorUpdatingUidMapPermissions",
+            "msgId": 11,
+            "msgString": "Failed to update uid_map mode",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "errorValue",
+                    "paramType": "commonError"
+                }
+            ]
+        },
+        {
+            "msgName": "StatFailedOnUidMap",
+            "msgId": 12,
+            "msgString": "Failed to stat uid_map",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "errorValue",
+                    "paramType": "commonError"
+                }
+            ]
+        },
+        {
+            "msgName": "UidMapWriteUnsuccessful",
+            "msgId": 13,
+            "msgString": "Write to uid_map failed",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "_errno",
+                    "paramType": "integer"
+                },
+                {
+                    "paramName": "stringSize",
+                    "paramType": "integer"
+                }
+            ]
+        },
+        {
+            "msgName": "UidMapBadFileFormat",
+            "msgId": 14,
+            "msgString": "uid_map has incorrect data format",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "data",
+                    "paramType": "string"
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,143 @@
+#Recovery error codes
+category_id: 39
+name: RecoveryError
+inlineDefs: true
+namespace: azure_sphere::hal::recovery
+codes:
+  - id: 1
+    name: BadImageManifestFormat
+    msg: The received file does not represent a valid image manifest
+  - id: 2
+    name: BadImage
+    msg: The received file does not represent a valid image
+  - id: 3
+    name: UnsupportedVersion
+    msg: The version of the image or manifest is not supported
+  - id: 4
+    name: UntrustedCertificate
+    msg: The certificate used to sign the image or manifest is not in the trusted list
+  - id: 5
+    name: BadSignature
+    msg: The digital signature of the image or manifest does not check
+  - id: 6
+    name: BadComponentUid
+    msg: The received image file does not match the component in the manifest
+  - id: 7
+    name: BadImageUid
+    msg: The received image file does not match the id in the manifest
+  - id: 8
+    name: BadImageFileSize
+    msg: The received image file size does not match the size in the manifest
+  - id: 9
+    name: BadImageType
+    msg: The received image type does not match the type in the manifest
+  - id: 10
+    name: ReceiveBufferTooSmall
+    msg: Buffer to receive a file transfer is smaller than the transfer length
+  - id: 11
+    name: TooManyImages
+    msg: Tried to install more than the maximum allowed image count
+  - id: 12
+    name: StreamSyncFailed
+    msg: Failed to resynchronize transport after configuration switch
+  - id: 13
+    name: UnsupportedProtocolVersion
+    msg: The requested protocol version is not supported
+  - id: 14
+    name: UnsupportedRecoveryMode
+    msg: The requested recovery mode is not supported
+
+  # Recovery Driver errors
+  - id: 50
+    name: GetServerResponseTimedOut
+    msg: Recovery timed out waiting for a server response
+  - id: 51
+    name: InvalidServerResponse
+    msg: The data read from the server failed driver error checking
+  - id: 52
+    name: SendRequestPacketFailed
+    msg: Error sending a request message
+
+  # Errors from recovery 1.0
+  - id: 100
+    name: GenericRecoveryError
+    msg: Use this when you are too lazy to actually generate a real error
+  - id: 101
+    name: FlashWriteFailed
+    msg: Flash write failed
+  - id: 102
+    name: ImageNotPageAligned
+    msg: The image passed to write to flash is not page aligned
+  - id: 103
+    name: FlashEraseFailed
+    msg: The attempt to erase flash failed
+  - id: 104
+    name: OutOfMemory
+    msg: Recovery is out of memory
+  - id: 105
+    name: BadState
+    msg: Recovery process is in a state it shouldn't be
+  - id: 107
+    name: FileTransferFailed
+    msg: A failure occurred in the file transfer process
+  - id: 108
+    name: ErasureCodingFailed
+    msg: Erasure coding failed
+  - id: 109
+    name: DataHashingFailed
+    msg: Data hashing failed
+  - id: 110
+    name: PrimaryBackupMismatch
+    msg: Unexpected primary/backup mismatch when recovering images
+  - id: 111
+    name: DuplicateTableEntries
+    msg: Table has a duplicate entry for an image
+  - id: 112
+    name: NoReceiverFound
+    msg: No receiver found for receiving a message
+  - id: 113
+    name: DoubleImageEntry
+    msg: Unexpected. Receiver already set. Double-entry for an image
+  - id: 114
+    name: PartitionTableOffsetNotFound
+    msg: Not able to find the partition layout for a specific partition type
+  - id: 115
+    name: PartitionLayoutNotFound
+    msg: Partition does not exist in the partition layout
+  - id: 116
+    name: TransferConfigFatal
+    msg: Configuration failed and driver is in unrecoverable state
+  - id: 117
+    name: TransferConfigNonfatal
+    msg: Configuration error occurred, recovery will continue with previous configuration
+
+  # Image request errors
+  - id: 150
+    name: ImageNotFound
+    msg: Requested image not found on the server
+  - id: 151
+    name: UnauthorizedAccess
+    msg: Server is not authorized to access requested image
+  - id: 152
+    name: UnknownImageRequestServerError
+    msg: Server responded to an image request with an unrecognized error code
+
+  # UART transfer errors
+  - id: 200
+    name: BaudrateNotSupported
+    msg: The server does not support the requested baudrate
+  - id: 202
+    name: FrameReadCrcCheckFailed
+    msg: CRC check failed when reading from the UART
+  - id: 203
+    name: FrameReadUartTimeoutError
+    msg: UART read failed when waiting for an incoming recovery frame
+  - id: 204
+    name: ReadPayloadTooSmall
+    msg: The received payload exceeds the maximum payload length passed as a parameter
+  - id: 205
+    name: XmodemBadStartState
+    msg: XMODEM transfer is not in the correct state to start file reception
+  - id: 206
+    name: XmodemInvalidBufferCapacity
+    msg: Buffer size provided to XMODEM ReceiveFilePacket is less than max packet size

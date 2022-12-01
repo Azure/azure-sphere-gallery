@@ -1,0 +1,148 @@
+category_id: 7
+name: ImageUpdateError
+namespace: azure_sphere
+# Temporary alias
+namespaceAlias: exp23
+enumPrefix: ImageUpdateReturn
+codes:
+  - id: 1
+    name: ImageAlreadyLoaded
+    msg: Image already loaded.  No update necessary.
+  - id: 2
+    name: FailedToFindFreeSpace
+    msg: Out of space for an update.
+  - id: 3
+    name: NotImplemented
+    msg: Functionality not implemented.
+  - id: 4
+    name: BadImageCount
+    msg: Bad count or count mismatch.
+  - id: 5
+    name: BadReplicaValue
+    msg: Invalid replica value for this method.
+  - id: 6
+    name: ImageNotFound
+    msg: Can't find the image.
+  - id: 7
+    name: UpdateAlreadyInProgress
+    msg: Update is already in progress.
+  - id: 8
+    name: BadHandle
+    msg: Bad handle value.
+  - id: 9
+    name: BadOffsetAlignment
+    msg: Offset is not on a valid alignment.
+  - id: 10
+    name: OffsetOutOfBounds
+    msg: Offset outside boundary of file.
+  - id: 11
+    name: WriteFailed
+    msg: Write to flash failed.
+  - id: 12
+    name: UpdateCommitFailed
+    msg: Update commit failed.
+  - id: 13
+    name: RpcCallFailed
+    msg: RPC call to kernel failed.
+  - id: 14
+    name: InvalidParameter
+    msg: There are one or more invalid parameters.
+  - id: 15
+    name: VerificationFailed
+    msg: Verification of the image failed.
+  - id: 16
+    name: DecompressionFailed
+    msg: Image decompression failed.
+  - id: 17
+    name: FlashEraseFailed
+    msg: Erasing flash failed.
+  - id: 18
+    name: ImageStagingFailed
+    msg: Staging the image for update failed.
+  - id: 19
+    name: ImageExceedsComponentSizeLimit
+    msg: The update failed because its compressed or uncompressed size component exceeds its size limits.
+  - id: 20
+    name: ImageIdentityInconsistency
+    msg: The component ids and types of existing images are inconsistent with proposed changes
+  - id: 21
+    name: XIPAddressForImageOutOfBounds
+    msg: The images offset is outside of executable flash
+  - id: 22
+    name: MustDownloadMissingImages
+    msg: The secure kernel must download images to update.
+  - id: 23
+    name: FailedToFindPartitionTable
+    msg: Failed to find a valid partition table.
+  - id: 24
+    name: ImageInstallFailed
+    msg: Installing updates failed.
+  - id: 25
+    name: VerificationTimedOut
+    msg: Verification of the image timed out.
+  - id: 26
+    name: MalformedManifestPayload
+    msg: The manifest payload is malformed.  Manifests may be missing, or may not represent valid (or bootable) lists of images.
+  - id: 27
+    name: ErasureCodingFailed
+    msg: Erasure coding failed.
+  - id: 28
+    name: ECRepairFailed
+    msg: Erasure coding repair failed.
+  - id: 29
+    name: ECUpdateFailed
+    msg: Erasure coding update failed.
+  - id: 30
+    name: OTAOutOfOrderImage
+    msg: We got a valid image for staging, but the image id was unexpected during an OTA update.
+  - id: 31
+    name: ManifestSetHeaderHasBadMagic
+    msg: ImageManifestSetHeader had a bad magic value.
+  - id: 32
+    name: ManifestSetHeaderHasInvalidVersion
+    msg: ImageManifestSetHeader had an invalid version number.
+  - id: 33
+    name: ManifestSetHeaderIsTooSmall
+    msg: ImageManifestSetHeader is too small to be parsable.
+  - id: 34
+    name: ManifestSetHeaderSizeIsInconsistent
+    msg: ImageManifestSetHeader disagrees about its size.
+  - id: 35
+    name: ManifestSetDataSizeIsTooBig
+    msg: ImageManifests are too big.
+  - id: 36
+    name: ManifestSetTotalSizeIsTooSmall
+    msg: Image manifest set's total size is too small.
+  - id: 37
+    name: PermissionDenied
+    msg: Permission denied.
+  - id: 38
+    name: NoOTAUpdateInProgress
+    msg: No OTA update in progress.
+  - id: 39
+    name: OTAUpdateInProgress
+    msg: OTA update in progress.
+  - id: 40
+    name: CouldNotFindABIVersions
+    msg: Could not find required ABI runtime version numbers.
+  - id: 41
+    name: InvalidABITypeFound
+    msg: The Type of the ABI identity is not recognized.
+  - id: 42
+    name: ImageExceedsImageTypeSizeLimit
+    msg: The image is too big for its image type.
+  - id: 43
+    name: CannotStageMultipleComponentsForImageType
+    msg: Multiple images of this type cannot be staged at the same time.
+  - id: 44
+    name: ManifestCountIsInconsistent
+    msg: The number of manifests in the set is inconsistent or invalid.
+  - id: 45
+    name: InvalidRuntimePartition
+    msg: The staged entry does not identify a valid runtime partition.
+  - id: 46
+    name: NoCorruptionDetected
+    msg: No corruption was detected in the flash range.
+  - id: 47
+    name: InvalidComponentId
+    msg: The staged entry has an invalid component ID.

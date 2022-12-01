@@ -1,0 +1,44 @@
+{
+    "version": "1.0",
+    "categoryId": 33,
+    "categoryName": "skuser",
+    "msgIds": [
+        {
+            "msgName": "Assert",
+            "msgId": 1092,
+            "msgString": "Assert occurred",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "File",
+                    "paramType": "string"
+                },
+                {
+                    "paramName": "Line",
+                    "paramType": "integer"
+                },
+                {
+                    "paramName": "Function",
+                    "paramType": "string"
+                },
+                {
+                    "paramName": "Assertion",
+                    "paramType": "string"
+                }
+            ]
+        },
+        {
+            "msgName": "PlutonSysCall",
+            "msgId": 1093,
+            "msgString": "Pluton Syscall",
+            "msgPriority": "Trace",
+            "params": [
+                {
+                    "paramName": "Id",
+                    "paramType": "integer"
+                }
+            ],
+            "obsolete": true
+        }
+    ]
+}
