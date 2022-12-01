@@ -41,7 +41,8 @@ Each folder within this repository contains a README.md file that describes the 
 | [OSNetworkRequirementChecker-HLApp](OSNetworkRequirementChecker-HLApp) | A sample app that performs DNS resolver and custom NTP test for diagnosing networking connectivity problems. |
 | [OSNetworkRequirementChecker-PC](OSNetworkRequirementChecker-PC) | A PC command line utility for diagnosing networking connectivity issues. |
 | [OpenSourceProjectsSupportingExternalPeripherals](OpenSourceProjectsSupportingExternalPeripherals) | This is a list of open-source projects supporting external hardware on the Azure Sphere MT3620 platform |
-| [ParseDeviceLog](ParseDeviceLog) | Tools that can parse device logs in to human readable format 
+| [ParseDeviceLog](ParseDeviceLog) | Tools that can parse device logs in to human readable format |
+| [PWMAudio](PWMAudio) | Generate tones using PWM on the real-time cores |
 | [RS485Driver](RS485Driver) | An RS-485 real-time driver with HL-Core interfacing API. |
 | [ServiceAPIDeviceCodeAuth](ServiceAPIDeviceCodeAuth) | Code snippet to access public rest api using device code flow from a web app. |
 | [SetIoTCentralPropsForDeviceGroup](SetIoTCentralPropsForDeviceGroup) | Utility that makes it easy to set an Azure IoT Central Device Twin property for all devices in an Azure Sphere Device Group. |
