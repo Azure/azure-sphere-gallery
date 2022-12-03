@@ -1,0 +1,23 @@
+{
+  "SchemaVersion": 1,
+  "Name": "allapis",
+  "ComponentId": "4c906188-bb3b-4bcf-98a3-9b636450e6b8",
+  "EntryPoint": "/bin/allapis",
+  "CmdArgs": [],
+  "Capabilities": {
+    "Gpio": [
+      8
+    ],
+    "Adc": [
+      "ADC-CONTROLLER-0"
+    ],
+    "AllowedConnections": [
+      "example.com"
+    ],
+    "MutableStorage": {
+      "SizeKB": 64
+    }
+  },
+  "ApplicationType": "Default",
+  "MallocVersion": 2
+}

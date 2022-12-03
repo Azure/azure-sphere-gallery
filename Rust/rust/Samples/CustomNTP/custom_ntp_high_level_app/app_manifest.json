@@ -1,0 +1,18 @@
+{
+  "SchemaVersion": 1,
+  "Name": "custom_ntp_high_level_app - Rust",
+  "ComponentId": "c3817924-f1c8-4891-ad8c-2ea8e31b033e",
+  "EntryPoint": "/bin/custom_ntp_high_level_app",
+  "CmdArgs": [],
+  "Capabilities": {
+    "NetworkConfig": true,
+    "TimeSyncConfig": true,
+    "Gpio": [
+      "$SAMPLE_BUTTON_1",
+      "$SAMPLE_RGBLED_RED",
+      "$SAMPLE_RGBLED_GREEN"
+    ]
+  },
+  "ApplicationType": "Default",
+  "MallocVersion": 2
+}
