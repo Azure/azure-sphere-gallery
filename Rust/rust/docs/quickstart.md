@@ -34,16 +34,16 @@ This quickstart will walk you through getting an Azure Sphere sample written in 
 
       Also on Arch Linux, needed (AUR, build with makepkg -si, do not delete sources.): <https://aur.archlinux.org/packages/azure-sphere-sdk/>
 
-4. Install the `cargo azsphere` helper tool:
+4. Install the `cargo azsphere` helper tool.  From the top-level Rust/ directory:
 
-    > cargo install --git <https://garage-06@dev.azure.com/garage-06/Rust%20for%20Azure%20Sphere%202107%2089861/_git/cargo-azsphere>
+    > cargo install --path cargo-azsphere/
 
 ## Build, Debug and Deploy from Command Line
 
 1. Navigate to one of the examples in the `Samples` directory:
 
 ```bash
-cd ../Samples/HelloWorld/hello_world_high_level_app
+cd rust/Samples/HelloWorld/hello_world_high_level_app
 ```
 
 1. Compile the binary:
@@ -83,7 +83,7 @@ cd ../Samples/HelloWorld/hello_world_high_level_app
 
 ## Viewing documentation
 
-From the top-level directory, run `cargo doc --open` to compile the documentation and open in a web browser.
+From the top-level rust/ directory, run `cargo doc --open` to compile the documentation and open in a web browser.
 The 'crate azure-sphere' contains the Azure Sphere AppLibs code.  The 'crate hardware' contains the hardware abstraction that enables targetting multiple devkits.  Use `cargo doc --open -p azure-sphere` to jump to the azure-sphere crate documentation.
 
 ## Tips and Tricks
@@ -99,8 +99,7 @@ set(TARGET_DEFINITION "sample_appliance.json")
 
 ### Targeting a Different SysRoot/ARV
 
-At the root, .cargo/config specifies `AZURE_SPHERE_ARV` and a path to the native linker to invoke.  Edit the value in both
-locations in order to change to a different ARV.
+At the root, .cargo/config specifies `AZURE_SPHERE_ARV` and a path to the native linker to invoke.  Edit the value in both locations in order to change to a different ARV.
 
 ### Debugging
 
