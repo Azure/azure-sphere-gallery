@@ -1,0 +1,11 @@
+[package]
+name = "adc_high_level_app"
+version = "0.1.0"
+authors = ["Microsoft"]
+edition = "2018"
+
+[dependencies]
+azure-sphere = { path = "../../../azure-sphere", version = "0.1" }
+signal-hook = "0.3.14"
+nullable-result = "0.7.0"
+hardware = { path = "../../../hardware"}

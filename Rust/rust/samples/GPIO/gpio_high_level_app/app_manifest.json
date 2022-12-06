@@ -1,0 +1,15 @@
+{
+  "SchemaVersion": 1,
+  "Name": "GPIO_HighLevelApp",
+  "ComponentId": "c64ecd9e-17f0-45fc-8165-f7b7ae2d5815",
+  "EntryPoint": "/bin/gpio_high_level_app",
+  "CmdArgs": [],
+  "Capabilities": {
+    "Gpio": [
+      "$SAMPLE_BUTTON_1",
+      "$SAMPLE_LED"
+    ]
+  },
+  "ApplicationType": "Default",
+  "MallocVersion": 2
+}

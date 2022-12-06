@@ -1,0 +1,19 @@
+{
+  "SchemaVersion": 1,
+  "Name": "dhcp_high_level_app",
+  "ComponentId": "fa3a9ef3-a563-4039-81f7-6135b94c6b4d",
+  "EntryPoint": "/bin/dhcp_high_level_app",
+  "CmdArgs": [],
+  "Capabilities": {
+    "NetworkConfig": true,
+    "Gpio": [
+      "$SAMPLE_BUTTON_1",
+      "$SAMPLE_BUTTON_2",
+      "$SAMPLE_RGBLED_RED",
+      "$SAMPLE_RGBLED_BLUE",
+      "$SAMPLE_RGBLED_GREEN"
+    ]
+  },
+  "ApplicationType": "Default",
+  "MallocVersion": 2
+}

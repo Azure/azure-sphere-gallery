@@ -1,0 +1,72 @@
+/// Azure Sphere Hardware Definition for Sample hardware abstraction for USI MT3620 BT EVB
+/* Copyright (c) Microsoft Corporation. All rights reserved.
+   Licensed under the MIT License. */
+
+// This file defines the mapping from the USI MT3620 Bluetooth (BT) Evaluation Board (EVB) to the
+// 'sample appliance' abstraction used by the samples at https://github.com/Azure/azure-sphere-samples.
+// Some peripherals are on-board on the USI MT3620 BT EVB, while other peripherals must be attached externally if needed.
+// See https://aka.ms/AzureSphereHardwareDefinitions for more information on how to use hardware abstractions,
+// to enable apps to work across multiple hardware variants.
+
+
+use crate::mt3620;
+
+use crate::azure_sphere_hardware;
+
+/// MT3620 USI BT EVB: Connect external button using J32, pin 13.
+pub const SAMPLE_BUTTON_1:u32 = azure_sphere_hardware::USI_MT3620_BT_EVB_J32_PIN13_GPIO12;
+
+/// MT3620 USI BT EVB: Connect external button using J32, pin 14.
+pub const SAMPLE_BUTTON_2:u32 = azure_sphere_hardware::USI_MT3620_BT_EVB_J32_PIN14_GPIO13;
+
+/// MT3620 USI BT EVB: PWM LED controller
+pub const SAMPLE_LED_PWM_CONTROLLER:u32 = azure_sphere_hardware::USI_MT3620_BT_EVB_PWM_CONTROLLER2;
+
+/// MT3620 USI BT EVB: Channel 2 for the PWM LED1 green. In the app manifest, it is only necessary to request the capability for the PWM Controller, SAMPLE_LED_PWM_CONTROLLER.
+pub const SAMPLE_LED_PWM_CHANNEL:u32 = mt3620::MT3620_PWM_CHANNEL2;
+
+/// MT3620 USI BT EVB: Connect external LED using J32, pin 9.
+pub const SAMPLE_LED:u32 = azure_sphere_hardware::USI_MT3620_BT_EVB_J32_PIN9_GPIO8;
+
+/// MT3620 USI BT EVB: ADC Potentiometer controller
+pub const SAMPLE_POTENTIOMETER_ADC_CONTROLLER:u32 = azure_sphere_hardware::USI_MT3620_BT_EVB_ADC_CONTROLLER0;
+
+/// MT3620 USI BT EVB: Connect external potentiometer to ADC controller 0, channel 0 using J34 pin16. In the app manifest, it is only necessary to request the capability for the ADC Group Controller, SAMPLE_POTENTIOMETER_ADC_CONTROLLER.
+pub const SAMPLE_POTENTIOMETER_ADC_CHANNEL:u32 = mt3620::MT3620_ADC_CHANNEL0;
+
+/// MT3620 USI BT EVB: Connect external red LED using J32, pin 10.
+pub const SAMPLE_RGBLED_RED:u32 = azure_sphere_hardware::USI_MT3620_BT_EVB_J32_PIN10_GPIO9;
+
+/// MT3620 USI BT EVB: Connect external green LED using J32, pin 11.
+pub const SAMPLE_RGBLED_GREEN:u32 = azure_sphere_hardware::USI_MT3620_BT_EVB_J32_PIN11_GPIO10;
+
+/// MT3620 USI BT EVB: Connect external blue LED using J32, pin 12.
+pub const SAMPLE_RGBLED_BLUE:u32 = azure_sphere_hardware::USI_MT3620_BT_EVB_J32_PIN12_GPIO11;
+
+/// MT3620 USI BT EVB: Connect J32 pin 2 (RX) to J32 pin 3 (TX).
+pub const SAMPLE_UART_LOOPBACK:u32 = azure_sphere_hardware::USI_MT3620_BT_EVB_ISU0_UART;
+
+/// MT3620 USI BT EVB: Connect external LSM6DS3 to I2C using J33, pin 15 (SDA) and pin 10 (SCL).
+pub const SAMPLE_LSM6DS3_I2C:u32 = azure_sphere_hardware::USI_MT3620_BT_EVB_ISU1_I2C;
+
+/// MT3620 USI BT EVB: Connect external LSM6DS3 to SPI using J33, pin 7 (MISO), pin 5 (SCLK), pin 8 (CSA), pin 6 (MOSI).
+pub const SAMPLE_LSM6DS3_SPI:u32 = azure_sphere_hardware::USI_MT3620_BT_EVB_ISU2_SPI;
+
+/// MT3620 SPI Chip Select (CS) value "A". This is not a peripheral identifier, and so has no meaning in an app manifest.
+pub const SAMPLE_LSM6DS3_SPI_CS:i32 = mt3620::MT3620_SPI_CS_A;
+
+/// MT3620 USI BT EVB: BT_nRST (RESET) signal on nRF52810.
+pub const SAMPLE_NRF52_RESET:u32 = azure_sphere_hardware::USI_MT3620_BT_COMBO_NRF52_RESET;
+
+/// MT3620 USI BT EVB: BT_FW_EN (DFU) signal on nRF52810.
+pub const SAMPLE_NRF52_DFU:u32 = azure_sphere_hardware::USI_MT3620_BT_COMBO_NRF52_DFU;
+
+/// MT3620 USI BT EVB: UART on nRF52810.
+pub const SAMPLE_NRF52_UART:u32 = azure_sphere_hardware::USI_MT3620_BT_COMBO_NRF52_UART;
+
+/// MT3620 USI BT EVB: Connect external LED using J32, pin 9.
+pub const SAMPLE_DEVICE_STATUS_LED:u32 = azure_sphere_hardware::USI_MT3620_BT_EVB_J32_PIN9_GPIO8;
+
+/// MT3620 USI BT EVB: Connect external blue LED using J32, pin 16.
+pub const SAMPLE_PENDING_UPDATE_LED:u32 = azure_sphere_hardware::USI_MT3620_BT_EVB_J32_PIN16_GPIO15;
+

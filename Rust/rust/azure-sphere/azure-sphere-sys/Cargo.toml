@@ -1,0 +1,13 @@
+[package]
+name = "azure-sphere-sys"
+version = "0.1.0"
+authors = ["Microsoft"]
+edition = "2018"
+links = "azure-sphere"
+
+[dependencies]
+libc = { version = "0.2", default-features = false }
+
+[build-dependencies]
+bindgen = { version = "0.54", default-features = false }
+cc = "1.0"
