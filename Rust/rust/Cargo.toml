@@ -1,23 +1,23 @@
 [workspace]
 
 members = [
-    "Samples/allapis",
-    "Samples/ADC/adc_high_level_app",
-    "Samples/DHCP",
-    "Samples/CertStore/cert_store_high_level_app",
-    "Samples/CustomNTP/custom_ntp_high_level_app",
-    "Samples/GPIO/gpio_high_level_app",
-    "Samples/HelloWorld/hello_world_high_level_app"
+    "samples/allapis",
+    "samples/ADC/adc_high_level_app",
+    "samples/DHCP",
+    "samples/CertStore/cert_store_high_level_app",
+    "samples/CustomNTP/custom_ntp_high_level_app",
+    "samples/GPIO/gpio_high_level_app",
+    "samples/HelloWorld/hello_world_high_level_app"
 ]
 
 default-members = [
-    "Samples/allapis",
-    "Samples/ADC/adc_high_level_app",
-    "Samples/DHCP",
-    "Samples/CertStore/cert_store_high_level_app",
-    "Samples/CustomNTP/custom_ntp_high_level_app",
-    "Samples/GPIO/gpio_high_level_app",
-    "Samples/HelloWorld/hello_world_high_level_app"
+    "samples/allapis",
+    "samples/ADC/adc_high_level_app",
+    "samples/DHCP",
+    "samples/CertStore/cert_store_high_level_app",
+    "samples/CustomNTP/custom_ntp_high_level_app",
+    "samples/GPIO/gpio_high_level_app",
+    "samples/HelloWorld/hello_world_high_level_app"
 ]
 
 [profile.dev]

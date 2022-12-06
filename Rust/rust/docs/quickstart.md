@@ -40,10 +40,10 @@ This quickstart will walk you through getting an Azure Sphere sample written in 
 
 ## Build, Debug and Deploy from Command Line
 
-1. Navigate to one of the examples in the `Samples` directory:
+1. Navigate to one of the examples in the `samples` directory:
 
 ```bash
-cd rust/Samples/HelloWorld/hello_world_high_level_app
+cd rust/samples/HelloWorld/hello_world_high_level_app
 ```
 
 1. Compile the binary:
@@ -149,8 +149,8 @@ Breakpoint 1, rust_begin_unwind () at library/std/src/panicking.rs:582
     at /rustc/897e37553bba8b42751c67658967889d11ecd120/library/core/src/result.rs:1107
 #4  0x00015300 in azure_sphere::applibs::log::log_debug (message=...) at azure-sphere/src/applibs/log.rs:51
 #5  0x000146dc in hello_world_high_level_app::actual_main ()
-    at Samples/HelloWorld/hello_world_high_level_app/src/main.rs:19
-#6  0x0001490c in hello_world_high_level_app::main () at Samples/HelloWorld/hello_world_high_level_app/src/main.rs:37
+    at samples/HelloWorld/hello_world_high_level_app/src/main.rs:19
+#6  0x0001490c in hello_world_high_level_app::main () at samples/HelloWorld/hello_world_high_level_app/src/main.rs:37
 (gdb) info symbol 0x2f098
 <std::sys_common::backtrace::_print::DisplayBacktrace as core::fmt::Display>::fmt + 336 in section .text of /home/barry/azrust/target/armv7-unknown-linux-musleabihf/debug/hello_world_high_level_app
 ```
