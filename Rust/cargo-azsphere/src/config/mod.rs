@@ -24,12 +24,12 @@ pub struct Config {
 /// Required fields, retrieved from the app's Cargo.toml
 #[derive(Debug)]
 pub struct PackageConfig {
-    pub name: String, // Cargo.Toml package.name
-    pub app_manifest: String,
-    pub arv: String,
-    pub target_hardware: Option<String>, // subdir under the HardwareDefinitions directory tree to use (usually, mt3620_rdb)
-    pub target_definition: Option<String>, // base of JSON filename to use for the target (usually, sample_appliance)
-    pub extra_files: Option<Vec<Value>>,
+    pub name: String, /// Cargo.Toml package.name
+    pub app_manifest: String, /// app manifest filename
+    pub arv: String, /// ARV version to target
+    pub target_hardware: Option<String>, /// subdir under the HardwareDefinitions directory tree to use (usually, mt3620_rdb)
+    pub target_definition: Option<String>, /// base of JSON filename to use for the target (usually, sample_appliance)
+    pub extra_files: Option<Vec<Value>>, /// extra files to include in the app package
 }
 
 /// Parse the app's Cargo.toml, with optional overrides
