@@ -12,7 +12,7 @@ const char *NTPServerList[] = { "168.61.215.74", "129.6.15.28", "20.43.94.199", 
                                 "40.81.94.65", "40.81.188.85", "40.119.6.228", "40.119.148.38",
                                 "20.101.57.9", "51.137.137.111", "51.145.123.29",
                                 "52.148.114.188", "52.231.114.183"};
-const unsigned int NTPServerListLen = 12;
+const unsigned int NTPServerListLen = 13;
 char **timeBeforeSyncList = NULL;
 char **timeAfterSyncList = NULL;
 int ntpIndex = 0;
