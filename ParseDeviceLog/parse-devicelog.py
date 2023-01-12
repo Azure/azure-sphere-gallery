@@ -178,7 +178,7 @@ class LogParser:
             index += 4
         if param['paramType'] == 'uniqueId':
             value = data[index:index + 16]
-            guid = uuid.UUID(bytes=value)
+            guid = uuid.UUID(bytes_le=value)
             result_string += ("%s" % guid)
             index += 16
         if param['paramType'] == 'unsignedInteger':
