@@ -28,6 +28,7 @@ Each folder within this repository contains a README.md file that describes the 
 | [AzureIoTMessageWithProperties](AzureIoTMessageWithProperties) | A project that shows how to add custom properties to an Azure IoT Hub telemetry message, which can then be used for message routing |
 | [AzureSphereTenantDeviceTwinSync](AzureSphereTenantDeviceTwinSync) | A project that shows how to update IoT Hub device twin with OS Version, Product/Device Group and more based on telemetry triggers using Azure IoT Hub/EventGrid and a custom ASP.NET Core REST API  |
 | [DeviceTenantFinder](DeviceTenantFinder) | Utility that makes it easy to find the Azure Sphere tenant name/Id within your tenants for a given Device Id |
+| [DNSServiceDiscoveryUnicast](DNSServiceDiscoveryUnicast) | Application showing unicast DNS service discovery to allow discovery of and connection to services outside of the local network |
 | [EAP-TLS_Solution](EAP-TLS_Solution) | A library & demo solution implementation for Azure Sphere-based devices connecting to Extensible Authentication Protocol – Transport Layer Security (EAP-TLS) networks. |
 | [GetDeviceOSVersion](GetDeviceOSVersion)| A project that retrieves the OS versions for all Azure Sphere based devices.|
 | [Grove_16x2_RGB_LCD](Grove_16x2_RGB_LCD) | A project that shows how to integrate a Seeed Grove LCD/RGB 16x2 display |
