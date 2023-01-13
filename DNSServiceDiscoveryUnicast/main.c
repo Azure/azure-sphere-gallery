@@ -37,10 +37,9 @@ typedef enum {
     ExitCode_ConnectionTimer_Disarm = 4,
 
     ExitCode_Init_EventLoop = 5,
-    ExitCode_Init_Socket = 6,
 
     ExitCode_Init_ConnectionTimer = 7,
-    ExitCode_Init_DnsResponseHandler = 8,
+    ExitCode_Init_ConfigureDnsServers = 8,
 
     ExitCode_Main_EventLoopFail = 9
 } ExitCode;
@@ -56,8 +55,8 @@ static const Networking_InterfaceConnectionStatus RequiredNetworkStatus =
     Networking_InterfaceConnectionStatus_IpAvailable;
 static const char NetworkInterface[] = "eth0";
 static const char DnsSDServiceType[] = "_http._tcp.home";
-static const char DnsSDServerIp[] = "10.0.0.1"; // Replace this with your DNS server for service discovery
-static const char OtherDnsServerIp[] = "10.0.0.2"; // Replace this with a second DNS server for normal resolution
+static const char DnsSDServerIp[] = "w.x.y.z"; // Replace this with your DNS server for service discovery
+static const char OtherDnsServerIp[] = "w.x.y.z"; // Replace this with a second DNS server for normal resolution
 
 
 // Termination state
@@ -100,12 +99,13 @@ static void DoFetch(const char* url)
 static void DoQuery(void)
 {
     static char answerBuf[ANSWER_BUF_SIZE];
+    ServiceInstanceDetails *details = NULL;
+
     int answerSize = SendServiceDiscoveryQuery(DnsSDServiceType, answerBuf, ANSWER_BUF_SIZE);
-    if (answerSize < 0) {
+    if (answerSize <= 0) {
         goto fail;
     }
     
-    ServiceInstanceDetails *details = NULL;
     int result = ProcessDnsResponse(&details, answerBuf, answerSize);
     if (result != 0) {
         goto fail;
@@ -203,7 +203,7 @@ static ExitCode InitializeAndStartDnsServiceDiscovery(void)
     for (int i = 0; i < numOfDnsServerAddressSpecified; i++) {
         if (inet_pton(AF_INET, dnsServerIpAddress[i], &dnsServers[i]) != 1) {
             Log_Debug("ERROR: Invalid DNS server address or address family specified.\n");
-            return -1;
+            return ExitCode_Init_ConfigureDnsServers;
         }
     }
 
@@ -215,7 +215,7 @@ static ExitCode InitializeAndStartDnsServiceDiscovery(void)
     if (result != 0) {
         Log_Debug("ERROR: Networking_IpConfig_EnableCustomDns: %d (%s)\n", errno, strerror(errno));
         Networking_IpConfig_Destroy(&ipConfig);
-        return -1;
+        return ExitCode_Init_ConfigureDnsServers;
     }
 
     result = Networking_IpConfig_Apply(NetworkInterface, &ipConfig);
@@ -223,8 +223,9 @@ static ExitCode InitializeAndStartDnsServiceDiscovery(void)
 
     if (result != 0) {
         Log_Debug("ERROR: Networking_IpConfig_Apply: %d (%s)\n", errno, strerror(errno));
-        return -1;
+        return ExitCode_Init_ConfigureDnsServers;
     }
+
     struct sigaction action;
     memset(&action, 0, sizeof(struct sigaction));
     action.sa_handler = TerminationHandler;

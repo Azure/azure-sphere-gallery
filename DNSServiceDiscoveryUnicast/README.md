@@ -8,9 +8,23 @@ A container is provided for a simple, minimal DNS server, configured to serve th
 
 Unlike multicast service discovery, the discovered service may exist outside of the local network for the device.
 
+## Contents
+
+| File/folder | Description |
+|-------------|-------------|
+| `.vscode/` | Settings for VSCode |
+| `container/` | Dockerfile and supporting content for DNS server container |
+| `main.c`, `dns-sd.c`, `dns-sd.h`       | source code. |
+| `eventloop_timer_utilities.c`, `eventloop_timer_utilities.h` | common library source code |
+| `app_manifest.json` | The application manifest |
+| `CMakeLists.txt` | Contains the project information and produces the build. |
+| `CMakeSettings.json` | Configures CMake with the correct command-line options. |
+| `README.md` | This README file. |
+| `LICENSE.txt`   | The license for the project. |
+
 ## Prerequisites
 
-The sample requires the following hardware:
+The project requires the following hardware:
 
 - An [Azure Sphere development board](https://aka.ms/azurespheredevkits)
 - (optional) a machine running Docker to run the DNS server container
@@ -22,7 +36,7 @@ The sample requires the following hardware:
 1. Connect your Azure Sphere device to the same local network as the DNS service.
 1. Enable application development, if you have not already done so, by entering the **azsphere device enable-development** command at the command prompt.
 
-1. Set up a DNS service. A container is provided that runs a minimal `bind9` on Ubuntu 22.04
+1. Set up a DNS service. A container is provided that runs a minimal `bind9` on Ubuntu 22.04:
 
    ```console
    $ docker build ./container -t dns-sd-example
@@ -51,10 +65,72 @@ By default, this sample runs over a Wi-Fi connection to the internet. To use Eth
     char networkInterface[] = "wlan0";
     ```
 
-## Build and run the sample
+## Running the code
 
-To build and run this sample, follow the instructions in [Build a sample application](../../BUILD_INSTRUCTIONS.md).
+To build and run this project, follow the instructions in [Build a sample application](../../BUILD_INSTRUCTIONS.md).
 
-### Test the sample
+On running the application, after checking that there is a connection to the internet, you should see, every ten seconds, the application perform the DNS-SD requests, followed by the download from www.dns-sd.org:
 
-When you run the sample, every 10 seconds the application will send a DNS query. When it receives a response, it displays the name, host, IPv4 address, port, and TXT data from the query response. The application will then connect to the discovered server and do an HTTP GET.
+```
+INFO: DNS Service Discovery sample starting.
+INFO: Network interface eth0 status: 0x0f
+INFO: Sending DNS query to resolve domain name [_http._tcp.home]...
+INFO: DNS Service Discovery has found an instance: HelloWorld._http._tcp.home.
+INFO: Requesting SRV and TXT details for the instance.
+INFO: Sending DNS query to resolve domain name [HelloWorld._http._tcp.home]...
+www.dns-sd.org
+	Name: HelloWorld._http._tcp.home
+	Host: www.dns-sd.org
+	IPv4 Address: 255.255.255.255
+	Port: 80
+	TXT Data: path=/Success.html
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+        "http://www.w3.org/TR/1998/REC-html40-19980424/loose.dtd">
+<HTML>
+...
+```
+
+### Troubleshooting
+
+If you see:
+
+```
+ERROR: Invalid DNS server address or address family specified.
+```
+
+ensure you have configured the DNS servers as described above.
+
+## Key concepts
+
+Unlike multicast service discovery, the discovered service may exist outside of the local network for the device. This means that DNS service discovery can be used to discovery and connect to endpoints on the wider internet - for example, Azure IoT hubs or other dynamically-assigned endpoints - without needing to specify them in the application manifest.
+
+## Project expectations
+
+This code is presented for informational purposes only; it is based on the existing DNS Service Discovery sample, with minimal modification. It is not intended for production scenarios, and it has not been rigorously checked for security issues or other errors.
+
+### Expected support for the code
+
+There is no official support guarantee for this code, but we will make a best effort to respond to/address any issues you encounter.
+
+### How to report an issue
+
+If you run into an issue with this project, please open a GitHub issue within this repo.
+
+## Contributing
+
+This project welcomes contributions and suggestions. Most contributions require you to
+agree to a Contributor License Agreement (CLA) declaring that you have the right to,
+and actually do, grant us the rights to use your contribution. For details, visit
+https://cla.microsoft.com.
+
+When you submit a pull request, a CLA-bot will automatically determine whether you need
+to provide a CLA and decorate the PR appropriately (e.g., label, comment). Simply follow the
+instructions provided by the bot. You will only need to do this once across all repositories using our CLA.
+
+This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
+For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/)
+or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
+
+## License
+
+For details on license, see LICENSE.txt in this directory.
