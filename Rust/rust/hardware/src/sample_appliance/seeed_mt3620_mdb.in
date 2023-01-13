@@ -1,0 +1,72 @@
+/// Azure Sphere Hardware Definition for Sample hardware abstraction for Seeed MT3620 MDB
+/* Copyright (c) Microsoft Corporation. All rights reserved.
+   Licensed under the MIT License. */
+
+// This file defines the mapping from the Seeed MT3620 Mini Development Board (MDB) to the
+// 'sample appliance' abstraction used by the samples at https://github.com/Azure/azure-sphere-samples.
+// Some peripherals are on-board on the Seeed MT3620 MDB, while other peripherals must be attached externally if needed.
+// See https://aka.ms/AzureSphereHardwareDefinitions for more information on how to use hardware abstractions,
+// to enable apps to work across multiple hardware variants.
+
+
+use crate::mt3620;
+
+use crate::azure_sphere_hardware;
+
+/// MT3620 MDB: Connect external button using J1, pin 9.
+pub const SAMPLE_BUTTON_1:u32 = azure_sphere_hardware::SEEED_MT3620_MDB_J1_PIN9_GPIO30;
+
+/// MT3620 MDB: Connect external button using J2, pin 15.
+pub const SAMPLE_BUTTON_2:u32 = azure_sphere_hardware::SEEED_MT3620_MDB_J2_PIN15_GPIO35;
+
+/// MT3620 MDB: PWM LED controller
+pub const SAMPLE_LED_PWM_CONTROLLER:u32 = azure_sphere_hardware::SEEED_MT3620_MDB_PWM_CONTROLLER1;
+
+/// MT3620 MDB: Channel 3 for the PWM LED1 green. In the app manifest, it is only necessary to request the capability for the PWM Controller, SAMPLE_LED_PWM_CONTROLLER.
+pub const SAMPLE_LED_PWM_CHANNEL:u32 = mt3620::MT3620_PWM_CHANNEL3;
+
+/// MT3620 MDB: ADC Potentiometer controller
+pub const SAMPLE_POTENTIOMETER_ADC_CONTROLLER:u32 = azure_sphere_hardware::SEEED_MT3620_MDB_ADC_CONTROLLER0;
+
+/// MT3620 MDB: Connect external potentiometer to ADC controller 0, channel 0 using pin 1. In the app manifest, it is only necessary to request the capability for the ADC Group Controller, SAMPLE_POTENTIOMETER_ADC_CONTROLLER.
+pub const SAMPLE_POTENTIOMETER_ADC_CHANNEL:u32 = mt3620::MT3620_ADC_CHANNEL0;
+
+/// MT3620 MDB: User LED.
+pub const SAMPLE_LED:u32 = azure_sphere_hardware::SEEED_MT3620_MDB_USER_LED;
+
+/// MT3620 MDB: Connect external LED using J1, pin 1.
+pub const SAMPLE_RGBLED_RED:u32 = azure_sphere_hardware::SEEED_MT3620_MDB_J1_PIN1_GPIO4;
+
+/// MT3620 MDB: Connect external LED using J1, pin 2.
+pub const SAMPLE_RGBLED_GREEN:u32 = azure_sphere_hardware::SEEED_MT3620_MDB_J1_PIN2_GPIO5;
+
+/// MT3620 MDB: Connect external LED using J1, pin 3.
+pub const SAMPLE_RGBLED_BLUE:u32 = azure_sphere_hardware::SEEED_MT3620_MDB_J1_PIN3_GPIO6;
+
+/// MT3620 MDB: Connect J1 pin 7 (RX) to J1 pin 5 (TX).
+pub const SAMPLE_UART_LOOPBACK:u32 = azure_sphere_hardware::SEEED_MT3620_MDB_J1_ISU0_UART;
+
+/// MT3620 MDB: Connect external LSM6DS3 to I2C using J1 and J2, pin 15 (SDA) and pin 10 (SCL).
+pub const SAMPLE_LSM6DS3_I2C:u32 = azure_sphere_hardware::SEEED_MT3620_MDB_J1J2_ISU1_I2C;
+
+/// MT3620 MDB: Connect external LSM6DS3 to SPI using J1, pin 7 (MISO), pin 5 (SCLK), pin 8 (CSA), pin 6 (MOSI).
+pub const SAMPLE_LSM6DS3_SPI:u32 = azure_sphere_hardware::SEEED_MT3620_MDB_J1_ISU0_SPI;
+
+/// MT3620 SPI Chip Select (CS) value "A". This is not a peripheral identifier, and so has no meaning in an app manifest.
+pub const SAMPLE_LSM6DS3_SPI_CS:i32 = mt3620::MT3620_SPI_CS_A;
+
+/// MT3620 MDB: Connect external reset signal using J1, pin 1.
+pub const SAMPLE_NRF52_RESET:u32 = azure_sphere_hardware::SEEED_MT3620_MDB_J1_PIN11_GPIO34;
+
+/// MT3620 MDB: Connect external dfu signal using J2, pin 13.
+pub const SAMPLE_NRF52_DFU:u32 = azure_sphere_hardware::SEEED_MT3620_MDB_J2_PIN13_GPIO31;
+
+/// MT3620 MDB: Connect external NRF52 UART using J1, pin 7 (RX), pin 5 (TX), pin 8 (CTS), pin 6 (RTS).
+pub const SAMPLE_NRF52_UART:u32 = azure_sphere_hardware::SEEED_MT3620_MDB_J1_ISU0_UART;
+
+/// MT3620 MDB: User LED.
+pub const SAMPLE_DEVICE_STATUS_LED:u32 = azure_sphere_hardware::SEEED_MT3620_MDB_USER_LED;
+
+/// MT3620 MDB: Connect external blue LED using J1, pin 5.
+pub const SAMPLE_PENDING_UPDATE_LED:u32 = azure_sphere_hardware::SEEED_MT3620_MDB_J1_PIN5_GPIO8;
+

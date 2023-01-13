@@ -1,0 +1,14 @@
+{
+  "SchemaVersion": 1,
+  "Name": "hello_world_high_level_app Rust",
+  "ComponentId": "1efb06e7-2795-42d7-a9d4-98e6a19051f2",
+  "EntryPoint": "/bin/hello_world_high_level_app",
+  "CmdArgs": [],
+  "Capabilities": {
+    "Gpio": [
+      "$SAMPLE_LED"
+    ]
+  },
+  "ApplicationType": "Default",
+  "MallocVersion": 2
+}

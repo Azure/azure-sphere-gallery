@@ -1,0 +1,141 @@
+{
+    "version": "1.0",
+    "categoryId": 15,
+    "categoryName": "ipc",
+    "msgIds": [
+        {
+            "msgName": "SocketFailed",
+            "msgId": 1,
+            "msgString": "socket() failed",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "err",
+                    "paramType": "integer"
+                }
+            ]
+        },
+        {
+            "msgName": "BindFailed",
+            "msgId": 2,
+            "msgString": "bind() failed",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "err",
+                    "paramType": "integer"
+                }
+            ]
+        },
+        {
+            "msgName": "ListenFailed",
+            "msgId": 3,
+            "msgString": "listen() failed",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "err",
+                    "paramType": "integer"
+                }
+            ]
+        },
+        {
+            "msgName": "GetUidFailed",
+            "msgId": 4,
+            "msgString": "Error getting UID",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "err",
+                    "paramType": "integer"
+                }
+            ]
+        },
+        {
+            "msgName": "WriteFailed",
+            "msgId": 5,
+            "msgString": "write() failed",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "err",
+                    "paramType": "integer"
+                }
+            ]
+        },
+        {
+            "msgName": "ReadFailed",
+            "msgId": 6,
+            "msgString": "read() failed",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "err",
+                    "paramType": "integer"
+                }
+            ]
+        },
+        {
+            "msgName": "GetGroupsFailed",
+            "msgId": 7,
+            "msgString": "Error getting groups",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "err",
+                    "paramType": "integer"
+                }
+            ]
+        },
+        {
+            "msgName": "ReadError",
+            "msgId": 8,
+            "msgString": "read() failed",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "count",
+                    "paramType": "integer"
+                },
+                {
+                    "paramName": "err",
+                    "paramType": "commonError"
+                }
+            ]
+        },
+        {
+            "msgName": "WriteError",
+            "msgId": 9,
+            "msgString": "write() failed",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "count",
+                    "paramType": "integer"
+                },
+                {
+                    "paramName": "err",
+                    "paramType": "commonError"
+                }
+            ]
+        },
+        {
+            "msgName": "ClientClosedError",
+            "msgId": 10,
+            "msgString": "Client closed during request execution",
+            "msgPriority": "Error"
+        },
+        {
+            "msgName": "SocketPathOversized",
+            "msgId": 11,
+            "msgString": "bind() failed, socket path truncated",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "err",
+                    "paramType": "integer"
+                }
+            ]
+        }
+    ]
+}

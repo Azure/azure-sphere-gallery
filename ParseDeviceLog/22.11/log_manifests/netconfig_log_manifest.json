@@ -1,0 +1,247 @@
+{
+    "version": "1.0",
+    "categoryId": 22,
+    "categoryName": "netconfig",
+    "msgIds": [
+        {
+            "msgName": "NetworkInterfaceListMissingError",
+            "msgId": 1,
+            "msgString": "Missing network interfaces list",
+            "msgPriority": "Error"
+        },
+        {
+            "msgName": "FailedToParseNetworkInterfaceError",
+            "msgId": 2,
+            "msgString": "Failed to parse an interface",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "errorValue",
+                    "paramType": "commonError"
+                },
+                {
+                    "paramName": "fieldType",
+                    "paramType": "unsignedInteger"
+                }
+            ],
+            "obsolete": true
+        },
+        {
+            "msgName": "FailedToCreateNetConfigJson",
+            "msgId": 3,
+            "msgString": "Failed to create the netconfig json object",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "errorValue",
+                    "paramType": "commonError"
+                }
+            ],
+            "obsolete": true
+        },
+        {
+            "msgName": "IpcConnectionFailed",
+            "msgId": 4,
+            "msgString": "Failed to connect through IPC. Try again",
+            "msgPriority": "Info",
+            "params": [
+                {
+                    "paramName": "errorValue",
+                    "paramType": "commonError"
+                }
+            ]
+        },
+        {
+            "msgName": "InvalidNetworkInterfaceFile",
+            "msgId": 5,
+            "msgString": "Network interface file is null or invalid.",
+            "msgPriority": "Error",
+            "obsolete": true
+        },
+        {
+            "msgName": "JsonParseError",
+            "msgId": 6,
+            "msgString": "Network interface file is inaccessible or is ill-formed JSON.",
+            "msgPriority": "Info",
+            "params": [
+                {
+                    "paramName": "errorValue",
+                    "paramType": "commonError"
+                },
+                {
+                    "paramName": "isPrimary",
+                    "paramType": "integer"
+                }
+            ],
+            "obsolete": true
+        },
+        {
+            "msgName": "RequestDoesNotMatchResponse",
+            "msgId": 7,
+            "msgString": "Net config IPC request type does not match the response type.",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "requestType",
+                    "paramType": "integer"
+                },
+                {
+                    "paramName": "responseType",
+                    "paramType": "integer"
+                }
+            ]
+        },
+        {
+            "msgName": "FailedToSaveNetConfig",
+            "msgId": 8,
+            "msgString": "Failed to save net config.",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "key",
+                    "paramType": "integer"
+                },
+                {
+                    "paramName": "errorValue",
+                    "paramType": "commonError"
+                }
+            ]
+        },
+        {
+            "msgName": "FailedToReadNetConfigField",
+            "msgId": 9,
+            "msgString": "Failed to read net config field.",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "key",
+                    "paramType": "integer"
+                }
+            ]
+        },
+        {
+            "msgName": "InvalidIpAddress",
+            "msgId": 10,
+            "msgString": "Invalid IpAddress",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "address",
+                    "paramType": "string"
+                }
+            ]
+        },
+        {
+            "msgName": "InvalidGatewayAddress",
+            "msgId": 11,
+            "msgString": "Invalid gateway address",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "gateway",
+                    "paramType": "string"
+                }
+            ]
+        },
+        {
+            "msgName": "InvalidSubnetMask",
+            "msgId": 12,
+            "msgString": "Invalid subnet mask",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "subnet_mask",
+                    "paramType": "string"
+                }
+            ]
+        },
+        {
+            "msgName": "FailedToLoadNetworkConfig",
+            "msgId": 13,
+            "msgString": "Failed to load network interfaces config",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "Error",
+                    "paramType": "commonError"
+                },
+                {
+                    "paramName": "IsRollbackConfig",
+                    "paramType": "integer"
+                }
+            ]
+        },
+        {
+            "msgName": "FailedToCreateNetworkConfig",
+            "msgId": 14,
+            "msgString": "Failed to create the network interfaces config",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "errorValue",
+                    "paramType": "commonError"
+                }
+            ]
+        },
+        {
+            "msgName": "FailedToInstallCertificate",
+            "msgId": 15,
+            "msgString": "Failed to install certificate",
+            "msgPriority": "Error",
+            "params": [
+                {
+                    "paramName": "errorValue",
+                    "paramType": "commonError"
+                }
+            ]
+        },
+        {
+            "msgName": "FailedToReadProxyAddressField",
+            "msgId": 16,
+            "msgString": "Failed to read proxy address field",
+            "msgPriority": "Error"
+        },
+        {
+            "msgName": "FailedToReadNoProxyAddressesField",
+            "msgId": 17,
+            "msgString": "Failed to read noProxyAddresses field",
+            "msgPriority": "Error"
+        },
+        {
+            "msgName": "FailedToReadProxyUsernameField",
+            "msgId": 18,
+            "msgString": "Failed to read proxy username field",
+            "msgPriority": "Error"
+        },
+        {
+            "msgName": "FailedToReadProxyPasswordField",
+            "msgId": 19,
+            "msgString": "Failed to read proxy password field",
+            "msgPriority": "Error"
+        },
+        {
+            "msgName": "FailedToReadProxyOptionsField",
+            "msgId": 20,
+            "msgString": "Failed to read proxy options field",
+            "msgPriority": "Error"
+        },
+        {
+            "msgName": "FailedToReadProxyPortField",
+            "msgId": 21,
+            "msgString": "Failed to read proxy port field",
+            "msgPriority": "Error"
+        },
+        {
+            "msgName": "FailedToReadProxyAuthTypeField",
+            "msgId": 22,
+            "msgString": "Failed to read proxy authType field",
+            "msgPriority": "Error"
+        },
+        {
+            "msgName": "FailedToReadProxyTypeField",
+            "msgId": 23,
+            "msgString": "Failed to read proxy type field",
+            "msgPriority": "Error"
+        }
+    ]
+}

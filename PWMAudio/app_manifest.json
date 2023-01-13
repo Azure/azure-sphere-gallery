@@ -1,0 +1,12 @@
+{
+  "SchemaVersion": 1,
+  "Name": "PWMAudioRT",
+  "ComponentId": "2d9ed42d-cc67-4f0d-ae83-2df45a2ecb1b",
+  "EntryPoint": "/bin/app",
+  "CmdArgs": [],
+  "Capabilities": {
+    "Gpio": [ 12 ],
+    "Pwm": ["PWM-CONTROLLER-0"]
+  },
+  "ApplicationType": "RealTimeCapable"
+}

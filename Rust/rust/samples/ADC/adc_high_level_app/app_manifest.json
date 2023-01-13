@@ -1,0 +1,14 @@
+{
+  "SchemaVersion": 1,
+  "Name": "adc_high_level_app - Rust",
+  "ComponentId": "3c766740-637b-416f-94af-6e7b404eb46f",
+  "EntryPoint": "/bin/adc_high_level_app",
+  "CmdArgs": [],
+  "Capabilities": {
+    "Adc": [
+      "$SAMPLE_POTENTIOMETER_ADC_CONTROLLER"
+    ]
+  },
+  "ApplicationType": "Default",
+  "MallocVersion": 2
+}

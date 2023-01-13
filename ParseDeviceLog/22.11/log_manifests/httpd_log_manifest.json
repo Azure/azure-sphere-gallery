@@ -1,0 +1,31 @@
+{
+    "version": "1.0",
+    "categoryId": 29,
+    "categoryName": "httpd",
+    "msgIds": [
+        {
+            "msgName": "FailedToFetchHttpHeader",
+            "msgId": 1,
+            "msgString": "Failed to fetch HTTP header",
+            "msgPriority": "Debug",
+            "params": [
+                {
+                    "paramName": "error",
+                    "paramType": "commonError"
+                }
+            ]
+        },
+        {
+            "msgName": "FailedToCompleteResponse",
+            "msgId": 2,
+            "msgString": "Failed to complete HTTP response",
+            "msgPriority": "Debug",
+            "params": [
+                {
+                    "paramName": "error",
+                    "paramType": "commonError"
+                }
+            ]
+        }
+    ]
+}

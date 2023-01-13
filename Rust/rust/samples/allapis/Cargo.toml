@@ -1,0 +1,18 @@
+[package]
+name = "allapis"
+version = "0.1.0"
+authors = ["Microsoft"]
+edition = "2018"
+
+[dependencies]
+azure-sphere = { path = "../../azure-sphere", version = "0.1" }
+nullable-result = { version = "0.7", default-features = false }
+curl = { git="https://github.com/BarryBo/curl-rust.git", branch="AzureSphere", version="0.4.44", features=["static-ssl"] }
+azure_iot_hub = "0.4.0" # see https://github.com/Azure/azure-sdk-for-rust and https://crates.io/crates/azure_sdk_for_rust
+
+[package.metadata.azsphere]
+arv = "14"
+app_manifest = "app_manifest.json"
+extra_files = [
+    ["README.md", "data/TEST.md"]
+]
