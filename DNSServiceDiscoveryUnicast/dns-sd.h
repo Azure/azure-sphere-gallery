@@ -29,24 +29,27 @@ typedef struct {
 /// <summary>
 /// Send a service discovery query
 /// </summary>
-/// <param name="svcName">Fully-qualified domain name of the DNS server</param>
-/// <param name="fd">The socket file descriptor to send the DNS query to</param>
-/// <returns>0 if succeeded, -1 if an error occurred.</returns>
+/// <param name="dName">Domain to query</param>
+/// <param name="answerBuf">Pointer to a buffer to receive the response</param>
+/// <param name="answerBufSize">Size of answerBuf</param>
+/// <returns>The number of bytes in the response if succeeded, -1 if an error occurred.</returns>
 int SendServiceDiscoveryQuery(const char *dName, char* answerBuf, int answerBufSize);
 
 /// <summary>
 /// Send a service instance details query
 /// </summary>
 /// <param name="instanceName">The instance name to query details for</param>
-/// <param name="fd">The socket file descriptor to send the DNS query to</param>
-/// <returns>0 if succeeded, -1 if an error occurred.</returns>
+/// <param name="answerBuf">Pointer to a buffer to receive the response</param>
+/// <param name="answerBufSize">Size of answerBuf</param>
+/// <returns>The number of bytes in the response if succeeded, -1 if an error occurred.</returns>
 int SendServiceInstanceDetailsQuery(const char *instanceName, char* answerBuf, int answerBufSize);
 
 /// <summary>
-/// Process pending data from a service discovery request
+/// Process data from a service discovery response
 /// </summary>
-/// <param name="fd">The socket file descriptor to receive the DNS response from</param>
 /// <param name="instanceDetails">The instance details if it is available in the response</param>
+/// <param name="answerBuf">Pointer to a buffer containing the response</param>
+/// <param name="answerBufSize">Size of answerBuf</param>
 /// <returns>0 if succeeded, -1 if an error occurred.</returns>
 int ProcessDnsResponse(ServiceInstanceDetails **instanceDetails, char* answerBuf, int answerBufSize);
 
