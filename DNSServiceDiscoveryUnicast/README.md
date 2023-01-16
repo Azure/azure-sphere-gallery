@@ -45,7 +45,9 @@ The project requires the following hardware:
    root@ef71614eec1c:/#
    ```
 
-   Note that if you have an existing DNS server running on port 53 of the Docker host (for example, a Linux system such as Ububtu that uses systemd is likely to have systemd-resolved running for local name resolution) you will need to disable this and configure an alternative (for example, specify a nameserver directly in `/etc/resolv.conf`)
+   **Note on networking:** The `docker run` command above will bind UDP ports 53 and 5353 from the container to the same ports on the host, so when configuring the Azure Sphere application, you should use the Docker host's IP address as the DNS server.
+   
+   If the Docker host has an existing DNS server running on port 53 (for example, a Linux system such as Ubuntu that uses systemd is likely to have systemd-resolved running for local name resolution), you will see a **Port in use** error when launching the container. You will need to disable the existing DNS server (and configure an alternative for local resolution, if required). Alternatively, you can disable the port binding (remove the `-p` options) and ensure the docker container is visible to the outside network; see the [Docker documentation](https://docs.docker.com/network/) for further details.
 
 1. Configure the application - specify the IP address of your nameserver and a secondary in `main.c`:
 
@@ -102,7 +104,7 @@ ensure you have configured the DNS servers as described above.
 
 ## Key concepts
 
-Unlike multicast service discovery, the discovered service may exist outside of the local network for the device. This means that DNS service discovery can be used to discovery and connect to endpoints on the wider internet - for example, Azure IoT hubs or other dynamically-assigned endpoints - without needing to specify them in the application manifest.
+Unlike multicast service discovery, the discovered service may exist outside of the local network for the device. This means that DNS service discovery can be used to discover and connect to endpoints on the wider internet - for example, Azure IoT hubs or other dynamically-assigned endpoints - without needing to specify them in the application manifest.
 
 ## Project expectations
 
