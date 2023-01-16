@@ -1,0 +1,1 @@
+docker run -it --rm -p 53:53/udp -p 5353:5353/udp dns-sd

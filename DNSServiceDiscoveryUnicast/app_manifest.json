@@ -1,0 +1,15 @@
+{
+  "SchemaVersion": 1,
+  "Name": "DNSServiceDiscoveryUnicas",
+  "ComponentId": "9c1b94a2-064c-436b-89b6-1300b39e27d9",
+  "EntryPoint": "/bin/app",
+  "CmdArgs": [],
+  "Capabilities": {
+    "NetworkConfig": true,
+    "AllowedConnections": [
+      "_http._tcp.home"
+    ]
+  },
+  "ApplicationType": "Default",
+  "MallocVersion": 2
+}

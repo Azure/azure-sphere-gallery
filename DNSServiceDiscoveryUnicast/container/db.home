@@ -1,0 +1,9 @@
+$TTL 10
+@ SOA ns.home. hostmaster.home. (2006010101 10800 3600 604800 10)
+                        NS  ns.home.
+ns.home.                A   127.0.0.1
+b._dns-sd._udp          PTR @
+lb._dns-sd._udp         PTR @
+_http._tcp              PTR HelloWorld._http._tcp
+HelloWorld._http._tcp SRV 0 0 80 www.dns-sd.org.
+                        TXT path=/Success.html
