@@ -67,6 +67,20 @@ By default, this sample runs over a Wi-Fi connection to the internet. To use Eth
     char networkInterface[] = "wlan0";
     ```
 
+### Configuring your own DNS server
+
+The supplied Docker image uses **bind9**, but the sample code should work with any correctly configured DNS server (including dedicated DNS-SD servers like **Avahi**, or DNS caches like **dnsmasq**).
+
+When configuring the DNS server, you should ensure that the time-to-live (TTL) for returned SRV/PTR records is **non-zero**: records with a TTL of zero are considered to be expiring immediately, and as such the Azure Sphere operating system will not open the firewall for them.
+
+#### dnsmasq example
+
+For example, **dnsmasq** sets a TTL of zero for all its responses as it is primarily a DNS cache - a zero TTL indicates a record should not be cached by downstream clients. To ensure that locally-configured SRV/PTR records have a non-zero TTL, you should modify `dnsmasq.conf` to include:
+
+```
+local-ttl=10 # Or other non-zero value (in seconds)
+```
+
 ## Running the code
 
 To build and run this project, follow the instructions in [Build a sample application](../../BUILD_INSTRUCTIONS.md).
