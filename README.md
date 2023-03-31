@@ -2,9 +2,10 @@
 
 This repository contains a collection of inspirational, unmaintained [Azure Sphere](https://www.microsoft.com/azure-sphere/) software samples and hardware designs ready to be reused.
 
-For maintained samples and designs, see the official Azure Sphere Samples and Azure Sphere Hardware Designs repos:
+For maintained samples and designs, see the official Azure Sphere Samples, Azure Sphere Tools, and Azure Sphere Hardware Designs repos:
 
 - https://github.com/Azure/azure-sphere-samples
+- https://github.com/Azure/azure-sphere-tools
 - https://github.com/Azure/azure-sphere-hardware-designs
 
 ## Using the samples and designs
@@ -42,7 +43,7 @@ Each folder within this repository contains a README.md file that describes the 
 | [OSNetworkRequirementChecker-HLApp](OSNetworkRequirementChecker-HLApp) | A sample app that performs DNS resolver and custom NTP test for diagnosing networking connectivity problems. |
 | [OSNetworkRequirementChecker-PC](OSNetworkRequirementChecker-PC) | A PC command line utility for diagnosing networking connectivity issues. |
 | [OpenSourceProjectsSupportingExternalPeripherals](OpenSourceProjectsSupportingExternalPeripherals) | This is a list of open-source projects supporting external hardware on the Azure Sphere MT3620 platform |
-| [ParseDeviceLog](ParseDeviceLog) | Tools that can parse device logs in to human readable format |
+| [ParseDeviceLog](https://github.com/Azure/azure-sphere-tools/) | Tools that can parse device logs in to human readable format. **This content has moved to the Azure Sphere Tools repository.** |
 | [PWMAudio](PWMAudio) | Generate tones using PWM on the real-time cores |
 | [RS485Driver](RS485Driver) | An RS-485 real-time driver with HL-Core interfacing API. |
 | [ServiceAPIDeviceCodeAuth](ServiceAPIDeviceCodeAuth) | Code snippet to access public rest api using device code flow from a web app. |

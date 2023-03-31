@@ -1,8 +1,0 @@
-# Json error codes
-category_id: 18
-name: JsonError
-codes: 
-  - 
-    id: 1 
-    name: InvalidJsonObject
-    msg: Invalid JSON Object
