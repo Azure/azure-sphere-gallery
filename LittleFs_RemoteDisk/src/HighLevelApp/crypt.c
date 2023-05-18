@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
+#include <errno.h>
 
 #include <applibs/storage.h>
 #include <applibs/log.h>
@@ -75,7 +76,7 @@ static int createKeyAndIV(int storageFd)
     wc_RNG_GenerateBlock(rng, &keyIV.iv, CHACHA20_POLY1305_AEAD_IV_SIZE);
 
     write(storageFd, &sh, sizeof(StorageHeader));
-    write(storageFd, &keyIV, sizeof(StorageHeader));
+    write(storageFd, &keyIV, sizeof(KeyIV));
 
     // Don't leave the key/IV hanging around on the stack
     memset(&keyIV, 0, sizeof(keyIV));
@@ -85,9 +86,6 @@ static int createKeyAndIV(int storageFd)
 
 static int getKeyAndIV(int storageFd, KeyIV* kv)
 {
-    KeyIV keyIV;
-    memset(&keyIV, 0, sizeof(keyIV));
-    
     if (storageFd <= 0) {
         return -1;
     }
@@ -103,12 +101,13 @@ static int getKeyAndIV(int storageFd, KeyIV* kv)
         return -1;
     }
 
-    read(storageFd, &keyIV, sizeof(keyIV));
+    if (read(storageFd, &kv, sizeof(KeyIV)) != sizeof(KeyIV)) {
+        memset(kv, 0, sizeof(KeyIV));
+        Log_Debug("[ERROR] Error reading key/IV: %s (%d)", strerror(errno), errno);
+        return -1;
+    }
 
-    memcpy(kv, &keyIV, sizeof(KeyIV));
-
-    // Don't leave the key/iv hanging around on the stack
-    memset(&keyIV, 0, sizeof(keyIV));
+    return 0;
 }
 
 int getOrCreateKeyAndIV(KeyIV* kv)
