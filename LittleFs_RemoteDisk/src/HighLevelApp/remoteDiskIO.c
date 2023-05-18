@@ -42,7 +42,7 @@ static size_t write_data(void* ptr, size_t size, size_t nmemb, struct url_data* 
 	return n;
 }
 
-static const readUrl = "http://%s:5000/ReadBlockFromOffset?offset=%u&size=%u";
+static const char *readUrl = "http://%s:5000/ReadBlockFromOffset?offset=%u&size=%u";
 
 uint8_t* readBlockData(uint32_t offset, uint32_t size)
 {

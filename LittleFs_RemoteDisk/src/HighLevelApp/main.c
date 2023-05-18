@@ -12,6 +12,7 @@
 #include <signal.h>
 
 #include "remoteDiskIO.h"
+#include "crypt.h"
 
 #include "littlefs/lfs.h"
 #include "littlefs/lfs_util.h"
@@ -83,6 +84,12 @@ int main(void)
 {
     // initialize Curl based on whether ENABLE_CURL_MEMORY_TRACE is defined or not
     initCurl();
+
+    KeyIV keyIV;
+    if (getOrCreateKeyAndIV(&keyIV) != 0) {
+        Log_Debug("[ERROR] Could not retrieve key and IV from storage\n");
+        return -1;
+    }
 
     // wait for networking...
     bool isNetworkingReady = false;

@@ -5,17 +5,19 @@ cmake_minimum_required(VERSION 3.10)
 
 project(LittleFs_HighLevelApp C)
 
-azsphere_configure_tools(TOOLS_REVISION "21.01")
-azsphere_configure_api(TARGET_API_SET "8")
+azsphere_configure_tools(TOOLS_REVISION "23.05")
+azsphere_configure_api(TARGET_API_SET "16")
 
 add_executable(${PROJECT_NAME} 
 	main.c 
+	crypt.c
 	curlFunctions.c
 	remoteDiskIO.c
 	littlefs/lfs.c 
 	littlefs/lfs_util.c)
 
-target_link_libraries(${PROJECT_NAME} applibs gcc_s c curl)
+target_include_directories(${PROJECT_NAME} PRIVATE wolfssl)
+target_link_libraries(${PROJECT_NAME} applibs gcc_s c curl wolfssl)
 
 # Enable/Disable Curl memory tracking
 # add_compile_definitions(ENABLE_CURL_MEMORY_TRACE)
