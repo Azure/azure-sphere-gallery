@@ -250,9 +250,9 @@ impl CliSetting {
                 None
             };
 
-        // ${AzureSphereDefaultSDKDir}/Tools_v2/azsphere image-package pack-application --package-directory out/ --destination ${APPNAME}.apppackage --target-api-set ${ARV}
+        // ${AzureSphereDefaultSDKDir}/Tools_v2/azsphere image-package pack-application --package-directory out/ --destination ${APPNAME}.imagepackage --target-api-set ${ARV}
         let azsphere = sdk_path.join("Tools_v2/azsphere");
-        let app_package_name = target_path.join(package_config.name.clone() + ".apppackage");
+        let app_package_name = target_path.join(package_config.name.clone() + ".imagepackage");
         let mut args = vec![
             "image-package",
             "pack-application",

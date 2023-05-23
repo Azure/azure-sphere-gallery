@@ -85,10 +85,10 @@ impl CliSetting {
         target_path.push("armv7-unknown-linux-musleabihf");
         target_path.push(build_flavor);
 
-        // ${AzureSphereDefaultSDKDir}/Tools_v2/azsphere image-package pack-application --package-directory out/ --destination ${APPNAME}.apppackage --target-api-set ${ARV}
+        // ${AzureSphereDefaultSDKDir}/Tools_v2/azsphere image-package pack-application --package-directory out/ --destination ${APPNAME}.imagepackage --target-api-set ${ARV}
         let app_package_name = target_path
             .clone()
-            .join(package_config.name + ".apppackage");
+            .join(package_config.name + ".imagepackage");
         let app_package_name = app_package_name.as_os_str().to_str().unwrap();
         let (azsphere, azsphere_args) = util::azsphere_tool_path();
         let mut args: Vec<String> = vec![];
