@@ -36,7 +36,7 @@ Rust is a systems programming language with a focus on performance and safety. T
 ## Building
 
 - Use `cargo build` or `cargo build --release` to compile.
-- Use `cargo azsphere package` in any app directory, to generate the Azure Sphere .imagepackage file
+- Use `cargo azsphere package` in any app directory, to generate the Azure Sphere .imagepackage file.
 - Use `cargo azsphere sideload` in any app directory, to sideload the application onto a device.  Pass "-m" for manual-launch.
 - Use `cargo azsphere debug` in any app directory, to launch gdb and debug the application.
 
