@@ -3,7 +3,7 @@
 	"tasks": [
 		{
 			"command": "cargo",
-			"args": ["build", "--target-dir", "."],
+			"args": ["build", "--target-dir", "${workspaceFolder}/out"],
 			"problemMatcher": [
 				"$rustc",
 				"$rust-panic"
@@ -20,7 +20,8 @@
 			],
 			"options": {
 				"env": {
-					"CARGO_TARGET_DIR": "${workspaceFolder}"
+					"CARGO_MANIFEST_DIR": "${workspaceFolder}",
+					"CARGO_TARGET_DIR": "${workspaceFolder}/out"
 				}
 			},
 			"group": "build",

@@ -8,7 +8,7 @@
             "name": "Launch Azure Sphere App",
             "type": "azurespheredbg",
             "request": "launch",
-            "program": "${workspaceFolder}/armv7-unknown-linux-musleabihf/debug/${workspaceFolderBasename}",
+            "program": "${workspaceFolder}/out/armv7-unknown-linux-musleabihf/debug/${workspaceFolderBasename}",
             "args": [],
             "stopAtEntry": false,
             "environment": [],
