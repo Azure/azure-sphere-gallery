@@ -13,7 +13,7 @@
 		},
         {
 			"command": "cargo",
-            "args": ["azsphere", "package"],
+            		"args": ["azsphere", "package"],
 			"problemMatcher": [
 				"$rustc",
 				"$rust-panic"
