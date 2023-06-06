@@ -11,7 +11,7 @@
 			"group": "build",
 			"label": "rust: cargo build"
 		},
-        {
+        	{
 			"command": "cargo",
             		"args": ["azsphere", "package"],
 			"problemMatcher": [
@@ -26,11 +26,11 @@
 			"group": "build",
 			"label": "rust: cargo azsphere package"
 		},
-        {
-            "dependsOn": ["rust: cargo build", "rust: cargo azsphere package"],
-            "dependsOrder": "sequence",
-            "group": "build",
-            "label": "rust: compile"
-        }
+		{
+		    "dependsOn": ["rust: cargo build", "rust: cargo azsphere package"],
+		    "dependsOrder": "sequence",
+		    "group": "build",
+		    "label": "rust: compile"
+		}
 	]
 }
