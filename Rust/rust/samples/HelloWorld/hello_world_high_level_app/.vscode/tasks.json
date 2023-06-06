@@ -3,7 +3,7 @@
 	"tasks": [
 		{
 			"command": "cargo",
-			"args": ["build"],
+			"args": ["build", "--target-dir", "."],
 			"problemMatcher": [
 				"$rustc",
 				"$rust-panic"
@@ -18,6 +18,11 @@
 				"$rustc",
 				"$rust-panic"
 			],
+			"options": {
+				"env": {
+					"CARGO_TARGET_DIR": "${workspaceFolder}"
+				}
+			},
 			"group": "build",
 			"label": "rust: cargo azsphere package"
 		},

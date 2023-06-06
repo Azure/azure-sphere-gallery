@@ -95,8 +95,6 @@ cd rust/samples/HelloWorld/hello_world_high_level_app
 code .
 ```
 
-1. Set `program` to the executable's full path inside the configuration in `.vscode/launch.json`. The executable's path will be located at `rust/target/armv7-unknown-linux-musleabihf/debug/hello_world_high_level_app`. 
-
 1. Press `F5` to build, deploy and run the application. If you set any breakpoints before pressing `F5`, you will be able to debug the code.
 
 ## Viewing documentation
