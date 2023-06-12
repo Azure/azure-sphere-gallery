@@ -25,7 +25,7 @@ Rust is a systems programming language with a focus on performance and safety. T
 
 ## Documentation
 
-> The contributing and quickstart guides requires the use of a Linux machine or a Windows machine runing Windows Subsystem for Linux (WSL).  Ubuntu is preferred.
+> The contributing and quickstart guides requires the use of a Linux machine or a Windows machine running Windows Subsystem for Linux (WSL).  Ubuntu is preferred.
 
 [Quickstart](./docs/quickstart.md)
 
