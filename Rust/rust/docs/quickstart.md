@@ -50,11 +50,11 @@ cd rust/samples/HelloWorld/hello_world_high_level_app
 
     > cargo build
 
-1. Build the app package:
+1. Build the image package:
 
     > cargo azsphere package
 
-1. Deploy the app package onto the device.
+1. Deploy the image package onto the device.
 
     > cargo azsphere sideload -m
 
@@ -80,6 +80,22 @@ cd rust/samples/HelloWorld/hello_world_high_level_app
     ```
 
     The device's led light should also blink on and off in 1 second cycles.
+
+## Build, Debug and Deploy using Visual Studio Code
+
+1. Navigate to one of the examples in the `samples` directory from the command line:
+
+```bash
+cd rust/samples/HelloWorld/hello_world_high_level_app
+```
+
+1. Open Visual Studio Code:
+
+```bash
+code .
+```
+
+1. Press `F5` to build, deploy and run the application. If you set any breakpoints before pressing `F5`, you will be able to debug the code.
 
 ## Viewing documentation
 

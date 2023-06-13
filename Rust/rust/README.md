@@ -25,7 +25,7 @@ Rust is a systems programming language with a focus on performance and safety. T
 
 ## Documentation
 
-> The contributing and quickstart guides requires the use of a Linux machine or a Windows machine runing Windows Services for Linux (WSL).  Ubuntu is preferred.
+> The contributing and quickstart guides requires the use of a Linux machine or a Windows machine running Windows Subsystem for Linux (WSL).  Ubuntu is preferred.
 
 [Quickstart](./docs/quickstart.md)
 
@@ -36,7 +36,7 @@ Rust is a systems programming language with a focus on performance and safety. T
 ## Building
 
 - Use `cargo build` or `cargo build --release` to compile.
-- Use `cargo azsphere package` in any app directory, to generate the Azure Sphere .appackage file
+- Use `cargo azsphere package` in any app directory, to generate the Azure Sphere .imagepackage file.
 - Use `cargo azsphere sideload` in any app directory, to sideload the application onto a device.  Pass "-m" for manual-launch.
 - Use `cargo azsphere debug` in any app directory, to launch gdb and debug the application.
 

@@ -1,0 +1,37 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"command": "cargo",
+			"args": ["build", "--target-dir", "${workspaceFolder}/out"],
+			"problemMatcher": [
+				"$rustc",
+				"$rust-panic"
+			],
+			"group": "build",
+			"label": "rust: cargo build"
+		},
+		{
+			"command": "cargo",
+			"args": ["azsphere", "package"],
+			"problemMatcher": [
+				"$rustc",
+				"$rust-panic"
+			],
+			"options": {
+				"env": {
+					"CARGO_MANIFEST_DIR": "${workspaceFolder}",
+					"CARGO_TARGET_DIR": "${workspaceFolder}/out"
+				}
+			},
+			"group": "build",
+			"label": "rust: cargo azsphere package"
+		},
+		{
+			"dependsOn": ["rust: cargo build", "rust: cargo azsphere package"],
+		    	"dependsOrder": "sequence",
+		    	"group": "build",
+		    	"label": "rust: compile"
+		}
+	]
+}

@@ -1,0 +1,21 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Launch Azure Sphere App",
+            "type": "azurespheredbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/out/armv7-unknown-linux-musleabihf/debug/${workspaceFolderBasename}",
+            "args": [],
+            "stopAtEntry": false,
+            "environment": [],
+            "externalConsole": true,
+            "partnerComponents": [],
+            "MIMode": "gdb",
+            "preLaunchTask": "rust: compile"
+        }
+    ]
+}
