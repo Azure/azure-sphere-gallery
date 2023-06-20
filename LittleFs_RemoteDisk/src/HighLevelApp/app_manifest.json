@@ -5,7 +5,8 @@
   "EntryPoint": "/bin/app",
   "CmdArgs": [],
   "Capabilities": {
-    "AllowedConnections": [],
+    // "AllowedConnections": [ "10.164.185.66" ],
+    "AllowedConnections": [ "192.168.1.174" ],
     "MutableStorage": { "SizeKB": 4 }
   },
   "ApplicationType": "Default"

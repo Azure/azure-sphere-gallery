@@ -22,6 +22,7 @@ const size_t StorageTotalSize = StorageHeaderSize + KeyIVSize;
 
 static int openAndCheckStorage(bool* hasKeyIV)
 {
+    Log_Debug("[INFO] ENTER openAndCheckStorage\n");
     int storageFd = Storage_OpenMutableFile();
     *hasKeyIV = false;
 
@@ -43,28 +44,30 @@ static int openAndCheckStorage(bool* hasKeyIV)
     }
 
     StorageHeader sh;
-    lseek(storageFd, SEEK_SET, 0);
+    lseek(storageFd, 0, SEEK_SET);
     read(storageFd, &sh, sizeof(StorageHeader));
 
     if (memcmp(&sh.header, HeaderMagic, sizeof(sh.header))) {
         Log_Debug("[ERROR] Storage header does not match expected magic - cannot retrieve key and IV\n");
         return -1;
     }
+    *hasKeyIV = true;
 
 exit:
-    lseek(storageFd, SEEK_SET, 0);
+    lseek(storageFd, 0, SEEK_SET);
     return storageFd;
 }
 
 static int createKeyAndIV(int storageFd)
 {
+    Log_Debug("[INFO] ENTER createKeyAndIV\n");
     if (storageFd <= 0) {
         return -1;
     }
 
     WC_RNG *rng = wc_rng_new(NULL, 0, NULL);
 
-    lseek(storageFd, SEEK_SET, 0);
+    lseek(storageFd, 0, SEEK_SET);
 
     StorageHeader sh;
     memcpy(&sh.header, HeaderMagic, sizeof(sh.header));
@@ -86,6 +89,7 @@ static int createKeyAndIV(int storageFd)
 
 static int getKeyAndIV(int storageFd, KeyIV* kv)
 {
+    Log_Debug("[INFO] ENTER getKeyAndIV\n");
     if (storageFd <= 0) {
         return -1;
     }
@@ -94,14 +98,16 @@ static int getKeyAndIV(int storageFd, KeyIV* kv)
         return -1;
     }
 
+    Log_Debug("INFO: Seeking to %x\n", KeyIVOffset);
     off_t pos = lseek(storageFd, KeyIVOffset, SEEK_SET);
+    Log_Debug("INFO: Reading %x bytes of key/IV at %x\n", sizeof(KeyIV), pos);
 
     if (pos != KeyIVOffset) { 
         Log_Debug("[ERROR] Could not seek to key/IV offset in storage\n");
         return -1;
     }
 
-    if (read(storageFd, &kv, sizeof(KeyIV)) != sizeof(KeyIV)) {
+    if (read(storageFd, kv, sizeof(KeyIV)) != sizeof(KeyIV)) {
         memset(kv, 0, sizeof(KeyIV));
         Log_Debug("[ERROR] Error reading key/IV: %s (%d)", strerror(errno), errno);
         return -1;
@@ -110,8 +116,9 @@ static int getKeyAndIV(int storageFd, KeyIV* kv)
     return 0;
 }
 
-int getOrCreateKeyAndIV(KeyIV* kv)
+int Crypt_GetOrCreateKeyAndIV(KeyIV* kv)
 {
+    Log_Debug("[INFO] ENTER GetOrCreateGetAndIV\n");
     bool hasKeyIV;
     int storageFd = openAndCheckStorage(&hasKeyIV);
 
@@ -122,16 +129,16 @@ int getOrCreateKeyAndIV(KeyIV* kv)
 
     if (!hasKeyIV) {
         Log_Debug("[INFO] No data found in mutable storage; generating key and IV\n");
-        // Fall through to force create
-    }
-
-    // Force it for now
-    int ret = createKeyAndIV(storageFd);
-
-    if (ret != 0) { 
-        return ret;
+        int ret = createKeyAndIV(storageFd);
+        if (ret != 0) { 
+            close(storageFd);
+            return ret;
+        }
     }
 
     getKeyAndIV(storageFd, kv);
+
+    close(storageFd);
+
     return 0;
 }

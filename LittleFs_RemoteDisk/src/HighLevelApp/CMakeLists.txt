@@ -12,6 +12,7 @@ add_executable(${PROJECT_NAME}
 	main.c 
 	crypt.c
 	curlFunctions.c
+	encrypted_storage.c
 	remoteDiskIO.c
 	littlefs/lfs.c 
 	littlefs/lfs_util.c)
@@ -23,7 +24,8 @@ target_link_libraries(${PROJECT_NAME} applibs gcc_s c curl wolfssl)
 # add_compile_definitions(ENABLE_CURL_MEMORY_TRACE)
 
 # // TODO: define the PC HOST IP Address
-add_compile_definitions(PC_HOST_IP="")
+add_compile_definitions(PC_HOST_IP="192.168.1.174")
+# add_compile_definitions(PC_HOST_IP="10.164.185.66")
 
 # Target hardware for the sample.
 set(TARGET_HARDWARE "mt3620_rdb")

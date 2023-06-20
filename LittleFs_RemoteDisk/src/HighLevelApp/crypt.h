@@ -10,4 +10,4 @@ typedef struct KeyIV {
     uint8_t iv[CHACHA20_POLY1305_AEAD_IV_SIZE];
 } KeyIV;
 
-int getOrCreateKeyAndIV(KeyIV* kv);
+int Crypt_GetOrCreateKeyAndIV(KeyIV* kv);

@@ -20,6 +20,8 @@ app = Flask(__name__)
 
 print("Python disk host")
 
+BLOCK_SIZE = 256 
+
 # create empty 'disk'
 # could easily modify this to read from a file
 diskData=bytearray(4194304)
