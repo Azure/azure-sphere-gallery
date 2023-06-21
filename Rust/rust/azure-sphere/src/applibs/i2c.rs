@@ -55,14 +55,9 @@ impl I2CMaster {
         &self,
         device_address: DeviceAddress,
         buffer: &mut [u8],
-    ) -> Result<i32, std::io::Error> {
+    ) -> Result<isize, std::io::Error> {
         let read_bytes_size = unsafe {
-            i2c::I2CMaster_Read(
-                self.fd,
-                device_address,
-                buffer.as_ptr() as _,
-                buffer.len() as u32,
-            )
+            i2c::I2CMaster_Read(self.fd, device_address, buffer.as_ptr() as _, buffer.len())
         };
 
         if read_bytes_size == -1 {
@@ -77,14 +72,9 @@ impl I2CMaster {
         &self,
         device_address: DeviceAddress,
         buffer: &[u8],
-    ) -> Result<i32, std::io::Error> {
+    ) -> Result<isize, std::io::Error> {
         let bytes_written = unsafe {
-            i2c::I2CMaster_Write(
-                self.fd,
-                device_address,
-                buffer.as_ptr() as _,
-                buffer.len() as u32,
-            )
+            i2c::I2CMaster_Write(self.fd, device_address, buffer.as_ptr() as _, buffer.len())
         };
 
         if bytes_written == -1 {
@@ -105,15 +95,15 @@ impl I2CMaster {
         device_address: DeviceAddress,
         write_buffer: &[u8],
         read_buffer: &mut [u8],
-    ) -> Result<i32, std::io::Error> {
+    ) -> Result<isize, std::io::Error> {
         let total_bytes = unsafe {
             i2c::I2CMaster_WriteThenRead(
                 self.fd,
                 device_address,
                 write_buffer.as_ptr() as _,
-                write_buffer.len() as u32,
+                write_buffer.len(),
                 read_buffer.as_ptr() as _,
-                read_buffer.len() as u32,
+                read_buffer.len(),
             )
         };
 

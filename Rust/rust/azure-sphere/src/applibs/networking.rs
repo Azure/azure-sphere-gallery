@@ -83,12 +83,12 @@ pub fn is_networking_ready() -> Result<bool, std::io::Error> {
 
 /// Gets the number of network interfaces in an Azure Sphere device.
 /// The number of interfaces in the system will not change within a boot cycle.
-pub fn interface_count() -> Result<u32, std::io::Error> {
+pub fn interface_count() -> Result<usize, std::io::Error> {
     let count = unsafe { networking::Networking_GetInterfaceCount() };
     if count == -1 {
         Err(Error::last_os_error())
     } else {
-        Ok(count as usize as u32)
+        Ok(count as usize)
     }
 }
 
@@ -403,7 +403,7 @@ impl IpConfig {
             networking::Networking_IpConfig_EnableCustomDns(
                 &mut self.ipconfig,
                 dns_server_address.as_ptr(),
-                dns_server_address.len() as u32,
+                dns_server_address.len() as usize,
             )
         };
         if r == -1 {
@@ -515,7 +515,7 @@ impl DhcpServerConfig {
             networking::Networking_DhcpServerConfig_SetNtpServerAddresses(
                 &mut self.config,
                 ntp_server_addresses.as_ptr(),
-                ntp_server_addresses.len() as u32,
+                ntp_server_addresses.len(),
             )
         };
         if result == 0 {
@@ -562,7 +562,7 @@ pub fn set_hardware_address(
         static_inline_helpers::Networking_SetHardwareAddress_inline(
             network_interface_name.as_ptr(),
             hardware_address.as_ptr(),
-            hardware_address.len() as u32,
+            hardware_address.len(),
         )
     };
     if result == 0 {

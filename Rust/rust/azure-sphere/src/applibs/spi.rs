@@ -97,14 +97,14 @@ impl SPIMaster {
         &self,
         write_buffer: &[u8],
         read_buffer: &mut [u8],
-    ) -> Result<i32, std::io::Error> {
+    ) -> Result<isize, std::io::Error> {
         let total_bytes = unsafe {
             static_inline_helpers::SPIMaster_WriteThenRead_inline(
                 self.fd,
                 write_buffer.as_ptr() as _,
-                write_buffer.len() as u32,
+                write_buffer.len(),
                 read_buffer.as_ptr() as _,
-                read_buffer.len() as u32,
+                read_buffer.len(),
             )
         };
 
@@ -121,7 +121,7 @@ impl SPIMaster {
     pub fn transfer_sequential<'a, 'b>(
         &self,
         transfers: &mut [SPIMasterTransfer<'a, 'b>],
-    ) -> Result<i32, std::io::Error> {
+    ) -> Result<isize, std::io::Error> {
         // Initialize a template SPIMaster_Transfer
         let mut t_template = static_inline_helpers::SPIMaster_Transfer {
             z__magicAndVersion: 0,
@@ -144,9 +144,9 @@ impl SPIMaster {
             t_template.writeData = t.write_data.as_ptr();
             t_template.readData = t.read_data.as_mut_ptr();
             t_template.length = if t.write_data.len() == 0 {
-                t.read_data.len() as static_inline_helpers::size_t
+                t.read_data.len() as libc::size_t
             } else {
-                min(t.write_data.len(), t.read_data.len()) as static_inline_helpers::size_t
+                min(t.write_data.len(), t.read_data.len()) as libc::size_t
             };
             v.push(t_template)
         }
@@ -155,7 +155,7 @@ impl SPIMaster {
             static_inline_helpers::SPIMaster_TransferSequential_inline(
                 self.fd,
                 v.as_mut_ptr(),
-                v.len() as u32,
+                v.len(),
             )
         };
         if total_bytes == -1 {

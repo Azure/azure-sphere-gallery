@@ -1,10 +1,10 @@
 [env]
-AZURE_SPHERE_ARV = "15"
+AZURE_SPHERE_ARV = "16"
 AZURE_SPHERE_TARGET_HARDWARE="mt3620_rdb"
 AZURE_SPHERE_TARGET_DEFINITION="sample_appliance"
 
 [target.armv7-unknown-linux-musleabihf]
-linker = "/opt/azurespheresdk/Sysroots/15/tools/sysroots/x86_64-pokysdk-linux/usr/bin/arm-poky-linux-musleabi/arm-poky-linux-musleabi-gcc"
+linker = "/opt/azurespheresdk/Sysroots/16/tools/sysroots/x86_64-pokysdk-linux/usr/bin/arm-poky-linux-musleabi/arm-poky-linux-musleabi-gcc"
 rustflags = ["-C", "link-arg=-Wl,-Bdynamic"]
 
 [build]

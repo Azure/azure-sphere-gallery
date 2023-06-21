@@ -46,11 +46,13 @@ impl EventLoopTimer {
             Some(t) => static_inline_helpers::timespec {
                 tv_sec: t.as_secs() as i64,
                 tv_nsec: t.subsec_nanos() as libc::c_long,
+                _bitfield_align_1: [],
                 _bitfield_1: static_inline_helpers::timespec::new_bitfield_1(),
             },
             None => static_inline_helpers::timespec {
                 tv_sec: 0,
                 tv_nsec: 0,
+                _bitfield_align_1: [],
                 _bitfield_1: static_inline_helpers::timespec::new_bitfield_1(),
             },
         };
@@ -58,11 +60,13 @@ impl EventLoopTimer {
             Some(t) => static_inline_helpers::timespec {
                 tv_sec: t.as_secs() as i64,
                 tv_nsec: t.subsec_nanos() as libc::c_long,
+                _bitfield_align_1: [],
                 _bitfield_1: static_inline_helpers::timespec::new_bitfield_1(),
             },
             None => static_inline_helpers::timespec {
                 tv_sec: 0,
                 tv_nsec: 0,
+                _bitfield_align_1: [],
                 _bitfield_1: static_inline_helpers::timespec::new_bitfield_1(),
             },
         };
