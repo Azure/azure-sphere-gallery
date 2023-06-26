@@ -1,7 +1,7 @@
 #  Copyright (c) Microsoft Corporation. All rights reserved.
 #  Licensed under the MIT License.
 
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.20)
 
 project(LittleFs_HighLevelApp C)
 
@@ -24,8 +24,7 @@ target_link_libraries(${PROJECT_NAME} applibs gcc_s c curl wolfssl)
 # add_compile_definitions(ENABLE_CURL_MEMORY_TRACE)
 
 # // TODO: define the PC HOST IP Address
-add_compile_definitions(PC_HOST_IP="192.168.1.174")
-# add_compile_definitions(PC_HOST_IP="10.164.185.66")
+add_compile_definitions(PC_HOST_IP="")
 
 # Target hardware for the sample.
 set(TARGET_HARDWARE "mt3620_rdb")
