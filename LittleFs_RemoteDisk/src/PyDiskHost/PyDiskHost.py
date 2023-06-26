@@ -5,6 +5,7 @@
 # encoding: utf-8
 import json
 import os
+import base64
 from pathlib import Path
 from flask import Flask, request, jsonify, make_response, session
 import datetime
@@ -20,90 +21,59 @@ app = Flask(__name__)
 
 print("Python disk host")
 
+DISK_SIZE = 4 * 1024 * 1024
 BLOCK_SIZE = 256 
+METADATA_SIZE = 16
+assert(DISK_SIZE % BLOCK_SIZE == 0)
+BLOCK_COUNT = DISK_SIZE // BLOCK_SIZE
+
+print("Disk: {:d} x {:d} bytes = {:d} bytes".format(BLOCK_COUNT, BLOCK_SIZE, DISK_SIZE))
+
+class Block:
+    def __init__(self):
+        self.bytes = bytearray(BLOCK_SIZE)
+        self.metadata = bytearray(METADATA_SIZE)
+
+Disk = list[Block]
 
 # create empty 'disk'
 # could easily modify this to read from a file
-diskData=bytearray(4194304)
-print("data length",len(diskData))
-
-print('startup memory CRC')
-memoryCRC()
+diskData: Disk = [Block()] * BLOCK_COUNT
 
 # -------------------------------------------------------------------------------------
 # Block level read and write.
 
-@app.route('/ReadBlockFromOffset', methods=['GET'])
+@app.route('/ReadBlock', methods=['GET'])
 def query_sector():
-    offset = request.args.get('offset')
-    size= request.args.get('size')
+    blockNum = request.args.get('block')
 
-    if not offset or not size:
+    if not blockNum:
         response=make_response(jsonify({'error': 'read request is not valid'}),400)
         return response
     else:
-        diskOffset=int(offset)
-        blockSize=int(size)
-
-        print("Request for offset: ",hex(diskOffset))
-        returnData=diskData[diskOffset:diskOffset+blockSize]
-
-        crc=0
-        for val in returnData:
-            crc=crc+val
-            crc=crc & 0xffff
-
-        print("Read CRC", hex(crc))
-        hexDump(returnData,diskOffset)
+        iBlockNum = int(blockNum)
+        print("Request for block: ",hex(iBlockNum))
+        returnData=bytes(diskData[iBlockNum].bytes)
+        returnMetaData = base64.b64encode(diskData[iBlockNum].metadata)
 
         response = make_response(returnData,200)
         response.headers.set('Content-Type', 'application/octet-stream')
+        response.headers.set('Block-Metadata', returnMetaData)
         return response
 
-@app.route('/WriteBlockFromOffset', methods=['POST'])
+@app.route('/WriteBlock', methods=['POST'])
 def write_sector():
     print("Content Length: ",request.content_length)
     print("Content Type  : ", request.content_type)
     print("Headers       : ", request.headers)
 
-    offset=request.headers['offset']
+    offset=request.headers['Block-Num']
+    metadata=request.headers['Block-Metadata']
 
-    if not offset:
+    if not offset or not metadata:
         response=make_response(jsonify({'error': 'write request is not valid'}),400)
         return response
     else:
-        blockOffset=int(offset)
-        chunk = request.stream.read(request.content_length)    # read a sector
-
-        print("chunk type: ",type(chunk))
-        print("chunk len : ",len(chunk))
-
-        print("save ",len(chunk),"bytes to ",hex(blockOffset))
-
-        crc=0
-        for val in chunk:
-            crc=crc+val
-            crc=crc & 0xffff
-
-        print("CRC", hex(crc))
-
-        print('Update disk image')
-        # update the disk image
-        diskData[blockOffset: blockOffset+len(chunk)]=chunk
-
-        print('---------------------------------------------------------')
-
-        memoryCRC()
-        hexDump(chunk,blockOffset)
-
-        print('validate new CRC')
-        validateCRC=0
-        for x in range(request.content_length):
-            validateCRC=validateCRC+diskData[blockOffset+x]
-            validateCRC=validateCRC & 0xffff
-
-        print("Validate CRC", hex(validateCRC))
-
         response=make_response("OK",200)
         return response
 
