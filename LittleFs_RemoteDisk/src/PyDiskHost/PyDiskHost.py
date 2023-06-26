@@ -31,8 +31,8 @@ print("Disk: {:d} x {:d} bytes = {:d} bytes".format(BLOCK_COUNT, BLOCK_SIZE, DIS
 
 class Block:
     def __init__(self):
-        self.bytes = bytearray(BLOCK_SIZE)
-        self.metadata = bytearray(METADATA_SIZE)
+        self.bytes = bytes(BLOCK_SIZE)
+        self.metadata = bytes(METADATA_SIZE)
 
 Disk = list[Block]
 
@@ -52,9 +52,14 @@ def query_sector():
         return response
     else:
         iBlockNum = int(blockNum)
-        print("Request for block: ",hex(iBlockNum))
-        returnData=bytes(diskData[iBlockNum].bytes)
-        returnMetaData = base64.b64encode(diskData[iBlockNum].metadata)
+        returnData=diskData[iBlockNum].bytes
+        metaData = diskData[iBlockNum].metadata
+        returnMetaData = base64.b64encode(metaData)
+
+        print("Read block {:d}".format(iBlockNum))
+        hexDump(returnData, 0)
+        print("Metadata:")
+        hexDump(metaData, 0)
 
         response = make_response(returnData,200)
         response.headers.set('Content-Type', 'application/octet-stream')
@@ -66,26 +71,31 @@ def write_sector():
     print("Content Length: ",request.content_length)
     print("Content Type  : ", request.content_type)
     print("Headers       : ", request.headers)
-
-    offset=request.headers['Block-Num']
-    metadata=request.headers['Block-Metadata']
-
-    if not offset or not metadata:
-        response=make_response(jsonify({'error': 'write request is not valid'}),400)
+    
+    headers = request.headers.keys()
+    if not "Block-Num" in headers or not "Block-Metadata" in headers:
+        response=make_response(jsonify({'error': 'Missing block number or metadata'}),400)
         return response
-    else:
-        response=make_response("OK",200)
+    
+    data = request.stream.read()
+    if len(data) != BLOCK_SIZE:
+        response=make_response(jsonify({'error': 'Incorrect data size for block write'}),400)
         return response
 
-@app.route('/WriteDisk', methods=['GET'])
-def write_disk():
-    fp=open("TestDisk.dsk","wb")
-    fp.write(diskData)
-    fp.close()
+    blockNum=int(request.headers['Block-Num'])
+    metadata=base64.decodebytes(request.headers['Block-Metadata'])
 
-    response=make_response(jsonify({'write': 'ok'}),200)
+    diskData[blockNum].metadata = metadata
+    diskData[blockNum].bytes = data
+
+    print("Write block {%d}:".format(blockNum))
+    hexDump(data, 0)
+    print("Metadata:")
+    hexDump(metadata, 0)
+
+    response=make_response("OK",200)
     return response
-
+    
 def hexDump(data, offset, banner=False):
     linebreak=0
     lineCounter=0
