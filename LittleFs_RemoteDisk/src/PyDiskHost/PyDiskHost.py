@@ -48,47 +48,44 @@ def query_sector():
     blockNum = request.args.get('block')
 
     if not blockNum:
-        response=make_response(jsonify({'error': 'read request is not valid'}),400)
+        response=make_response(jsonify({'error': 'Missing block arg in block read'}),400)
         return response
     else:
         iBlockNum = int(blockNum)
-        returnData=diskData[iBlockNum].bytes
+        data=diskData[iBlockNum].bytes
         metaData = diskData[iBlockNum].metadata
-        returnMetaData = base64.b64encode(metaData)
 
         print("Read block {:d}".format(iBlockNum))
-        hexDump(returnData, 0)
+        hexDump(data, 0)
         print("Metadata:")
         hexDump(metaData, 0)
 
-        response = make_response(returnData,200)
+        responseData = data + metaData
+        response = make_response(responseData,200)
         response.headers.set('Content-Type', 'application/octet-stream')
-        response.headers.set('Block-Metadata', returnMetaData)
         return response
 
 @app.route('/WriteBlock', methods=['POST'])
 def write_sector():
-    print("Content Length: ",request.content_length)
-    print("Content Type  : ", request.content_type)
-    print("Headers       : ", request.headers)
+    blockNum = request.args.get('block')
     
-    headers = request.headers.keys()
-    if not "Block-Num" in headers or not "Block-Metadata" in headers:
-        response=make_response(jsonify({'error': 'Missing block number or metadata'}),400)
+    if not blockNum:
+        response=make_response(jsonify({'error': 'Missing block arg in block write'}),400)
         return response
-    
+
     data = request.stream.read()
-    if len(data) != BLOCK_SIZE:
-        response=make_response(jsonify({'error': 'Incorrect data size for block write'}),400)
+    if len(data) != BLOCK_SIZE + METADATA_SIZE:
+        response=make_response(jsonify({'error': 'Incorrect data size {:d} bytes for block write'.format(len(data))}),400)
         return response
 
-    blockNum=int(request.headers['Block-Num'])
-    metadata=base64.decodebytes(request.headers['Block-Metadata'])
+    blockdata = data[:BLOCK_SIZE]
+    metadata = data[BLOCK_SIZE:]
 
-    diskData[blockNum].metadata = metadata
-    diskData[blockNum].bytes = data
+    iBlockNum = int(blockNum) 
+    diskData[iBlockNum].metadata = metadata
+    diskData[iBlockNum].bytes = blockdata
 
-    print("Write block {%d}:".format(blockNum))
+    print("Write block {:d}:".format(iBlockNum))
     hexDump(data, 0)
     print("Metadata:")
     hexDump(metadata, 0)
