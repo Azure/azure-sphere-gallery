@@ -12,7 +12,6 @@
 #include "remoteDiskIO.h"
 
 static uint8_t readBuffer[4096];
-
 // Curl stuff.
 struct url_data {
 	size_t size;
@@ -20,7 +19,7 @@ struct url_data {
 };
 
 struct WriteThis {
-	const char* readptr;
+	const void* readptr;
 	size_t sizeleft;
 };
 
@@ -45,11 +44,11 @@ static size_t writeCallback(void* ptr, size_t size, size_t nmemb, struct url_dat
 	return n;
 }
 
-static const char *readUrl = "http://%s:5000/ReadBlockFromOffset?offset=%u&size=%u";
+static const char *readUrl = "http://%s:5000/ReadBlock?block=%u";
 
-uint8_t* readBlockData(uint32_t offset, uint32_t size)
+int readBlockData(uint32_t blockNum, StorageBlock* block)
 {
-	snprintf(urlBuffer, 255, readUrl, PC_HOST_IP, offset, size);
+	snprintf(urlBuffer, 255, readUrl, PC_HOST_IP, blockNum);
 
 	// use fixed buffer, reduce the number of mallocs.
 	data.size = 0;
@@ -73,11 +72,15 @@ uint8_t* readBlockData(uint32_t offset, uint32_t size)
 
 	if (res == CURLE_OK)
 	{
-		// caller is responsible for freeing this.
-		return data.data;
+		if (data.size != STORAGE_BLOCK_SIZE + STORAGE_METADATA_SIZE) {
+			memset(block, 0, sizeof(StorageBlock));
+			return -1;
+		}
+		memcpy(block, data.data, STORAGE_BLOCK_SIZE + STORAGE_METADATA_SIZE);
+		return 0;
 	}
 
-	return NULL;
+	return -1;
 }
 
 static size_t readCallback(char* dest, size_t size, size_t nmemb, void* userp)
@@ -100,9 +103,9 @@ static size_t readCallback(char* dest, size_t size, size_t nmemb, void* userp)
 	return 0; /* no more data left to deliver */
 }
 
-static char* writeBlockURL = "http://%s:5000/WriteBlockFromOffset";
+static char* writeBlockURL = "http://%s:5000/WriteBlock?block=%u";
 
-int writeBlockData(const uint8_t* sectorData, uint32_t size, uint32_t offset)
+int writeBlockData(uint32_t blockNum, const StorageBlock* sectorData)
 {
 	CURL* curl;
 	CURLcode res = -1;
@@ -110,10 +113,10 @@ int writeBlockData(const uint8_t* sectorData, uint32_t size, uint32_t offset)
 
 	struct WriteThis wt;
 
-	wt.readptr = sectorData;
-	wt.sizeleft = size;
+	wt.readptr = (void*)sectorData;
+	wt.sizeleft = sizeof(StorageBlock);
 
-	snprintf(urlBuffer, 255, writeBlockURL, PC_HOST_IP);
+	snprintf(urlBuffer, 255, writeBlockURL, PC_HOST_IP, blockNum);
 
 	curl = curl_easy_init();
 	if (curl)
@@ -137,10 +140,6 @@ int writeBlockData(const uint8_t* sectorData, uint32_t size, uint32_t offset)
 		curl_easy_setopt(curl, CURLOPT_CAINFO, NULL);
 
 		struct curl_slist* hs = NULL;
-		char tBuff[50];
-		memset(&tBuff[0], 0x00, 50);
-		snprintf(tBuff, 50, "offset: %d", offset);
-		hs = curl_slist_append(hs, tBuff);
 		hs = curl_slist_append(hs, "Content-Type: application/octet-stream");
 		hs = curl_slist_append(hs, "Expect:");
 		curl_easy_setopt(curl, CURLOPT_HTTPHEADER, hs);
