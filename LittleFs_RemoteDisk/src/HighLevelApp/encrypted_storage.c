@@ -67,7 +67,7 @@ static int storage_read(const struct lfs_config* c, lfs_block_t block, lfs_off_t
             retval = LFS_ERR_INVAL;
             goto exit;
         }
-        memcpy(buffer + (STORAGE_BLOCK_SIZE * index), &storageblock.block, sizeof(STORAGE_BLOCK_SIZE));
+        memcpy(buffer + (STORAGE_BLOCK_SIZE * index), &storageblock.block, STORAGE_BLOCK_SIZE);
         blocks --;
         index ++;
     }
@@ -116,7 +116,7 @@ static int storage_program(const struct lfs_config* c, lfs_block_t block, lfs_of
     int retval = LFS_ERR_OK;
     size_t index = 0;
     while (blocks > 0) {
-        memcpy(&storageblock.block, buffer + (STORAGE_BLOCK_SIZE * index), sizeof(STORAGE_BLOCK_SIZE));
+        memcpy(&storageblock.block, buffer + (STORAGE_BLOCK_SIZE * index), STORAGE_BLOCK_SIZE);
 
         int result = writeBlockData(block_num + index, &storageblock);
 
