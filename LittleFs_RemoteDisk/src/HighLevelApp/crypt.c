@@ -22,7 +22,6 @@ const size_t StorageTotalSize = StorageHeaderSize + KeyIVSize;
 
 static int openAndCheckStorage(bool* hasKeyIV)
 {
-    Log_Debug("[INFO] ENTER openAndCheckStorage\n");
     int storageFd = Storage_OpenMutableFile();
     *hasKeyIV = false;
 
@@ -60,7 +59,6 @@ exit:
 
 static int createKeyAndIV(int storageFd)
 {
-    Log_Debug("[INFO] ENTER createKeyAndIV\n");
     if (storageFd <= 0) {
         return -1;
     }
@@ -89,7 +87,6 @@ static int createKeyAndIV(int storageFd)
 
 static int getKeyAndIV(int storageFd, KeyIV* kv)
 {
-    Log_Debug("[INFO] ENTER getKeyAndIV\n");
     if (storageFd <= 0) {
         return -1;
     }
@@ -98,9 +95,7 @@ static int getKeyAndIV(int storageFd, KeyIV* kv)
         return -1;
     }
 
-    Log_Debug("INFO: Seeking to %x\n", KeyIVOffset);
     off_t pos = lseek(storageFd, KeyIVOffset, SEEK_SET);
-    Log_Debug("INFO: Reading %x bytes of key/IV at %x\n", sizeof(KeyIV), pos);
 
     if (pos != KeyIVOffset) { 
         Log_Debug("[ERROR] Could not seek to key/IV offset in storage\n");
@@ -118,7 +113,6 @@ static int getKeyAndIV(int storageFd, KeyIV* kv)
 
 int Crypt_GetOrCreateKeyAndIV(KeyIV* kv)
 {
-    Log_Debug("[INFO] ENTER GetOrCreateGetAndIV\n");
     bool hasKeyIV;
     int storageFd = openAndCheckStorage(&hasKeyIV);
 
