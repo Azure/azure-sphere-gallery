@@ -37,7 +37,6 @@ const struct lfs_config g_littlefs_config = {
 static int storage_read(const struct lfs_config* c, lfs_block_t block, lfs_off_t off, void* buffer, lfs_size_t size)
 {
     static StorageBlock storageblock;
-    // static byte authTag[CHACHA20_POLY1305_AEAD_AUTHTAG_SIZE] = { 0 };
     KeyIV iv;
     if (Crypt_GetOrCreateKeyAndIV(&iv) != 0) {
         return LFS_ERR_INVAL;
@@ -68,18 +67,19 @@ static int storage_read(const struct lfs_config* c, lfs_block_t block, lfs_off_t
             retval = LFS_ERR_INVAL;
             goto exit;
         }
-        memcpy(buffer + (STORAGE_BLOCK_SIZE * index), &storageblock.block, STORAGE_BLOCK_SIZE);
+
+        void* dest = buffer + (STORAGE_BLOCK_SIZE * index);
+        if (wc_ChaCha20Poly1305_Decrypt(iv.key, iv.iv,
+                                        0, 0,
+                                        storageblock.block, STORAGE_BLOCK_SIZE,
+                                        storageblock.metadata, dest) != 0) {
+            memset(dest, 0, STORAGE_BLOCK_SIZE);
+            Log_Debug("WARN: Unable to decrypt block %d\n", storage_block_num + index);
+            // result = LFS_ERR_INVAL;
+        }
         storage_blocks --;
         index ++;
     }
-
-    // if (data != NULL)
-    // {
-    //     if (wc_ChaCha20Poly1305_Decrypt(iv.key, iv.iv, 0, 0, data, size, authTag, buffer) != 0) {
-    //         memset(buffer, 0, size);
-    //         // result = LFS_ERR_INVAL;
-    //     }
-    // }
 
 exit:
     memset(&storageblock, 0, sizeof(StorageBlock));
@@ -90,13 +90,7 @@ exit:
 static int storage_program(const struct lfs_config* c, lfs_block_t block, lfs_off_t off, const void* buffer, lfs_size_t size)
 {
     static StorageBlock storageblock;
-    // static byte authTag[CHACHA20_POLY1305_AEAD_AUTHTAG_SIZE] = { 0 };
-    // static byte ciphertext[BLOCK_SIZE];
     KeyIV iv;
-
-    // if (size > BLOCK_SIZE) {
-    //     return LFS_ERR_INVAL;
-    // }
 
     if (Crypt_GetOrCreateKeyAndIV(&iv) != 0) {
         return LFS_ERR_INVAL;
@@ -120,7 +114,15 @@ static int storage_program(const struct lfs_config* c, lfs_block_t block, lfs_of
     int retval = LFS_ERR_OK;
     size_t index = 0;
     while (storage_blocks > 0) {
-        memcpy(&storageblock.block, buffer + (STORAGE_BLOCK_SIZE * index), STORAGE_BLOCK_SIZE);
+        const void *src = buffer + (STORAGE_BLOCK_SIZE * index);
+        if (wc_ChaCha20Poly1305_Encrypt(iv.key, iv.iv,
+                                        0, 0,
+                                        src, STORAGE_BLOCK_SIZE,
+                                        &storageblock.block, &storageblock.metadata) != 0) {
+            Log_Debug("WARN: Unable to encrypt block %d\n", storage_block_num + index);
+            retval = LFS_ERR_INVAL;
+            goto exit;
+        }
 
         int result = writeBlockData(storage_block_num + index, &storageblock);
 
@@ -131,9 +133,6 @@ static int storage_program(const struct lfs_config* c, lfs_block_t block, lfs_of
         storage_blocks --;
         index ++;
     }
-    // if (wc_ChaCha20Poly1305_Encrypt(iv.key, iv.iv, 0, 0, buffer, size, ciphertext, authTag) != 0) {
-    //     result = LFS_ERR_INVAL;
-    // } else {
     // }
 
 exit:

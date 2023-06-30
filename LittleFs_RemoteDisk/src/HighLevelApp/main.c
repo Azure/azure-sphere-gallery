@@ -20,8 +20,16 @@ int main(void)
 {
     static lfs_t lfs;
     static lfs_file_t file;
-    static char* content = "Test";
-    static char buffer[512] = { 0 };
+    static char* content = 
+"0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"
+"0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"
+"0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"
+"0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"
+"0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"
+"0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"
+"0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"
+"foobarbaz";
+    static char buffer[1024] = { 0 };
 
     // initialize Curl based on whether ENABLE_CURL_MEMORY_TRACE is defined or not
     initCurl();
@@ -43,12 +51,14 @@ int main(void)
     Log_Debug("Open File 'test.txt'\n");
     assert(lfs_file_open(&lfs, &file, "test.txt", LFS_O_RDWR | LFS_O_CREAT) == LFS_ERR_OK);
     Log_Debug("Write to the file\n");
-    assert(lfs_file_write(&lfs, &file, content, strlen(content)) == 4);
+    assert(lfs_file_write(&lfs, &file, content, strlen(content)) == strlen(content));
     Log_Debug("Seek to the start of the file\n");
     assert(lfs_file_seek(&lfs, &file, 0, LFS_SEEK_SET) == 0);
     Log_Debug("Read from the file\n"); 
-    assert(lfs_file_read(&lfs, &file, buffer, 512) == 4);
+    int read_len = lfs_file_read(&lfs, &file, buffer, sizeof(buffer));
+    Log_Debug("%d = %d?\n", read_len, strlen(content));
     Log_Debug("Read content = %s\n", buffer);
+    assert(read_len == strlen(content));
     Log_Debug("Close the file\n");
     assert(lfs_file_close(&lfs, &file) == LFS_ERR_OK);
 
