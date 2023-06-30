@@ -31,14 +31,12 @@ print("Disk: {:d} x {:d} bytes = {:d} bytes".format(BLOCK_COUNT, BLOCK_SIZE, DIS
 
 class Block:
     def __init__(self):
-        self.bytes = bytes(BLOCK_SIZE)
+        self.data = bytes(BLOCK_SIZE)
         self.metadata = bytes(METADATA_SIZE)
-
-Disk = list[Block]
 
 # create empty 'disk'
 # could easily modify this to read from a file
-diskData: Disk = [Block()] * BLOCK_COUNT
+diskData = [Block() for _ in range(0, BLOCK_COUNT) ]
 
 # -------------------------------------------------------------------------------------
 # Block level read and write.
@@ -52,7 +50,7 @@ def query_sector():
         return response
     else:
         iBlockNum = int(blockNum)
-        data=diskData[iBlockNum].bytes
+        data     = diskData[iBlockNum].data
         metaData = diskData[iBlockNum].metadata
 
         print("Read block {:d}".format(iBlockNum))
@@ -73,22 +71,22 @@ def write_sector():
         response=make_response(jsonify({'error': 'Missing block arg in block write'}),400)
         return response
 
-    data = request.stream.read()
-    if len(data) != BLOCK_SIZE + METADATA_SIZE:
-        response=make_response(jsonify({'error': 'Incorrect data size {:d} bytes for block write'.format(len(data))}),400)
+    requestdata = request.stream.read()
+    if len(requestdata) != BLOCK_SIZE + METADATA_SIZE:
+        response=make_response(jsonify({'error': 'Incorrect data size {:d} bytes for block write'.format(len(requestdata))}),400)
         return response
 
-    blockdata = data[:BLOCK_SIZE]
-    metadata = data[BLOCK_SIZE:]
+    data = requestdata[:BLOCK_SIZE]
+    metadata = requestdata[BLOCK_SIZE:]
 
     iBlockNum = int(blockNum) 
     diskData[iBlockNum].metadata = metadata
-    diskData[iBlockNum].bytes = blockdata
+    diskData[iBlockNum].data = data
 
     print("Write block {:d}:".format(iBlockNum))
-    hexDump(data, 0)
+    hexDump(diskData[iBlockNum].data, 0)
     print("Metadata:")
-    hexDump(metadata, 0)
+    hexDump(diskData[iBlockNum].metadata, 0)
 
     response=make_response("OK",200)
     return response
