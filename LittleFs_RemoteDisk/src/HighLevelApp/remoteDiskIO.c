@@ -11,23 +11,20 @@
 #include "crypt.h"
 #include "remoteDiskIO.h"
 
-static uint8_t readBuffer[4096];
+static uint8_t readBuffer[STORAGE_BLOCK_SIZE + STORAGE_METADATA_SIZE + 64];
+
+// Check there's no padding in the struct
+_Static_assert(sizeof(StorageBlock) == STORAGE_BLOCK_SIZE + STORAGE_METADATA_SIZE);
+
 // Curl stuff.
-struct url_data {
-	size_t size;
+typedef struct {
 	uint8_t* data;
-};
+	size_t size;
+} Transfer;
 
-struct WriteThis {
-	const void* readptr;
-	size_t sizeleft;
-};
+static char UrlBuffer[255];
 
-struct url_data data;
-
-static char urlBuffer[255];
-
-static size_t writeCallback(void* ptr, size_t size, size_t nmemb, struct url_data* data)
+static size_t writeCallback(void* ptr, size_t size, size_t nmemb, Transfer* data)
 {
 	size_t index = data->size;
 	size_t n = (size * nmemb);
@@ -48,20 +45,21 @@ static const char *readUrl = "http://%s:5000/ReadBlock?block=%u";
 
 int readBlockData(uint32_t blockNum, StorageBlock* block)
 {
-	snprintf(urlBuffer, 255, readUrl, PC_HOST_IP, blockNum);
+	static Transfer transfer;
+	snprintf(UrlBuffer, 255, readUrl, PC_HOST_IP, blockNum);
 
 	// use fixed buffer, reduce the number of mallocs.
-	data.size = 0;
-	data.data = &readBuffer[0];
+	transfer.size = 0;
+	transfer.data = &readBuffer[0];
 
 	CURLcode res = CURLE_OK;
 
 	CURL* curl = curl_easy_init();
-	curl_easy_setopt(curl, CURLOPT_URL, urlBuffer);
+	curl_easy_setopt(curl, CURLOPT_URL, UrlBuffer);
 	/* use a GET to fetch data */
 	curl_easy_setopt(curl, CURLOPT_HTTPGET, 1L);
 	curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, writeCallback);
-	curl_easy_setopt(curl, CURLOPT_WRITEDATA, &data);
+	curl_easy_setopt(curl, CURLOPT_WRITEDATA, &transfer);
 
 	// based on the libcurl sample - https://curl.se/libcurl/c/https.html 
 	curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0L);
@@ -72,31 +70,30 @@ int readBlockData(uint32_t blockNum, StorageBlock* block)
 
 	if (res == CURLE_OK)
 	{
-		if (data.size != STORAGE_BLOCK_SIZE + STORAGE_METADATA_SIZE) {
+		if (transfer.size != STORAGE_BLOCK_SIZE + STORAGE_METADATA_SIZE) {
 			memset(block, 0, sizeof(StorageBlock));
 			return -1;
 		}
-		memcpy(block, data.data, STORAGE_BLOCK_SIZE + STORAGE_METADATA_SIZE);
+		memcpy(block, transfer.data, STORAGE_BLOCK_SIZE + STORAGE_METADATA_SIZE);
 		return 0;
 	}
 
 	return -1;
 }
 
-static size_t readCallback(char* dest, size_t size, size_t nmemb, void* userp)
+static size_t readCallback(char* dest, size_t size, size_t nmemb, Transfer* transfer)
 {
-	struct WriteThis* wt = (struct WriteThis*)userp;
 	size_t buffer_size = size * nmemb;
 
-	if (wt->sizeleft) {
+	if (transfer->size) {
 		/* copy as much as possible from the source to the destination */
-		size_t copy_this_much = wt->sizeleft;
+		size_t copy_this_much = transfer->size;
 		if (copy_this_much > buffer_size)
 			copy_this_much = buffer_size;
-		memcpy(dest, wt->readptr, copy_this_much);
+		memcpy(dest, transfer->data, copy_this_much);
 
-		wt->readptr += copy_this_much;
-		wt->sizeleft -= copy_this_much;
+		transfer->data += copy_this_much;
+		transfer->size -= copy_this_much;
 		return copy_this_much; /* we copied this many bytes */
 	}
 
@@ -107,28 +104,26 @@ static char* writeBlockURL = "http://%s:5000/WriteBlock?block=%u";
 
 int writeBlockData(uint32_t blockNum, const StorageBlock* sectorData)
 {
+	static Transfer transfer;
 	CURL* curl;
 	CURLcode res = -1;
-	
 
-	struct WriteThis wt;
+	transfer.data = (void*)sectorData;
+	transfer.size = sizeof(StorageBlock);
 
-	wt.readptr = (void*)sectorData;
-	wt.sizeleft = sizeof(StorageBlock);
-
-	snprintf(urlBuffer, 255, writeBlockURL, PC_HOST_IP, blockNum);
+	snprintf(UrlBuffer, 255, writeBlockURL, PC_HOST_IP, blockNum);
 
 	curl = curl_easy_init();
 	if (curl)
 	{
 		// curl_easy_setopt(curl, CURLOPT_VERBOSE, 1L);
-		curl_easy_setopt(curl, CURLOPT_URL, urlBuffer);
+		curl_easy_setopt(curl, CURLOPT_URL, UrlBuffer);
 
 		curl_easy_setopt(curl, CURLOPT_POST, 1);
 		curl_easy_setopt(curl, CURLOPT_READFUNCTION, readCallback);
-		curl_easy_setopt(curl, CURLOPT_READDATA, &wt);
+		curl_easy_setopt(curl, CURLOPT_READDATA, &transfer);
 
-		curl_easy_setopt(curl, CURLOPT_POSTFIELDSIZE, (long)wt.sizeleft);
+		curl_easy_setopt(curl, CURLOPT_POSTFIELDSIZE, (long)transfer.size);
 
 		curl_easy_setopt(curl, CURLOPT_CONNECTTIMEOUT, (long)5);
 		curl_easy_setopt(curl, CURLOPT_DNS_CACHE_TIMEOUT, -1);

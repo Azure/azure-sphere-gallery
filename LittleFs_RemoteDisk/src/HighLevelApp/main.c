@@ -21,14 +21,11 @@ int main(void)
     static lfs_t lfs;
     static lfs_file_t file;
     static char* content = 
-"0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"
-"0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"
-"0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"
-"0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"
-"0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"
-"0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"
-"0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"
-"foobarbaz";
+"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+"Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure"
+"dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non"
+"proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
+
     static char buffer[1024] = { 0 };
 
     // initialize Curl based on whether ENABLE_CURL_MEMORY_TRACE is defined or not
@@ -56,8 +53,7 @@ int main(void)
     assert(lfs_file_seek(&lfs, &file, 0, LFS_SEEK_SET) == 0);
     Log_Debug("Read from the file\n"); 
     int read_len = lfs_file_read(&lfs, &file, buffer, sizeof(buffer));
-    Log_Debug("%d = %d?\n", read_len, strlen(content));
-    Log_Debug("Read content = %s\n", buffer);
+    Log_Debug("Read %d bytes of content = %s\n", read_len, buffer);
     assert(read_len == strlen(content));
     Log_Debug("Close the file\n");
     assert(lfs_file_close(&lfs, &file) == LFS_ERR_OK);
