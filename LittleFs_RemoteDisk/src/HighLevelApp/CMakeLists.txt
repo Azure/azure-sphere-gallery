@@ -23,6 +23,9 @@ target_link_libraries(${PROJECT_NAME} applibs gcc_s c curl wolfssl)
 # Enable/Disable Curl memory tracking
 # add_compile_definitions(ENABLE_CURL_MEMORY_TRACE)
 
+# Enabled debug logging for encrypted storage
+# add_compile_definitions(ENCRYPTED_STORAGE_DEBUG)
+
 # // TODO: define the PC HOST IP Address
 add_compile_definitions(PC_HOST_IP="")
 

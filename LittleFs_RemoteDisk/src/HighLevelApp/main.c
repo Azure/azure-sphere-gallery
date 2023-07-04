@@ -26,7 +26,7 @@ int main(void)
 "dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non"
 "proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
 
-    static char buffer[1024] = { 0 };
+    static char buffer[512] = { 0 };
 
     // initialize Curl based on whether ENABLE_CURL_MEMORY_TRACE is defined or not
     initCurl();
