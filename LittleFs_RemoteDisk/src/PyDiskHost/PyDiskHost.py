@@ -5,7 +5,6 @@
 # encoding: utf-8
 import json
 import os
-import base64
 from pathlib import Path
 from flask import Flask, request, jsonify, make_response, session
 import datetime
@@ -21,76 +20,100 @@ app = Flask(__name__)
 
 print("Python disk host")
 
-DISK_SIZE = 4 * 1024 * 1024
-BLOCK_SIZE = 256 
-METADATA_SIZE = 16
-assert(DISK_SIZE % BLOCK_SIZE == 0)
-BLOCK_COUNT = DISK_SIZE // BLOCK_SIZE
-
-print("Disk: {:d} x {:d} bytes = {:d} bytes".format(BLOCK_COUNT, BLOCK_SIZE, DISK_SIZE))
-
-class Block:
-    def __init__(self):
-        self.data = bytes(BLOCK_SIZE)
-        self.metadata = bytes(METADATA_SIZE)
-
 # create empty 'disk'
 # could easily modify this to read from a file
-diskData = [Block() for _ in range(0, BLOCK_COUNT) ]
+diskData=bytearray(4194304)
+print("data length",len(diskData))
+
+print('startup memory CRC')
+memoryCRC()
 
 # -------------------------------------------------------------------------------------
 # Block level read and write.
 
-@app.route('/ReadBlock', methods=['GET'])
+@app.route('/ReadBlockFromOffset', methods=['GET'])
 def query_sector():
-    blockNum = request.args.get('block')
+    offset = request.args.get('offset')
+    size= request.args.get('size')
 
-    if not blockNum:
-        response=make_response(jsonify({'error': 'Missing block arg in block read'}),400)
+    if not offset or not size:
+        response=make_response(jsonify({'error': 'read request is not valid'}),400)
         return response
     else:
-        iBlockNum = int(blockNum)
-        data     = diskData[iBlockNum].data
-        metaData = diskData[iBlockNum].metadata
+        diskOffset=int(offset)
+        blockSize=int(size)
 
-        print("Read block {:d}".format(iBlockNum))
-        hexDump(data, 0)
-        print("Metadata:")
-        hexDump(metaData, 0)
+        print("Request for offset: ",hex(diskOffset))
+        returnData=diskData[diskOffset:diskOffset+blockSize]
 
-        responseData = data + metaData
-        response = make_response(responseData,200)
+        crc=0
+        for val in returnData:
+            crc=crc+val
+            crc=crc & 0xffff
+
+        print("Read CRC", hex(crc))
+        hexDump(returnData,diskOffset)
+
+        response = make_response(returnData,200)
         response.headers.set('Content-Type', 'application/octet-stream')
         return response
 
-@app.route('/WriteBlock', methods=['POST'])
+@app.route('/WriteBlockFromOffset', methods=['POST'])
 def write_sector():
-    blockNum = request.args.get('block')
-    
-    if not blockNum:
-        response=make_response(jsonify({'error': 'Missing block arg in block write'}),400)
+    print("Content Length: ",request.content_length)
+    print("Content Type  : ", request.content_type)
+    print("Headers       : ", request.headers)
+
+    offset=request.headers['offset']
+
+    if not offset:
+        response=make_response(jsonify({'error': 'write request is not valid'}),400)
+        return response
+    else:
+        blockOffset=int(offset)
+        chunk = request.stream.read(request.content_length)    # read a sector
+
+        print("chunk type: ",type(chunk))
+        print("chunk len : ",len(chunk))
+
+        print("save ",len(chunk),"bytes to ",hex(blockOffset))
+
+        crc=0
+        for val in chunk:
+            crc=crc+val
+            crc=crc & 0xffff
+
+        print("CRC", hex(crc))
+
+        print('Update disk image')
+        # update the disk image
+        diskData[blockOffset: blockOffset+len(chunk)]=chunk
+
+        print('---------------------------------------------------------')
+
+        memoryCRC()
+        hexDump(chunk,blockOffset)
+
+        print('validate new CRC')
+        validateCRC=0
+        for x in range(request.content_length):
+            validateCRC=validateCRC+diskData[blockOffset+x]
+            validateCRC=validateCRC & 0xffff
+
+        print("Validate CRC", hex(validateCRC))
+
+        response=make_response("OK",200)
         return response
 
-    requestdata = request.stream.read()
-    if len(requestdata) != BLOCK_SIZE + METADATA_SIZE:
-        response=make_response(jsonify({'error': 'Incorrect data size {:d} bytes for block write'.format(len(requestdata))}),400)
-        return response
+@app.route('/WriteDisk', methods=['GET'])
+def write_disk():
+    fp=open("TestDisk.dsk","wb")
+    fp.write(diskData)
+    fp.close()
 
-    data = requestdata[:BLOCK_SIZE]
-    metadata = requestdata[BLOCK_SIZE:]
-
-    iBlockNum = int(blockNum) 
-    diskData[iBlockNum].metadata = metadata
-    diskData[iBlockNum].data = data
-
-    print("Write block {:d}:".format(iBlockNum))
-    hexDump(diskData[iBlockNum].data, 0)
-    print("Metadata:")
-    hexDump(diskData[iBlockNum].metadata, 0)
-
-    response=make_response("OK",200)
+    response=make_response(jsonify({'write': 'ok'}),200)
     return response
-    
+
 def hexDump(data, offset, banner=False):
     linebreak=0
     lineCounter=0

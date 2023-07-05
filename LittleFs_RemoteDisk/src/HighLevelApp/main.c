@@ -10,24 +10,77 @@
 #include <applibs/gpio.h>
 #include <applibs/networking.h>
 #include <signal.h>
-#include <assert.h>
+
+#include "remoteDiskIO.h"
 
 #include "littlefs/lfs.h"
+#include "littlefs/lfs_util.h"
+#include <assert.h>
 #include "curlFunctions.h"
-#include "encrypted_storage.h"
+
+// 4MB Storage.
+#define PAGE_SIZE     (256)
+#define SECTOR_SIZE   (16 * PAGE_SIZE)
+#define BLOCK_SIZE    (16 * SECTOR_SIZE)
+#define TOTAL_SIZE    (64 * BLOCK_SIZE)
+
+static int storage_read(const struct lfs_config* c, lfs_block_t block, lfs_off_t off, void* buffer, lfs_size_t size);
+static int storage_program(const struct lfs_config* c, lfs_block_t block, lfs_off_t off, const void* buffer, lfs_size_t size);
+static int storage_erase(const struct lfs_config* c, lfs_block_t block);
+static int storage_sync(const struct lfs_config* c);
+
+static lfs_t lfs;
+static lfs_file_t file;
+
+char* content = "Test";
+char buffer[512] = { 0 };
+
+const struct lfs_config g_littlefs_config = {
+    // block device operations
+    .read = storage_read,
+    .prog = storage_program,
+    .erase = storage_erase,
+    .sync = storage_sync,
+    .read_size = 16,
+    .prog_size = PAGE_SIZE,
+    .block_size = SECTOR_SIZE,
+    .block_count = TOTAL_SIZE / SECTOR_SIZE,
+    .block_cycles = 1000000,
+    .cache_size = PAGE_SIZE,
+    .lookahead_size = 16,
+};
+
+static int storage_read(const struct lfs_config* c, lfs_block_t block, lfs_off_t off, void* buffer, lfs_size_t size)
+{
+    uint8_t* data = readBlockData(off, size);
+
+    if (data != NULL)
+    {
+        memcpy(buffer, data, size);
+    }
+
+    return LFS_ERR_OK;
+}
+
+static int storage_program(const struct lfs_config* c, lfs_block_t block, lfs_off_t off, const void* buffer, lfs_size_t size)
+{
+    writeBlockData(buffer, size, off);
+
+    return LFS_ERR_OK;
+}
+
+static int storage_erase(const struct lfs_config* c, lfs_block_t block)
+{
+    return LFS_ERR_OK;
+}
+
+static int storage_sync(const struct lfs_config* c)
+{
+    return LFS_ERR_OK;
+}
 
 int main(void)
 {
-    static lfs_t lfs;
-    static lfs_file_t file;
-    static char* content = 
-"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-"Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure"
-"dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non"
-"proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
-
-    static char buffer[512] = { 0 };
-
     // initialize Curl based on whether ENABLE_CURL_MEMORY_TRACE is defined or not
     initCurl();
 
@@ -48,13 +101,12 @@ int main(void)
     Log_Debug("Open File 'test.txt'\n");
     assert(lfs_file_open(&lfs, &file, "test.txt", LFS_O_RDWR | LFS_O_CREAT) == LFS_ERR_OK);
     Log_Debug("Write to the file\n");
-    assert(lfs_file_write(&lfs, &file, content, strlen(content)) == strlen(content));
+    assert(lfs_file_write(&lfs, &file, content, strlen(content)) == 4);
     Log_Debug("Seek to the start of the file\n");
     assert(lfs_file_seek(&lfs, &file, 0, LFS_SEEK_SET) == 0);
     Log_Debug("Read from the file\n"); 
-    int read_len = lfs_file_read(&lfs, &file, buffer, sizeof(buffer));
-    Log_Debug("Read %d bytes of content = %s\n", read_len, buffer);
-    assert(read_len == strlen(content));
+    assert(lfs_file_read(&lfs, &file, buffer, 512) == 4);
+    Log_Debug("Read content = %s\n", buffer);
     Log_Debug("Close the file\n");
     assert(lfs_file_close(&lfs, &file) == LFS_ERR_OK);
 

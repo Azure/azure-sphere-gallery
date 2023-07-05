@@ -1,30 +1,31 @@
 /* Copyright (c) Microsoft Corporation. All rights reserved.
    Licensed under the MIT License. */
 
-#include <stdint.h>
+#include "remoteDiskIO.h"
+#include "stdint.h"
 #include <curl/curl.h>
 #include <curl/easy.h>
-#include <wolfssl/wolfcrypt/chacha20_poly1305.h>
 #include <stdlib.h>
 #include <string.h>
 
-#include "crypt.h"
-#include "remoteDiskIO.h"
-
-static uint8_t readBuffer[STORAGE_BLOCK_SIZE + STORAGE_METADATA_SIZE + 64];
-
-// Check there's no padding in the struct
-_Static_assert(sizeof(StorageBlock) == STORAGE_BLOCK_SIZE + STORAGE_METADATA_SIZE);
+static uint8_t readBuffer[4096];
 
 // Curl stuff.
-typedef struct {
-	uint8_t* data;
+struct url_data {
 	size_t size;
-} Transfer;
+	uint8_t* data;
+};
 
-static char UrlBuffer[255];
+struct WriteThis {
+	const char* readptr;
+	size_t sizeleft;
+};
 
-static size_t writeCallback(void* ptr, size_t size, size_t nmemb, Transfer* data)
+struct url_data data;
+
+static char urlBuffer[255];
+
+static size_t write_data(void* ptr, size_t size, size_t nmemb, struct url_data* data)
 {
 	size_t index = data->size;
 	size_t n = (size * nmemb);
@@ -41,25 +42,24 @@ static size_t writeCallback(void* ptr, size_t size, size_t nmemb, Transfer* data
 	return n;
 }
 
-static const char *readUrl = "http://%s:5000/ReadBlock?block=%u";
+static const readUrl = "http://%s:5000/ReadBlockFromOffset?offset=%u&size=%u";
 
-int readBlockData(uint32_t blockNum, StorageBlock* block)
+uint8_t* readBlockData(uint32_t offset, uint32_t size)
 {
-	static Transfer transfer;
-	snprintf(UrlBuffer, 255, readUrl, PC_HOST_IP, blockNum);
+	snprintf(urlBuffer, 255, readUrl, PC_HOST_IP, offset, size);
 
 	// use fixed buffer, reduce the number of mallocs.
-	transfer.size = 0;
-	transfer.data = &readBuffer[0];
+	data.size = 0;
+	data.data = &readBuffer[0];
 
 	CURLcode res = CURLE_OK;
 
 	CURL* curl = curl_easy_init();
-	curl_easy_setopt(curl, CURLOPT_URL, UrlBuffer);
+	curl_easy_setopt(curl, CURLOPT_URL, urlBuffer);
 	/* use a GET to fetch data */
 	curl_easy_setopt(curl, CURLOPT_HTTPGET, 1L);
-	curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, writeCallback);
-	curl_easy_setopt(curl, CURLOPT_WRITEDATA, &transfer);
+	curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_data);
+	curl_easy_setopt(curl, CURLOPT_WRITEDATA, &data);
 
 	// based on the libcurl sample - https://curl.se/libcurl/c/https.html 
 	curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0L);
@@ -70,60 +70,58 @@ int readBlockData(uint32_t blockNum, StorageBlock* block)
 
 	if (res == CURLE_OK)
 	{
-		if (transfer.size != STORAGE_BLOCK_SIZE + STORAGE_METADATA_SIZE) {
-			memset(block, 0, sizeof(StorageBlock));
-			return -1;
-		}
-		memcpy(block, transfer.data, STORAGE_BLOCK_SIZE + STORAGE_METADATA_SIZE);
-		return 0;
+		// caller is responsible for freeing this.
+		return data.data;
 	}
 
-	return -1;
+	return NULL;
 }
 
-static size_t readCallback(char* dest, size_t size, size_t nmemb, Transfer* transfer)
+static size_t read_callback(char* dest, size_t size, size_t nmemb, void* userp)
 {
+	struct WriteThis* wt = (struct WriteThis*)userp;
 	size_t buffer_size = size * nmemb;
 
-	if (transfer->size) {
+	if (wt->sizeleft) {
 		/* copy as much as possible from the source to the destination */
-		size_t copy_this_much = transfer->size;
+		size_t copy_this_much = wt->sizeleft;
 		if (copy_this_much > buffer_size)
 			copy_this_much = buffer_size;
-		memcpy(dest, transfer->data, copy_this_much);
+		memcpy(dest, wt->readptr, copy_this_much);
 
-		transfer->data += copy_this_much;
-		transfer->size -= copy_this_much;
+		wt->readptr += copy_this_much;
+		wt->sizeleft -= copy_this_much;
 		return copy_this_much; /* we copied this many bytes */
 	}
 
 	return 0; /* no more data left to deliver */
 }
 
-static char* writeBlockURL = "http://%s:5000/WriteBlock?block=%u";
+static char* writeBlockURL = "http://%s:5000/WriteBlockFromOffset";
 
-int writeBlockData(uint32_t blockNum, const StorageBlock* sectorData)
+int writeBlockData(uint8_t* sectorData, uint32_t size, uint32_t offset)
 {
-	static Transfer transfer;
 	CURL* curl;
 	CURLcode res = -1;
 
-	transfer.data = (void*)sectorData;
-	transfer.size = sizeof(StorageBlock);
+	struct WriteThis wt;
 
-	snprintf(UrlBuffer, 255, writeBlockURL, PC_HOST_IP, blockNum);
+	wt.readptr = sectorData;
+	wt.sizeleft = size;
+
+	snprintf(urlBuffer, 255, writeBlockURL, PC_HOST_IP);
 
 	curl = curl_easy_init();
 	if (curl)
 	{
 		// curl_easy_setopt(curl, CURLOPT_VERBOSE, 1L);
-		curl_easy_setopt(curl, CURLOPT_URL, UrlBuffer);
+		curl_easy_setopt(curl, CURLOPT_URL, urlBuffer);
 
 		curl_easy_setopt(curl, CURLOPT_POST, 1);
-		curl_easy_setopt(curl, CURLOPT_READFUNCTION, readCallback);
-		curl_easy_setopt(curl, CURLOPT_READDATA, &transfer);
+		curl_easy_setopt(curl, CURLOPT_READFUNCTION, read_callback);
+		curl_easy_setopt(curl, CURLOPT_READDATA, &wt);
 
-		curl_easy_setopt(curl, CURLOPT_POSTFIELDSIZE, (long)transfer.size);
+		curl_easy_setopt(curl, CURLOPT_POSTFIELDSIZE, (long)wt.sizeleft);
 
 		curl_easy_setopt(curl, CURLOPT_CONNECTTIMEOUT, (long)5);
 		curl_easy_setopt(curl, CURLOPT_DNS_CACHE_TIMEOUT, -1);
@@ -135,6 +133,70 @@ int writeBlockData(uint32_t blockNum, const StorageBlock* sectorData)
 		curl_easy_setopt(curl, CURLOPT_CAINFO, NULL);
 
 		struct curl_slist* hs = NULL;
+		char tBuff[50];
+		memset(&tBuff[0], 0x00, 50);
+		snprintf(tBuff, 50, "offset: %d", offset);
+		hs = curl_slist_append(hs, tBuff);
+		hs = curl_slist_append(hs, "Content-Type: application/octet-stream");
+		hs = curl_slist_append(hs, "Expect:");
+		curl_easy_setopt(curl, CURLOPT_HTTPHEADER, hs);
+
+		res = curl_easy_perform(curl);
+
+		curl_slist_free_all(hs);
+		curl_easy_cleanup(curl);
+	}
+
+	if (res == CURLE_OK)
+		return 0;
+
+	return -1;
+}
+
+int writeTrackData(uint8_t trackNum, uint8_t* trackData, uint16_t length)
+{
+	uint16_t crc = 0;
+	for (int x = 0; x < length; x++)
+	{
+		crc += trackData[x];
+		crc &= 0xffff;
+	}
+
+	CURL* curl;
+	CURLcode res = -1;
+
+	struct WriteThis wt;
+
+	wt.readptr = trackData;
+	wt.sizeleft = length;
+
+	curl = curl_easy_init();
+	if (curl)
+	{
+
+		curl_easy_setopt(curl, CURLOPT_VERBOSE, 1L);
+		curl_easy_setopt(curl, CURLOPT_URL, writeBlockURL);
+
+		curl_easy_setopt(curl, CURLOPT_POST, 1);
+		curl_easy_setopt(curl, CURLOPT_READFUNCTION, read_callback);
+		curl_easy_setopt(curl, CURLOPT_READDATA, &wt);
+
+		curl_easy_setopt(curl, CURLOPT_POSTFIELDSIZE, (long)wt.sizeleft);
+
+		curl_easy_setopt(curl, CURLOPT_CONNECTTIMEOUT, (long)5);
+		curl_easy_setopt(curl, CURLOPT_DNS_CACHE_TIMEOUT, -1);
+
+		curl_easy_setopt(curl, CURLOPT_SSL_SESSIONID_CACHE, 0);
+		curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0);
+		curl_easy_setopt(curl, CURLOPT_SSL_VERIFYHOST, 0);
+		curl_easy_setopt(curl, CURLOPT_SSL_VERIFYSTATUS, 0);
+		curl_easy_setopt(curl, CURLOPT_CAINFO, NULL);
+
+		struct curl_slist* hs = NULL;
+		char tBuff[50];
+		memset(&tBuff[0], 0x00, 50);
+		snprintf(tBuff, 50, "track: %d", trackNum);
+		hs = curl_slist_append(hs, tBuff);
 		hs = curl_slist_append(hs, "Content-Type: application/octet-stream");
 		hs = curl_slist_append(hs, "Expect:");
 		curl_easy_setopt(curl, CURLOPT_HTTPHEADER, hs);
