@@ -99,7 +99,8 @@ application - modify **AllowedConnections** to include the PC host IP address, a
   "EntryPoint": "/bin/app",
   "CmdArgs": [],
   "Capabilities": {
-    "AllowedConnections": ["192.168.1.65"]
+    "AllowedConnections": ["192.168.1.65"],
+    "MutableStorage": { "SizeKB": 4 }
   },
   "ApplicationType": "Default"
 }

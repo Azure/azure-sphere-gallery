@@ -27,7 +27,7 @@ target_link_libraries(${PROJECT_NAME} applibs gcc_s c curl wolfssl)
 # add_compile_definitions(ENCRYPTED_STORAGE_DEBUG)
 
 # // TODO: define the PC HOST IP Address
-add_compile_definitions(PC_HOST_IP="192.168.1.99")
+add_compile_definitions(PC_HOST_IP="")
 
 # Target hardware for the sample.
 set(TARGET_HARDWARE "mt3620_rdb")
