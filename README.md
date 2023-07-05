@@ -34,6 +34,7 @@ Each folder within this repository contains a README.md file that describes the 
 | [GetDeviceOSVersion](GetDeviceOSVersion)| A project that retrieves the OS versions for all Azure Sphere based devices.|
 | [Grove_16x2_RGB_LCD](Grove_16x2_RGB_LCD) | A project that shows how to integrate a Seeed Grove LCD/RGB 16x2 display |
 | [HeapTracker](HeapTracker) | A memory allocation tracking library that can help diagnose memory leaks. |
+| [LittleFs_Encrypted_RemoteDisk](LittleFs_Encrypted_RemoteDisk) | A project that shows how to add encrypted, authenticated storage using [Littlefs](https://github.com/littlefs-project/littlefs) to an Azure Sphere project (with remote storage) |
 | [LittleFs_RemoteDisk](LittleFs_RemoteDisk) | A project that shows how to add [Littlefs](https://github.com/littlefs-project/littlefs) to an Azure Sphere project, uses Curl to talk to remote storage |
 | [LittleFs_SDCard](LittleFs_SDCard) | A project that combines [Littlefs](https://github.com/littlefs-project/littlefs) with SD Card support, and PC utilities to read the SD Card and extract files/folders.|
 | [MQTT-C_Client](MQTT-C_Client) | A project that shows how to add the  [MQTT-C](https://github.com/LiamBindle/MQTT-C.git) library to an Azure Sphere project. There is also a host Python app provided for testing purposes. |
