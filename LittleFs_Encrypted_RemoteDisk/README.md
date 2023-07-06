@@ -117,15 +117,25 @@ The application will initialize and format the storage, create a file, write som
 
 When the application runs you should see the following output in the Visual Studio/Code debug window:
 
-```makefile
+```
+INFO: No data found in mutable storage; generating key and IV
+WARN: Unable to decrypt block 0
+WARN: Unable to decrypt block 1
+WARN: Unable to decrypt block 0
+WARN: Unable to decrypt block 1
+C:/Users/chwhitwo/source/accel/azure-sphere-gallery/LittleFs_Encrypted_RemoteDisk/src/HighLevelApp/littlefs/lfs.c:1070:error: Corrupted dir pair at {0x0, 0x1}
 Format and Mount
+WARN: Unable to decrypt block 1
 Open File 'test.txt'
 Write to the file
 Seek to the start of the file
 Read from the file
-Read content = Test
+Read 442 bytes of content = Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute iruredolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat nonproident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 Close the file
 ```
+
+Note that the remote storage begins initialized to zeroes, and as such it cannot be successfully decrypted until it has been written to. Thus, the initial attempt by littlefs
+to mount to storage will fail until the storage is formatted. Subsequent runs will not produce these warnings (assuming the storage server is not restarted).
 
 ### Curl memory tracing
 
