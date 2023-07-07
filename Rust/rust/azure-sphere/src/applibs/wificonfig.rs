@@ -242,13 +242,13 @@ pub fn forget_all_networks() -> Result<(), std::io::Error> {
 
 /// Gets the number of stored Wi-Fi networks on the device. This function is not thread safe.
 /// The application manifest must include the WifiConfig capability.
-pub fn stored_network_count() -> Result<u32, std::io::Error> {
+pub fn stored_network_count() -> Result<usize, std::io::Error> {
     let result = unsafe { wificonfig::WifiConfig_GetStoredNetworkCount() };
     if result < 0 {
         Err(Error::last_os_error())
     } else {
         // Convert from ssize_t to u32 now that the failure value of -1 has been handled
-        Ok(result as u32)
+        Ok(result as usize)
     }
 }
 
@@ -337,12 +337,12 @@ pub fn connected_network_id() -> Result<u32, std::io::Error> {
 /// - This is a blocking call
 ///
 /// The application manifest must include the WifiConfig capability.
-pub fn trigger_scan_and_get_scanned_network_count() -> Result<u32, std::io::Error> {
+pub fn trigger_scan_and_get_scanned_network_count() -> Result<usize, std::io::Error> {
     let count = unsafe { wificonfig::WifiConfig_TriggerScanAndGetScannedNetworkCount() };
     if count < 0 {
         Err(Error::last_os_error())
     } else {
-        Ok(count as u32)
+        Ok(count as usize)
     }
 }
 
@@ -409,7 +409,7 @@ pub fn set_ssid(network_id: u32, ssid: &[u8]) -> Result<(), std::io::Error> {
         static_inline_helpers::WifiConfig_SetSSID_inline(
             network_id as i32,
             ssid.as_ptr(),
-            ssid.len() as u32,
+            ssid.len(),
         )
     };
     if result == -1 {
@@ -490,11 +490,7 @@ pub fn reload_config() -> Result<(), std::io::Error> {
 /// The application manifest must include the WifiConfig capability.
 pub fn set_psk(network_id: u32, psk: &[u8]) -> Result<(), std::io::Error> {
     let result = unsafe {
-        static_inline_helpers::WifiConfig_SetPSK_inline(
-            network_id as i32,
-            psk.as_ptr(),
-            psk.len() as u32,
-        )
+        static_inline_helpers::WifiConfig_SetPSK_inline(network_id as i32, psk.as_ptr(), psk.len())
     };
     if result == -1 {
         Err(Error::last_os_error())

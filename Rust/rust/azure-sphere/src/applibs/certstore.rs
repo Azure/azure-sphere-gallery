@@ -54,9 +54,9 @@ pub fn install_client_certificate<P: AsRef<OsStr>>(
         certstore::CertStore_InstallClientCertificate(
             identifier,
             cert_blob.as_ptr(),
-            cert_blob.len() as u32,
+            cert_blob.len(),
             private_key_blob.as_ptr(),
-            private_key_blob.len() as u32,
+            private_key_blob.len(),
             private_key_password.as_ptr(),
         )
     };
@@ -80,7 +80,7 @@ pub fn install_root_ca_certificate<P: AsRef<OsStr>>(
         certstore::CertStore_InstallRootCACertificate(
             identifier,
             cert_blob.as_ptr(),
-            cert_blob.len() as u32,
+            cert_blob.len(),
         )
     };
     if result == -1 {
@@ -91,21 +91,21 @@ pub fn install_root_ca_certificate<P: AsRef<OsStr>>(
 }
 
 /// Gets the number of certificates installed on the device.
-pub fn get_certificate_count() -> Result<u32, std::io::Error> {
+pub fn get_certificate_count() -> Result<usize, std::io::Error> {
     let result = unsafe { certstore::CertStore_GetCertificateCount() };
     if result < 0 {
         Err(Error::last_os_error())
     } else {
-        Ok(result as u32)
+        Ok(result as usize)
     }
 }
 
-fn get_certificate_identifer_at(index: u32) -> Result<OsString, std::io::Error> {
+fn get_certificate_identifer_at(index: usize) -> Result<OsString, std::io::Error> {
     unsafe {
         let mut identifier = certstore::CertStore_Identifier {
             identifier: [0u8; 17],
         };
-        let result = certstore::CertStore_GetCertificateIdentifierAt(index as u32, &mut identifier);
+        let result = certstore::CertStore_GetCertificateIdentifierAt(index, &mut identifier);
         if result == -1 {
             Err(Error::last_os_error())
         } else {
@@ -116,7 +116,7 @@ fn get_certificate_identifer_at(index: u32) -> Result<OsString, std::io::Error> 
 }
 
 /// Gets the ID of the certificate at the specified index.
-pub fn get_certificate_at(index: u32) -> Result<Certificate, std::io::Error> {
+pub fn get_certificate_at(index: usize) -> Result<Certificate, std::io::Error> {
     let identifier = get_certificate_identifer_at(index)?;
     Ok(Certificate { identifier })
 }
@@ -180,7 +180,7 @@ impl Certificate {
 /// Iterate through the device's certificate store
 #[derive(Clone, Debug)]
 pub struct Certificates {
-    curr: u32,
+    curr: usize,
 }
 
 impl Iterator for Certificates {

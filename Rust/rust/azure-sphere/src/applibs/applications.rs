@@ -6,17 +6,17 @@ use azure_sphere_sys::applibs::static_inline_helpers;
 use std::io::Error;
 
 /// Gets the total memory usage of your high-level application in kibibytes. This is the total physical memory usage of your app on the system, including kernel allocations (such as buffers for sockets) on behalf of your app or the debugging server, returned as a raw value (in KiB). Values returned are approximate and may vary across operating system versions.
-pub fn total_memory_usage() -> libc::c_uint {
+pub fn total_memory_usage() -> usize {
     return unsafe { static_inline_helpers::Applications_GetTotalMemoryUsageInKB_inline() };
 }
 
 /// Gets the user-mode memory usage of your high-level application in kibibytes. This is the amount of physical memory used directly by your app, the memory used by any libraries on its behalf (also referred to as anon allocations), and memory used by the debugging server, returned as a raw value (in KiB). Values returned are approximate and may vary across operating system versions.
-pub fn user_mode_memory_usage() -> libc::c_uint {
+pub fn user_mode_memory_usage() -> usize {
     return unsafe { static_inline_helpers::Applications_GetUserModeMemoryUsageInKB_inline() };
 }
 
 /// Gets the peak user-mode memory usage of your high-level application in kibibytes. This is the maximum amount of user memory used in the current session. It is returned as a raw value (in KiB). Values returned are approximate and may vary across operating system versions.
-pub fn peak_user_mode_memory_usage() -> libc::c_uint {
+pub fn peak_user_mode_memory_usage() -> usize {
     return unsafe { static_inline_helpers::Applications_GetPeakUserModeMemoryUsageInKB_inline() };
 }
 
