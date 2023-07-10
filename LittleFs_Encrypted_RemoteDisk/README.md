@@ -48,11 +48,11 @@ This project requires the 23.05 or later SDK, and a device running the 23.05 (or
 
 ## How to use
 
-### Python Remote Storage app
-The project contains a Python Flask application (PyDiskHost.py) that supports 4MB storage (matching the defined storage
-layout of the high-level Azure Sphere application). The Python application supports HTTP GET (read), and POST (Write) functions.
-The 4MB of storage is represented by an array of 256byte blocks, each with a 16 byte metadata block used for the authentication
-tag.
+### Python 3 Remote Storage app
+The project contains a Python 3 Flask application (PyDiskHost.py) that supports 4MB storage (matching the defined storage
+layout of the high-level Azure Sphere application). The Python application supports HTTP GET (read), and POST (Write) 
+functions. The 4MB of storage is represented by an array of 256byte blocks, each with a 16 byte metadata block used for
+the authentication tag.
 
 The storage size is defined on lines 24-27:
 
@@ -63,7 +63,17 @@ METADATA_SIZE = 16
 BLOCK_COUNT = DISK_SIZE // BLOCK_SIZE
 ```
 
-Start the Python application before running the Azure Sphere application.
+Ensure you have installed the required dependencies, and start the Python 3 application before running the
+Azure Sphere application.
+
+```
+pip install -r requirements.txt
+python PyDiskHost.py
+```
+
+If you are running the Python application on Windows, you may need to open the firewall to allow access - from the
+Windows search, type "Allow an app through Windows firewall", select "Change settings" and ensure the appropriate
+public/private settings are checked for the Python executable.
 
 ### Azure Sphere High Level Application
 
