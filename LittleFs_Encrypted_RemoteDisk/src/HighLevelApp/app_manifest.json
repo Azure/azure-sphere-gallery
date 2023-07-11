@@ -1,0 +1,12 @@
+{
+  "SchemaVersion": 1,
+  "Name": "LittleFs_HighLevelApp",
+  "ComponentId": "9fe91e75-94ad-4ca5-a875-1909ee229163",
+  "EntryPoint": "/bin/app",
+  "CmdArgs": [],
+  "Capabilities": {
+    "AllowedConnections": [ "" ],
+    "MutableStorage": { "SizeKB": 4 }
+  },
+  "ApplicationType": "Default"
+}
