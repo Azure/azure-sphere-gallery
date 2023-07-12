@@ -1,0 +1,18 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Install 'cargo azsphere'",
+            "detail": "Install 'cargo azsphere' helper tool on startup",
+            "type": "shell",
+            "linux": {
+                "command": "cargo install --path ${workspaceFolder}/cargo-azsphere"
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+            },
+            "runOptions": { "runOn": "folderOpen" }
+        }
+    ]
+}
