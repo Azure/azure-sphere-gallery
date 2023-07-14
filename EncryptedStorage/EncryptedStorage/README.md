@@ -34,8 +34,8 @@ On first run, you will see output on the debug console as follows:
 ```
 Encrypted storage project
 Loading state...
-Storage not initialized
-Initializing to default
+INFO: Storage not initialized
+Initializing state to default
 State on entry:
 Counter = 0
 State on exit:
