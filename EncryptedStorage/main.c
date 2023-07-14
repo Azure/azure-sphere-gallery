@@ -1,5 +1,5 @@
-// This minimal Azure Sphere app prints "High Level Application" to the debug
-// console and exits with status 0.
+/* Copyright (c) Microsoft Corporation. All rights reserved.
+   Licensed under the MIT License. */
 
 #include <stdint.h>
 #include <errno.h>
@@ -12,7 +12,6 @@
 #include "wolfssl/wolfcrypt/chacha20_poly1305.h"
 
 static const char* MAGIC = "ENC0";
-
 
 typedef struct {
     uint32_t counter;

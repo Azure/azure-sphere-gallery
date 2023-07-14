@@ -63,7 +63,7 @@ For more information on ChaCha20-Poly1305 encryption and authentication, see
 [here](https://en.wikipedia.org/wiki/ChaCha20-Poly1305).
 
 For an example of using these functions to store data off-device encrypted-at-rest, please see the
-[LittleFS Encrypted Remote Disk](../../LittleFs_Encrypted_RemoteDisk/) project.
+[LittleFS Encrypted Remote Disk](../LittleFs_Encrypted_RemoteDisk/) project.
 
 ## Project expectations
 
