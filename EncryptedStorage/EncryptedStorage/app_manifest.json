@@ -1,0 +1,11 @@
+{
+  "SchemaVersion": 1,
+  "Name": "EncryptedStorage",
+  "ComponentId": "4d02fee9-0fd6-45c2-8983-621229fb195c",
+  "EntryPoint": "/bin/app",
+  "CmdArgs": [],
+  "Capabilities": {
+    "MutableStorage": { "SizeKB": 4 }
+  },
+  "ApplicationType": "Default"
+}
