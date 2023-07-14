@@ -26,6 +26,12 @@ typedef struct {
 
 _Static_assert(sizeof(Storage) == 4 + sizeof(State) + CHACHA20_POLY1305_AEAD_AUTHTAG_SIZE);
 
+// ************************** IMPORTANT ************************************
+// This project uses hard-coded encryption Key and IV values.
+// 
+// THIS IS NOT SECURE. YOU SHOULD NOT DO THIS IN PRODUCTION CODE
+// ************************** IMPORTANT ************************************
+
 const byte Key[] = { 
     0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
     0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f,
@@ -33,14 +39,16 @@ const byte Key[] = {
     0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17,
     0x18, 0x19, 0x1a, 0x1b, 0x1c, 0x1d, 0x1e, 0x1f,
 };
-_Static_assert(sizeof(Key) == CHACHA20_POLY1305_AEAD_KEYSIZE);
 
 const byte IV[] = {
     0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
     0x08, 0x09, 0x0a, 0x0b
 };
+
+_Static_assert(sizeof(Key) == CHACHA20_POLY1305_AEAD_KEYSIZE);
 _Static_assert(sizeof(IV) == CHACHA20_POLY1305_AEAD_IV_SIZE);
 
+// Additional authentication data for validating decryption
 const char AAD[] = "Encrypted storage demo";
 
 static State state;
@@ -63,17 +71,18 @@ int SaveState(void )
             (byte*)&state, sizeof(State),
             (byte*)&storage.data, (byte*)&storage.authTag) != 0) {
         
-        Log_Debug("Cannot encrypt state\n");
+        Log_Debug("ERROR: Failed to encrypt state\n");
         return SaveState_Encrypt;
     };
 
     int fd = Storage_OpenMutableFile();
     if (fd == -1) {
-        Log_Debug("Cannot open mutable storage: %s (%d)\n", strerror(errno), errno);
+        Log_Debug("ERROR: Cannot open mutable storage: %s (%d)\n", strerror(errno), errno);
         return SaveState_Open;
     }
 
     if (write(fd, &storage, sizeof(Storage)) != sizeof(Storage)) {
+        Log_Debug("ERROR: Failed to save state to mutable storage.\n");
         close(fd);
         return SaveState_Save;
     }
@@ -94,7 +103,7 @@ int LoadState(void)
 {
     int fd = Storage_OpenMutableFile();
     if (fd == -1) {
-        Log_Debug("Cannot open mutable storage: %s (%d)\n", strerror(errno), errno);
+        Log_Debug("ERROR: Cannot open mutable storage: %s (%d)\n", strerror(errno), errno);
         return LoadState_Open;
     }
 
@@ -103,12 +112,12 @@ int LoadState(void)
     close(fd);
 
     if (bytes != sizeof(Storage)) {
-        Log_Debug("Storage not initialized\n");
+        Log_Debug("INFO: Storage not initialized\n");
         return LoadState_NotInit;
     }
 
     if (memcmp(storage.magic, MAGIC, sizeof(storage.magic)) != 0) {
-        Log_Debug("Storage corrupt/unreadable\n");
+        Log_Debug("ERROR: Storage corrupt/unreadable\n");
         return LoadState_Magic;
     }
 
@@ -116,7 +125,7 @@ int LoadState(void)
             Key, IV, AAD, sizeof(AAD),
             storage.data, sizeof(State), storage.authTag,
             (byte*)&state) != 0) {
-        Log_Debug("Failed to decrypt state\n");
+        Log_Debug("ERROR: Failed to decrypt state\n");
         return LoadState_Decrypt;
     }
 
@@ -136,7 +145,7 @@ int main(void)
     int result = LoadState();
 
     if (result == LoadState_NotInit) {
-        Log_Debug("Initializing to default\n");
+        Log_Debug("Initializing state to default\n");
         memset(&state, 0, sizeof(State));
     }
 
