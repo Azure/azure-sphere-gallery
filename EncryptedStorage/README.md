@@ -11,9 +11,10 @@ to prevent sensitive information leaking through uninitialized/uncleared memory.
 
 | File/folder | Description |
 |-------------|-------------|
-| `src`       | source code. |
+| `main.c` | Source code |
+| `app_manifest.json`, `CMakeLists.txt`, `CMakePresets.json` | Project files |
 | `README.md` | This README file. |
-| `LICENSE.txt`   | The license for the project. |
+| `LICENSE.txt` | The license for the project. |
 
 ## Prerequisites
 
