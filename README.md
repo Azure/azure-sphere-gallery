@@ -31,6 +31,7 @@ Each folder within this repository contains a README.md file that describes the 
 | [DeviceTenantFinder](DeviceTenantFinder) | Utility that makes it easy to find the Azure Sphere tenant name/Id within your tenants for a given Device Id |
 | [DNSServiceDiscoveryUnicast](DNSServiceDiscoveryUnicast) | Application showing unicast DNS service discovery to allow discovery of and connection to services outside of the local network |
 | [EAP-TLS_Solution](EAP-TLS_Solution) | A library & demo solution implementation for Azure Sphere-based devices connecting to Extensible Authentication Protocol – Transport Layer Security (EAP-TLS) networks. |
+| [EncryptedStorage](EncryptedStorage) | A project demonstrating simple use of the wolfCrypt authenticated encryption APIs |
 | [GetDeviceOSVersion](GetDeviceOSVersion)| A project that retrieves the OS versions for all Azure Sphere based devices.|
 | [Grove_16x2_RGB_LCD](Grove_16x2_RGB_LCD) | A project that shows how to integrate a Seeed Grove LCD/RGB 16x2 display |
 | [HeapTracker](HeapTracker) | A memory allocation tracking library that can help diagnose memory leaks. |
