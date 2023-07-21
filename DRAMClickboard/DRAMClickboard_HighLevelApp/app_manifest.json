@@ -1,0 +1,19 @@
+{
+  "SchemaVersion": 1,
+  "Name": "DRAMClickboard",
+  "ComponentId": "0cbd4a46-7311-4557-9d83-4c9ba4530d22",
+  "EntryPoint": "/bin/app",
+  "CmdArgs": [],
+  "Capabilities": {
+    "AllowedApplicationConnections": [],
+    "SpiMaster": [
+      "$SAMPLE_DRAM_SPI"
+    ],
+    "Gpio": [
+      "$SAMPLE_DRAM_SPI_IO3A", 
+      "$SAMPLE_DRAM_SPI_IO2A"
+    ]
+  },
+  "ApplicationType": "Default",
+  "MallocVersion": 2
+}
