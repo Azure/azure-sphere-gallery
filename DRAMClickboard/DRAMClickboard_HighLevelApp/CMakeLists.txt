@@ -6,7 +6,7 @@ cmake_minimum_required (VERSION 3.20)
 project (DRAMClickboard C)
 
 azsphere_configure_tools(TOOLS_REVISION "23.05")
-azsphere_configure_api(TARGET_API_SET "15")
+azsphere_configure_api(TARGET_API_SET "16")
 
 # External Library Add
 add_library(DRAM_Click STATIC dram.c)
@@ -22,16 +22,6 @@ target_link_libraries (${PROJECT_NAME} DRAM_Click applibs pthread gcc_s c)
 set(TARGET_HARDWARE "avnet_mt3620_sk")
 set(TARGET_DEFINITION "sample_appliance.json")
 
-# This finds the path to the target hardware definition, in one of two places.
-# If the sample is cloned from the github repo, then the path to the target hardware is 
-# "../../../HardwareDefinitions/${TARGET_HARDWARE}". If the sample is downloaded from the Microsoft
-# samples browser, then the path is "HardwareDefinitions/${TARGET_HARDWARE}"
-find_path(
-    TARGET_DIRECTORY
-    NAMES ${TARGET_DEFINITION}
-    PATHS "HardwareDefinitions/${TARGET_HARDWARE}" "../../../HardwareDefinitions/${TARGET_HARDWARE}"
-    NO_DEFAULT_PATH NO_CMAKE_FIND_ROOT_PATH)
-
-azsphere_target_hardware_definition(${PROJECT_NAME} TARGET_DIRECTORY "${TARGET_DIRECTORY}" TARGET_DEFINITION "${TARGET_DEFINITION}")
+azsphere_target_hardware_definition(${PROJECT_NAME} TARGET_DIRECTORY "../HardwareDefinitions/${TARGET_HARDWARE}" TARGET_DEFINITION "${TARGET_DEFINITION}")
 
 azsphere_target_add_image_package(${PROJECT_NAME})
