@@ -14,13 +14,6 @@ jobs:
         steps:
             - uses: actions/checkout@v3
 
-            - name: Install latest Azure Sphere SDK
-              shell: bash
-              run: |
-                curl -L https://aka.ms/AzureSphereSDKInstall/Linux | tar zxf -
-                chmod +x install_azure_sphere_sdk.sh
-                sudo ./install_azure_sphere_sdk.sh -y
-
             - name: Install prereqs
               shell: bash
               run: |
@@ -28,7 +21,16 @@ jobs:
                 sudo apt-get install ca-certificates gpg wget
                 echo 'deb [signed-by=/usr/share/keyrings/kitware-archive-keyring.gpg] https://apt.kitware.com/ubuntu/ jammy main' | sudo tee /etc/apt/sources.list.d/kitware.list >/dev/null
                 sudo apt-get update
+                sudo apt-get install kitware-archive-keyring
                 sudo apt install cmake ninja-build
+            
+            - name: Install latest Azure Sphere SDK
+              shell: bash
+              run: |
+                curl -L https://aka.ms/AzureSphereSDKInstall/Linux | tar zxf -
+                chmod +x install_azure_sphere_sdk.sh
+                sudo ./install_azure_sphere_sdk.sh -y
+
 
             - name: Sanity check all the projects
               shell: bash
