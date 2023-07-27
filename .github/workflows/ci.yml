@@ -1,0 +1,21 @@
+name: ci
+
+on:
+    push:
+        branches: [main, chwhitwo/github-actions]
+    pull_request:
+        branches: [main, chwhitwo/github-actions]
+
+jobs:
+    sanity-check:
+        name: sanity-check
+        runs-on: ubuntu-22.04
+
+    steps:
+    - name: Install latest Azure Sphere SDK
+      shell: bash
+      run: |
+        curl -L https://aka.ms/AzureSphereSDKInstall/Linux | tar zxf -
+        chmod +x install_azure_sphere_sdk.sh
+        sudo ./install_azure_sphere_sdk.sh -y
+
