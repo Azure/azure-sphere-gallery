@@ -21,6 +21,11 @@ jobs:
                 chmod +x install_azure_sphere_sdk.sh
                 sudo ./install_azure_sphere_sdk.sh -y
 
+            - name: Install prereqs
+              shell: bash
+              run: |
+                sudo apt install cmake ninja-build
+
             - name: Sanity check all the projects
               shell: bash
               run: |

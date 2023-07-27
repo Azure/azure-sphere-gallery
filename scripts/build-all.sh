@@ -7,6 +7,11 @@ function log()
     echo "::$level file=$script_filename,line=${BASH_LINENO[1]}::$message"
 }
 
+function error()
+{
+    log "error" "$1"
+}
+
 function warn()
 {
     log "warning" "$1"
@@ -40,9 +45,10 @@ for p in $azsphere_projects; do
 
     presets="$project_dir/CMakePresets.json"
     if [ ! -e $presets ]; then
-        warn "Missing $presets - skipping"
+        error "Missing $presets - skipping"
     else
         notice "Found $presets"
+        cmake --preset ARM-Release $p
     fi
 
     endgroup
