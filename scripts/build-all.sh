@@ -36,13 +36,13 @@ azsphere_projects=$(find . -name CMakeLists.txt -print0 | xargs -0 grep -l azsph
 
 for p in $azsphere_projects; do
     project_dir=$(dirname $p)
-    group project_dir
+    group "$project_dir"
 
     presets="$project_dir/CMakePresets.json"
     if [ ! -e $presets ]; then
         warn "Missing $presets - skipping"
     else
-        debug "Found $presets"
+        notice "Found $presets"
     fi
 
     endgroup
