@@ -41,15 +41,14 @@ azsphere_projects=$(find . -name CMakeLists.txt -print0 | xargs -0 grep -l azsph
 
 for p in $azsphere_projects; do
     project_dir=$(dirname $p)
-    group "$project_dir"
 
     presets="$project_dir/CMakePresets.json"
     if [ ! -e $presets ]; then
-        error "Missing $presets - skipping"
+        error "$project_dir: missing CMakePresets.json"
     else
-        notice "Found $presets"
+        group "$project_dir"
         cmake --preset ARM-Release $p
+        endgroup
     fi
 
-    endgroup
 done
