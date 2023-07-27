@@ -12,6 +12,8 @@ jobs:
         runs-on: ubuntu-22.04
 
         steps:
+            - uses: actions/checkout@v3
+
             - name: Install latest Azure Sphere SDK
               shell: bash
               run: |
@@ -19,3 +21,7 @@ jobs:
                 chmod +x install_azure_sphere_sdk.sh
                 sudo ./install_azure_sphere_sdk.sh -y
 
+            - name: Sanity check all the projects
+              shell: bash
+              run: |
+                ./scripts/build-all.sh
