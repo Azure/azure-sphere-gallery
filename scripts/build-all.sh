@@ -47,8 +47,10 @@ for p in $azsphere_projects; do
         error "$project_dir: missing CMakePresets.json"
     else
         group "$project_dir"
-        if $(cmake --preset ARM-Release $p); then
+        if cmake --preset ARM-Release $p; then
             cmake --build $project_dir/out/ARM-Release
+        else
+            error "$project_dir: Configuration failed"
         fi
         endgroup
     fi
