@@ -39,7 +39,23 @@ function endgroup()
 
 azsphere_projects=$(find . -name CMakeLists.txt -print0 | xargs -0 grep -l azsphere_configure_tools)
 
+exclude_paths="MT3620_M4_Sample_Code;AzureSphereDevX/examples;"
+
+excludes=$(echo $exclude_paths | tr ";" "\n")
+
 for p in $azsphere_projects; do
+    skip=""
+    for exclude in $excludes; do
+        if [[ $p =~ "$exclude" ]]; then
+            skip="true"
+        fi
+    done
+
+    if [[ $skip == "true" ]]; then
+        notice "Skipping $p - excluded"
+        continue
+    fi
+
     project_dir=$(dirname $p)
 
     presets="$project_dir/CMakePresets.json"
