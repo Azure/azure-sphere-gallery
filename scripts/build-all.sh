@@ -4,6 +4,7 @@ function log()
 {
     level=$1
     message=$2
+    echo "$level $script_filename:${BASH_LINENO[1]} $message" >> $GITHUB_STEP_SUMMARY
     echo "::$level file=$script_filename,line=${BASH_LINENO[1]}::$message"
 }
 
