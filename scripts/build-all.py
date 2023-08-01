@@ -51,13 +51,22 @@ def should_exclude(path, exclude_paths):
             return True
     return False
 
+def code(str, lang=None):
+    lang = lang or ""
+    return f"```{lang}\n{str}\n```\n";
+
+def indent(str, amount=1):
+    return "\n".join( ("   " * amount) + line for line in str.split('\n') )
+
+
 def build(cmakelists, log, messages):
     preset = "ARM-Release"
     generate_args = [ "cmake", f"--preset {preset}", str(cmakelists) ]
     generate = subprocess.run( generate_args, capture_output=True)
     if generate.returncode != 0:
         log.error(f"{p.parent}: Generate failed")
-        messages.add(GENERATE_FAILED, p.parent, generate.stderr)
+        detail = indent(code(generate.stderr.decode("utf-8")))
+        messages.add(GENERATE_FAILED, p.parent, detail)
         return
 
     folder = p.parent.joinpath("out").joinpath(preset)
@@ -65,7 +74,8 @@ def build(cmakelists, log, messages):
     build = subprocess.run(build_args, capture_output=True)
     if build.returncode != 0:
         log.error(f"{p.parent}: Build failed")
-        messages.add(BUILD_FAILED, p.parent, build.stderr)
+        detail = indent(code(generate.stderr.decode("utf-8")))
+        messages.add(BUILD_FAILED, p.parent, detail)
 
     messages.add(BUILD_OK, p.parent)
 
@@ -95,7 +105,7 @@ for p in cmakelists:
 with open(os.environ.get("GITHUB_STEP_SUMMARY", "summary.md"), "w") as summary:
     for category in (BUILD_OK, BUILD_FAILED, GENERATE_FAILED, MISSING_PRESETS, NOT_SPHERE):
         summary.write(f"# {category}\n")
-        for (message, detail) in messages.instances(category):
+        for (message, detail) in sorted(messages.instances(category), key=lambda i: i[0]):
             summary.write(f" * **{message}**\n")
             if detail:
-                summary.write(f"   {detail}\n")
+                summary.write(f"{detail}\n")
