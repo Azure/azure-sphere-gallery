@@ -43,6 +43,23 @@ cmakelists = ( path
                for path in list(Path(".").rglob("CMakeLists.txt"))
                if not should_exclude(str(path), exclude_paths) )
 
+class Messages:
+    def __init__(self):
+        self.messages = {}
+
+    def add(self, category, instance):
+        if not category in self.messages.keys():
+            self.messages[category] = []
+        self.messages[category] += [ instance ]
+
+    def categories(self):
+        return self.messages.keys()
+    
+    def instances(self, category):
+        return self.messages[category]
+
+messages = Messages()
+
 for p in cmakelists:
     azsphere_project = False
     with open(p,"r") as cmakelists:
@@ -50,11 +67,16 @@ for p in cmakelists:
             if "azsphere_configure_tools" in line:
                 azsphere_project = True
     if not azsphere_project:
-        notice(f"{p}: not an Azure Sphere project; skipping")
+        messages.add("Not an Azure Sphere project", p)
         continue
 
     folder = p.parent
     if not folder.joinpath("CMakePresets.json").exists():
-        error(f"{folder}: missing CMakePresets.json; skipping")
+        messages.add("Missing CMakePresets.json", folder)
         continue
     build(p)
+
+for category in messages.categories():
+    print(f"# {category}")
+    for instance in messages.instances(category):
+        print(f"* {instance}")
