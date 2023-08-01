@@ -2,6 +2,7 @@
 
 from pathlib import Path
 import subprocess
+import os
 
 exclude_paths=[
     "MT3620_M4_Sample_Code",
@@ -9,14 +10,40 @@ exclude_paths=[
     "threadx"
 ]
 
-def log(level, message):
-    print(f"::{level}::{message}")
+BUILD_OK = "Build OK"
+BUILD_FAILED = "Build failed"
+GENERATE_FAILED = "Generate failed"
+MISSING_PRESETS = "Missing CMakePresets.json"
+NOT_SPHERE = "Not an Azure Sphere project (Consider adding to excludes)"
 
-def error(message):
-    log("error", message)
+class Messages:
+    def __init__(self):
+        self.messages = {}
 
-def notice(message):
-    log("notice", message)
+    def add(self, category, instance, detail = None):
+        if not category in self.messages.keys():
+            self.messages[category] = []
+        self.messages[category] += [ (instance, detail) ]
+
+    def categories(self):
+        return self.messages.keys()
+    
+    def instances(self, category):
+        if category not in self.messages.keys():
+            return []
+        return self.messages[category]
+
+class Log:
+    def __init__(self): pass
+
+    def _log(self, level, message):
+        print(f"::{level}::{message}")
+
+    def error(self, message):
+        self._log("error", message)
+
+    def notice(self, message):
+        self._log("notice", message)
 
 def should_exclude(path, exclude_paths):
     for e in exclude_paths:
@@ -24,40 +51,29 @@ def should_exclude(path, exclude_paths):
             return True
     return False
 
-def build(cmakelists):
+def build(cmakelists, log, messages):
     preset = "ARM-Release"
     generate_args = [ "cmake", f"--preset {preset}", str(cmakelists) ]
     generate = subprocess.run( generate_args, capture_output=True)
-    if generate.returncode == 0:
-        folder = p.parent.joinpath("out").joinpath(preset)
-        build_args = [ "cmake", "--build", folder]
-        build = subprocess.run(build_args, capture_output=True)
-        if build.returncode == 0:
-            print(f"{p.parent}: Build OK")
-        else:
-            error(f"{p.parent}: Build failed: {build.stderr}")
-    else:
-        error(f"{p.parent}: Generate failed: {generate.stderr}")
+    if generate.returncode != 0:
+        log.error(f"{p.parent}: Generate failed")
+        messages.add(GENERATE_FAILED, p.parent, generate.stderr)
+        return
+
+    folder = p.parent.joinpath("out").joinpath(preset)
+    build_args = [ "cmake", "--build", folder]
+    build = subprocess.run(build_args, capture_output=True)
+    if build.returncode != 0:
+        log.error(f"{p.parent}: Build failed")
+        messages.add(BUILD_FAILED, p.parent, build.stderr)
+
+    messages.add(BUILD_OK, p.parent)
 
 cmakelists = ( path 
                for path in list(Path(".").rglob("CMakeLists.txt"))
                if not should_exclude(str(path), exclude_paths) )
 
-class Messages:
-    def __init__(self):
-        self.messages = {}
-
-    def add(self, category, instance):
-        if not category in self.messages.keys():
-            self.messages[category] = []
-        self.messages[category] += [ instance ]
-
-    def categories(self):
-        return self.messages.keys()
-    
-    def instances(self, category):
-        return self.messages[category]
-
+log = Log()
 messages = Messages()
 
 for p in cmakelists:
@@ -67,16 +83,19 @@ for p in cmakelists:
             if "azsphere_configure_tools" in line:
                 azsphere_project = True
     if not azsphere_project:
-        messages.add("Not an Azure Sphere project", p)
+        messages.add(NOT_SPHERE, p)
         continue
 
     folder = p.parent
     if not folder.joinpath("CMakePresets.json").exists():
-        messages.add("Missing CMakePresets.json", folder)
+        messages.add(MISSING_PRESETS, folder)
         continue
-    build(p)
+    build(p, log, messages)
 
-for category in messages.categories():
-    print(f"# {category}")
-    for instance in messages.instances(category):
-        print(f"* {instance}")
+with open(os.environ.get("GITHUB_STEP_SUMMARY", "summary.md"), "w") as summary:
+    for category in (BUILD_OK, BUILD_FAILED, GENERATE_FAILED, MISSING_PRESETS, NOT_SPHERE):
+        summary.write(f"# {category}\n")
+        for (message, detail) in messages.instances(category):
+            summary.write(f" * **{message}**\n")
+            if detail:
+                summary.write(f"   {detail}\n")
