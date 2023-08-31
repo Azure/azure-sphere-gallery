@@ -91,9 +91,10 @@ messages = Messages()
 success = True
 
 for p in cmakelists:
+    print(f"Considering {p}")
     azsphere_project = False
-    with open(p,"r") as cmakelists:
-        for line in cmakelists:
+    with open(p,"r") as f:
+        for line in f:
             if "azsphere_configure_tools" in line:
                 azsphere_project = True
     if not azsphere_project:
@@ -113,9 +114,5 @@ with open(os.environ.get("GITHUB_STEP_SUMMARY", "summary.md"), "w") as summary:
             summary.write(f" * **{message}**\n")
             if detail:
                 summary.write(f"{detail}\n")
-
-    summary.write("# Projects considered")
-    for p in cmakelists:
-        summary.write(f" * {p}")
 
 exit(0 if success else -1)
