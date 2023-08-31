@@ -69,7 +69,6 @@ def build(cmakelists, log, messages):
         messages.add(GENERATE_FAILED, p.parent, detail)
         return False
 
-    ok = True
     folder = p.parent.joinpath("out").joinpath(preset)
     build_args = [ "cmake", "--build", folder]
     build = subprocess.run(build_args, capture_output=True)
@@ -77,10 +76,10 @@ def build(cmakelists, log, messages):
         log.error(f"{p.parent}: Build failed")
         detail = indent(code(generate.stderr.decode("utf-8")))
         messages.add(BUILD_FAILED, p.parent, detail)
-        ok = False
+        return False
 
     messages.add(BUILD_OK, p.parent)
-    return ok
+    return True
 
 cmakelists = ( path 
                for path in list(Path(".").rglob("CMakeLists.txt"))
