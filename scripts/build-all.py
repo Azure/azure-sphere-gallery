@@ -114,4 +114,8 @@ with open(os.environ.get("GITHUB_STEP_SUMMARY", "summary.md"), "w") as summary:
             if detail:
                 summary.write(f"{detail}\n")
 
+summary.write("# Projects considered")
+for p in cmakelists:
+    summary.write(f" * {p}")
+
 exit(0 if success else -1)
