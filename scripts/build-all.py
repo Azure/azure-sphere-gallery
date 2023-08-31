@@ -67,8 +67,9 @@ def build(cmakelists, log, messages):
         log.error(f"{p.parent}: Generate failed")
         detail = indent(code(generate.stderr.decode("utf-8")))
         messages.add(GENERATE_FAILED, p.parent, detail)
-        return
+        return False
 
+    ok = True
     folder = p.parent.joinpath("out").joinpath(preset)
     build_args = [ "cmake", "--build", folder]
     build = subprocess.run(build_args, capture_output=True)
@@ -76,8 +77,10 @@ def build(cmakelists, log, messages):
         log.error(f"{p.parent}: Build failed")
         detail = indent(code(generate.stderr.decode("utf-8")))
         messages.add(BUILD_FAILED, p.parent, detail)
+        ok = False
 
     messages.add(BUILD_OK, p.parent)
+    return ok
 
 cmakelists = ( path 
                for path in list(Path(".").rglob("CMakeLists.txt"))
@@ -85,6 +88,8 @@ cmakelists = ( path
 
 log = Log()
 messages = Messages()
+
+success = True
 
 for p in cmakelists:
     azsphere_project = False
@@ -100,7 +105,7 @@ for p in cmakelists:
     if not folder.joinpath("CMakePresets.json").exists():
         messages.add(MISSING_PRESETS, folder)
         continue
-    build(p, log, messages)
+    success = success and build(p, log, messages)
 
 with open(os.environ.get("GITHUB_STEP_SUMMARY", "summary.md"), "w") as summary:
     for category in (BUILD_OK, BUILD_FAILED, GENERATE_FAILED, MISSING_PRESETS, NOT_SPHERE):
@@ -109,3 +114,5 @@ with open(os.environ.get("GITHUB_STEP_SUMMARY", "summary.md"), "w") as summary:
             summary.write(f" * **{message}**\n")
             if detail:
                 summary.write(f"{detail}\n")
+
+exit(0 if success else -1)
