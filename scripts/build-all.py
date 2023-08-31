@@ -64,7 +64,6 @@ def build(cmakelists, log, messages):
     generate_args = [ "cmake", f"--preset {preset}", str(cmakelists) ]
     generate = subprocess.run( generate_args, capture_output=True)
     if generate.returncode != 0:
-        log.error(f"{p.parent}: Generate failed")
         detail = indent(code(generate.stderr.decode("utf-8")))
         messages.add(GENERATE_FAILED, p.parent, detail)
         return False
@@ -73,7 +72,6 @@ def build(cmakelists, log, messages):
     build_args = [ "cmake", "--build", folder]
     build = subprocess.run(build_args, capture_output=True)
     if build.returncode != 0:
-        log.error(f"{p.parent}: Build failed")
         detail = indent(code(generate.stderr.decode("utf-8")))
         messages.add(BUILD_FAILED, p.parent, detail)
         return False
@@ -91,12 +89,12 @@ messages = Messages()
 success = True
 
 for p in cmakelists:
-    print(f"Considering {p}")
     azsphere_project = False
     with open(p,"r") as f:
         for line in f:
             if "azsphere_configure_tools" in line:
                 azsphere_project = True
+
     if not azsphere_project:
         messages.add(NOT_SPHERE, p)
         continue
@@ -105,7 +103,9 @@ for p in cmakelists:
     if not folder.joinpath("CMakePresets.json").exists():
         messages.add(MISSING_PRESETS, folder)
         continue
-    success = success and build(p, log, messages)
+
+    if not build(p, log, messages):
+        success = False
 
 with open(os.environ.get("GITHUB_STEP_SUMMARY", "summary.md"), "w") as summary:
     for category in (BUILD_OK, BUILD_FAILED, GENERATE_FAILED, MISSING_PRESETS, NOT_SPHERE):
