@@ -81,9 +81,9 @@ def build(cmakelists, log, messages):
     messages.add(BUILD_OK, p.parent)
     return True
 
-cmakelists = ( path 
+cmakelists = list(( path 
                for path in list(Path(".").rglob("CMakeLists.txt"))
-               if not should_exclude(str(path), exclude_paths) )
+                if not should_exclude(str(path), exclude_paths) ))
 
 log = Log()
 messages = Messages()
