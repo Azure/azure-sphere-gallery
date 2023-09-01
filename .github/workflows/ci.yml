@@ -30,7 +30,7 @@ jobs:
                 sudo apt install cmake ninja-build gcc-arm-none-eabi
             
             - name: Install latest Azure Sphere SDK
-              shell: basb
+              shell: bash
               run: |
                 curl -L https://aka.ms/AzureSphereSDKInstall/Linux | tar zxf -
                 chmod +x install_azure_sphere_sdk.sh
