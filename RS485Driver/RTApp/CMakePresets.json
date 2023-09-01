@@ -9,8 +9,8 @@
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Debug",
         "CMAKE_INSTALL_PREFIX": "${sourceDir}/install/${presetName}",
-        "CMAKE_TOOLCHAIN_FILE": "$env{AzureSphereDefaultSDKDir}/CMakeFiles/AzureSphereToolchain.cmake",
-        "AZURE_SPHERE_TARGET_API_SET": "latest-lts"
+        "CMAKE_TOOLCHAIN_FILE": "$env{AzureSphereDefaultSDKDir}/CMakeFiles/AzureSphereRTCoreToolchain.cmake",
+        "ARM_GNU_PATH": "$env{ArmGnuPath}"
       },
       "vendor": {
         "microsoft.com/VisualStudioSettings/CMake/1.0": {
