@@ -68,6 +68,7 @@ def indent(str, amount=1):
 
 
 def build(cmakelists, log, messages):
+    print(f"Building {cmakelists}...")
     preset = "ARM-Release"
     generate_args = [ "cmake", f"--preset {preset}", str(cmakelists) ]
     generate = subprocess.run( generate_args, capture_output=True)
@@ -107,6 +108,7 @@ for p in cmakelists:
         messages.add(NOT_SPHERE, p)
         continue
 
+    print(f"Considering {p}...")
     folder = p.parent
     if not folder.joinpath("CMakePresets.json").exists():
         messages.add(MISSING_PRESETS, folder)
