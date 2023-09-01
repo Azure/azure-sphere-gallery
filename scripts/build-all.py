@@ -6,8 +6,16 @@ import os
 
 exclude_paths=[
     "MT3620_M4_Sample_Code",
-    "AzureSphereDevX/examples",
+    "AzureSphereDevX",
     "threadx"
+    "AzureIoT_StoreAndForward/src/SimpleFileSystem",
+    "AzureSphereSquirrel/HLCore/squirrel",
+    "BalancingRobot/Software/RTOS/mt3620_m4_software",
+    "CO2_MonitorHealthySpaces/src/AzureSphereDrivers",
+    "IndustrialDeviceController/Software/HighLevelApp/external",
+    "MQTT-C_Client/src/HighLevelApp/MQTT-C",
+    "BalancingRobot/Software/RTOS/threadx",
+    "AzureIoT_StoreAndForward/src/SimpleFileSystem"
 ]
 
 BUILD_OK = "Build OK"
@@ -102,6 +110,7 @@ for p in cmakelists:
     folder = p.parent
     if not folder.joinpath("CMakePresets.json").exists():
         messages.add(MISSING_PRESETS, folder)
+        success = False
         continue
 
     if not build(p, log, messages):
