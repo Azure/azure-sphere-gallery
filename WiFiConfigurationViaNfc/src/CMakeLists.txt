@@ -5,8 +5,8 @@ cmake_minimum_required(VERSION 3.10)
 
 project(WiFiProvisioningViaNfc_HighLevelApp C)
 
-azsphere_configure_tools(TOOLS_REVISION "21.04")
-azsphere_configure_api(TARGET_API_SET "9")
+azsphere_configure_tools(TOOLS_REVISION "23.05")
+azsphere_configure_api(TARGET_API_SET "16")
 
 include_directories(${CMAKE_SOURCE_DIR} M24SR)
 
