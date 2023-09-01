@@ -81,7 +81,7 @@ def build(cmakelists, log, messages):
     build_args = [ "cmake", "--build", folder]
     build = subprocess.run(build_args, capture_output=True)
     if build.returncode != 0:
-        detail = indent(code(generate.stderr.decode("utf-8")))
+        detail = indent(code(build.stderr.decode("utf-8")))
         messages.add(BUILD_FAILED, p.parent, detail)
         return False
 
