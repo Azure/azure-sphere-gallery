@@ -7,6 +7,7 @@
       "generator": "Ninja",
       "binaryDir": "${sourceDir}/out/${presetName}",
       "cacheVariables": {
+        "PRODUCT": "mt3620-idc",
         "CMAKE_BUILD_TYPE": "Debug",
         "CMAKE_INSTALL_PREFIX": "${sourceDir}/install/${presetName}",
         "CMAKE_TOOLCHAIN_FILE": "$env{AzureSphereDefaultSDKDir}/CMakeFiles/AzureSphereToolchain.cmake",

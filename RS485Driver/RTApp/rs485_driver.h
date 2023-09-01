@@ -7,7 +7,7 @@
 #include <stdbool.h>
 #include <stdint.h>
 
-#include "..\common_defs.h"
+#include "../common_defs.h"
 #include "ringBuffer.h"
 
 //////////////////////////////////////////////////////////////////////////////////

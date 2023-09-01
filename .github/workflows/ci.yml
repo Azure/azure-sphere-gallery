@@ -27,7 +27,7 @@ jobs:
                 wget -O - https://apt.kitware.com/keys/kitware-archive-latest.asc 2>/dev/null | gpg --dearmor - | sudo tee /usr/share/keyrings/kitware-archive-keyring.gpg >/dev/null
                 echo 'deb [signed-by=/usr/share/keyrings/kitware-archive-keyring.gpg] https://apt.kitware.com/ubuntu/ jammy main' | sudo tee /etc/apt/sources.list.d/kitware.list >/dev/null
                 sudo apt-get update
-                sudo apt install cmake ninja-build
+                sudo apt install cmake ninja-build gcc-arm-none-eabi
             
             - name: Install latest Azure Sphere SDK
               shell: bash
@@ -36,9 +36,9 @@ jobs:
                 chmod +x install_azure_sphere_sdk.sh
                 sudo ./install_azure_sphere_sdk.sh -y
 
-
             - name: Sanity check all the projects
               shell: bash
               run: |
                 source /etc/profile.d/azure-sphere-sdk.sh
+                ./scripts/prebuild.py
                 ./scripts/build-all.py

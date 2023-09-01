@@ -12,7 +12,7 @@ azsphere_configure_tools(TOOLS_REVISION "21.07")
 
 include_directories(../intercore_messages)
 
-add_executable(${PROJECT_NAME} main.c sd.c Socket.c lib/VectorTable.c lib/SPIMaster.c lib/UART.c lib/Print.c lib/GPT.c lib/Mbox.c)
+add_executable(${PROJECT_NAME} main.c SD.c Socket.c lib/VectorTable.c lib/SPIMaster.c lib/UART.c lib/Print.c lib/GPT.c lib/MBox.c)
 set_target_properties(${PROJECT_NAME} PROPERTIES LINK_DEPENDS ${CMAKE_SOURCE_DIR}/linker.ld)
 
 azsphere_target_add_image_package(${PROJECT_NAME})

@@ -15,7 +15,7 @@ exclude_paths=[
     "IndustrialDeviceController/Software/HighLevelApp/external",
     "MQTT-C_Client/src/HighLevelApp/MQTT-C",
     "BalancingRobot/Software/RTOS/threadx",
-    "AzureIoT_StoreAndForward/src/SimpleFileSystem"
+    "AzureIoT_StoreAndForward"
 ]
 
 BUILD_OK = "Build OK"
@@ -73,7 +73,8 @@ def build(cmakelists, log, messages):
     generate_args = [ "cmake", f"--preset {preset}", str(cmakelists) ]
     generate = subprocess.run( generate_args, capture_output=True)
     if generate.returncode != 0:
-        detail = indent(code(generate.stderr.decode("utf-8")))
+        detail = indent(code(generate.stdout.decode("utf-8")))
+        detail += indent(code(generate.stderr.decode("utf-8")))
         messages.add(GENERATE_FAILED, p.parent, detail)
         return False
 
@@ -81,7 +82,8 @@ def build(cmakelists, log, messages):
     build_args = [ "cmake", "--build", folder]
     build = subprocess.run(build_args, capture_output=True)
     if build.returncode != 0:
-        detail = indent(code(build.stderr.decode("utf-8")))
+        detail = indent(code(build.stdout.decode("utf-8")))
+        detail += indent(code(build.stderr.decode("utf-8")))
         messages.add(BUILD_FAILED, p.parent, detail)
         return False
 
