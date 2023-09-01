@@ -126,7 +126,7 @@ with open(os.environ.get("GITHUB_STEP_SUMMARY", "summary.md"), "w") as summary:
 
         summary.write(f"# {category}\n")
         if len(sorted_messages) == 0:
-            summary.write("(none)")
+            summary.write("(none)\n")
         else:
             for (message, detail) in sorted_messages:
                 summary.write(f" * **{message}**\n")
