@@ -102,6 +102,7 @@ for p in cmakelists:
     folder = p.parent
     if not folder.joinpath("CMakePresets.json").exists():
         messages.add(MISSING_PRESETS, folder)
+        success = False
         continue
 
     if not build(p, log, messages):
