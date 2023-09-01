@@ -5,8 +5,8 @@ cmake_minimum_required(VERSION 3.10)
 
 project(BalancingRobot_HighLevel C)
 
-azsphere_configure_tools(TOOLS_REVISION "21.01")
-azsphere_configure_api(TARGET_API_SET "8")
+azsphere_configure_tools(TOOLS_REVISION "23.05")
+azsphere_configure_api(TARGET_API_SET "16")
 
 # to enable UdpLog, uncomment the next line.
 # add_compile_definitions(USE_SOCKET_LOG)
