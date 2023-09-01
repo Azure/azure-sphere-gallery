@@ -2,9 +2,9 @@ name: ci
 
 on:
     push:
-        branches: [main, chwhitwo/github-actions]
+        branches: [main]
     pull_request:
-        branches: [main, chwhitwo/github-actions]
+        branches: [main]
 
 jobs:
     sanity-check:
