@@ -18,11 +18,11 @@ exclude_paths=[
     "AzureIoT_StoreAndForward"
 ]
 
-BUILD_OK = "Build OK"
-BUILD_FAILED = "Build failed"
-GENERATE_FAILED = "Generate failed"
-MISSING_PRESETS = "Missing CMakePresets.json"
-NOT_SPHERE = "Not an Azure Sphere project (Consider adding to excludes)"
+BUILD_OK = "✅ Build OK"
+BUILD_FAILED = "❌ Build failed"
+GENERATE_FAILED = "❌ Generate failed"
+MISSING_PRESETS = "❌ Missing CMakePresets.json"
+NOT_SPHERE = "🤔 Not an Azure Sphere project (Consider adding to excludes)"
 
 class Messages:
     def __init__(self):
@@ -122,10 +122,15 @@ for p in cmakelists:
 
 with open(os.environ.get("GITHUB_STEP_SUMMARY", "summary.md"), "w") as summary:
     for category in (BUILD_OK, BUILD_FAILED, GENERATE_FAILED, MISSING_PRESETS, NOT_SPHERE):
+        sorted_messages = sorted(messages.instances(category), key=lambda i: i[0])
+
         summary.write(f"# {category}\n")
-        for (message, detail) in sorted(messages.instances(category), key=lambda i: i[0]):
-            summary.write(f" * **{message}**\n")
-            if detail:
-                summary.write(f"{detail}\n")
+        if len(sorted_messages) == 0:
+            summary.write("(none)")
+        else:
+            for (message, detail) in sorted_messages:
+                summary.write(f" * **{message}**\n")
+                if detail:
+                    summary.write(f"{detail}\n")
 
 exit(0 if success else -1)
