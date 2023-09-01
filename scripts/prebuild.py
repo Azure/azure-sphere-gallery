@@ -8,9 +8,13 @@ open("MQTT-C_Client/src/HighLevelApp/Certs/client.key", "w").close()
 open("MQTT-C_Client/src/HighLevelApp/Certs/client.crt", "w").close()
 
 # Files needed for EAP-TLS project
+certs = [ "eap-tls-webapi.pem", "az-CA.pem", "iotuser_public.pem", "iotuser_private.pem", "extuser_public.pem", "extuser_private.pem" ]
+
 if not os.path.exists("EAP-TLS_Solution/EAP-TLS Client/certs"):
     os.mkdir("EAP-TLS_Solution/EAP-TLS Client/certs")
-open("EAP-TLS_Solution/EAP-TLS Client/certs/eap-tls-webapi.pem", "w").close()
+
+for c in certs:
+    open(f"EAP-TLS_Solution/EAP-TLS Client/certs/{c}", "w").close()
 
 environment_config_c = '''
 /////////////////////////////////////////////////
