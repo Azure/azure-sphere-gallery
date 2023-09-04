@@ -6,15 +6,23 @@ import os
 
 exclude_paths=[
     "MT3620_M4_Sample_Code",
-    "AzureSphereDevX/examples",
+    "AzureSphereDevX",
     "threadx"
+    "AzureIoT_StoreAndForward/src/SimpleFileSystem",
+    "AzureSphereSquirrel/HLCore/squirrel",
+    "BalancingRobot/Software/RTOS/mt3620_m4_software",
+    "CO2_MonitorHealthySpaces/src/AzureSphereDrivers",
+    "IndustrialDeviceController/Software/HighLevelApp/external",
+    "MQTT-C_Client/src/HighLevelApp/MQTT-C",
+    "BalancingRobot/Software/RTOS/threadx",
+    "AzureIoT_StoreAndForward"
 ]
 
-BUILD_OK = "Build OK"
-BUILD_FAILED = "Build failed"
-GENERATE_FAILED = "Generate failed"
-MISSING_PRESETS = "Missing CMakePresets.json"
-NOT_SPHERE = "Not an Azure Sphere project (Consider adding to excludes)"
+BUILD_OK = "✅ Build OK"
+BUILD_FAILED = "❌ Build failed"
+GENERATE_FAILED = "❌ Generate failed"
+MISSING_PRESETS = "❌ Missing CMakePresets.json"
+NOT_SPHERE = "🤔 Not an Azure Sphere project (Consider adding to excludes)"
 
 class Messages:
     def __init__(self):
@@ -60,11 +68,13 @@ def indent(str, amount=1):
 
 
 def build(cmakelists, log, messages):
+    print(f"Building {cmakelists}...")
     preset = "ARM-Release"
     generate_args = [ "cmake", f"--preset {preset}", str(cmakelists) ]
     generate = subprocess.run( generate_args, capture_output=True)
     if generate.returncode != 0:
-        detail = indent(code(generate.stderr.decode("utf-8")))
+        detail = indent(code(generate.stdout.decode("utf-8")))
+        detail += indent(code(generate.stderr.decode("utf-8")))
         messages.add(GENERATE_FAILED, p.parent, detail)
         return False
 
@@ -72,7 +82,8 @@ def build(cmakelists, log, messages):
     build_args = [ "cmake", "--build", folder]
     build = subprocess.run(build_args, capture_output=True)
     if build.returncode != 0:
-        detail = indent(code(generate.stderr.decode("utf-8")))
+        detail = indent(code(build.stdout.decode("utf-8")))
+        detail += indent(code(build.stderr.decode("utf-8")))
         messages.add(BUILD_FAILED, p.parent, detail)
         return False
 
@@ -99,6 +110,7 @@ for p in cmakelists:
         messages.add(NOT_SPHERE, p)
         continue
 
+    print(f"Considering {p}...")
     folder = p.parent
     if not folder.joinpath("CMakePresets.json").exists():
         messages.add(MISSING_PRESETS, folder)
@@ -110,10 +122,15 @@ for p in cmakelists:
 
 with open(os.environ.get("GITHUB_STEP_SUMMARY", "summary.md"), "w") as summary:
     for category in (BUILD_OK, BUILD_FAILED, GENERATE_FAILED, MISSING_PRESETS, NOT_SPHERE):
+        sorted_messages = sorted(messages.instances(category), key=lambda i: i[0])
+
         summary.write(f"# {category}\n")
-        for (message, detail) in sorted(messages.instances(category), key=lambda i: i[0]):
-            summary.write(f" * **{message}**\n")
-            if detail:
-                summary.write(f"{detail}\n")
+        if len(sorted_messages) == 0:
+            summary.write("(none)\n")
+        else:
+            for (message, detail) in sorted_messages:
+                summary.write(f" * **{message}**\n")
+                if detail:
+                    summary.write(f"{detail}\n")
 
 exit(0 if success else -1)

@@ -5,7 +5,7 @@ cmake_minimum_required (VERSION 3.11)
 #set(CMAKE_TRY_COMPILE_TARGET_TYPE "STATIC_LIBRARY")
 project (BalancingRobot_RealTime C ASM)
 
-azsphere_configure_tools(TOOLS_REVISION "21.02")
+azsphere_configure_tools(TOOLS_REVISION "23.05")
 
 SET(CMAKE_ASM_FLAGS "-mcpu=cortex-m4")
 

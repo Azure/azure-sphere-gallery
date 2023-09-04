@@ -4,8 +4,8 @@
 cmake_minimum_required(VERSION 3.10)
 project(EAP_TLS_Client C)
 
-azsphere_configure_tools(TOOLS_REVISION "21.07")
-azsphere_configure_api(TARGET_API_SET "10")
+azsphere_configure_tools(TOOLS_REVISION "23.05")
+azsphere_configure_api(TARGET_API_SET "16")
 
 
 # Create executable

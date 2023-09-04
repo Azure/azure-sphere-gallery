@@ -5,7 +5,7 @@
 #include <signal.h>
 #include <curl/curl.h>
 
-#include "..\applibs_versions.h"
+#include "../applibs_versions.h"
 #include <applibs/log.h>
 #include <applibs/networking.h>
 #include <applibs/wificonfig.h>
@@ -13,7 +13,7 @@
 #include <applibs/certstore.h>
 #include <tlsutils/deviceauth_curl.h>
 
-#include "..\parson.h"
+#include "../parson.h"
 #include "_environment_config.h"
 #include "web_api_client.h"
 

@@ -10,7 +10,7 @@
 #include <applibs/log.h>
 #include <applibs/application.h>
 
-#include "..\common_defs.h"
+#include "../common_defs.h"
 #include "eventloop_timer_utilities.h"
 #include "rs485_hl_driver.h"
 

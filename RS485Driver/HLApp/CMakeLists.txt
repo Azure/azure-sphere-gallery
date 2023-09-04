@@ -5,8 +5,8 @@ cmake_minimum_required(VERSION 3.10)
 
 project(RS_485_HighLevelApp C)
 
-azsphere_configure_tools(TOOLS_REVISION "21.07")
-azsphere_configure_api(TARGET_API_SET "10")
+azsphere_configure_tools(TOOLS_REVISION "23.05")
+azsphere_configure_api(TARGET_API_SET "16")
 
 add_executable(${PROJECT_NAME} main.c eventloop_timer_utilities.c rs485_hl_driver.c)
 target_link_libraries(${PROJECT_NAME} applibs gcc_s c)

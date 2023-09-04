@@ -9,7 +9,7 @@ add_executable(${PROJECT_NAME} main.c Socket.c ringBuffer.c rs485_driver.c lib/V
 target_link_libraries(${PROJECT_NAME})
 set_target_properties(${PROJECT_NAME} PROPERTIES LINK_DEPENDS ${CMAKE_SOURCE_DIR}/linker.ld)
 
-azsphere_configure_tools(TOOLS_REVISION "21.07")
+azsphere_configure_tools(TOOLS_REVISION "23.05")
 
 # Add MakeImage post-build command
 azsphere_target_add_image_package(${PROJECT_NAME})
