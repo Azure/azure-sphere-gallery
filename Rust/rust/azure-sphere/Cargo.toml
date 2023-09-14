@@ -2,7 +2,7 @@
 name = "azure-sphere"
 version = "0.1.0"
 authors = ["Microsoft"]
-edition = "2018"
+edition = "2021"
 
 [dependencies]
 azure-sphere-sys = { path = "./azure-sphere-sys", version = "0.1" }
