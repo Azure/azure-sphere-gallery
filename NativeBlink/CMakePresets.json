@@ -36,7 +36,8 @@
         "CMAKE_BUILD_TYPE": "Debug",
         "CMAKE_INSTALL_PREFIX": "${sourceDir}/install/${presetName}",
         "CMAKE_TOOLCHAIN_FILE": "$env{AzureSphereDefaultSDKDir}/CMakeFiles/AzureSphereNativeToolchain.cmake",
-        "AZURE_SPHERE_TARGET_API_SET": "latest-lts"
+        "AZURE_SPHERE_TARGET_API_SET": "latest-lts",
+        "BUILD_TESTING": "on"
       },
       "vendor": {
         "microsoft.com/VisualStudioSettings/CMake/1.0": {
