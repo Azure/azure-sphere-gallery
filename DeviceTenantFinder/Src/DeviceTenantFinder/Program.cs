@@ -106,7 +106,7 @@ namespace DeviceTenantFinder
 
             if (!deviceFound)
             {
-                Console.WriteLine($"Device Id Not Found: {args[0]}");
+                Console.WriteLine($"Device Id Not Found: {deviceId}");
                 return -1;
             }
 
