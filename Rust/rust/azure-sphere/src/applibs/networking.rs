@@ -224,7 +224,7 @@ fn convert_tm_to_datetime(tm: &mut networking::tm) -> DateTime<Utc> {
     let naive =
         NaiveDateTime::from_timestamp_opt(timestamp / 1000, (timestamp % 1000) as u32 * 1_000_000)
             .unwrap();
-    DateTime::<Utc>::from_utc(naive, Utc)
+    DateTime::from_naive_utc_and_offset(naive, Utc)
 }
 
 /// Gets the NTP server last used to successfully sync the device. The [`is_networking_ready`] API can be used to determine when this API can be called.
