@@ -138,9 +138,9 @@ fn main() {
     let patched_libc = patched_libs_path.join("libc.so");
     patch_lib(libc.as_path(), patched_libc.as_path()).unwrap();
 
-    println!("cargo:rustc-link-lib=c");
-    println!("cargo:rustc-link-lib=applibs");
-    println!("cargo:rustc-link-lib=tlsutils");
+    //println!("cargo:rustc-link-lib=dylib:c");
+    //println!("cargo:rustc-link-lib=dylib:applibs");
+    //println!("cargo:rustc-link-lib=dylib:tlsutils");
     println!(
         "cargo:rustc-link-search={}",
         patched_libs_path.as_path().to_str().unwrap()

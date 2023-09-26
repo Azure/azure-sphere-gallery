@@ -7,6 +7,11 @@ Licensed under the MIT License. */
 #![allow(dead_code)]
 #![no_std]
 
+#[link(name = "applibs", kind = "dylib")]
+#[link(name = "tlsutils", kind = "dylib")]
+#[link(name = "c", kind = "dylib")]
+extern "C" {}
+
 macro_rules! sys_mod {
     ($name:ident) => {
         pub mod $name {
