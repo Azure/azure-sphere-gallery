@@ -40,32 +40,32 @@ docker pull vsdockercontainerregistry.azurecr.io/internal/azurespheresdk-int:lat
 
 1. Open VS Code, open the Command Palette (`Ctrl + Shift + P`), and run "Dev Containers - Open Folder in Container...".
 
-    ![Screenshot that shows how to run command to open folder in dev container.](media/devcontainers_openfolder.png)
+    ![Screenshot that shows how to run command to open folder in dev container.](.media/devcontainers_openfolder.png)
 
 2. Select this sample folder.
 
 3. Use the Toolbar to select the configure preset "x86-Debug", and wait for CMake to finish generating the cache.
 
-    ![Screenshot that shows how to select config preset from Toolbar.](media/select_config_preset_toolbar.png)
+    ![Screenshot that shows how to select config preset from Toolbar.](.media/select_config_preset_toolbar.png)
 
     (Alternatively, open the Command Palette, run the command "CMake: Select Configure Preset", select the "x86-Debug" Preset.)
 
-    ![Screenshot that shows how to select config preset from the Command Palette.](media/select_config_preset_command_palette.png)
+    ![Screenshot that shows how to select config preset from the Command Palette.](.media/select_config_preset_command_palette.png)
 
 > Hint: 
 If this project had been built locally, you may need to open the Command Pallete, and run the command "CMake: Delete Cache and Reconfigure".
 
 4. Use the Toolbar to build.
 
-    ![Screenshot that shows how to build using Toolbar.](media/build_toolbar.png)
+    ![Screenshot that shows how to build using Toolbar.](.media/build_toolbar.png)
 
     (Alternatively, open the Command Palette and run the command "CMake: Build" to build.)
 
-    ![Screenshot that shows how to build using the Command Palette.](media/build_command_palette.png)
+    ![Screenshot that shows how to build using the Command Palette.](.media/build_command_palette.png)
 
 5. Open the Debug window (`Ctrl + Shift + D`), select the "Native Azure Sphere Launch" configuration, and press F5 to debug.
 
-    ![Screenshot that shows how to debug.](media/debug.png)
+    ![Screenshot that shows how to debug.](.media/debug.png)
 
 ### Observe the output
 
@@ -75,11 +75,11 @@ When debugging, open the Terminal Window (Ctrl + `) to see program output, which
 
 1. Open the Testing window on the left (science flask icon) to view the CTests.
 
-    ![Screenshot that shows how to view the CTests.](media/view_ctests.png)
+    ![Screenshot that shows how to view the CTests.](.media/view_ctests.png)
 
 2. Click on the play icon to run the tests, or the play + bug icon with the "Test Azure Sphere Launch" configuration to debug the tests.
 
-    ![Screenshot that shows how to run the CTests.](media/run_ctests.png)
+    ![Screenshot that shows how to run the CTests.](.media/run_ctests.png)
 
 ## Project expectations
 
