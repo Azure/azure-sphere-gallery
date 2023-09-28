@@ -85,7 +85,7 @@ When debugging, open the Terminal Window (Ctrl + `) to see program output, which
 
 ### Expected support for the code
 
-This code is not formally maintained, but we will make a best effort to respond to/address any issues you encounter.
+There is no official support guarantee for this code, but we will make a best effort to respond to/address any issues you encounter.
 
 ### How to report an issue
 
