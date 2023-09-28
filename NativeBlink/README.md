@@ -34,6 +34,10 @@ Run the following command to download the container image:
 docker pull mcr.microsoft.com/azurespheresdk:latest
 ```
 
+## Configure Docker Desktop to run Linux containers
+
+Ensure that Docker Desktop is configured to run Linux containers.  Right-click Docker Desktop menu; if you see the option to "Switch to Linux containers", then select it.  (If you see the option to "Switch to Windows containers", then Docker Desktop is already configured to run Linux containers.)
+
 ## Build and run the sample
 
 1. Open VS Code, open the Command Palette (`Ctrl + Shift + P`), and run "Dev Containers - Open Folder in Container...".
