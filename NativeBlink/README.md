@@ -29,11 +29,9 @@ This sample requires the following additional software:
 
 ## Setup
 
-Run the following commands to download the container image:
+Run the following command to download the container image:
 ```
-az login
-az acr login -n vsdockercontainerregistry
-docker pull vsdockercontainerregistry.azurecr.io/internal/azurespheresdk-int:latest
+docker pull mcr.microsoft.com/azurespheresdk:latest
 ```
 
 ## Build and run the sample
