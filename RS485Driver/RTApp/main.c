@@ -15,7 +15,7 @@
 #include "lib/NVIC.h"
 #include "lib/Print.h"
 
-#include "..\common_defs.h"
+#include "../common_defs.h"
 #include "Socket.h"
 #include "ringBuffer.h"
 #include "rs485_driver.h"

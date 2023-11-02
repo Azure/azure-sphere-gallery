@@ -5,7 +5,7 @@ cmake_minimum_required (VERSION 3.10)
 
 project (PWMAudioRT C)
 
-azsphere_configure_tools(TOOLS_REVISION "22.11")
+azsphere_configure_tools(TOOLS_REVISION "23.05")
 
 # Create executable
 add_executable(${PROJECT_NAME} main.c lib/VectorTable.c lib/GPT.c lib/GPIO.c)

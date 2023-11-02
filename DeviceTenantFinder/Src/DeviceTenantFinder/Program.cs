@@ -37,13 +37,18 @@ namespace DeviceTenantFinder
 
         public static async Task<int> Main(string[] args)
         {
+            string deviceId = string.Empty;
             if (args.Count() != 1)
             {
-                Console.WriteLine("App requires a device id on the command line");
-                return -1;
+                Console.Write("Enter a device id >");
+                deviceId = Console.ReadLine();
+            }
+            else
+            {
+                deviceId = args[0];
             }
 
-            if (args[0].Length != 128)
+            if (deviceId.Length != 128)
             {
                 Console.WriteLine("Device Id Length is expected to be 128 characters, try again");
                 return -1;
@@ -85,7 +90,7 @@ namespace DeviceTenantFinder
                 Devices devices = JsonSerializer.Deserialize<Devices>(result);
                 foreach (Item item in devices.Items)
                 {
-                    if (item.DeviceId.ToLower() == args[0].ToLower())
+                    if (item.DeviceId.ToLower() == deviceId.ToLower())
                     {
                         deviceFound = true;
                         tenantId = tenant.Id;
@@ -101,16 +106,15 @@ namespace DeviceTenantFinder
 
             if (!deviceFound)
             {
-                Console.WriteLine($"Device Id Not Found: {args[0]}");
+                Console.WriteLine($"Device Id Not Found: {deviceId}");
                 return -1;
             }
 
-            Console.WriteLine($"Device Found   : {args[0]}");
+            Console.WriteLine($"Device Found   : {deviceId}");
             Console.WriteLine($"Tenant Id      : {tenantId}");
             Console.WriteLine($"Tenant Name    : {tenantName}");
             Console.WriteLine($"Product Id     : {productId}");
             Console.WriteLine($"Device Group Id: {deviceGroupId}");
-
 
             return 0;
         }

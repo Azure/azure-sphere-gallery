@@ -33,7 +33,7 @@ fn convert_tm_to_datetime(tm: &mut static_inline_helpers::tm) -> DateTime<Utc> {
     let naive =
         NaiveDateTime::from_timestamp_opt(timestamp / 1000, (timestamp % 1000) as u32 * 1_000_000)
             .unwrap();
-    DateTime::<Utc>::from_utc(naive, Utc)
+    DateTime::from_naive_utc_and_offset(naive, Utc)
 }
 
 /// Installs a client certificate that consists of a public certificate and a private key with the specified ID. The ID can then be used to refer to the certificate in other functions. If any type of certificate is already installed with the same ID, it will be replaced with the new certificate.

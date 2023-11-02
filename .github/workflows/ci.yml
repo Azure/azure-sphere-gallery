@@ -1,0 +1,44 @@
+name: ci
+
+on:
+    push:
+        branches: [main]
+    pull_request:
+        branches: [main]
+
+jobs:
+    sanity-check:
+        name: sanity-check
+        runs-on: ubuntu-20.04
+
+        steps:
+            - uses: actions/checkout@v3
+              with:
+                submodules: recursive
+            - uses: actions/setup-python@v4
+              with:
+                python-version: '3.10'
+
+            - name: Install prereqs
+              shell: bash
+              run: |
+                sudo apt-get update
+                sudo apt-get install ca-certificates gpg wget
+                wget -O - https://apt.kitware.com/keys/kitware-archive-latest.asc 2>/dev/null | gpg --dearmor - | sudo tee /usr/share/keyrings/kitware-archive-keyring.gpg >/dev/null
+                echo 'deb [signed-by=/usr/share/keyrings/kitware-archive-keyring.gpg] https://apt.kitware.com/ubuntu/ focal main' | sudo tee /etc/apt/sources.list.d/kitware.list >/dev/null
+                sudo apt-get update
+                sudo apt install cmake ninja-build gcc-arm-none-eabi
+            
+            - name: Install latest Azure Sphere SDK
+              shell: bash
+              run: |
+                curl -L https://aka.ms/AzureSphereSDKInstall/Linux | tar zxf -
+                chmod +x install_azure_sphere_sdk.sh
+                sudo ./install_azure_sphere_sdk.sh -y
+
+            - name: Sanity check all the projects
+              shell: bash
+              run: |
+                source /etc/profile.d/azure-sphere-sdk.sh
+                ./scripts/prebuild.py
+                ./scripts/build-all.py
