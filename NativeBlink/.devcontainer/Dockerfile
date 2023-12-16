@@ -1,4 +1,4 @@
-FROM vsdockercontainerregistry.azurecr.io/internal/azurespheresdk-int:latest
+FROM mcr.microsoft.com/azurespheresdk:latest
 
 RUN apt update && \
     apt install -y libncurses5 gdb && \

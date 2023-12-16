@@ -53,5 +53,41 @@
         "CMAKE_BUILD_TYPE": "Release"
       }
     }
+  ],
+  "buildPresets": [
+    {
+      "name": "ARM-Debug",
+      "configurePreset": "ARM-Debug"
+    },
+    {
+      "name": "ARM-Release",
+      "configurePreset": "ARM-Release"
+    },
+    {
+      "name": "x86-Debug",
+      "configurePreset": "x86-Debug"
+    },
+    {
+      "name": "x86-Release",
+      "configurePreset": "x86-Release"
+    }
+  ],
+  "testPresets": [
+    {
+      "name": "ARM-Debug",
+      "configurePreset": "ARM-Debug"
+    },
+    {
+      "name": "ARM-Release",
+      "configurePreset": "ARM-Release"
+    },
+    {
+      "name": "x86-Debug",
+      "configurePreset": "x86-Debug"
+    },
+    {
+      "name": "x86-Release",
+      "configurePreset": "x86-Release"
+    }
   ]
 }

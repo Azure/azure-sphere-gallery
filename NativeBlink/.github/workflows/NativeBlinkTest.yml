@@ -1,0 +1,43 @@
+name: Run NativeBlink Tests
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      checks: write
+      pull-requests: write
+
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+
+      - name: Build the container image
+        run:  |
+          docker build -t container-image-demo -f $GITHUB_WORKSPACE/NativeBlink/.devcontainer/Dockerfile .
+
+      - name: Create and start a container
+        run:  |
+          docker create -it --name container-demo --mount src="$GITHUB_WORKSPACE",target=/azure-sphere-gallery,type=bind container-image-demo
+          docker start container-demo
+
+      - name: Build the app and run tests in container
+        run:  |
+          docker exec container-demo bash -c "cd /azure-sphere-gallery/NativeBlink && cmake --preset x86-Debug && cmake --build --preset x86-Debug && ctest --preset x86-Debug --output-junit /azure-sphere-gallery/NativeBlink/TestResults.xml"
+
+      - name: Copy test results
+        run:  |
+          docker cp container-demo:/azure-sphere-gallery/NativeBlink/TestResults.xml $GITHUB_WORKSPACE/NativeBlink/TestResults.xml
+
+      - name: Upload test results
+        uses: EnricoMi/publish-unit-test-result-action@v2
+        if: always()
+        with:
+          files: ${{ github.workspace }}/NativeBlink/TestResults.xml
