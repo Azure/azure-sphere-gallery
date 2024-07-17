@@ -83,6 +83,32 @@ When debugging, open the Terminal Window (Ctrl + `) to see program output, which
 
     ![Screenshot that shows how to run the CTests.](.media/run_ctests.png)
 
+### Check for memory leaks
+
+1. Use the Toolbar to select the configure preset "x86-Debug-Leak", and wait for CMake to finish generating the cache.
+
+    (Alternatively, open the Command Palette, run the command "CMake: Select Configure Preset", select the "x86-Debug-Leak" Preset.)
+
+2. Use the Toolbar to build.
+
+    (Alternatively, open the Command Palette and run the command "CMake: Build" to build.)
+
+3. Open the Terminal Window (Ctrl + `) and run the following command to start running Valgrind on the app:
+```
+valgrind --leak-check=full --show-leak-kinds=definite out/x86-Debug-Leak/HelloWorld_HighLevelApp
+```
+
+4. After the app runs for a while, stop the app (Ctrl + C) and observe the output from Valgrind. Note that Valgrind correctly identifies memory that is definitely lost in main():
+```
+HEAP SUMMARY:
+    in use at exit: 146,511 bytes in 7 blocks
+  total heap usage: 7 allocs, 0 frees, 146,511 bytes allocated
+
+8 bytes in 2 blocks are definitely lost in loss record 2 of 6
+   at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+   by 0x10931F: main (main.c:66)
+```
+
 ## Project expectations
 
 ### Expected support for the code

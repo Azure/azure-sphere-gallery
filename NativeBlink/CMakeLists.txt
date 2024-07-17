@@ -6,11 +6,15 @@ cmake_minimum_required(VERSION 3.20)
 project(HelloWorld_HighLevelApp C)
 include(CTest)
 
-azsphere_configure_tools(TOOLS_REVISION "23.05")
-azsphere_configure_api(TARGET_API_SET "16")
+azsphere_configure_tools(TOOLS_REVISION "24.03")
+azsphere_configure_api(TARGET_API_SET "17")
 
 add_executable(${PROJECT_NAME} main.c led.c)
 target_link_libraries(${PROJECT_NAME} applibs gcc_s c)
+
+if(LEAK)
+    target_compile_definitions(${PROJECT_NAME} PUBLIC LEAK)
+endif()
 
 # TARGET_HARDWARE and TARGET_DEFINITION relate to the hardware definition targeted by this sample.
 # When using this sample with other hardware, replace TARGET_HARDWARE with the name of that hardware.

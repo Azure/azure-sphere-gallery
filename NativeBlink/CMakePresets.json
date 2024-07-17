@@ -52,6 +52,14 @@
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Release"
       }
+    },
+    {
+      "name": "x86-Debug-Leak",
+      "displayName": "x86-Debug-Leak",
+      "inherits": "x86-Debug",
+      "cacheVariables": {
+        "LEAK": true
+      }
     }
   ],
   "buildPresets": [
