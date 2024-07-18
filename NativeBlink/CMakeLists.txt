@@ -6,9 +6,6 @@ cmake_minimum_required(VERSION 3.20)
 project(HelloWorld_HighLevelApp C)
 include(CTest)
 
-azsphere_configure_tools(TOOLS_REVISION "24.03")
-azsphere_configure_api(TARGET_API_SET "17")
-
 add_executable(${PROJECT_NAME} main.c led.c)
 target_link_libraries(${PROJECT_NAME} applibs gcc_s c)
 
