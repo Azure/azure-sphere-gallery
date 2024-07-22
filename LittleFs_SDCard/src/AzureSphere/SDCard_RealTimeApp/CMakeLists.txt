@@ -5,8 +5,6 @@ cmake_minimum_required(VERSION 3.10)
 
 project(IntercoreComms_RTApp_MT3620_BareMetal C)
 
-azsphere_configure_tools(TOOLS_REVISION "21.07")
-
 # Enable/Disable runtime debug messages
 # add_compile_definitions(SHOW_DEBUG_INFO)
 

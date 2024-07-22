@@ -103,7 +103,7 @@ for p in cmakelists:
     azsphere_project = False
     with open(p,"r") as f:
         for line in f:
-            if "azsphere_configure_tools" in line:
+            if "azsphere_target_add_image_package" in line:
                 azsphere_project = True
 
     if not azsphere_project:

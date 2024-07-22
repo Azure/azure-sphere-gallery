@@ -16,9 +16,6 @@ add_compile_definitions(MQTT_USE_WOLFSSL)
 #
 ###################################################################################################################
 
-azsphere_configure_tools(TOOLS_REVISION "23.05")
-azsphere_configure_api(TARGET_API_SET "16")
-
 add_subdirectory("AzureSphereDevX" out)
 
 add_library(mqttc STATIC

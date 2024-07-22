@@ -7,21 +7,6 @@ project("co2monitor" C)
 
 include(azsphere_board.txt)
 
-if (EXISTS "${CMAKE_SOURCE_DIR}/Tools/cmake/azsphere_config.cmake")
-
-    include(Tools/cmake/azsphere_config.cmake)
-    auto_generate_azsphere_config()
-
-else()
-
-    # For information on setting tools revision and target api set see
-    # https://learn.microsoft.com/en-us/azure-sphere/app-development/using-cmake-functions
-
-    azsphere_configure_tools(TOOLS_REVISION "21.07")
-    azsphere_configure_api(TARGET_API_SET "10")
-
-endif()
-
 if (SCD4x)
     set(scd4x
         "AzureSphereDrivers/embedded-i2c-scd4x/scd4x_i2c.c"

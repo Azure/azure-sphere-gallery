@@ -878,36 +878,6 @@ static void InitPeripheralsAndHandlers(void)
 }
 ```
 
-## This project is evergreen
-
-This project automatically updates the CMake Azure Sphere configuration to match the Azure Sphere SDK you've installed on your computer. This is fine for a sample, but for production applications, setting the Azure Sphere configuration in CMake should be intentional and tested.
-
-In the CMakeLists.txt file, the *auto_generate_azsphere_config* CMake function is called to generate the azsphere_configure_tools and azsphere_configure_api settings.
-
-```makefile
-if (EXISTS "${CMAKE_SOURCE_DIR}/Tools/cmake/azsphere_config.cmake")
-
-    include(Tools/cmake/azsphere_config.cmake)
-    auto_generate_azsphere_config()
-
-else()
-
-    # For information on setting tools revision and target API set see
-    # https://learn.microsoft.com/en-us/azure-sphere/app-development/using-cmake-functions
-
-    azsphere_configure_tools(TOOLS_REVISION "21.07")
-    azsphere_configure_api(TARGET_API_SET "10")
-
-endif()
-```
-
-For production applications, remove this block and replace it with the following CMake commands.
-
-```makefile
-    azsphere_configure_tools(TOOLS_REVISION "<YOUR_TOOLS_VERSION>")
-    azsphere_configure_api(TARGET_API_SET "<THE_TARGET_API_SET_YOU_ARE_TESTING_AGAINST")
-```
-
 <!-- ---
 
 ## Understanding exits codes
