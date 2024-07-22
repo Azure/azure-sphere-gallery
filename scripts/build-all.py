@@ -9,6 +9,7 @@ exclude_paths=[
     "AzureSphereDevX",
     "threadx"
     "AzureIoT_StoreAndForward/src/SimpleFileSystem",
+    "AzureSphereSquirrel/HLCore"
     "AzureSphereSquirrel/HLCore/squirrel",
     "BalancingRobot/Software/RTOS/mt3620_m4_software",
     "CO2_MonitorHealthySpaces/src/AzureSphereDrivers",
