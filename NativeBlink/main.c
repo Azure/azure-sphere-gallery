@@ -9,6 +9,7 @@
 // - gpio (digital input for button)
 // - log (displays messages in the Device Output window during debugging)
 
+#include <stdlib.h>
 #include <stdbool.h>
 #include <errno.h>
 #include <string.h>
@@ -60,5 +61,10 @@ int main(void)
         nanosleep(&sleepTime, NULL);
         LED_Off(fd);
         nanosleep(&sleepTime, NULL);
+#ifdef LEAK
+        // Intentionally leak here to show an example of using valgrind to detect memory leaks
+        int* leak = (int*)malloc(sizeof(int));
+        *leak = 1;
+#endif
     }
 }

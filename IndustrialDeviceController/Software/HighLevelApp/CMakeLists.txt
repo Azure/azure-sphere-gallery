@@ -30,10 +30,6 @@ aux_source_directory(drivers DRIVERS_SRCS)
 aux_source_directory(drivers/modbus MODBUS_DRIVERS_SRCS)
 aux_source_directory(libutils LIBUTILS_SRCS)
 
-azsphere_configure_tools(TOOLS_REVISION "23.05")
-
-azsphere_configure_api(TARGET_API_SET "16")
-
 option(ENABLE_SERIAL_LOG "Enable Serial Log" OFF)
 if(ENABLE_SERIAL_LOG)
   message(STATUS "Enable Serial Log")

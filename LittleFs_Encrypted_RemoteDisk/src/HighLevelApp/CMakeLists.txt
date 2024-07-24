@@ -5,9 +5,6 @@ cmake_minimum_required(VERSION 3.20)
 
 project(LittleFs_HighLevelApp C)
 
-azsphere_configure_tools(TOOLS_REVISION "23.05")
-azsphere_configure_api(TARGET_API_SET "16")
-
 add_executable(${PROJECT_NAME} 
 	main.c 
 	crypt.c

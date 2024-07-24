@@ -9,6 +9,7 @@ exclude_paths=[
     "AzureSphereDevX",
     "threadx"
     "AzureIoT_StoreAndForward/src/SimpleFileSystem",
+    "AzureSphereSquirrel/HLCore",
     "AzureSphereSquirrel/HLCore/squirrel",
     "BalancingRobot/Software/RTOS/mt3620_m4_software",
     "CO2_MonitorHealthySpaces/src/AzureSphereDrivers",
@@ -103,7 +104,7 @@ for p in cmakelists:
     azsphere_project = False
     with open(p,"r") as f:
         for line in f:
-            if "azsphere_configure_tools" in line:
+            if "azsphere_target_add_image_package" in line:
                 azsphere_project = True
 
     if not azsphere_project:

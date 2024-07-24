@@ -24,7 +24,7 @@ This sample does not require any additional hardware.
 
 This sample requires the following additional software:
 - [Docker Desktop](https://www.docker.com/products/docker-desktop/)
-- [VS Code](https://code.visualstudio.com/download)
+- [VS Code](https://code.visualstudio.com/download) OR [Visual Studio](https://visualstudio.microsoft.com/downloads/)
 - [Dev Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) extension for VS Code
 
 ## Setup
@@ -38,7 +38,9 @@ docker pull mcr.microsoft.com/azurespheresdk:latest
 
 Ensure that Docker Desktop is configured to run Linux containers.  Right-click Docker Desktop menu; if you see the option to "Switch to Linux containers", then select it.  (If you see the option to "Switch to Windows containers", then Docker Desktop is already configured to run Linux containers.)
 
-## Build and run the sample
+## VS Code
+
+### Build and run the sample
 
 1. Open VS Code, open the Command Palette (`Ctrl + Shift + P`), and run "Dev Containers - Open Folder in Container...".
 
@@ -82,6 +84,80 @@ When debugging, open the Terminal Window (Ctrl + `) to see program output, which
 2. Click on the play icon to run the tests, or the play + bug icon with the "Test Azure Sphere Launch" configuration to debug the tests.
 
     ![Screenshot that shows how to run the CTests.](.media/run_ctests.png)
+
+### Check for memory leaks
+
+1. Use the Toolbar to select the configure preset "x86-Debug-Leak", and wait for CMake to finish generating the cache.
+
+    (Alternatively, open the Command Palette, run the command "CMake: Select Configure Preset", select the "x86-Debug-Leak" Preset.)
+
+2. Use the Toolbar to build.
+
+    (Alternatively, open the Command Palette and run the command "CMake: Build" to build.)
+
+3. Open the Terminal Window (Ctrl + `) and run the following command to start running Valgrind on the app:
+```
+valgrind --leak-check=full --show-leak-kinds=definite out/x86-Debug-Leak/HelloWorld_HighLevelApp
+```
+
+4. After the app runs for a while, stop the app (Ctrl + C) and observe the output from Valgrind. Note that Valgrind correctly identifies memory that is definitely lost in main():
+```
+HEAP SUMMARY:
+    in use at exit: 146,511 bytes in 7 blocks
+  total heap usage: 7 allocs, 0 frees, 146,511 bytes allocated
+
+8 bytes in 2 blocks are definitely lost in loss record 2 of 6
+   at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+   by 0x10931F: main (main.c:66)
+```
+## Visual Studio
+
+### Build and run the sample
+
+1. Open this folder in Visual Studio and wait for CMake to finish generating.
+
+2. Select the "Reopen folder in container" link in the Dev Container Info Bar.
+
+    (Alternatively, select the "[Dev Container]" option from the Target System dropdown menu)
+
+3. Select the "x86-Debug" configuration from the Configuration dropdown menu and wait for CMake to finish generating.
+
+4. Open the Build menu and select the "Build All" command (`Ctrl + Shift + B`) to build.
+
+5. Select the "HelloWorld_HighLevelApp (Native)" item from the Startup Item dropdown menu and Select the "Start Debugging" command from the Debug Menu (`F5`) to start debugging.
+
+### Observe the output
+
+When debugging, the output should appear in the Output Window, which should show the GPIO_SetValue call with 1 and 0 to simulate blinking an LED.
+
+### Run Tests
+
+1. Open the Test menu and select the "Test Explorer" command to open the Test Explorer Window.
+
+2. Click on the Play icon to run all the tests or right-click on a test and select the "Run" command to run an individual test.
+
+3. Right-click on a test and select the "Debug" command to start debugging an individual test.
+
+### Check for memory leaks
+
+1. Select the "x86-Debug-Leak" configuration from the Configuration dropdown menu and wait for CMake to finish generating.
+
+2. Open the Build menu and select the "Build All" command (`Ctrl + Shift + B`) to build.
+
+3. Open the Debug menu and select the "Start Valgrind" command under the "Other Debug Targets" sub-menu to start running Valgrind on the app.
+
+4. After the app runs for a while, open the Debug menu and select the "Stop Valgrind" command under the "Other Debug Targets" sub-menu to stop running Valgrind.
+
+5. The Valgrind window will show that Valgrind correctly found a memory leak in main() as shown below, and if main.c is opened, the memory leak will be underlined with a warning message.
+```
+HEAP SUMMARY:
+    in use at exit: 146,511 bytes in 7 blocks
+  total heap usage: 7 allocs, 0 frees, 146,511 bytes allocated
+
+8 bytes in 2 blocks are definitely lost in loss record 2 of 6
+   at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+   by 0x10931F: main (main.c:66)
+```
 
 ## Project expectations
 

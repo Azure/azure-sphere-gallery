@@ -4,10 +4,6 @@
 cmake_minimum_required(VERSION 3.10)
 project(EAP_TLS_Client C)
 
-azsphere_configure_tools(TOOLS_REVISION "23.05")
-azsphere_configure_api(TARGET_API_SET "16")
-
-
 # Create executable
 add_executable(${PROJECT_NAME} main.c eventloop_timer_utilities.c parson.c "lib/_environment_config.c" "lib/eap_tls_lib.c" "lib/web_api_client.c" "tests/tests.c")
 target_link_libraries(${PROJECT_NAME} applibs pthread gcc_s c curl tlsutils)

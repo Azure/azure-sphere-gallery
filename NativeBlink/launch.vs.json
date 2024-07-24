@@ -9,6 +9,16 @@
       "applicationPath": "${debugInfo.target}",
       "imagePath": "${debugInfo.targetImage}",
       "partnerComponents": []
+    },
+    {
+      "type": "cppgdb",
+      "name": "HelloWorld_HighLevelApp (Native)",
+      "project": "CMakeLists.txt",
+      "projectTarget": "HelloWorld_HighLevelApp",
+      "debuggerConfiguration": "gdb",
+      "MIMode": "gdb",
+      "args": [],
+      "env": {}
     }
   ]
 }
