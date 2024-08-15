@@ -20,6 +20,7 @@ Each folder within this repository contains a README.md file that describes the 
 
 | Folder name | Description |
 | ----------- | ----------- |
+| [AzureEventGrid](AzureEventGrid) | This project shows how to connect an Azure Sphere device to the Azure Event Grid service. |
 | [AzureFunctionApp_AzureSpherePublicAPI](AzureFunctionApp_AzureSpherePublicAPI) | This project shows how to create a Python Azure Function app that uses Managed Service Identity to call the Azure Sphere Public API |
 | [AzureIoT_StoreAndForward](AzureIoT_StoreAndForward) | This project shows how to add telemetry store and forward capability to the AzureIoT sample |
 | [AzureSphereSquirrel](AzureSphereSquirrel) | This project shows how to run a high-level scripting langauge (Squirrel Lang) on MT3620 for powerful high-level API use, code hot-reload and unit testing. |
