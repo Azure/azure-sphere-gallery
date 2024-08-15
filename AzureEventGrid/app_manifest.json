@@ -1,0 +1,12 @@
+{
+  "SchemaVersion": 1,
+  "Name": "AzureEventGrid_HighLevelApp",
+  "ComponentId": "661F0FCE-25FF-421F-AFCD-542DD1CE5355",
+  "EntryPoint": "/bin/app",
+    "CmdArgs": [ "--Hostname", "<your_event_grid_mqtt_hostname>" ],
+    "Capabilities": {
+        "AllowedConnections": [ "<your_event_grid_mqtt_hostname>" ],
+        "DeviceAuthentication": "00000000-0000-0000-0000-000000000000"
+    },
+  "ApplicationType": "Default"
+}

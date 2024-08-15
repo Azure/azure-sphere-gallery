@@ -62,3 +62,6 @@
 [submodule "LittleFs_Encrypted_RemoteDisk/src/HighLevelApp/littlefs"]
 	path = LittleFs_Encrypted_RemoteDisk/src/HighLevelApp/littlefs
 	url = https://github.com/littlefs-project/littlefs.git
+[submodule "AzureEventGrid/MQTT-C"]
+	path = AzureEventGrid/MQTT-C
+	url = https://github.com/LiamBindle/MQTT-C

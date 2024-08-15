@@ -1,0 +1,14 @@
+﻿{
+  "version": "0.2.1",
+  "configurations": [
+    {
+      "type": "azurespheredbg",
+      "name": "AzureEventGrid_HighLevelApp (HLCore)",
+      "project": "CMakeLists.txt",
+      "workingDirectory": "${workspaceRoot}",
+      "applicationPath": "${debugInfo.target}",
+      "imagePath": "${debugInfo.targetImage}",
+      "partnerComponents": [ "6583cf17-d321-4d72-8283-0b7c5b56442b" ]
+    }
+  ]
+}
