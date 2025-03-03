@@ -16,7 +16,8 @@ exclude_paths=[
     "IndustrialDeviceController/Software/HighLevelApp/external",
     "MQTT-C_Client/src/HighLevelApp/MQTT-C",
     "BalancingRobot/Software/RTOS/threadx",
-    "AzureIoT_StoreAndForward"
+    "AzureIoT_StoreAndForward",
+    "AzureEventGrid/MQTT-C/CMakeLists.txt"
 ]
 
 BUILD_OK = "✅ Build OK"

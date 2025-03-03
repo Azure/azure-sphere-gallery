@@ -1,0 +1,25 @@
+[ req ]
+prompt              = no
+default_bits        = 2048
+distinguished_name  = req_distinguished_name
+req_extensions      = req_extensions
+x509_extensions     = x509_extensions
+string_mask         = utf8only
+
+[ req_distinguished_name ]
+countryName         = GB
+stateOrProvinceName = Countyshire
+localityName        = Countytown
+organizationName    = Contoso Ltd
+commonName          = IP_ADDRESS
+emailAddress        = cert@contoso.com
+
+[ req_extensions ]
+subjectAltName = @alt_names
+
+[ x509_extensions ]
+subjectAltName = @alt_names
+
+[alt_names]
+IP.1 = 127.0.0.1
+IP.2 = IP_ADDRESS
