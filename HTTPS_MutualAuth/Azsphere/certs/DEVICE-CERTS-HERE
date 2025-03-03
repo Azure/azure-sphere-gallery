@@ -1,0 +1,5 @@
+This folder should contain:
+
+ - ca-bundle.pem - a bundle containing the CA cert chain for verifying the server certificate
+ - device-cert.pem - the device certificate
+ - device-key.pem - the private key for the device certificate

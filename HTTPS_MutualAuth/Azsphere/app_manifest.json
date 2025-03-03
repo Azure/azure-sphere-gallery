@@ -1,0 +1,15 @@
+{
+  "SchemaVersion": 1,
+  "Name": "HTTPS_MutualAuth",
+  "ComponentId": "5d7c4db5-d182-4ccc-9a23-1bdc6d899cb6",
+  "EntryPoint": "/bin/app",
+  "CmdArgs": [],
+  "Capabilities": {
+    "AllowedConnections": [
+      "10.164.185.66"
+    ],
+    "ReadNetworkProxyConfig": true
+  },
+  "ApplicationType": "Default",
+  "MallocVersion": 2
+}

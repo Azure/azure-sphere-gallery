@@ -1,0 +1,5 @@
+Azsphere/CMakeFiles
+Azsphere/out
+certs/*.pem
+certs/*.certs
+certs/*.srl
