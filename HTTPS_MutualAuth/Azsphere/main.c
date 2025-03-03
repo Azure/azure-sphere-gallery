@@ -270,7 +270,8 @@ static void PerformWebPageDownload(void)
     // Specify URL to download.
     // Important: Any change in the domain name must be reflected in the AllowedConnections
     // capability in app_manifest.json.
-    if ((res = curl_easy_setopt(curlHandle, CURLOPT_URL, "https://10.164.185.66:5000/")) != CURLE_OK) {
+#warning Change the following line to specify the server address and delete this warning!
+    if ((res = curl_easy_setopt(curlHandle, CURLOPT_URL, "https://CHANGE.THIS:5000/")) != CURLE_OK) {
         LogCurlError("curl_easy_setopt CURLOPT_URL", res);
         goto cleanupLabel;
     }

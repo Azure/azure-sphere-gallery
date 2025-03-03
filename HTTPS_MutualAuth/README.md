@@ -44,7 +44,7 @@ Please refer to the HTTPS_Curl_Easy sample for detailed setup instructions.
    ```c
     if ((res = curl_easy_setopt(curlHandle, CURLOPT_URL, "https://i192.168.1.1:5000/")) != CURLE_OK) {
    ```
-   And delete the `#error` on line 263.
+   And delete the `#warning` on line 263.
 
 1. Build and run the project.
 
