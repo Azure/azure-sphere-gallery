@@ -185,6 +185,16 @@ static int TransferInfoCallback(void *clientp, curl_off_t dltotal, curl_off_t dl
 /// <summary>
 ///     Logs a cURL error.
 /// </summary>
+/// <param name="message">The message to print</param>
+/// <param name="curlErrCode">The cURL error code to describe</param>
+static void LogCurlError(const char *message, int curlErrCode)
+{
+    Log_Debug(message);
+    Log_Debug(" (curl err=%d, '%s')\n", curlErrCode, curl_easy_strerror(curlErrCode));
+}
+
+/// <summary>
+///     Checks that the network is ready.
 /// </summary>
 static bool IsNetworkReady(void)
 {
@@ -260,8 +270,7 @@ static void PerformWebPageDownload(void)
     // Specify URL to download.
     // Important: Any change in the domain name must be reflected in the AllowedConnections
     // capability in app_manifest.json.
-#error Change the following line to specify the server address and delete this error!
-    if ((res = curl_easy_setopt(curlHandle, CURLOPT_URL, "https://CHANGE.THIS:5000/")) != CURLE_OK) {
+    if ((res = curl_easy_setopt(curlHandle, CURLOPT_URL, "https://10.164.185.66:5000/")) != CURLE_OK) {
         LogCurlError("curl_easy_setopt CURLOPT_URL", res);
         goto cleanupLabel;
     }
