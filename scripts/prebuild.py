@@ -10,7 +10,7 @@ open("MQTT-C_Client/src/HighLevelApp/Certs/client.crt", "w").close()
 # Files needed for HTTPS mutual auth project
 https_certs = [ "ca-bundle.pem", "device-cert.pem", "device-key.pem" ]
 for c in https_certs:
-    open(f"HTTPS-MutualAuth/Azsphere/certs/{c}", "w").close()
+    open(f"HTTPS_MutualAuth/Azsphere/certs/{c}", "w").close()
 
 # Files needed for EAP-TLS project
 eaptls_certs = [ "eap-tls-webapi.pem", "az-CA.pem", "iotuser_public.pem", "iotuser_private.pem", "extuser_public.pem", "extuser_private.pem" ]
