@@ -8,6 +8,8 @@ A simple Python script is provided to run an https server using the generated se
 
 ## Setup
 
+This project uses Python 3, OpenSSL and bash - it is easiest to build and run in a Linux environment; it may work in other environments but is untested.
+
 Please refer to the HTTPS_Curl_Easy sample for detailed setup instructions.
 
 1. Copy your certs and keys as follows (or use the `make-certs.sh` script to generate test certs and keys - see below)
@@ -40,9 +42,9 @@ Please refer to the HTTPS_Curl_Easy sample for detailed setup instructions.
       },
     ```
 
-1. Modify `main.c` to point to your server: change line 264, for example:
+1. Modify `main.c` to point to your server: change line 274, for example:
    ```c
-    if ((res = curl_easy_setopt(curlHandle, CURLOPT_URL, "https://i192.168.1.1:5000/")) != CURLE_OK) {
+    if ((res = curl_easy_setopt(curlHandle, CURLOPT_URL, "https://192.168.1.1:5000/")) != CURLE_OK) {
    ```
    And delete the `#warning` on line 263.
 
