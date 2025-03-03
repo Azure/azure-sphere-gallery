@@ -1,6 +1,6 @@
 # Make root CCA
 
-IP=$1 || "localhost"
+IP=$1
 
 echo "Making cert config for $IP"
 
@@ -53,6 +53,6 @@ echo "------------------------------------------------------------------------"
 echo "Signing device cert"
 openssl x509 -req -days 363 -in generated-certs/device.csr -CA generated-certs/rootca-cert.pem -CAkey generated-certs/rootca-key.pem -CAcreateserial -out generated-certs/device-cert.pem
 
-cat generated-certs/rootca-cert.pem generated-certs/intermediate-cert.pem > Azsphere/generated-certs/ca-bundle.pem
-
+cat generated-certs/rootca-cert.pem generated-certs/intermediate-cert.pem > Azsphere/certs/ca-bundle.pem
+cp generated-certs/device-cert.pem generated-certs/device-key.pem Azsphere/certs/
 cp generated-certs/rootca-cert.pem generated-certs/server-cert.pem generated-certs/server-key.pem server-certs
