@@ -5,9 +5,7 @@
   "EntryPoint": "/bin/app",
   "CmdArgs": [],
   "Capabilities": {
-    "AllowedConnections": [
-      "10.164.185.66"
-    ],
+    "AllowedConnections": [ "CHANGE THIS" ],
     "ReadNetworkProxyConfig": true
   },
   "ApplicationType": "Default",
