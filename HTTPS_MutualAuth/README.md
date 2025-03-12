@@ -67,6 +67,11 @@ rather, you must use `wolfSSL_CTX_use_certificate_chain_file` from within the SS
    #include "wolfssl/ssl.h"
    ```
 
+1. In CMakeLists.txt, modofy the `target_link_libraries` to include `wolfssl`:
+   ```cmake
+   target_link_libraries(${PROJECT_NAME} applibs gcc_s c curl wolfssl)
+   ```
+
 1. Add the following function somewhere above `PerformWebPageDownload()`:
    ```c
    CURLcode wolfssl_ctx_callback(CURL* curlHandle, void* wolfssl_ctx, void* client)
