@@ -303,6 +303,11 @@ static void PerformWebPageDownload(void)
         goto cleanupLabel;
     }
     
+    if ((res = curl_easy_setopt(curlHandle, CURLOPT_SSLCERT, clientCertPath)) != CURLE_OK) {
+        LogCurlError("curl_easy_setopt CURLOPT_SSLCERT", res);
+        goto cleanupLabel;
+    }
+    
     clientKeyPath= Storage_GetAbsolutePathInImagePackage("certs/device-key.pem");
     if (clientKeyPath == NULL) {
         Log_Debug("The client key path could not be resolved: errno=%d (%s)\n", errno,
@@ -310,11 +315,20 @@ static void PerformWebPageDownload(void)
         goto cleanupLabel;
     }
 
-    curl_easy_setopt(curlHandle, CURLOPT_SSLCERT, clientCertPath);
-    curl_easy_setopt(curlHandle, CURLOPT_SSLKEY, clientKeyPath);
+    if ((res = curl_easy_setopt(curlHandle, CURLOPT_SSLKEY, clientKeyPath)) != CURLE_OK) {
+        LogCurlError("curl_easy_setopt CURLOPT_SSLKEY", res);
+        goto cleanupLabel;
+    }
 
-    curl_easy_setopt(curlHandle, CURLOPT_SSL_VERIFYPEER, 1L);
-    curl_easy_setopt(curlHandle, CURLOPT_SSL_VERIFYHOST, 1L);
+    if ((res = curl_easy_setopt(curlHandle, CURLOPT_SSL_VERIFYPEER, 1L)) != CURLE_OK) {
+        LogCurlError("curl_easy_setopt CURLOPT_SSL_VERIFYPEER", res);
+        goto cleanupLabel;
+    }
+
+    if ((res = curl_easy_setopt(curlHandle, CURLOPT_SSL_VERIFYHOST, 1L)) != CURLE_OK) {
+        LogCurlError("curl_easy_setopt CURLOPT_SSL_VERIFYHOST", res);
+        goto cleanupLabel;
+    }
 
     // Let cURL follow any HTTP 3xx redirects.
     // Important: Any redirection to different domain names requires that domain name to be added to

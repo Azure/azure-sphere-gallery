@@ -22,6 +22,7 @@ Please refer to the HTTPS_Curl_Easy sample for detailed setup instructions.
    - `server-certs/server-cert.pem` - the server certificate
    - `server-certs/server-key.pem` - the private key for the server certificate
 
+   If you are using a device certificate _chain_ rather than a single certificate, please refer to the instructions below
 
 1. Launch the server:
    ```
@@ -51,6 +52,67 @@ Please refer to the HTTPS_Curl_Easy sample for detailed setup instructions.
 1. Build and run the project.
 
    In the device output, you should see a successful HTTP request (with a directory listing from the server)
+
+### Using a device certificate chain
+
+Some configurations may require the use of a certificate chain rather than a single device certificate (for example, if the
+device certificate is not signed by the required root authority, but is rather signed by an intermediate authority, which has itself
+been signed by the root authority required by the server).
+
+In this case, you cannot use the `curl_easy_setopt(curlHandle, CURLOPT_SSLCERT, clientCertPath);` function to set the client certificate;
+rather, you must use `wolfSSL_CTX_use_certificate_chain_file` from within the SSL context callback:
+
+1. At the top of main.c, add:
+   ```c
+   #include "wolfssl/ssl.h"
+   ```
+
+1. Add the following function somewhere above `PerformWebPageDownload()`:
+   ```c
+   CURLcode wolfssl_ctx_callback(CURL* curlHandle, void* wolfssl_ctx, void* client)
+   {
+      char* clientCertPath= Storage_GetAbsolutePathInImagePackage("certs/device-cert.pem");
+      if (clientCertPath == NULL) {
+         Log_Debug("The client certificate path could not be resolved: errno=%d (%s)\n", errno,
+                     strerror(errno));
+         return CURLE_SSL_CONNECT_ERROR;
+      }
+
+      int r = wolfSSL_CTX_use_certificate_chain_file(wolfssl_ctx, clientCertPath);
+      if (r != WOLFSSL_SUCCESS) {
+         Log_Debug("Error loading cert chain for client\n");
+         return CURLE_SSL_CONNECT_ERROR;
+      }
+
+      return CURLE_OK;
+   }
+   ```
+
+1. In `PerformWebPageDownload()`, remove the lines:
+
+   ```c
+   clientCertPath= Storage_GetAbsolutePathInImagePackage("certs/device-cert.pem");
+   if (clientCertPath == NULL) {
+       Log_Debug("The client certificate path could not be resolved: errno=%d (%s)\n", errno,
+                 strerror(errno));
+       goto cleanupLabel;
+   }
+
+   if ((res = curl_easy_setopt(curlHandle, CURLOPT_SSLCERT, clientCertPath)) != CURLE_OK) {
+       LogCurlError("curl_easy_setopt CURLOPT_SSLCERT", res);
+       goto cleanupLabel;
+   }
+   ```
+
+   and replace them with:
+   
+   ```c
+    if ((res = curl_easy_setopt(curlHandle, CURLOPT_SSL_CTX_FUNCTION, wolfssl_ctx_callback)) != CURLE_OK) {
+        LogCurlError("curl_easy_setopt CURLOPT_SSL_CTX_FUNCTION", res);
+        goto cleanupLabel;
+    }
+   ```
+
 
 ### Generating test certificates
 
