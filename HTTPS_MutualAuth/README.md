@@ -67,7 +67,7 @@ rather, you must use `wolfSSL_CTX_use_certificate_chain_file` from within the SS
    #include "wolfssl/ssl.h"
    ```
 
-1. In CMakeLists.txt, modofy the `target_link_libraries` to include `wolfssl`:
+1. In CMakeLists.txt, modify the `target_link_libraries` to include `wolfssl`:
    ```cmake
    target_link_libraries(${PROJECT_NAME} applibs gcc_s c curl wolfssl)
    ```
