@@ -2,6 +2,17 @@
 
 IP=$1
 
+if [[ -z $IP ]]; then
+    echo "syntax: $0 <ip address or hostname>"
+    exit -1
+fi
+
+echo "Clearing old certs"
+
+rm -v generated-certs/*
+rm -v Azsphere/certs/*
+rm -v server-certs/*
+
 echo "Making cert config for $IP"
 
 sed "s/IP_ADDRESS/$IP/g" certs-config/server.conf.template > certs-config/server.conf
@@ -53,6 +64,8 @@ echo "------------------------------------------------------------------------"
 echo "Signing device cert"
 openssl x509 -req -days 363 -in generated-certs/device.csr -CA generated-certs/rootca-cert.pem -CAkey generated-certs/rootca-key.pem -CAcreateserial -out generated-certs/device-cert.pem
 
-cat generated-certs/rootca-cert.pem generated-certs/intermediate-cert.pem > Azsphere/certs/ca-bundle.pem
-cp generated-certs/device-cert.pem generated-certs/device-key.pem Azsphere/certs/
-cp generated-certs/rootca-cert.pem generated-certs/server-cert.pem generated-certs/server-key.pem server-certs
+echo "Making CA bundle"
+cat generated-certs/rootca-cert.pem generated-certs/intermediate-cert.pem > generated-certs/ca-bundle.pem
+
+cp -v generated-certs/ca-bundle.pem generated-certs/device-cert.pem generated-certs/device-key.pem Azsphere/certs/
+cp -v generated-certs/rootca-cert.pem generated-certs/server-cert.pem generated-certs/server-key.pem server-certs
