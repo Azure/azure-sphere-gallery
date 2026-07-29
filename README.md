@@ -1,4 +1,6 @@
-# Azure Sphere Gallery
+# Azure Sphere Gallery [ARCHIVED]
+
+> **Warning:** This project is no longer actively maintained or supported. No new issues, pull requests, or updates will be accepted.
 
 This repository contains a collection of inspirational, unmaintained [Azure Sphere](https://www.microsoft.com/azure-sphere/) software samples and hardware designs ready to be reused.
 
